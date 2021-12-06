@@ -4,6 +4,692 @@
     @include(isset(getSetting()['slider_style']) ? 'includes.sliders.slider-'.getSetting()['slider_style'] :
     'includes.sliders.slider-style1')
 
+    <!-- Product Listing  -->
+    <section id="product-listing-wrapper">
+        <div class="container">
+            <div class="product-lists padding">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading d-flex justify-content-between align-items-center mb-5 flex-wrap">
+                            <div class="head">
+                                <h2 class="font-weight-bold">Shop All New Imports</h2>
+                                <p>THERE'S SOMETHING FOR EVERYONE</p>
+                            </div>
+                            <div class="navigator">
+                                <a href="">See all</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (1).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (2).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (3).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mt-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Listing Ends -->
+    <!-- Categories -->
+    <section id="categories-wrapper" class="py-3">
+        <div class="container">
+            <div class="row py-4">
+                <div class="col-12">
+                    <div class="heading d-flex justify-content-between align-items-center mb-5 flex-wrap">
+                        <div class="head">
+                            <h2 class="font-weight-bold">Choose your Categories</h2>
+                            <p>More than 10 categories to choose from</p>
+                        </div>
+                        <div class="navigator">
+                            <a href="">See all</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-12">
+                    <div class="content text-center bg-white">
+                        <a href="">
+                            <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                            <div class="title mt-3">
+                                <h6 class="m-0">Headphone</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+                <div class="slick-slider-category w-100">
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-item mx-3 p-3">
+                        <div class="content text-center bg-light">
+                            <a href="">
+                                <div class="box m-auto"> <i class="fa fa-headphones" aria-hidden="true"></i></div>
+                                <div class="title mt-3">
+                                    <h6 class="m-0">Headphone</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Ends -->
+    <!-- Feature Product Listing Slider -->
+    <section id="feature-product-slider-wrapper" class="bg-light">
+        <div class="container">
+            <div class="product-lists padding">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading d-flex justify-content-between align-items-center mb-5 flex-wrap">
+                            <div class="head">
+                                <h2 class="font-weight-bold">Featured Products</h2>
+                                <!-- <p>THERE'S SOMETHING FOR EVERYONE</p> -->
+                            </div>
+                            <div class="navigator">
+                                <a href="">See all</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slick-slider-product w-100">
+                        <div class="slick-item mx-3 ">
+                            <div class="product-grid-item">
+                                <div class="product-grid-image">
+                                    <a href="#">
+                                        <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                    </a>
+                                    <ul class="social">
+                                        <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label font-weight-bold">New</span>
+                                    <span class="product-discount-label">-10%</span>
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                    <div class="price">
+                                        $14.40
+                                        <span>$16.00</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slick-item mx-3 ">
+                            <div class="product-grid-item">
+                                <div class="product-grid-image">
+                                    <a href="#">
+                                        <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                    </a>
+                                    <ul class="social">
+                                        <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label font-weight-bold">New</span>
+                                    <span class="product-discount-label">-10%</span>
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                    <div class="price">
+                                        $14.40
+                                        <span>$16.00</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slick-item mx-3 ">
+                            <div class="product-grid-item">
+                                <div class="product-grid-image">
+                                    <a href="#">
+                                        <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                    </a>
+                                    <ul class="social">
+                                        <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label font-weight-bold">New</span>
+                                    <span class="product-discount-label">-10%</span>
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                    <div class="price">
+                                        $14.40
+                                        <span>$16.00</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slick-item mx-3 ">
+                            <div class="product-grid-item">
+                                <div class="product-grid-image">
+                                    <a href="#">
+                                        <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                    </a>
+                                    <ul class="social">
+                                        <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label font-weight-bold">New</span>
+                                    <span class="product-discount-label">-10%</span>
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                    <div class="price">
+                                        $14.40
+                                        <span>$16.00</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slick-item mx-3 ">
+                            <div class="product-grid-item">
+                                <div class="product-grid-image">
+                                    <a href="#">
+                                        <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                    </a>
+                                    <ul class="social">
+                                        <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label font-weight-bold">New</span>
+                                    <span class="product-discount-label">-10%</span>
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                    <div class="price">
+                                        $14.40
+                                        <span>$16.00</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slick-item mx-3 ">
+                            <div class="product-grid-item">
+                                <div class="product-grid-image">
+                                    <a href="#">
+                                        <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                    </a>
+                                    <ul class="social">
+                                        <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label font-weight-bold">New</span>
+                                    <span class="product-discount-label">-10%</span>
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                    <div class="price">
+                                        $14.40
+                                        <span>$16.00</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Product Listing Slider Ends -->
+    <!-- Latest Product Listing  -->
+    <section id="latest-product-listing-wrapper">
+        <div class="container">
+            <div class="product-lists padding">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading d-flex justify-content-between align-items-center mb-5 flex-wrap">
+                            <div class="head">
+                                <h2 class="font-weight-bold">Latest Products</h2>
+                                <p>Winter New Arrivals</p>
+                            </div>
+                            <div class="navigator">
+                                <a href="">See all</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">
+                        <div class="product-grid-item">
+                            <div class="product-grid-image">
+                                <a href="#">
+                                    <img class="pic-1 img-fluid" src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}">
+                                </a>
+                                <ul class="social">
+                                    <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <span class="product-new-label font-weight-bold">New</span>
+                                <span class="product-discount-label">-10%</span>
+                            </div>
+                            <div class="product-content">
+                                <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest Product Listing Ends -->
+    <!-- Ads -->
+    <section id="ads">
+        <div class="content position-relative text-center">
+            <img src="{{ asset('frontend/assets/images/product-images/1 (3).jpg') }}" class="img-fluid">
+            <div class="discription m-auto text-white p-xl-5 p-lg-5 p-md-3 p-3">
+                <h1 class="font-weight-bold text-uppercase">This is Us</h1>
+                <p>Discover all your demands.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Ads Ends -->
+    <!-- Blogs -->
+    <section id="reviews-wrapper" class="bg-light">
+        <div class="container">
+            <div class="row padding">
+                <div class="col-12">
+                    <div class="heading d-flex justify-content-between align-items-center mb-5 flex-wrap">
+                        <div class="head">
+                            <h2 class="font-weight-bold">Reviews</h2>
+                        </div>
+                        <div class="navigator">
+                            <a href="">See all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 blog-list">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                            <div class="content">
+                                <div class="image">
+                                    <img src="{{ asset('frontend/assets/images/product-images/1 (4).jpg') }}" class="img-fluid">
+                                </div>
+                                <div class="discription text-center p-3 m-auto bg-light">
+                                    <a href="">
+                                        <h3 class="font-weight-bold">
+                                            Blog Titles
+                                        </h3>
+                                    </a>
+                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque culpa unde et maiores porro reiciendis.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                            <div class="content">
+                                <div class="image">
+                                    <img src="{{ asset('frontend/assets/images/banner/1 (1).jpg') }}" class="img-fluid">
+                                </div>
+                                <div class="discription text-center p-3 m-auto bg-light">
+                                    <a href="">
+                                        <h3 class="font-weight-bold">
+                                            Blog Titles
+                                        </h3>
+                                    </a>
+                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque culpa unde et maiores porro reiciendis.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                            <div class="content">
+                                <div class="image">
+                                    <img src="{{ asset('frontend/assets/images/banner/1 (2).jpg') }}" class="img-fluid">
+                                </div>
+                                <div class="discription text-center p-3 m-auto bg-light">
+                                    <a href="">
+                                        <h3 class="font-weight-bold">
+                                            Blog Titles
+                                        </h3>
+                                    </a>
+                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque culpa unde et maiores porro reiciendis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blogs Ends -->
 
     @foreach (homePageBuilderJson() as $template)
         @if (!$template['skip'] && $template['display'])

@@ -4,50 +4,130 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ isset(getSetting()['seo_title']) ? getSetting()['seo_title'] : 'Seo Title' }}</title>
-    <meta name="description"
-        content="{{ isset(getSetting()['seo_description']) ? getSetting()['seo_description'] : 'Seo Description' }}">
-    <meta name="keywords"
-        content="{{ isset(getSetting()['seo_keywords']) ? getSetting()['seo_keywords'] : 'Seo Keywords' }}">
-    <meta name="author" content="">
-
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="icon" type="image/png"
-        href="{{ isset(getSetting()['favicon']) ? getSetting()['favicon'] : '01-fav.png' }}">
-
-    <!-- Fontawesome CSS Files -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- Core CSS Files -->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/front/css/style.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharma Acoustic</title>
+    <!-- Bootstrap link Starts -->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css.map') }}">
+    <!-- Bootstrap link Ends -->
+    <!-- Font Awesome Link Starts -->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!-- Font Awesome Link Ends -->
+    <!-- Slick Css -->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/slick/slick-theme.css') }}">
+    <!-- Slick Css Ends-->
+    <!-- Custom Links -->
+    <!-- Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- Font Link Ends -->
+    <link rel="stylesheet" href="https://k1ngzed.com/dist/swiper/swiper.min.css" />
+    <link rel="stylesheet" href="https://k1ngzed.com/dist/EasyZoom/easyzoom.css" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
+    <!-- Custom Links Ends -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-
-
 </head>
 
 <body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }} ">
     {{-- {{   dd(getSetting()) }} --}}
-    @include('extras.preloader')
-    @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] :
-    'includes.headers.header-style1')
+    {{-- @include('extras.preloader') --}}
+    <!-- Whole Body Wrapper Starts -->
+    <section id="index-wrapper">
+        @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')
 
 
-    @yield('content')
+        @yield('content')
 
 
-    @include(isset(getSetting()['Footer_style']) ? 'includes.footers.footer-'.getSetting()['Footer_style'] :
-    'includes.footers.footer-style1')
+        @include(isset(getSetting()['Footer_style']) ? 'includes.footers.footer-'.getSetting()['Footer_style'] :
+        'includes.footers.footer-style1')
+        
+    </section>
+    <!-- Whole Body Wrapper Ends -->
 
+    <!-- 1st Jquery Link Starts-->
+    <script src="{{ asset('frontend/assets/jquery-3.5.1/jquery-3.5.1.js') }}"></script>
+    <!-- Jquery Link Ends-->
+    <!-- 2nd Popper Js Starts -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <!-- Popper Js Ends -->
+    <!-- 3rd Bootstrap Js Link Starts -->
+    <script src="{{ asset('frontend/assets/bootstrap-4.3.1/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/bootstrap-4.3.1/js/bootstrap.min.js.map') }}"></script>
+    <!-- Bootstrap Js Link Ends -->
+    <!-- Slick Js -->
+    <script src="{{ asset('frontend/assets/slick/slick.min.js') }}"></script>
+    <!-- Slick Js Ends-->
+    <!-- Custom Js Starts -->
+    <script src="https://k1ngzed.com/dist/swiper/swiper.min.js"></script>
+    <script src="https://k1ngzed.com/dist/EasyZoom/easyzoom.js"></script>
+    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <!-- Custom Js Ends -->
+    <!-- Nav Cart Popup -->
+    <!-- Modal -->
+    <div class="modal fade" id="nav-cart" tabindex="-1" role="dialog" aria-labelledby="navcartlabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title m-auto" id="navcartlabel"> <span class="mr-2"><i class="fa fa-opencart" aria-hidden="true"></i></span> Items List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <div class="item">
+                                <td class="pr-4 py-3"><img src="{{ asset('frontend/assets/images/product-images/1 (2).jpg') }}" class="img-fluid"></td>
+                                <td class="px-4 py-3">
+                                    <div class="head font-weight-bold">
+                                        Beats Headphone x <span class="cart-quantity ">1</span>
+                                    </div>
+                                    <div class="price">
+                                        Rs 1000
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="item">
+                                <td class="pr-4 py-3"><img src="{{ asset('frontend/assets/images/product-images/1 (1).jpg') }}" class="img-fluid"></td>
+                                <td class="px-4 py-3">
+                                    <div class="head font-weight-bold">
+                                        Beats Headphone x <span class="cart-quantity ">1</span>
+                                    </div>
+                                    <div class="price">
+                                        Rs 1000
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </td>
+                            </div>
+                        </tr>
+                    </table>
+                    <div class="total-amount pt-3 text-center">
+                        Total : <span class="font-weight-bold">Rs 1500</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary m-auto">Proceed Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+    <!-- Nav Cart Popup -->
 
-    <a href="javascript:void(0)" class="btn-secondary swipe-to-top" id="back-to-top" data-toggle="tooltip"
+    {{-- <a href="javascript:void(0)" class="btn-secondary swipe-to-top" id="back-to-top" data-toggle="tooltip"
         data-placement="bottom" data-original-title="{{ trans('lables.general-backtotop') }}"
         title="{{ trans('lables.general-backtotop') }}">&uarr;</a>
 
@@ -890,7 +970,7 @@
                 error: function(data) {},
             });
         }
-    </script>
+    </script> --}}
 
     @yield('script')
 </body>
