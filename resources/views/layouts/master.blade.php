@@ -40,9 +40,7 @@
     <section id="index-wrapper">
         @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')
 
-
         @yield('content')
-
 
         @include(isset(getSetting()['Footer_style']) ? 'includes.footers.footer-'.getSetting()['Footer_style'] :
         'includes.footers.footer-style1')

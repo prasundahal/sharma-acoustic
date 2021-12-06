@@ -51,100 +51,104 @@ function slickInit(){
 }
 // Banner Slick Slider Ends
 // Product List Slick Slider 
-$('.slick-slider-product').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: false,
-    responsive: [{
-            breakpoint: 1400,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 1
+function productListInit(){
+    $('.slick-slider-product').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        responsive: [{
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1080,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 780,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+    
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-        },
-        {
-            breakpoint: 1080,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 780,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-            }
-        },
-
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-
-
-    ]
-});
+    
+    
+        ]
+    });
+}
 // Product List Slick Slider Ends
 // Category Slick Slider 
-$('.slick-slider-category').slick({
-    infinite: true,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: false,
-    responsive: [{
-            breakpoint: 1440,
-            settings: {
-                slidesToShow: 8,
-                slidesToScroll: 1
+function categorySlickInit(){
+    $('.slick-slider-category').slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        responsive: [{
+                breakpoint: 1440,
+                settings: {
+                    slidesToShow: 8,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1080,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 780,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+    
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 420,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-        },
-        {
-            breakpoint: 1080,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 780,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-            }
-        },
-
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 420,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-
-
-    ]
-});
+    
+    
+        ]
+    });
+}
 // Category Slick Slider Ends
 
 // Product Page carousel Start
