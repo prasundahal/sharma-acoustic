@@ -5,7 +5,7 @@
           <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
               <div class="footer-logo-box text-white">
                   <div class="header-logo mb-3">
-                      <a class="" href="index.html"><img src="frontend/assets/images/logo/logo-footer.jpeg" class="img-fluid"></a>
+                      <a class="" href="index.html"><img src="{{ asset('frontend/assets/images/logo/logo-footer.jpeg') }}" class="img-fluid"></a>
                   </div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta saepe tenetur nostrum maxime ratione quis perspiciatis facilis, laudantium ipsum commodi assumenda ad earum ex eaque possimus laboriosam. Doloremque, provident
                       nostrum!

@@ -4,7 +4,7 @@
     @include(isset(getSetting()['slider_style']) ? 'includes.sliders.slider-'.getSetting()['slider_style'] :
     'includes.sliders.slider-style1')
 
-    <!-- Product Listing  -->
+    {{-- <!-- Product Listing  -->
     <section id="product-listing-wrapper">
         <div class="container">
             <div class="product-lists padding">
@@ -689,7 +689,7 @@
             </div>
         </div>
     </section>
-    <!-- Blogs Ends -->
+    <!-- Blogs Ends --> --}}
 
     @foreach (homePageBuilderJson() as $template)
         @if (!$template['skip'] && $template['display'])
@@ -702,50 +702,50 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            var url = "{{ url('') }}" +
-                '/api/client/products?limit=10&getCategory=1&getDetail=1&language_id=' + languageId +
-                '&topSelling=1&currency=' + localStorage.getItem("currency");
-            appendTo = 'tab_top_sales';
-            fetchProduct(url, appendTo);
+            // var url = "{{ url('') }}" +
+            //     '/api/client/products?limit=10&getCategory=1&getDetail=1&language_id=' + languageId +
+            //     '&topSelling=1&currency=' + localStorage.getItem("currency");
+            // appendTo = 'tab_top_sales';
+            // fetchProduct(url, appendTo);
 
-            var url = "{{ url('') }}" + '/api/client/products?limit=10&getDetail=1&language_id=' +
-                languageId + '&currency=' + localStorage.getItem("currency");
-            appendTo = 'tab_special_products';
-            fetchProduct(url, appendTo);
+            // var url = "{{ url('') }}" + '/api/client/products?limit=10&getDetail=1&language_id=' +
+            //     languageId + '&currency=' + localStorage.getItem("currency");
+            // appendTo = 'tab_special_products';
+            // fetchProduct(url, appendTo);
 
-            var url = "{{ url('') }}" + '/api/client/products?limit=10&getDetail=1&language_id=' +
-                languageId + '&currency=' + localStorage.getItem("currency");
-            appendTo = 'tab_most_liked';
-            fetchProduct(url, appendTo);
+            // var url = "{{ url('') }}" + '/api/client/products?limit=10&getDetail=1&language_id=' +
+            //     languageId + '&currency=' + localStorage.getItem("currency");
+            // appendTo = 'tab_most_liked';
+            // fetchProduct(url, appendTo);
 
-            var url = "{{ url('') }}" +
-                '/api/client/products?limit=12&getCategory=1&getDetail=1&language_id=' + languageId +
-                '&sortBy=id&sortType=DESC&currency=' + localStorage.getItem("currency");
-            appendTo = 'new-arrival';
-            fetchProduct(url, appendTo);
+            // var url = "{{ url('') }}" +
+            //     '/api/client/products?limit=12&getCategory=1&getDetail=1&language_id=' + languageId +
+            //     '&sortBy=id&sortType=DESC&currency=' + localStorage.getItem("currency");
+            // appendTo = 'new-arrival';
+            // fetchProduct(url, appendTo);
 
 
-            var url = "{{ url('') }}" +
-                '/api/client/products?limit=6&getCategory=1&getDetail=1&language_id=' + languageId +
-                '&sortBy=id&sortType=DESC&currency=' + localStorage.getItem("currency");
-            appendTo = 'weekly-sale';
-            fetchProduct(url, appendTo);
+            // var url = "{{ url('') }}" +
+            //     '/api/client/products?limit=6&getCategory=1&getDetail=1&language_id=' + languageId +
+            //     '&sortBy=id&sortType=DESC&currency=' + localStorage.getItem("currency");
+            // appendTo = 'weekly-sale';
+            // fetchProduct(url, appendTo);
 
-            var url = "{{ url('') }}" +
-                '/api/client/products?limit=1&getCategory=1&getDetail=1&language_id=' + languageId +
-                '&topSelling=1&currency=' + localStorage.getItem("currency");
-            appendTo = 'weekly-sale-first-div';
-            fetchFeaturedWeeklyProduct(url,appendTo)
+            // var url = "{{ url('') }}" +
+            //     '/api/client/products?limit=1&getCategory=1&getDetail=1&language_id=' + languageId +
+            //     '&topSelling=1&currency=' + localStorage.getItem("currency");
+            // appendTo = 'weekly-sale-first-div';
+            // fetchFeaturedWeeklyProduct(url,appendTo)
 
-            blogNews();
+            // blogNews();
             sliderMedia();
-            categorySlider();
-            bannerMedia();
-            cartSession = $.trim(localStorage.getItem("cartSession"));
-            if (cartSession == null || cartSession == 'null') {
-                cartSession = '';
-            }
-            menuCart(cartSession);
+            // categorySlider();
+            // bannerMedia();
+            // cartSession = $.trim(localStorage.getItem("cartSession"));
+            // if (cartSession == null || cartSession == 'null') {
+            //     cartSession = '';
+            // }
+            // menuCart(cartSession);
         });
 
 
@@ -1072,9 +1072,9 @@
             $.ajax({
                 type: 'get',
                 url: "{{ url('') }}" +
-                    '/api/client/slider?getLanguage=' + languageId +
+                    '/api/client/slider?getLanguage=' + 1 +
                     '&getSliderType=1&getSliderNavigation=1&getSliderGallary=1&limit=5&sortBy=id&sortType=DESC&sliderType=' +
-                    sliderType + '&language_id=' + languageId,
+                    sliderType + '&language_id=' + 1,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
@@ -1082,73 +1082,23 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
+                    console.log(data);
                     if (data.status == 'Success') {
-                        $(".slider-navigation-show").html('');
-                        const templ = document.getElementById("slider-navigation-template");
-                        // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-                        for (i = 0; i < data.data.length; i++) {
-
-
-                            $("#slider-bullets-" + i).addClass("d-xl-block");
-
-                            const clone = templ.content.cloneNode(true);
-                            // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-                            clone.querySelector(".slider-navigation-title").innerHTML = data.data[i]
-                                .slider_title;
-                            clone.querySelector(".slider-navigation-desc").innerHTML = data.data[i]
-                                .slider_description;
-                            clone.querySelector(".slider-navigation-url").setAttribute('href', data.data[i]
-                                .slider_url);
-                            if (i == 0) {
-                                clone.querySelector(".slider-navigation-active").classList.add("active");
-                            }
-                            if (data.data[i].gallary != null && $.trim(data.data[i].gallary) != '') {
-                                clone.querySelector(".slider-navigation-image").setAttribute('src',
-                                    '/gallary/' + data.data[i].gallary);
-                            }
-                            $(".slider-navigation-show").append(clone);
-                        }
-                    }
-                },
-                error: function(data) {},
-            });
-
-
-            $.ajax({
-                type: 'get',
-                url: "{{ url('') }}" +
-                    '/api/client/constant_banner?getLanguage=' + languageId +
-                    '&title=rightsliderbanner&language_id=' + languageId + '&getGallary=1',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
-                    clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
-                },
-                beforeSend: function() {},
-                success: function(data) {
-                    if (data.status == 'Success') {
-                        var side_banners = '';
-                        side_banners += '<figure class="banner-image imagespace">';
-                        side_banners +=
-                            '<a class="banner-slider-link1" href=""><img class="img-fluid banner-slider-image1" src="" alt="Banner Image"></a>';
-                        side_banners += '</figure>';
-                        side_banners += '<figure class="banner-image ">';
-                        side_banners +=
-                            '<a class="banner-slider-link2" href=""><img class="img-fluid banner-slider-image2" src="" alt="Banner Image"></a>';
-                        side_banners += '</figure>';
-                        $('.side-banners').html(side_banners);
-
-                        $('.banner-slider-link1').attr('href', "{{ url('') }}" + data.data[0]
-                            .banner_url);
-                        $('.banner-slider-image1').attr('src', "/gallary/" + data.data[0].gallary.gallary_name);
-
-
-
-                        $('.banner-slider-link2').attr('href', "{{ url('') }}" + data.data[1]
-                            .banner_url);
-                        $('.banner-slider-image2').attr('src', "/gallary/" + data.data[1].gallary.gallary_name);
-
-
+                        var slider = '';
+                        $.each(data.data, function(i, e){
+                            slider += '<div class="slick-item">' +
+                                '<img src="{{ asset('gallary') }}/' + e.gallary + '" class="img-fluid w-100">' +
+                                '<div class="discription">' +
+                                    '<h1 class="font-weight-bold"> ' + e.slider_title + '</h1>' +
+                                    '<div class="ban-content">' +
+                                        '<p>' + e.slider_description + '</p>' +
+                                    '</div>' +
+                                    '<a href="' + e.slider_url + '" class="btn anchor-btn">Learn More</a>' +
+                                '</div>' +
+                            '</div>';
+                        });
+                        $('.slick-slider').html(slider);
+                        slickInit();
                     }
                 },
                 error: function(data) {},

@@ -1,52 +1,54 @@
 // Banner Slick Slider Starts
-$('.slick-slider').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: false,
-
-    responsive: [{
-            breakpoint: 1400,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
+function slickInit(){
+    $('.slick-slider').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+    
+        responsive: [{
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1080,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 780,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+    
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-        },
-        {
-            breakpoint: 1080,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 780,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-
-
-    ]
-
-});
+    
+    
+        ]
+    
+    }); 
+}
 // Banner Slick Slider Ends
 // Product List Slick Slider 
 $('.slick-slider-product').slick({
