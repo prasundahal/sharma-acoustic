@@ -4,9 +4,22 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>{{ isset(getSetting()['seo_title']) ? getSetting()['seo_title'] : 'Seo Title' }}</title>
+    <meta name="description"
+        content="{{ isset(getSetting()['seo_description']) ? getSetting()['seo_description'] : 'Seo Description' }}">
+    <meta name="keywords"
+        content="{{ isset(getSetting()['seo_keywords']) ? getSetting()['seo_keywords'] : 'Seo Keywords' }}">
+    <meta name="author" content="">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png"
+        href="{{ isset(getSetting()['favicon']) ? getSetting()['favicon'] : '01-fav.png' }}">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharma Acoustic</title>
+    
     <!-- Bootstrap link Starts -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css.map') }}">
@@ -74,14 +87,14 @@
                 <div class="modal-header">
                     <h5 class="modal-title m-auto" id="navcartlabel"> <span class="mr-2"><i class="fa fa-opencart" aria-hidden="true"></i></span> Items List</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table>
-                        <tr>
+                    <table id="top-cart-product-template">
+                        {{-- <tr>
                             <div class="item">
-                                <td class="pr-4 py-3"><img src="{{ asset('frontend/assets/images/product-images/1 (2).jpg') }}" class="img-fluid"></td>
+                                <td class="pr-4 py-3"><img src=" frontend/assets/images/product-images/1 (2).jpg " class="img-fluid"></td>
                                 <td class="px-4 py-3">
                                     <div class="head font-weight-bold">
                                         Beats Headphone x <span class="cart-quantity ">1</span>
@@ -97,7 +110,7 @@
                         </tr>
                         <tr>
                             <div class="item">
-                                <td class="pr-4 py-3"><img src="{{ asset('frontend/assets/images/product-images/1 (1).jpg') }}" class="img-fluid"></td>
+                                <td class="pr-4 py-3"><img src=" frontend/assets/images/product-images/1 (1).jpg " class="img-fluid"></td>
                                 <td class="px-4 py-3">
                                     <div class="head font-weight-bold">
                                         Beats Headphone x <span class="cart-quantity ">1</span>
@@ -110,11 +123,14 @@
                                     <span><i class="fa fa-trash" aria-hidden="true"></i></span>
                                 </td>
                             </div>
-                        </tr>
+                        </tr> --}}
                     </table>
-                    <div class="total-amount pt-3 text-center">
-                        Total : <span class="font-weight-bold">Rs 1500</span>
-                    </div>
+                    <span id="top-cart-product-total"></span>
+                    {{-- <div class="total-amount pt-3 text-center">
+                        Total : <span class="font-weight-bold" id="top-cart-product-total">
+                            Rs 1500
+                        </span>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary m-auto">Proceed Checkout</button>
@@ -127,21 +143,21 @@
 
     {{-- <a href="javascript:void(0)" class="btn-secondary swipe-to-top" id="back-to-top" data-toggle="tooltip"
         data-placement="bottom" data-original-title="{{ trans('lables.general-backtotop') }}"
-        title="{{ trans('lables.general-backtotop') }}">&uarr;</a>
+        title="{{ trans('lables.general-backtotop') }}">&uarr;</a> --}}
 
-    <div class="mobile-overlay"></div>
+    {{-- <div class="mobile-overlay"></div> --}}
 
-    <div class="notifications" id="notificationWishlist">Product Added To Wishlist</div>
+    {{-- <div class="notifications" id="notificationWishlist">Product Added To Wishlist</div> --}}
 
 
 
-    @include('extras.settings')
-    @include('modals.product-quick-view')
+    {{-- @include('extras.settings') --}}
+    {{-- @include('modals.product-quick-view') --}}
 
     <!-- All custom scripts here -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/front/js/scripts.js') }}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
+    {{-- <script src="{{ asset('assets/front/js/scripts.js') }}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @php
@@ -460,13 +476,13 @@
             product_combination_id = '';
             if (product_type == 'variable') {
                 if ($.trim($("#product_combination_id").val()) == '' || $.trim($("#product_combination_id").val()) ==
-                    'null') {
+                'null') {
                     toastr.error("{{ trans('response.select-combination') }}")
                     return;
                 }
                 product_combination_id = $("#product_combination_id").val();
             }
-
+            
             qty = $.trim($("#quantity-input").val());
             if (qty == '' || qty == 'undefined' || qty == null) {
                 qty = 1;
@@ -496,7 +512,7 @@
                     if (data.status == 'Success') {
                         if (loggedIn != '1') {
                             localStorage.setItem("cartSession", data.data.session);
-                            console.dir(data);
+                            // console.dir(data);
                             menuCart(data.data.session);
                         } else {
                             menuCart('');
@@ -537,92 +553,98 @@
                 beforeSend: function() {},
                 success: function(data) {
                     if (data.status == 'Success') {
-                        $(".top-cart-product-show").html('');
-                        const templ = document.getElementById("top-cart-product-template");
                         total_price = 0;
                         currrency = '';
+                        var qtyAmountRow = '';
+                        var deleteRow = '';
+                        var totalRow = '';
+                        var clone = '';
                         for (i = 0; i < data.data.length; i++) {
-                            const clone = templ.content.cloneNode(true);
-                            // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
                             if (data.data[i].product_type == 'variable') {
                                 for (k = 0; k < data.data[i].combination.length; k++) {
                                     if (data.data[i].product_combination_id == data.data[i].combination[k]
                                         .product_combination_id) {
                                         price = data.data[i].combination[k].price;
                                         $(".product-card-price").html(data.data[i].product_price_symbol);
-
-                                        if (data.data[i].combination[k].gallary != null && data.data[i]
-                                            .combination[k].gallary != 'null' && data.data[i].combination[k]
-                                            .gallary != '') {
-                                            clone.querySelector(".top-cart-product-image").setAttribute('src',
-                                                '/gallary/' + data.data[i].combination[k].gallary
-                                                .gallary_name);
-                                            clone.querySelector(".top-cart-product-image").setAttribute('alt',
-                                                data.data[i].combination[k].gallary.gallary_name);
+                                        if (data.data[i].combination[k].gallary != null && data.data[i].combination[k].gallary != 'null' && data.data[i].combination[k].gallary != '') {
+                                            imageSrc = '/gallary/' + data.data[i].combination[k].gallary.gallary_name;
+                                            imageAlt = data.data[i].combination[k].gallary.gallary_name;
                                             name = data.data[i].product_detail[0].title;
                                             for (loop = 0; loop < data.data[i].product_combination
                                                 .length; loop++) {
                                                 if (data.data[i].product_combination[loop].length - 1 == loop) {
-                                                    name += data.data[i].product_combination[loop].variation
-                                                        .detail[0].name;
+                                                    name += data.data[i].product_combination[loop].variation.detail[0].name;
                                                 } else {
-                                                    name += data.data[i].product_combination[loop].variation
-                                                        .detail[0].name + '-';
+                                                    name += data.data[i].product_combination[loop].variation.detail[0].name + '-';
                                                 }
                                             }
-                                            clone.querySelector(".top-cart-product-name").innerHTML = name;
                                         }
                                         k = data.data[i].combination.length;
                                     } else {}
                                 }
                             } else {
-                                if (data.data[i].product_gallary != null && data.data[i].product_gallary !=
-                                    'null' && $.trim(data.data[i].product_gallary) != '') {
+                                if (data.data[i].product_gallary != null && data.data[i].product_gallary != 'null' && $.trim(data.data[i].product_gallary) != '') {
                                     if (data.data[i].product_gallary.detail != null && data.data[i]
                                         .product_gallary.detail != 'null' && $.trim(data.data[i].product_gallary
                                             .detail) != '') {
-                                        clone.querySelector(".top-cart-product-image").setAttribute('src', data
-                                            .data[i].product_gallary.detail[2].gallary_path);
+                                        imageSrc = data.data[i].product_gallary.detail[2].gallary_path;
+                                        if(imageSrc.startsWith('/')){
+                                            imageSrc = imageSrc.substring(1);
+                                        }
                                     }
                                 }
-                                if (data.data[i].product_detail != null && data.data[i].product_detail !=
-                                    'null' && $.trim(data.data[i].product_detail) != '') {
-                                    clone.querySelector(".top-cart-product-image").setAttribute('alt', data
-                                        .data[i].product_detail[0].title);
-                                    clone.querySelector(".top-cart-product-name").innerHTML = data.data[i]
-                                        .product_detail[0].title;
+                                if (data.data[i].product_detail != null && data.data[i].product_detail != 'null' && $.trim(data.data[i].product_detail) != '') {
+                                    imageAlt = data.data[i].product_detail[0].title;
+                                    name = data.data[i].product_detail[0].title;
                                 }
                             }
 
-                            if (data.data[i].discount_price > 0)
-                            {
+                            if (data.data[i].discount_price > 0) {
                                 discount_price = data.data[i].discount_price;
                             } else {
                                 discount_price = data.data[i].price;
                             }
                             //discount_price = +data.data[i].price - +data.data[i].discount_price;
-                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
-                                .currency != null) {
+                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i].currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
-                                    clone.querySelector(".top-cart-product-qty-amount").innerHTML = data.data[i]
-                                        .qty + ' x ' + data.data[i].currency.code + ' ' + discount_price +
-                                        '     <i class="fas fa-trash"  data-id=' + data.data[i]
-                                        .product_id + ' data-combination-id=' + data
-                                        .data[i].product_combination_id +
-                                        ' onclick="removeCartItem(this)"></i>';
+                                    qtyAmountRow = '<td class="px-4 py-3">' +
+                                        '<div class="head font-weight-bold">' +
+                                            name + ' x <span class="cart-quantity ">' + data.data[i].qty + '</span>' +
+                                        '</div>' +
+                                        '<div class="price">' +
+                                            data.data[i].currency.code + ' ' + discount_price +
+                                        '</div>' +
+                                    '</td>';
+                                    deleteRow = '<td class="px-4 py-3">' +
+                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data.data[i].product_id + ' data-combination-id=' + data.data[i].product_combination_id + ' onclick="removeCartItem(this)"></i></span>' +
+                                    '</td>';
                                 } else {
-                                    clone.querySelector(".top-cart-product-qty-amount").innerHTML = data.data[i]
-                                        .qty + ' x ' + discount_price + ' ' + data.data[i].currency.code +
-                                        '  <i class="fas fa-trash" data-id=' + data.data[i]
-                                        .product_id + ' data-combination-id=' + data
-                                        .data[i].product_combination_id +
-                                        '  onclick="removeCartItem(this)"></i>';
+                                    qtyAmountRow = '<td class="px-4 py-3">' +
+                                        '<div class="head font-weight-bold">' +
+                                            name + ' x <span class="cart-quantity ">' + data.data[i].qty + '</span>' +
+                                        '</div>' +
+                                        '<div class="price">' +
+                                            discount_price + ' ' + data.data[i].currency.code +
+                                        '</div>' +
+                                    '</td>';
+                                    deleteRow = '<td class="px-4 py-3">' +
+                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data.data[i].product_id + ' data-combination-id=' + data.data[i].product_combination_id + ' onclick="removeCartItem(this)"></i></span>' +
+                                    '</td>';
                                 }
                             }
-                            
-                            total_price = total_price + (discount_price*data.data[i].qty);
 
-                            $(".top-cart-product-show").append(clone);
+                            total_price = total_price + (discount_price * data.data[i].qty);
+                            
+                            clone += '<tr>' +
+                                '<div class="item">' +
+                                    '<td class="pr-4 py-3"><img src="{{ asset('') }}' + imageSrc + '" class="img-fluid"></td>' +
+                                    qtyAmountRow +
+                                    deleteRow +
+                                '</div>' +
+                            '</tr>';
+
+                            $("#top-cart-product-template").html(clone);
+                            
                             currrency = data.data[i].currency;
                         }
                         if (currrency != '' && currrency != 'null' && currrency != null) {
@@ -633,13 +655,19 @@
                             }
                         }
                         if (data.data.length > 0) {
-                            const temp1 = document.getElementById("top-cart-product-total-template");
-                            const clone1 = temp1.content.cloneNode(true);
-                            clone1.querySelector(".top-cart-product-total").innerHTML = total_price;
-                            $(".top-cart-product-show").append(clone1);
-                            $(".total-menu-cart-product-count").html(data.data.length);
+                            totalRow += '<div class="total-amount pt-3 text-center">' +
+                                'Total : <span class="font-weight-bold">' +
+                                    total_price +
+                                '</span>' +
+                            '</div>';
+                            $("#total-menu-cart-product-count").html(data.data.length);
+                            $("#top-cart-product-total").html(totalRow);
+                            $('#nav-cart > div > div > div').eq(2).show();
                         } else {
-                            $(".top-cart-product-show").html('{{ trans('lables.header-emptycart') }}');
+                            $("#total-menu-cart-product-count").html(data.data.length);
+                            $("#top-cart-product-template").html('<tr><td>No Items</td></tr>');
+                            $("#top-cart-product-total").html('');
+                            $('#nav-cart > div > div > div').eq(2).hide();
                         }
                     } else {
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
@@ -648,7 +676,6 @@
                 error: function(data) {},
             });
         }
-
 
         $(document).on('click', '.quantity-plus', function() {
             var quantity = $('#quantity-input').val();
@@ -716,8 +743,6 @@
             location.reload();
         });
 
-
-
         $(".currency").change(function(e) {
             e.preventDefault();
             lcurrencyId = $(this).attr('data-id');
@@ -728,6 +753,7 @@
         });
 
         $('.log_out').click(function() {
+        // $('body').click(function() {
             url = "{{ url('') }}" + '/api/client/customer_logout';
 
             $.ajax({
@@ -930,7 +956,7 @@
         }
 
         function removeCartItem(input) {
-
+            console.log('removeCartItem');
             product_id = $.trim($(input).attr('data-id'));
             product_combination_id = $.trim($(input).attr('data-combination-id'));
             if (product_combination_id == null || product_combination_id == 'null') {
@@ -968,7 +994,7 @@
                 error: function(data) {},
             });
         }
-    </script> --}}
+    </script>
 
     @yield('script')
 </body>

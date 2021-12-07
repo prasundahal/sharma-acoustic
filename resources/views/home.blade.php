@@ -90,7 +90,7 @@
         </div>
     </section>
     <!-- Latest Product Listing Ends -->
-    {{-- <!-- Ads -->
+    <!-- Ads -->
     <section id="ads">
         <div class="content position-relative text-center">
             <img src="{{ asset('frontend/assets/images/product-images/1 (3).jpg') }}" class="img-fluid">
@@ -100,7 +100,7 @@
             </div>
         </div>
     </section>
-    <!-- Ads Ends --> --}}
+    <!-- Ads Ends -->
     <!-- Blogs -->
     <section id="reviews-wrapper" class="bg-light">
         <div class="container">
@@ -214,7 +214,7 @@
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
                                                     '<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
-                                                    '<li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
                                                 '<span class="product-new-label font-weight-bold">New</span>' +
                                                 '<span class="product-discount-label">-10%</span>' +
@@ -225,7 +225,7 @@
                                                     e.product_price_symbol +
                                                     // '<span>$16.00</span>' +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '">ADD TO CART</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
@@ -244,7 +244,7 @@
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
                                                     '<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
-                                                    '<li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
                                                 '<span class="product-new-label font-weight-bold">New</span>' +
                                                 '<span class="product-discount-label">-10%</span>' +
@@ -255,7 +255,7 @@
                                                     e.product_price_symbol +
                                                     // '<span>$16.00</span>' +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '">ADD TO CART</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
@@ -274,7 +274,7 @@
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
                                                     '<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
-                                                    '<li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
                                                 '<span class="product-new-label font-weight-bold">New</span>' +
                                                 '<span class="product-discount-label">-10%</span>' +
@@ -285,7 +285,7 @@
                                                     e.product_price_symbol +
                                                     // '<span>$16.00</span>' +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '">ADD TO CART</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
@@ -399,7 +399,6 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
-                    console.log(data);
                     if (data.status == 'Success') {
                         var blogSection = '';
                         $.each(data.data, function(i, e){

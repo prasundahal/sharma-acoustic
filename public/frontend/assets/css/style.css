@@ -62,7 +62,7 @@
             }
             
             button {
-                background-color: #00d1b2;
+                background-color: var(--main-color);
                 border-color: transparent;
                 color: #fff;
                 padding: 8px 20px;
@@ -108,6 +108,59 @@
                 height: 100vh;
                 background: #fff url("/frontend/assets/images/preloader.gif") no-repeat center center;
                 z-index: 99999;
+            }
+            
+            #leftsidebarfilter .modal-dialog {
+                position: fixed;
+                left: 0;
+                margin: auto;
+                width: 320px;
+                height: 100%;
+                -webkit-transform: translate3d(0%, 0, 0);
+                -ms-transform: translate3d(0%, 0, 0);
+                -o-transform: translate3d(0%, 0, 0);
+                transform: translate3d(0%, 0, 0);
+            }
+            
+            #leftsidebarfilter.fade .modal-dialog {
+                left: -320px;
+                -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+                -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+                -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+                transition: opacity 0.3s linear, left 0.3s ease-out;
+            }
+            
+            #leftsidebarfilter.fade.show .modal-dialog {
+                left: 0;
+            }
+            
+            #profilemobilenav .modal-dialog {
+                position: fixed;
+                left: 0;
+                margin: auto;
+                width: 230px;
+                height: 100%;
+                -webkit-transform: translate3d(0%, 0, 0);
+                -ms-transform: translate3d(0%, 0, 0);
+                -o-transform: translate3d(0%, 0, 0);
+                transform: translate3d(0%, 0, 0);
+            }
+            
+            #profilemobilenav.fade .modal-dialog {
+                left: -320px;
+                -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+                -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+                -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+                transition: opacity 0.3s linear, left 0.3s ease-out;
+            }
+            
+            #profilemobilenav.fade.show .modal-dialog {
+                left: 0;
+            }
+            
+            .mobile-profile-nav {
+                border-radius: 8px;
+                border-right: 1px solid #aeaeae;
             }
             /* Global Css Ends */
             /* navigation section starts */
@@ -200,6 +253,12 @@
                 width: 100%;
             }
             
+            #nav-cart .modal-body {
+                max-height: 275px;
+                min-height: 275px;
+                overflow-y: scroll;
+            }
+            
             #nav-cart .modal-body table .head {
                 font-size: 18px;
             }
@@ -260,6 +319,7 @@
             .product-grid-item,
             .product-grid-item .product-grid-image {
                 position: relative;
+                overflow: hidden;
             }
             
             .product-grid-item {
@@ -289,9 +349,19 @@
                 object-position: center;
             }
             
+            .product-grid-item:hover .product-grid-image img {
+                -webkit-transform: rotate( 2deg) scale(1.1);
+                transform: rotate( 2deg) scale(1.1);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
             .product-grid-item .pic-1 {
                 opacity: 1;
                 transition: all .5s ease-out 0s;
+                -webkit-transform: rotate( 0deg) scale(1.0);
+                transform: rotate( 0deg) scale(1.0);
+                -webkit-transition: .3s ease-in-out;
             }
             
             .product-grid-item:hover .pic-1 {
@@ -572,6 +642,7 @@
                 max-height: 300px;
                 min-height: 300px;
                 width: 100%;
+                transition: all .5s;
             }
             
             #reviews-wrapper .content .discription {
@@ -601,6 +672,18 @@
             #reviews-wrapper .discription a {
                 text-decoration: none;
             }
+            
+            .content:hover img {
+                -webkit-transform: rotate( 2deg) scale(1.1);
+                transform: rotate( 2deg) scale(1.1);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
+            .content {
+                overflow: hidden;
+                transition: all .5s;
+            }
             /* Blog Section Ends */
             /* Ads */
             
@@ -626,7 +709,7 @@
             
             #footer-wrapper {
                 background-color: var(--black);
-                border-top: 4px solid var(--text-color);
+                border-top: 4px solid var(--secondary-color);
             }
             
             #footer-wrapper .footer-logo-box a img {
@@ -725,10 +808,6 @@
             .swiper-button-prev {
                 display: none !important;
             }
-            /* .product-carousel .gallery-top .swiper-slide .easyzoom-flyout img {
-    min-width: 100%;
-    min-height: 100%;
-} */
             
             .product-carousel .swiper-button-next.swiper-button-white,
             .product-carousel .swiper-button-prev.swiper-button-white {
@@ -898,6 +977,21 @@
                 min-height: 150px;
                 object-fit: contain;
                 object-position: center;
+                transition: all .5s ease-out 0s;
+                -webkit-transform: rotate( 0deg) scale(1.0);
+                transform: rotate( 0deg) scale(1.0);
+                -webkit-transition: .3s ease-in-out;
+            }
+            
+            #cart-wrapper .shopping-cart .cart-image:hover a img {
+                -webkit-transform: rotate( 0deg) scale(1.1);
+                transform: rotate( 0deg) scale(1.1);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
+            #cart-wrapper .shopping-cart .cart-image a {
+                overflow: hidden;
             }
             
             #cart-wrapper .shopping-cart .shopping-cart-table table tbody tr .cart-product-name-info {
@@ -980,13 +1074,20 @@
             
             #profile-wrapper .profile-side-detail-edit ul li {
                 border-bottom: 1px solid #e7e7e7;
-                margin-bottom: 10px;
-                padding-bottom: 10px;
+                margin: 5px 0;
+                padding: 10px 0;
                 font-size: 14px;
             }
             
             #profile-wrapper .profile-side-detail-edit ul li span {
                 float: right;
+            }
+            
+            #profile-wrapper .profile-side-detail-edit .tab-profile-img {
+                max-height: 250px;
+                min-height: 250px;
+                object-fit: contain;
+                object-position: center;
             }
             
             #profile-wrapper .nav .nav-item .head-info {
@@ -1007,5 +1108,185 @@
                 border-radius: 6px;
             }
             /* Dashboard  Page Ends */
+            /* About Page */
+            
+            #about-us-wrapper .about-us-image img {
+                max-height: 350px;
+                min-height: 350px;
+                object-fit: cover;
+                object-position: center;
+                width: 100%;
+                -webkit-transform: rotate( 0deg) scale(1.0);
+                transform: rotate( 0deg) scale(1.0);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
+            #about-us-wrapper .about-us-image:hover img {
+                -webkit-transform: rotate( 2deg) scale(1.1);
+                transform: rotate( 2deg) scale(1.1);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
+            #about-us-wrapper .about-us-image {
+                overflow: hidden;
+            }
+            
+            #about-us-wrapper .about-us-image img:hover {
+                opacity: 0.8;
+                transition: all 0.5s;
+            }
+            
+            #about-us-wrapper .about-banner-img img {
+                max-height: 350px;
+                min-height: 350px;
+                object-position: center;
+                object-fit: cover;
+                width: 100%;
+                transition: all 0.5s;
+                border: 2px solid transparent;
+            }
+            
+            .overlay {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+                transition: all 0.5s;
+                background-color: #ba3b0033;
+            }
+            
+            .about-banner-img:hover .overlay {
+                opacity: 1;
+            }
+            
+            #about-us-wrapper .text {
+                color: white;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+            
+            .about-us-image-discription h3 {
+                color: var(--main-color);
+            }
+            
+            .about-us-image-discription p {
+                color: var(--text-color)
+            }
+            
+            .about-us-list h2 {
+                font-family: 'FontAwesome';
+            }
+            /* About Page Ends */
             /* Contact Page */
+            
+            #contact-us-wrapper .address-info ul li .fa,
+            .address-info ul li p a,
+            #contact-us-wrapper .title h2 {
+                color: white;
+            }
+            
+            #contact-us-wrapper .address-info ul li:hover {
+                background-color: red;
+            }
+            
+            #contact-us-wrapper .row::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                border-radius: 8px;
+                background-color: var(--main-color);
+                -webkit-clip-path: polygon(25% 0%, 100% 0, 100% 45%, 61% 100%, 0 100%, 0 0);
+                clip-path: polygon(25% 0%, 100% 0, 100% 45%, 61% 100%, 0 100%, 0 0);
+            }
+            
+            #contact-us-wrapper .row {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            #contact-us-wrapper form {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0px 0px 5px 0px #c4c4c4;
+            }
             /* Contact Page Ends */
+            /* Login Page */
+            
+            #login-register-wrapper .login-register-form h1 {
+                color: var(--main-color);
+            }
+            
+            #login-register-wrapper i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--main-color);
+            }
+            
+            #login-register-wrapper .social-media a {
+                color: white;
+                background-color: var(--main-color);
+                height: 30px;
+                width: 30px;
+                font-size: 15px;
+                border-radius: 4px;
+                line-height: 2;
+            }
+            
+            #login-register-wrapper .social-media a:hover {
+                background-color: var(--secondary-color);
+            }
+            
+            #login-register-wrapper .login-register-form:hover img {
+                -webkit-transform: rotate( 2deg) scale(1.1);
+                transform: rotate( 2deg) scale(1.1);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
+            #login-register-wrapper .image img {
+                max-height: 600px;
+                min-height: 600px;
+                object-fit: cover;
+                object-position: center;
+                width: 100%;
+                -webkit-transform: rotate( 0deg) scale(1.0);
+                transform: rotate( 0deg) scale(1.0);
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            
+            #login-register-wrapper .login-register-form .image {
+                overflow: hidden;
+            }
+            
+            #login-register-wrapper .login-register-form .form-wrapper {
+                top: 50%;
+                left: 50%;
+                border-radius: 8px;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                background-color: rgb(255 255 255 / 63%);
+                -webkit-backdrop-filter: blur(2px);
+                backdrop-filter: blur(2px);
+            }
+            /* Login Page Ends */

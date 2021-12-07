@@ -80,6 +80,26 @@
                             #footer-wrapper .col-12 {
                                 border-bottom: 1px solid rgba(255, 255, 255, 0.349);
                             }
+                            #leftsidebarfilter .modal-content {
+                                height: 100%;
+                                overflow-y: scroll;
+                            }
+                            #about-us-wrapper .about-banner-img .overlay h3 {
+                                font-size: 20px;
+                            }
+                            #about-us-wrapper .about-us-image img {
+                                max-height: 250px;
+                                min-height: 250px;
+                                object-fit: cover;
+                                object-position: center;
+                                width: 100%;
+                            }
+                            #profile-wrapper .profile-side-detail-edit .dashboard-content ul.w-75 {
+                                width: 100% !important;
+                            }
+                            #profile-wrapper .profile-side-detail-edit .dashboard-content {
+                                flex-wrap: wrap;
+                            }
                         }
                         
                         @media (max-width: 601px) {
@@ -115,6 +135,26 @@
                             #nav-cart .modal-body table .head {
                                 font-size: 14px;
                             }
+                            #breadcrumbs h2 {
+                                font-size: 22px;
+                            }
+                            #nav-tabContent .tab-pane {
+                                width: 100% !important;
+                            }
+                            #nav-tabContent .tab-pane h2 {
+                                font-size: 22px;
+                            }
+                            #login-register-wrapper .image img {
+                                max-height: 408px;
+                                min-height: 408px;
+                                border-radius: 8px;
+                            }
+                            #login-register-wrapper .login-register-form h1 {
+                                font-size: 25px;
+                            }
+                            #login-register-wrapper .login-register-form .form-wrapper {
+                                backdrop-filter: none;
+                            }
                         }
                         
                         @media (max-width: 425px) {
@@ -136,5 +176,10 @@
                             }
                             #banner-wrapper .discription {
                                 padding: 35px 10px;
+                            }
+                            #login-register-wrapper .image img {
+                                max-height: 450px;
+                                min-height: 450px;
+                                border-radius: 8px;
                             }
                         }
