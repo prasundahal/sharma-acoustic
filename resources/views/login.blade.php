@@ -2,7 +2,6 @@
 @section('content')
 @include(isset(getSetting()['login']) ? 'includes.login.login-'.getSetting()['login'] : 'includes.login.login-style1')
 
-
 @endsection
 @section('script')
 <script>
