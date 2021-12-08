@@ -12,16 +12,16 @@
                   </p>
                   <ul class="d-flex pl-0">
                       <li class="logo-bg ">
-                          <a href="https://www.facebook.com" class="text-white"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                          <a href="{{ getSetting()['facebook_url'] }}" class="text-white"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                       </li>
                       <li class="feature_in_bg ml-3">
-                          <a href="https://www.instagram.com" class="text-white"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                          <a href="{{ getSetting()['instagram_url'] }}" class="text-white"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                       </li>
                       <li class="logo-bg ml-3">
-                          <a href="https://www.google.com" class="text-white"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                          <a href="{{ getSetting()['google_url'] }}" class="text-white"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                       </li>
                       <li class="logo-bg ml-3">
-                          <a href="https://np.linkedin.com" class="text-white"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                          <a href="{{ getSetting()['instagram_url'] }}" class="text-white"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                       </li>
                   </ul>
               </div>
@@ -31,10 +31,10 @@
                   <h4 class="mb-3 mb-md-4 text-white">Let Us Help</h4>
                   <ul class="text-white">
                       <li class="mb-3">
-                          <a href="" class="text-white">Home</a>
+                          <a href="{{ url('/') }}" class="text-white">Home</a>
                       </li>
                       <li class="mb-3">
-                          <a href="" class="text-white">About Us</a>
+                          <a href="{{ url('/about-us') }}" class="text-white">About Us</a>
                       </li>
                       <li class="mb-3">
                           <a href="" class="text-white">Terms & Conditions</a>
@@ -50,7 +50,7 @@
                   <h4 class="text-white mb-3 mb-md-4">Support</h4>
                   <ul>
                       <li class="mb-3">
-                          <a href="" class="text-white">Contact Us</a>
+                          <a href="{{ url('/contact-us') }}" class="text-white">Contact Us</a>
                       </li>
                       <li class="mb-3">
                           <a href="" class="text-white">FAQs</a>
@@ -73,7 +73,7 @@
       <div class="row">
           <div class="col-md-12 text-center">
               <p class="mb-0 text-white text-center ">
-                  Copyright All Right Reserved 2021.
+                  Copyright All Right Reserved {{ date('Y') }}.
                   <span class="testimonial-title">Next Nepal Pvt.Ltd</span>
               </p>
           </div>

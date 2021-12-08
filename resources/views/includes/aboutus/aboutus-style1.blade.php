@@ -1,233 +1,72 @@
 @extends('layouts.master')
 @section('content')
-<div class="container-fuild">
-      <nav aria-label="breadcrumb">
+    <!-- Breadcrumbs -->
+    <!-- <section id="breadcrumbs" class="py-3">
           <div class="container">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Aboutus</li>
-              </ol>
-          </div>
-        </nav>
-    </div> 
-    
-    <section class="pro-content">
-      <div class="container">
-        <div class="page-heading-title">
-            <h2> ABOUTS 
-            </h2>
-         
-            </div>
-    </div>
-    <!-- About-us Content -->
-    <section class="aboutus-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-6 img-portion">
-              <img class="img-fluid" src="{{ asset('assets/front/images/about-us/full-width.jpg') }}">
-          </div>
-          <div class="col-12 col-md-6">
-              <div class="peragraph">
-                  <p>
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-                  <div class="pre-info">
-                      <h5 class="widget-title">ADDRESS</h5>
-                      <p class="widget-content">1800 Abbot Kinney Blvd. Unit D &amp; E Venice</p>
+              <div class="row">
+                  <div class="col-12">
+                      <ul class="m-0 p-0 d-flex align-items-center text-white">
+                          <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                          <li class="">About Us</li>
+                      </ul>
                   </div>
-                <div class="pre-info">
-                    <h5 class="widget-title">PHONE</h5>
-                    <p class="widget-content">Mobile: +88 – 1990</p>
-                    <p class="widget-content">Hotline: 1800 – 1102</p>
-                </div>
-                <div class="pre-info">
-                    <h5 class="widget-title">EMAIL</h5>
-                      <p class="widget-content">Support@ecommerce.com</p>
-                </div>
-                </div>
-            </div>
-        </div>
-       
-     
-  
-      </div>  
-      <div class="container-fluid profile-div">
-          <div class="container">
-              <div class="media-main">
-                  <div class="row">
-                     <div class="col-12 col-md-6 media-col">
-                         <div class="media">
-                             <img src="{{ asset('assets/front/images/about-us/profile.png') }}" alt="profile" class="rounded-circle" style="width:100px;">
-                             <div class="media-body">
-                               <h4>John Doe <small>Sales Executive</small></h4>
-                               <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                             </div>
-                           </div>
-                      </div>
-                      <div class="col-12 col-md-6">
-                         <div class="media">
-                             <img src="{{ asset('assets/front/images/about-us/profile.png') }}" alt="profile" class="rounded-circle" style="width:100px;">
-                             <div class="media-body">
-                               <h4>John Doe  <small>Sales Executive</small></h4>
-                               <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                             </div>
-                           </div>
-                      </div>
+                  <div class="col-12 mt-3">
+                      <h2 class="text-white">About Us</h2>
                   </div>
-                  
               </div>
           </div>
-      </div>
-      <div class="conatiner-fluid profile-team pro-content">
+      </section> -->
+    <!-- Breadcrumbs Ends -->
+    <!-- ABOUT Us -->
+    <section id="about-us-wrapper" class="py-4">
         <div class="container">
-          <div class="row justify-content-center">
-              <div class="col-12 col-lg-6">
-                <div class="pro-heading-title">
-                    <h2> Our Team
-                    </h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                      Morbi venenatis felis tempus feugiat maximus. Aliquam erat volutpat. 
-                    </p>
-                </div>
-              </div>
-          </div>
-        </div>
-          <div class="container">
-              <div class="products-area">
-                
-                  <div class="row">
-                    <div class="col-12">
-                        <div class="aboutus-carousel-js row">
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="product">
-                                  <article>
-                                    <img src="{{ asset('assets/front/images/about-us/14_01_about us2.jpg') }}" class="img-fluid" alt="blogImage">
-                                  
-                                      <div class="aboutdetail">
-                                        <div class="pro-title">
-                                          <h5>Senior Frontend Developer</h5>
-                                          </div>
-                                          <div class="pro-entry-content">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                            </div>
-                                      
-                                      </div>
-                                          <div class="over"></div>
-                                  </article>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="product">
-                                  <article>
-                                    <img src="{{ asset('assets/front/images/about-us/14_01_about us2.jpg') }}" class="img-fluid" alt="blogImage">
-                                    <div class="aboutdetail">
-                                      <div class="pro-title">
-                                        <h5>Senior Frontend Developer</h5>
-                                        </div>
-                                        <div class="pro-entry-content">
-                                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                          </div>
-                                    
-                                    </div>
-                                  
-                                          <div class="over"></div>
-                                  </article>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="product">
-                                  <article>
-                                    <img src="{{ asset('assets/front/images/about-us/14_01_about us2.jpg') }}" class="img-fluid" alt="blogImage">
-                                  
-                                    <div class="aboutdetail">
-                                      <div class="pro-title">
-                                        <h5>Senior Frontend Developer</h5>
-                                        </div>
-                                        <div class="pro-entry-content">
-                                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                          </div>
-                                    
-                                    </div>
-                                  
-                                          <div class="over"></div>
-                                  </article>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="product">
-                                  <article>
-                                    <img src="{{ asset('assets/front/images/about-us/14_01_about us2.jpg') }}" class="img-fluid" alt="blogImage">
-                                  
-                                    <div class="aboutdetail">
-                                      <div class="pro-title">
-                                        <h5>Senior Frontend Developer</h5>
-                                        </div>
-                                        <div class="pro-entry-content">
-                                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                          </div>
-                                    
-                                    </div>
-                                  
-                                          <div class="over"></div>
-                                  </article>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="product">
-                                  <article>
-                                    <img src="{{ asset('assets/front/images/about-us/14_01_about us2.jpg') }}" class="img-fluid" alt="blogImage">
-                                  
-                                    <div class="aboutdetail">
-                                      <div class="pro-title">
-                                        <h5>Senior Frontend Developer</h5>
-                                        </div>
-                                        <div class="pro-entry-content">
-                                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                          </div>
-                                    
-                                    </div>
-                                  
-                                          <div class="over"></div>
-                                  </article>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-6">
-                                <div class="product">
-                                  <article>
-                                    <img src="{{ asset('assets/front/images/about-us/14_01_about us2.jpg') }}" class="img-fluid" alt="blogImage">
-                                  
-                                    <div class="aboutdetail">
-                                      <div class="pro-title">
-                                        <h5>Senior Frontend Developer</h5>
-                                        </div>
-                                        <div class="pro-entry-content">
-                                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                          </div>
-                                    
-                                    </div>
-                                  
-                                          <div class="over"></div>
-                                  </article>
-                                </div>
-                            </div>
-                          
-                        </div>  
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="about-banner-img mb-3 position-relative">
+                        <img src="frontend/assets/images/product-images/1 (2).jpg" class="img-fluid">
+                        <div class="overlay">
+                            <h3 class="text font-weight-bold">Sharma Acoustic <sub>dolor sit amet consectetur adipisicing
+                                    elit. A soluta rerum, quibusdam exercitationem mollitia voluptate corrupti molestias
+                                    nihil tempora officiis eveniet esse obcaecati laborum corporis sapiente ea provident
+                                    voluptatum eos.</sub></h3>
+                        </div>
                     </div>
-                  </div>
-                 </div> 
-          </div>
-      </div>
+                </div>
+            </div>
+            <div class="about-us-list">
+                <div class="row">
+                    <div class=" col-xl-6 col-lg-6 col-md-6 order-xl-1 order-lg-1 order-md-1 order-2 mb-2">
+                        <div
+                            class="about-us-image-discription d-flex h-100 justify-content-center align-items-center flex-column py-3">
+                            <h2>Our Story</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora commodi corporis omnis
+                                aliquid minima sapiente exercitationem nemo ad amet, quae voluptatem fugit eaque quo. Eaque
+                                aperiam at blanditiis! Doloribus, sunt.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 order-xl-2 order-lg-2 order-md-2 order-1 mb-2">
+                        <div class="about-us-image">
+                            <img src="frontend/assets/images/product-images/1 (5).jpg " class="img-fluid ">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 order-xl-3 order-lg-3 order-md-3 order-3 mb-2">
+                        <div class="about-us-image ">
+                            <img src="frontend/assets/images/product-images/1 (6).jpg " class="img-fluid ">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 order-xl-4 order-lg-4 order-md-4 order-4 mb-2">
+                        <div
+                            class="about-us-image-discription d-flex h-100 justify-content-center align-items-center flex-column py-3">
+                            <h2>Our Goals</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora commodi corporis omnis
+                                aliquid minima sapiente exercitationem nemo ad amet, quae voluptatem fugit eaque quo. Eaque
+                                aperiam at blanditiis! Doloribus, sunt.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
-    </section>
-  
-   
-    @endsection
-    @section('script')
-    @endsection
+    <!-- About Us Ends -->
+@endsection
+@section('script')
+@endsection

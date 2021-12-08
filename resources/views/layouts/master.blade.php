@@ -1,4 +1,5 @@
 {{-- {{ dd(getSetting()['card_style']) }} --}}
+{{-- {{ dd(getSetting()) }} --}}
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
