@@ -638,7 +638,7 @@
                             
                             clone += '<tr>' +
                                 '<div class="item">' +
-                                    '<td class="pr-4 py-3"><img src="{{ asset('') }}' + imageSrc + '" class="img-fluid"></td>' +
+                                    '<td class="pr-4 py-3"><img src="{{ asset('/') }}' + imageSrc + '" class="img-fluid"></td>' +
                                     qtyAmountRow +
                                     deleteRow +
                                 '</div>' +

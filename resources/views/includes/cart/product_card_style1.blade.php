@@ -1,60 +1,33 @@
-<template id="product-card-template">
-<div class="div-class">
-<div class="product product3">
-  <article>
-    <div class="thumb">
-      {{-- <div class="badges">
-
-        <span class="badge badge-success">featured</span>
-        <span class="badge badge-info">New</span>
-        <span class="badge badge-danger">50%</span>
-      </div> --}}
-      <div class="product-hover d-none d-lg-flex d-xl-flex">
-        <div class="icons">
-
-            <a href="javascript:void(0)" class="icon active swipe-to-top wishlist-icon" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Wishlist">
-              <i class="fas fa-heart"></i>
-            </a>
-          <div class="icon swipe-to-top quick-view-icon" data-toggle="modal" data-target="#quickViewModal" data-tooltip="tooltip" data-placement="bottom" title="" data-original-title="Quick View">
-            <i class="fas fa-eye"></i></div>
-          <a href="javascript:void(0)" class="icon swipe-to-top compare-icon" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Compare"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
-        </div>
-
-      </div>
-      <div class="mobile-icons d-lg-none d-xl-none">
-        <div class="icons">
-          <div class="icon-liked">
-            <a href="javascript:void(0)" class="icon active wishlist-icon">
-              <i class="fas fa-heart"></i>
-            </a>
+<div class="col-xl-9 col-lg-9 col-12">
+    <div class="row" id="shop_page_product_card">
+        {{-- <div class="col-md-4 col-sm-6 mt-3">
+          <div class="product-grid-item">
+              <div class="product-grid-image">
+                  <a href="#">
+                      <img class="pic-1 img-fluid" src="frontend/assets/images/product-images/1 (1).jpg">
+                  </a>
+                  <ul class="social">
+                      <!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->
+                      <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                      <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                  </ul>
+                  <span class="product-new-label font-weight-bold">New</span>
+                  <span class="product-discount-label">-10%</span>
+              </div>
+              <div class="product-content">
+                  <h4 class="title mt-2"><a href="#">Product Name</a></h4>
+                  <div class="price">
+                      $14.40
+                      <span>$16.00</span>
+                  </div>
+                  <a class="add-to-cart" href="">ADD TO CART</a>
+              </div>
           </div>
-          <div class="icon quick-view-icon" data-toggle="modal" data-target="#quickViewModal"><i class="fas fa-eye"></i></div>
-          <a href="javascript:void(0)" class="icon compare-icon"><i class="fas fa-align-right" data-fa-transform="rotate-90"></i></a>
+      </div> --}}
+    </div>
+    <div class="container">
+        <div class="pagination justify-content-between ">
+
         </div>
-      </div>
-      <img class="img-fluid product-card-image" src="" alt="Modern Single Sofa">
     </div>
-
-    <div class="content  content-relative">
-      <span class="tag product-card-category">
-
-      </span>
-      <h5 class="title text-center"><a href="javascript:void(0)" class="product-card-name"></a></h5>
-     <p class="para product-card-desc"></p>
-      <div class="price product-card-price">
-      </div>
-    <div class=" btn-hover new-design">
-        <a class="btn  btn-secondary  swipe-to-top product-card-link" href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Detail">View Detail</a>
-
-    </div>
-    </div>
-
-
-
-
-  </article>
-  <div class="d-none display-rating" ></div>
-        <div class="d-none display-rating1" ></div>
 </div>
-</div>
-</template>

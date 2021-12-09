@@ -1,3 +1,4 @@
+{{-- {{ dd(get_defined_vars()) }} --}}
 @extends('layouts.master')
 @section('content')
 <style>
@@ -9,15 +10,13 @@
         border: 1px solid;
     }
 </style>
-@include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail'] :
-'includes.productdetail.product-style1')
+@include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail'] : 'includes.productdetail.product-style1')
 
-@include(isset(getSetting()['product_detail']) ?
-'includes.productdetail.product-'.getSetting()['product_detail']."-template" :
-'includes.productdetail.product-style1-template')
+@include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail']."-template" : 'includes.productdetail.product-style1-template')
 
-@include(isset(getSetting()['card_style']) ?
-'includes.cart.product_card_'.getSetting()['card_style'] : "includes.cart.product_card_style1")
+@include('includes.productdetail.related-product-section');
+
+@include(isset(getSetting()['card_style']) ? 'includes.cart.product_card_'.getSetting()['card_style'] : "includes.cart.product_card_style1")
 
 <input type="hidden" id="product_id" value="{{ $product }}" />
 
@@ -32,7 +31,7 @@
     var variation = [];
     $(document).ready(function() {
         fetchProduct();
-        fetchRelatedProduct();
+        // fetchRelatedProduct();
     });
 
     languageId = localStorage.getItem("languageId");
@@ -60,169 +59,172 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                console.log(data);
                 if (data.status == 'Success') {
-                    const templ = document.getElementById("product-detail-section");
-
-                    const clone = templ.content.cloneNode(true);
-                    // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-                    clone.querySelector(".wishlist-icon").setAttribute('data-id', data.data.product_id);
-                    clone.querySelector(".wishlist-icon").setAttribute('onclick', 'addWishlist(this)');
-                    clone.querySelector(".wishlist-icon").setAttribute('data-type', data.data.product_type);
-                    clone.querySelector(".compare-icon").setAttribute('data-id', data.data.product_id);
-                    clone.querySelector(".compare-icon").setAttribute('data-type', data.data.product_type);
-                    clone.querySelector(".compare-icon").setAttribute('onclick', 'addCompare(this)');
-                    clone.querySelector(".product-detail-section-product-id").innerHTML = data.data
-                        .product_id;
-
-                    clone.querySelector(".add-to-cart").setAttribute('onclick', 'addToCart(this)');
-                    clone.querySelector(".add-to-cart").setAttribute('data-id', data.data.product_id);
-                    clone.querySelector(".add-to-cart").setAttribute('data-type', data.data.product_type);
-
-
-                    if (data.data.product_gallary_detail != null) {
-                        var image_list_link = "";
-                        var image_list = "";
+                    var clone = '';
+                    var topGal = '';
+                    var thumbGal = '';
+                    $('#add-to-wishlist').attr('data-id', data.data.product_id);
+                    $('#add-to-wishlist').attr('onclick', 'addWishlist(this)');
+                    $('#add-to-wishlist').attr('data-type', data.data.product_type);
+                    $('#add-to-cart').attr('data-id', data.data.product_id);
+                    $('#add-to-cart').attr('onclick', 'addToCart(this)');
+                    $('#add-to-cart').attr('data-type', data.data.product_type);
+                    if (data.data.product_gallary_detail != null && data.data.product_gallary_detail.length > 0) {
+                        console.log(data.data.product_gallary_detail.length);
                         for (var g = 0; g < data.data.product_gallary_detail.length; g++) {
-
-                            image_list_link += '<a class="slider-for__item ex1 fancybox-button" href="/gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet"><img class="product-detail-section-image" src="/gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="Zoom Image" /></a>'
-
-
-                            image_list += '<div class="slider-nav__item"><img class="product-detail-section-image" src="/gallary/thumbnail' + data.data.product_gallary_detail[g].gallary_name + '" alt="Zoom Image"/></div>';
-
+                            topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
+                                '<a href="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '">' +
+                                    '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                '</a>' +
+                            '</div>';
+                            thumbGal += '<div class="swiper-slide">' +
+                                '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                            '</div>';
                         }
-
                         if(data.data.product_combination){
                             for (loop = 0; loop < data.data.product_combination.length; loop++) {
                                 if (data.data.product_combination[loop].gallary != null) {
-                                    image_list_link += '<a class="slider-for__item ex1 fancybox-button" href="/gallary/large' + data.data.product_combination[loop].gallary.gallary_name + '" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet"><img class="product-detail-section-image" src="/gallary/large' + data.data.product_combination[loop].gallary.gallary_name + '" alt="Zoom Image" /></a>';
-
-
-                                    image_list += '<div class="slider-nav__item"><img class="product-detail-section-image" src="/gallary/thumbnail' + data.data.product_combination[loop].gallary.gallary_name + '" alt="Zoom Image" id="image-'+data.data.product_combination[loop].product_combination_id+'"/></div>';
+                                    topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
+                                        '<a href="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '">' +
+                                            '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                        '</a>' +
+                                    '</div>';
+                                    thumbGal += '<div class="swiper-slide">' +
+                                        '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                    '</div>';
                                 }
                             }
                         }
-
-                        clone.querySelector(".slider-for").innerHTML = image_list_link;
-                        clone.querySelector(".slider-nav").innerHTML = image_list;
-
-                    }
-                    if (data.data.category != null) {
-                        if (data.data.category[0].category_detail != null) {
-                            if (data.data.category[0].category_detail.detail != null) {
-                                clone.querySelector(".product-detail-section-cateogory-link").setAttribute(
-                                    'href', "/shop");
-
-                                clone.querySelector(".product-detail-section-cateogory-link").innerHTML =
-                                    data.data.category[0].category_detail.detail[0].name;
-
-                            }
+                    } else {
+                        if(data.data.product_gallary != null){
+                            // console.log(data.data.product_gallary.gallary_name);
+                            topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
+                                '<a href="{{ asset("/") }}gallary/' + data.data.product_gallary.gallary_name + '">' +
+                                    '<img src="{{ asset("/") }}gallary/' + data.data.product_gallary.gallary_name + '" alt="" />' +
+                                '</a>' +
+                            '</div>';
+                            thumbGal += '<div class="swiper-slide">' +
+                                '<img src="{{ asset("/") }}gallary/' + data.data.product_gallary.gallary_name + '" alt="" />' +
+                            '</div>';
                         }
                     }
+                    $('#top-gallery').html(topGal);
+                    $('#thumb-gallery').html(thumbGal);
+                    productDetailInit();
+
+                    // if (data.data.category != null) {
+                    //     if (data.data.category[0].category_detail != null) {
+                    //         if (data.data.category[0].category_detail.detail != null) {
+                    //             clone.querySelector(".product-detail-section-cateogory-link").setAttribute(
+                    //                 'href', "/shop");
+
+                    //             clone.querySelector(".product-detail-section-cateogory-link").innerHTML =
+                    //                 data.data.category[0].category_detail.detail[0].name;
+
+                    //         }
+                    //     }
+                    // }
+
                     if (data.data.detail != null) {
-                        clone.querySelector(".pro-title").innerHTML = data.data.detail[0].title;
-                        clone.querySelector(".description").innerHTML = data.data.detail[0].desc;
+                        $("#pro-title").html(data.data.detail[0].title);
+                        $(".pro-desc").html(data.data.detail[0].desc);
 
                     }
 
                     if (data.data.product_type == 'simple') {
-                            if (data.data.product_discount_price == '' || data.data
-                                .product_discount_price == null || data.data.product_discount_price ==
-                                'null') {
-                                clone.querySelector(".product-card-price").innerHTML = data.data
-                                    .product_price_symbol;
+                            if (data.data.product_discount_price == '' || data.data.product_discount_price == null || data.data.product_discount_price =='null') {
+                                $("#product-card-price").html(data.data.product_price_symbol);
                             } else {
-
-                                clone.querySelector(".product-card-price").innerHTML = data.data
-                                    .product_discount_price_symbol + '<span>' + data.data
-                                    .product_price_symbol + '</span>';
+                                $("#product-card-price").html(data.data.product_discount_price_symbol); 
+                                $('#cut-product-card-price').html(data.data.product_price_symbol);
                             }
                         } else {
                             if (data.data.product_combination != null) {
-                                clone.querySelector(".product-card-price").innerHTML = data.data
-                          .product_combination[0].product_price_symbol;
+                                $("#product-card-price").html(data.data.product_combination[0].product_price_symbol);
                         }
-                        if (data.data.attribute != null) {
-                            var combination = '';
-                            var attribute = data.data.attribute
-                            for (var a = 0; a < attribute.length; a++) {
+                        // if (data.data.attribute != null) {
+                        //     var combination = '';
+                        //     var attribute = data.data.attribute
+                        //     for (var a = 0; a < attribute.length; a++) {
 
-                                if (attribute[a].attributes != null) {
+                        //         if (attribute[a].attributes != null) {
 
-                                    if (attribute[a].attributes.detail != null) {
+                        //             if (attribute[a].attributes.detail != null) {
 
-                                        combination += '<div class="color-selection">';
-                                        combination += '<h4><b>' + attribute[a].attributes.detail[0].name +
-                                            '</b></h4>';
-                                        combination += '</div>';
-                                    }
-                                    combination += '<ul class="variations">';
-                                    if (attribute[a].variations != null) {
-                                        for (var v = 0; v < attribute[a].variations
-                                            .length; v++) {
-                                            combination +=
-                                                '<li class="btn size-btn variation_list_item attribute_' +
-                                                attribute[a].attributes.detail[0].name.split(' ').join(
-                                                    '_') + '_div  ' + attribute[a].variations[v]
-                                                .product_variation.detail[0].name + '-' + attribute[a]
-                                                .attributes.detail[0].name.split(' ').join('_') +
-                                                '" data-attribute-id="' + attribute[a].attributes
-                                                .attribute_id + '" data-attribute-name="' + attribute[a]
-                                                .attributes.detail[0].name + '" data-variation-id="' +
-                                                attribute[a].variations[v]
-                                                .product_variation.id + '" data-variation-name="' +
-                                                attribute[a].variations[v]
-                                                .product_variation.detail[0].name + '">' + attribute[a]
-                                                .variations[v]
-                                                .product_variation.detail[0].name + '</li>';
-                                        }
-                                    }
-                                    combination += '</ul>';
-                                }
-                                clone.querySelector(".pro-options").innerHTML = combination;
-                            }
-                        }
+                        //                 combination += '<div class="color-selection">';
+                        //                 combination += '<h4><b>' + attribute[a].attributes.detail[0].name +
+                        //                     '</b></h4>';
+                        //                 combination += '</div>';
+                        //             }
+                        //             combination += '<ul class="variations">';
+                        //             if (attribute[a].variations != null) {
+                        //                 for (var v = 0; v < attribute[a].variations
+                        //                     .length; v++) {
+                        //                     combination +=
+                        //                         '<li class="btn size-btn variation_list_item attribute_' +
+                        //                         attribute[a].attributes.detail[0].name.split(' ').join(
+                        //                             '_') + '_div  ' + attribute[a].variations[v]
+                        //                         .product_variation.detail[0].name + '-' + attribute[a]
+                        //                         .attributes.detail[0].name.split(' ').join('_') +
+                        //                         '" data-attribute-id="' + attribute[a].attributes
+                        //                         .attribute_id + '" data-attribute-name="' + attribute[a]
+                        //                         .attributes.detail[0].name + '" data-variation-id="' +
+                        //                         attribute[a].variations[v]
+                        //                         .product_variation.id + '" data-variation-name="' +
+                        //                         attribute[a].variations[v]
+                        //                         .product_variation.detail[0].name + '">' + attribute[a]
+                        //                         .variations[v]
+                        //                         .product_variation.detail[0].name + '</li>';
+                        //                 }
+                        //             }
+                        //             combination += '</ul>';
+                        //         }
+                        //         clone.querySelector(".pro-options").innerHTML = combination;
+                        //     }
+                        // }
 
                     }
-                    if (data.data.reviews !== null) {
-                        clone.querySelector(".review-count").innerHTML = data.data.reviews.length +
-                            " Reviews";
-                            rating = '';
-                            sum = 0;
-                            for(review = 0; review < data.data.reviews.length; review++){
-                                sum = +sum + +data.data.reviews[review].rating;
-                            }
-                            cur_rating = (sum / data.data.reviews.length);
-                            cur_rating = Math.round(cur_rating);
-                            if(cur_rating == 1){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa " for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
-                            }
-                            else if(cur_rating == 2){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
-                            }
-                            else if(cur_rating == 3){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
-                            }
-                            else if(cur_rating == 4){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa active" for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
-                            }
-                            else if(cur_rating == 5){
-                                rating = '<label class="full fa active" for="star1" title="Awesome - 1 stars"></label><label class="full fa active" for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
-                            }
-                            else{
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa " for="star_4" title="Awesome - 4 stars"></label><label class="full fa " for="star_5" title="Awesome - 5 stars"></label>'
-                            }
+                    // if (data.data.reviews !== null) {
+                    //     clone.querySelector(".review-count").innerHTML = data.data.reviews.length +
+                    //         " Reviews";
+                    //         rating = '';
+                    //         sum = 0;
+                    //         for(review = 0; review < data.data.reviews.length; review++){
+                    //             sum = +sum + +data.data.reviews[review].rating;
+                    //         }
+                    //         cur_rating = (sum / data.data.reviews.length);
+                    //         cur_rating = Math.round(cur_rating);
+                    //         if(cur_rating == 1){
+                    //             rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa " for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                    //         }
+                    //         else if(cur_rating == 2){
+                    //             rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                    //         }
+                    //         else if(cur_rating == 3){
+                    //             rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                    //         }
+                    //         else if(cur_rating == 4){
+                    //             rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa active" for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                    //         }
+                    //         else if(cur_rating == 5){
+                    //             rating = '<label class="full fa active" for="star1" title="Awesome - 1 stars"></label><label class="full fa active" for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                    //         }
+                    //         else{
+                    //             rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa " for="star_4" title="Awesome - 4 stars"></label><label class="full fa " for="star_5" title="Awesome - 5 stars"></label>'
+                    //         }
 
-                            clone.querySelector(".display-rating").innerHTML = rating;
-                    }
+                    //         clone.querySelector(".display-rating").innerHTML = rating;
+                    // }
 
-                    if (data.data.rating !== null) {
-                        clone.querySelector(".rating").innerHTML = data.data.rating;
-                    }
+                    // if (data.data.rating !== null) {
+                    //     clone.querySelector(".rating").innerHTML = data.data.rating;
+                    // }
 
 
-                    $("." + appendTo).append(clone);
-                    getProductReview();
-                    slideInital();
+                    // $("." + appendTo).append(clone);
+                    // getProductReview();
+                    // slideInital();
 
                 }
             },
@@ -425,149 +427,91 @@
         });
     }
 
-    function productReview() {
-        rating = $("input[name=rating]").val();
-        comment = $("#comment").val();
-        title = $("#title").val();
-        if(rating == ''){
-            toastr.error('{{ trans("select-ratings") }}');
-            return;
-        }
+    // function productReview() {
+    //     rating = $("input[name=rating]").val();
+    //     comment = $("#comment").val();
+    //     title = $("#title").val();
+    //     if(rating == ''){
+    //         toastr.error('{{ trans("select-ratings") }}');
+    //         return;
+    //     }
 
-        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&comment=' + comment + '&rating=' + rating +'&title='+title;
-        var appendTo = 'related';
-        $.ajax({
-            type: 'post',
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + customerToken,
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
-                clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
-            },
-            beforeSend: function() {},
-            success: function(data) {
-                if (data.status == 'Success') {
-                    toastr.success('{{ trans("rating-saved-successfully") }}');
-                    $("#comment").val('');
-                    $("#title").val('');
-                    getProductReview();
-                }
-            },
-            error: function(data) {
-                console.log(data);
-                if (data.status == 422) {
-                    jQuery.each(data.responseJSON.errors, function(index, item) {
-                        $("#" + index).parent().find('.invalid-feedback').css('display',
-                            'block');
-                        $("#" + index).parent().find('.invalid-feedback').html(item);
-                    });
-                }
-                else if (data.status == 401) {
-                    toastr.error('{{ trans("response.some_thing_went_wrong") }}');
-                }
-            },
-        });
-    }
+    //     var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&comment=' + comment + '&rating=' + rating +'&title='+title;
+    //     var appendTo = 'related';
+    //     $.ajax({
+    //         type: 'post',
+    //         url: url,
+    //         headers: {
+    //             'Authorization': 'Bearer ' + customerToken,
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    //             clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+    //             clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+    //         },
+    //         beforeSend: function() {},
+    //         success: function(data) {
+    //             if (data.status == 'Success') {
+    //                 toastr.success('{{ trans("rating-saved-successfully") }}');
+    //                 $("#comment").val('');
+    //                 $("#title").val('');
+    //                 getProductReview();
+    //             }
+    //         },
+    //         error: function(data) {
+    //             console.log(data);
+    //             if (data.status == 422) {
+    //                 jQuery.each(data.responseJSON.errors, function(index, item) {
+    //                     $("#" + index).parent().find('.invalid-feedback').css('display',
+    //                         'block');
+    //                     $("#" + index).parent().find('.invalid-feedback').html(item);
+    //                 });
+    //             }
+    //             else if (data.status == 401) {
+    //                 toastr.error('{{ trans("response.some_thing_went_wrong") }}');
+    //             }
+    //         },
+    //     });
+    // }
 
-    function getProductReview() {
-        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}';
-        $.ajax({
-            type: 'get',
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + customerToken,
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
-                clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
-            },
-            beforeSend: function() {},
-            success: function(data) {
-                if (data.status == 'Success') {
-                    const temp2 = document.getElementById("review-rating-template");
-                    $("#review-rating-show").html('');
-                    for (review = 0; review < data.data.length; review++) {
-                        const clone1 = temp2.content.cloneNode(true);
-                        clone1.querySelector(".review-comment").innerHTML = data.data[review].comment;
-                        clone1.querySelector(".review-date").innerHTML = data.data[review].date;
-                        clone1.querySelector(".review-title").innerHTML = data.data[review].title;
-                        if (data.data[review].rating == '5') {
-                            clone1.querySelector(".review-rating5").setAttribute('checked', true);
-                        } else if (data.data[review].rating == '4') {
-                            clone1.querySelector(".review-rating4").setAttribute('checked', true);
-                        } else if (data.data[review].rating == '3') {
-                            clone1.querySelector(".review-rating3").setAttribute('checked', true);
-                        } else if (data.data[review].rating == '2') {
-                            clone1.querySelector(".review-rating2").setAttribute('checked', true);
-                        } else if (data.data[review].rating == '1') {
-                            clone1.querySelector(".review-rating1").setAttribute('checked', true);
-                        }
-                        $("#review-rating-show").append(clone1);
-                    }
-                }
-            },
-            error: function(data) {
-                console.log(data);
-            },
-        });
-    }
-
-
-    function slideInital() {
-        // Product SLICK
-        // $('.slider-show').html('<div class="slider-for"></div><div class="slider-nav"></div>');
-        // alert();
-        jQuery('.slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            infinite: false,
-            draggable: false,
-            fade: true,
-            asNavFor: '.slider-nav',
-            reinit : true
-        });
-        jQuery('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider-for',
-            centerMode: true,
-            centerPadding: '60px',
-            dots: false,
-            arrows: true,
-            focusOnSelect: true,
-            reinit : true
-        });
-
-
-        // Product vertical SLICK
-        jQuery('.slider-for-vertical').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            infinite: false,
-            draggable: false,
-            fade: true,
-            asNavFor: '.slider-nav-vertical'
-        });
-        jQuery('.slider-nav-vertical').slick({
-            dots: false,
-            arrows: true,
-            vertical: true,
-            asNavFor: '.slider-for-vertical',
-            slidesToShow: 3,
-            // centerMode: true,
-            slidesToScroll: 1,
-            verticalSwiping: true,
-            focusOnSelect: true
-        });
-
-        jQuery(function() {
-            // ZOOM
-            jQuery('.ex1').zoom();
-
-        });
-
-    }
+    // function getProductReview() {
+    //     var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}';
+    //     $.ajax({
+    //         type: 'get',
+    //         url: url,
+    //         headers: {
+    //             'Authorization': 'Bearer ' + customerToken,
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    //             clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+    //             clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+    //         },
+    //         beforeSend: function() {},
+    //         success: function(data) {
+    //             if (data.status == 'Success') {
+    //                 const temp2 = document.getElementById("review-rating-template");
+    //                 $("#review-rating-show").html('');
+    //                 for (review = 0; review < data.data.length; review++) {
+    //                     const clone1 = temp2.content.cloneNode(true);
+    //                     clone1.querySelector(".review-comment").innerHTML = data.data[review].comment;
+    //                     clone1.querySelector(".review-date").innerHTML = data.data[review].date;
+    //                     clone1.querySelector(".review-title").innerHTML = data.data[review].title;
+    //                     if (data.data[review].rating == '5') {
+    //                         clone1.querySelector(".review-rating5").setAttribute('checked', true);
+    //                     } else if (data.data[review].rating == '4') {
+    //                         clone1.querySelector(".review-rating4").setAttribute('checked', true);
+    //                     } else if (data.data[review].rating == '3') {
+    //                         clone1.querySelector(".review-rating3").setAttribute('checked', true);
+    //                     } else if (data.data[review].rating == '2') {
+    //                         clone1.querySelector(".review-rating2").setAttribute('checked', true);
+    //                     } else if (data.data[review].rating == '1') {
+    //                         clone1.querySelector(".review-rating1").setAttribute('checked', true);
+    //                     }
+    //                     $("#review-rating-show").append(clone1);
+    //                 }
+    //             }
+    //         },
+    //         error: function(data) {
+    //             console.log(data);
+    //         },
+    //     });
+    // }
 </script>
 @endsection

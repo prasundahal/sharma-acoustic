@@ -151,47 +151,48 @@ function categorySlickInit(){
 }
 // Category Slick Slider Ends
 
-// Product Page carousel Start
-// product Gallery and Zoom
+function productDetailInit(){
+    // Product Page carousel Start
+    // product Gallery and Zoom
 
-// activation carousel plugin
-var galleryThumbs = new Swiper('.gallery-thumbs', {
-    spaceBetween: 5,
-    freeMode: true,
+    // activation carousel plugin
+    var galleryThumbs = new Swiper('.gallery-thumbs', {
+        spaceBetween: 5,
+        freeMode: true,
 
-    watchSlidesVisibility: true,
-    watchSlidesProgress: true,
-    breakpoints: {
-        0: {
-            slidesPerView: 3,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+            0: {
+                slidesPerView: 3,
+            },
+            992: {
+                slidesPerView: 4,
+            },
+        }
+    });
+    var galleryTop = new Swiper('.gallery-top', {
+        spaceBetween: 10,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         },
-        992: {
-            slidesPerView: 4,
+        thumbs: {
+            swiper: galleryThumbs
         },
-    }
-});
-var galleryTop = new Swiper('.gallery-top', {
-    spaceBetween: 10,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    thumbs: {
-        swiper: galleryThumbs
-    },
-});
-// change carousel item height
-// gallery-top
-let productCarouselTopWidth = $('.gallery-top').outerWidth();
-$('.gallery-top').css('height', productCarouselTopWidth);
+    });
+    // change carousel item height
+    // gallery-top
+    let productCarouselTopWidth = $('.gallery-top').outerWidth();
+    $('.gallery-top').css('height', productCarouselTopWidth);
 
-// gallery-thumbs
-let productCarouselThumbsItemWith = $('.gallery-thumbs .swiper-slide').outerWidth();
-$('.gallery-thumbs').css('height', productCarouselThumbsItemWith);
+    // gallery-thumbs
+    let productCarouselThumbsItemWith = $('.gallery-thumbs .swiper-slide').outerWidth();
+    $('.gallery-thumbs').css('height', productCarouselThumbsItemWith);
 
-// activation zoom plugin
-var $easyzoom = $('.easyzoom').easyZoom();
-
+    // activation zoom plugin
+    var $easyzoom = $('.easyzoom').easyZoom();
+}
 
 // loader 
 // $(document).ready(function(){
