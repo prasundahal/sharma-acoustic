@@ -66,15 +66,15 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
-                                    <form>
+                                    <form id="profileForm" method="post">
                                         <div class="form-row">
                                             <div class="form-group col-md-6 col-12">
-                                                <label for="fname">First Name</label>
-                                                <input type="text" class="form-control" placeholder="First Name" id="fname" name="fname">
+                                                <label for="first_name">First Name</label>
+                                                <input type="text" class="form-control" placeholder="First Name" id="first_name" name="first_name">
                                             </div>
                                             <div class="form-group col-md-6 col-12">
-                                                <label for="lname">Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" id="lname" name="lname">
+                                                <label for="last_name">Last Name</label>
+                                                <input type="text" class="form-control" placeholder="Last Name" id="last_name" name="last_name">
                                             </div>
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="phone">Phone</label>
@@ -83,8 +83,8 @@
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="gender">Email</label>
                                                 <select class="form-control" id="gender" name="gender">
-                                                    <option value="Female">Female</option>
                                                     <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6 col-12">
@@ -97,7 +97,7 @@
                                             </div> --}}
 
                                             <div class="form-group col-md-12 col-12">
-                                                <button type="button" class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-primary">Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -147,8 +147,10 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
-                    $("#liName").html(data.data.customer_first_name + ' ' + data.data.customer_last_name);
-                    $("#liEmail").html(data.data.customer_email);
+                    $("#fname").val(data.data.customer_first_name);
+                    $("#lname").val(data.data.customer_last_name);
+                    $("#profileForm").find("#first_name").val(data.data.customer_first_name);
+                    $("#profileForm").find("#last_name").val(data.data.customer_last_name);
                 }
             },
             error: function(data) {},
@@ -166,15 +168,14 @@
             },
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 if (data.status == 'Success') {
                     if(data.data != null && data.data != 'null' && data.data != ''){
-                        $("#liNumber").html(data.data[0].phone);
-                        $("#liAddress").html(data.data[0].city + ', ' + data.data[0].country_id.country_name);
-                        $("#fname").val(data.data[0].first_name);
-                        $("#lname").val(data.data[0].last_name);
-                        $("#phone").val(data.data[0].phone);
-                        $("#profileForm").val('put');
+                        $("#profileForm").find("#gender").val(data.data[0].gender);
+                        $("#profileForm").find("#gender").trigger('change');
+                        $("#profileForm").find("#dob").val(data.data[0].dob);
+                        $("#profileForm").find("#phone").val(data.data[0].phone);
+                        $("#profileForm").find("#method").val('put');
+                        $("#profileForm").find("#addres_id").val(data.data[0].id);
                     }
                     else{
                         $("#profileForm").find("#method").val('post');
