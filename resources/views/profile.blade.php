@@ -71,6 +71,9 @@
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="fname">First Name</label>
                                                 <input type="text" class="form-control" placeholder="First Name" id="fname" name="fname">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="lname">Last Name</label>
                                                 <input type="text" class="form-control" placeholder="Last Name" id="lname" name="lname">
                                             </div>
                                             <div class="form-group col-md-6 col-12">
@@ -92,7 +95,10 @@
                                                 <label for="image">Upload Profile Image</label>
                                                 <input type="file" class="form-control-file" id="uploadprofileimage">
                                             </div> --}}
-                                            <button type="button" class="btn btn-primary">Save</button>
+
+                                            <div class="form-group col-md-12 col-12">
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -168,9 +174,7 @@
                         $("#fname").val(data.data[0].first_name);
                         $("#lname").val(data.data[0].last_name);
                         $("#phone").val(data.data[0].phone);
-                        $("#phone").val('asdasd');
-                        $("#male").val(data.data[0].gender);
-                        $("#dob").val(data.data[0].dob);
+                        $("#profileForm").val('put');
                     }
                     else{
                         $("#profileForm").find("#method").val('post');
