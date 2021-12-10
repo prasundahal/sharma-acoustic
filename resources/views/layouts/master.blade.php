@@ -184,18 +184,21 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
+
         loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
         customerFname = $.trim(localStorage.getItem("customerFname"));
         customerLname = $.trim(localStorage.getItem("customerLname"));
+
         if (loggedIn != '1') {
             $(".auth-login").remove();
+            $(".without-auth-login").removeAttr('hidden');
         } else {
+            $(".auth-login").removeAttr('hidden');
             $(".without-auth-login").remove();
             $(".welcomeUsername").html(customerFname + " " + customerLname);
         }
 
         customerToken = $.trim(localStorage.getItem("customerToken"));
-
 
         languageId = localStorage.getItem("languageId");
         languageName = localStorage.getItem("languageName");
@@ -222,24 +225,27 @@
             $('.currency option[value="' + localStorage.getItem("languageId") + '"]').attr('selected', 'selected');
         }
 
-
         cartSession = $.trim(localStorage.getItem("cartSession"));
         if (cartSession == null || cartSession == 'null') {
             cartSession = '';
         }
         $(document).ready(function() {
-
             if (loggedIn != '1') {
                 localStorage.setItem("cartSession", cartSession);
                 menuCart(cartSession);
             } else {
                 menuCart('');
             }
-
             getWishlist();
 
-
-
+            // if (loggedIn != '1') {
+            //     console.log('login');
+            //     $(".auth-login").remove();
+            // } else {
+            //     console.log('no login');
+            //     $(".without-auth-login").remove();
+            //     $(".welcomeUsername").html(customerFname + " " + customerLname);
+            // }
         });
 
         function getSliderSettings(className) {
@@ -320,8 +326,6 @@
             });
         }
 
-
-
         function addWishlist(input) {
             if (loggedIn != '1') {
                 toastr.error('{{ trans('response.please_login_first') }}')
@@ -347,7 +351,6 @@
                 error: function(data) {},
             });
         }
-
 
         function addCompare(input) {
             if (loggedIn != '1') {
@@ -377,7 +380,6 @@
                 error: function(data) {},
             });
         }
-
 
         function quiclViewData(input) {
             product_type = $.trim($(input).attr('data-type'));
@@ -469,7 +471,6 @@
                 error: function(data) {},
             });
         }
-
 
         function addToCart(input) {
             product_type = $.trim($(input).attr('data-type'));

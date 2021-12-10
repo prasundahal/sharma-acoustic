@@ -40,21 +40,23 @@ $categories = App\Models\Admin\Category::inRandomOrder()
                     </li>
                 </ul>
             </div>
-            <div class="extra auth-login">
+            <div class="extra auth-login" hidden>
                 <ul class="d-flex align-items-center justify-content-center mb-0 p-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle m-auto add-on" href="#" id="profilenav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-1"><i class="fa fa-user-o" aria-hidden="true"></i></span> <span class="welcomeUsername"></span>
                         </a>
                         <div class="profilenav-dropdown dropdown-menu p-0" aria-labelledby="profilenav">
-                            <a class="dropdown-item" href="{{ url('/login') }}"> <span class="mr-2"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a>
-                            <a class="dropdown-item" href="{{ url('/login') }}"> <span class="mr-2"><i class="fa fa-lock" aria-hidden="true"></i></span>Change Password</a>
+                            <a class="dropdown-item" href="{{ url('/profile') }}"> <span class="mr-2"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a>
+                            <a class="dropdown-item" href="{{ url('/wishlist') }}"> <span class="mr-2"><i class="fa fa-heart" aria-hidden="true"></i></span>Wish List</a>
+                            <a class="dropdown-item" href="{{ url('/orders') }}"> <span class="mr-2"><i class="fa fa-sort" aria-hidden="true"></i></span>Order Status</a>
+                            <a class="dropdown-item" href="{{ url('/change-password') }}"> <span class="mr-2"><i class="fa fa-lock" aria-hidden="true"></i></span>Change Pas...</a>
                             <a class="dropdown-item log_out" href="javascript:void(0)"> <span class="mr-2"><i class="fa fa-sign-out" aria-hidden="true"></i></span>Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="extra without-auth-login">
+            <div class="extra without-auth-login" hidden>
                 <ul class="d-flex align-items-center justify-content-center mb-0 p-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle m-auto add-on" href="#" id="profilenav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
