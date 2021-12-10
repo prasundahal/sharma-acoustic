@@ -213,7 +213,7 @@
                                                 '</a>' +
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
-                                                    '<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
+                                                    '<li><a href="avascript:void(0)" onclick="addWishlist(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
                                                     '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
                                                 '<span class="product-new-label font-weight-bold">New</span>' +
