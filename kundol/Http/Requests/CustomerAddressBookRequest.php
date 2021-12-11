@@ -18,7 +18,7 @@ class CustomerAddressBookRequest extends FormRequest
         if (isset($this->customer_address_book['id'])) {
             $id = $this->customer_address_book['id'];
         }
-        $isDeliveryboy = isset(getSetting()['is_deliveryboyapp_purchased']) && getSetting()['is_deliveryboyapp_purchased'] == '1' ? 'required|string|max:191,' : 'nullable|string|max:191,';
+        $isDeliveryboy = isset(getSetting()['is_deliveryboyapp_purchased']) && getSetting()['is_deliveryboyapp_purchased'] == '1' ? 'nullable|string|max:191,' : 'nullable|string|max:191,';
         
         return [
             'gender' => 'nullable|in:Male,Female,Other',

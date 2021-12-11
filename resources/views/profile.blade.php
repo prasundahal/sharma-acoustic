@@ -48,7 +48,7 @@
                                                 </span>
                                             </li>
                                             <li>
-                                                Contact <span id="liNumber">
+                                                Contact <span id="liPhone">
                                                     {{-- +123 90 --}}
                                                 </span>
                                             </li>
@@ -95,10 +95,14 @@
                                                 <label for="image">Upload Profile Image</label>
                                                 <input type="file" class="form-control-file" id="uploadprofileimage">
                                             </div> --}}
-
                                             <div class="form-group col-md-12 col-12">
+                                                <input type="hidden" class="form-control" id="addres_id">
+                                                <input type="hidden" class="form-control" id="method">
                                                 <button type="submit" class="btn btn-primary">Save</button>
                                             </div>
+                                            @php
+                                                getSetting()['is_deliveryboyapp_purchased'] = 0;
+                                            @endphp
                                         </div>
                                     </form>
                                 </div>
@@ -147,8 +151,8 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
-                    $("#fname").val(data.data.customer_first_name);
-                    $("#lname").val(data.data.customer_last_name);
+                    $("#liName").html(data.data.customer_first_name + ' ' + data.data.customer_last_name);
+                    $("#liEmail").html(data.data.customer_email);
                     $("#profileForm").find("#first_name").val(data.data.customer_first_name);
                     $("#profileForm").find("#last_name").val(data.data.customer_last_name);
                 }
@@ -168,11 +172,14 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                console.log(data)
                 if (data.status == 'Success') {
                     if(data.data != null && data.data != 'null' && data.data != ''){
                         $("#profileForm").find("#gender").val(data.data[0].gender);
                         $("#profileForm").find("#gender").trigger('change');
                         $("#profileForm").find("#dob").val(data.data[0].dob);
+                        $("#liPhone").html(data.data[0].phone);
+                        $("#liAddress").html(data.data[0].city + ', ' + data.data[0].country_id.country_name);
                         $("#profileForm").find("#phone").val(data.data[0].phone);
                         $("#profileForm").find("#method").val('put');
                         $("#profileForm").find("#addres_id").val(data.data[0].id);
@@ -265,6 +272,7 @@
                 if (data.status == 'Success') {
                     $("#profileForm").find("#method").val('put');
                     $("#profileForm").find("#addres_id").val(data.data.id);
+                    location.reload();
                 }
                 else if (data.status == 'Error') {
                     toastr.error('{{ trans("response.some_thing_went_wrong") }}');
