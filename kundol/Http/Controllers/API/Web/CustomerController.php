@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Web;
 
 use App\Contract\Web\CustomerInterface;
 use App\Http\Controllers\Controller as Controller;
+use App\Http\Requests\CustomerChangePasswordRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 use App\Models\Admin\Customer;
 use App\Repository\Web\CustomerRepository;
@@ -26,6 +27,12 @@ class CustomerController extends Controller
     {
         $parms = $request->all();
         return $this->customerRepository->update($parms, $customer);
+    }
+
+    public function changePassword(CustomerChangePasswordRequest $request)
+    {
+        $parms = $request->all();
+        return $this->customerRepository->changePassword($parms);
     }
 
 }
