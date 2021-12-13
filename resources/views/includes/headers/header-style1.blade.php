@@ -33,7 +33,7 @@ $categories = App\Models\Admin\Category::inRandomOrder()
                     </li>
                     <li class="nav-item">
                         <a class="nav-link add-on px-xl-2 px-lg-1 px-md-2 px-2" href="{{ url('/wishlist') }}">
-                            <span class="mr-1"><i class="fa fa-heart-o" aria-hidden="true"></i></span> Wishlist <sup class="cart-item-no text-white px-2">
+                            <span class="mr-1"><i class="fa fa-heart-o" aria-hidden="true"></i></span> Wishlist <sup class="cart-item-no text-white px-2 wishlist-count">
                                 0
                             </sup>
                         </a>

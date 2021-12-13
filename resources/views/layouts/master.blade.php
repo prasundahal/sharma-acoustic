@@ -923,10 +923,6 @@
                                     $(".caritem-subtotal").attr('price', total_price.toFixed(2));
                                     $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price.toFixed(2));
                                     $(".caritem-grandtotal").html(data.data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    console.log(data.data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    console.log(total_price.toFixed(2));
-                                    console.log(data.data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    console.log(data.data[i].currency.code + ' ' + total_price.toFixed(2));
                                 } else {
                                     console.log('else')
                                     $(".caritem-subtotal").html(total_price.toFixed(2) + ' ' + data.data[i].currency.code);
@@ -952,7 +948,6 @@
         }
 
         function removeCartItem(input) {
-            console.log('removeCartItem');
             product_id = $.trim($(input).attr('data-id'));
             product_combination_id = $.trim($(input).attr('data-combination-id'));
             if (product_combination_id == null || product_combination_id == 'null') {
