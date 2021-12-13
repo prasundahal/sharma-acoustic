@@ -35,7 +35,7 @@
                             </thead>
                             <!-- /thead -->
                             <tbody id="cartItem-product-show">
-                                <tr>
+                                {{-- <tr>
                                     <td class="cart-image">
                                         <a class="entry-thumbnail" href="detail.html">
                                             <img src="frontend/assets/images/product-images/1 (1).jpg" class="img-fluid">
@@ -62,7 +62,7 @@
                                     <td class="romove-item"><a href="#" title="cancel" class="icon"><i
                                     class="fa fa-trash-o"></i></a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                             <!-- /tbody -->
                         </table>

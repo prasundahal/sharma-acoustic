@@ -16,7 +16,7 @@
                                 <p>THERE'S SOMETHING FOR EVERYONE</p>
                             </div>
                             <div class="navigator">
-                                <a href="">See all</a>
+                                <a href="/shop">See all</a>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                             <p>More than 10 categories to choose from</p>
                         </div>
                         <div class="navigator">
-                            <a href="">See all</a>
+                            <a href="/shop">See all</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                 <!-- <p>THERE'S SOMETHING FOR EVERYONE</p> -->
                             </div>
                             <div class="navigator">
-                                <a href="">See all</a>
+                                <a href="/shop">See all</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                                 <p>Winter New Arrivals</p>
                             </div>
                             <div class="navigator">
-                                <a href="">See all</a>
+                                <a href="/shop">See all</a>
                             </div>
                         </div>
                     </div>
@@ -200,100 +200,133 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
+                    console.log(appendTo);
+                    console.log(data);
                     if (data.status == 'Success') {
-                        var product = '';
-                        $.each(data.data, function(i, e){
+                        for (i = 0; i < data.data.length; i++) {
+                            
+                            if (data.data[i].product_gallary != null && data.data[i].product_gallary != 'null' && data.data[i].product_gallary != '') {
+                                if (data.data[i].product_gallary.detail != null && data.data[i].product_gallary.detail != 'null' && data.data[i].product_gallary.detail != '') {
+                                    imgSrc = data.data[i].product_gallary.detail[1].gallary_path;
+                                }
+                            }
+                            if (data.data[i].detail != null && data.data[i].detail != 'null' && data.data[i].detail != '') {
+                                imgAlt = data.data[i].detail[0].title;
+                            }
+                            if (data.data[i].category != null && data.data[i].category != 'null' && data.data[i].category != '') {
+                                if (data.data[i].category[0].category_detail != null && data.data[i].category[0].category_detail != 'null' && data.data[i].category[0].category_detail != ''
+                                ) {
+                                    if (data.data[i].category[0].category_detail.detail != null && data.data[i].category[0].category_detail.detail != 'null' && data.data[i].category[0].category_detail.detail != '') {
+                                        itemName = data.data[i].category[0].category_detail.detail[0].name;
+                                    }
+                                }
+                            }
+                            if (data.data[i].detail != null && data.data[i].detail != 'null' && data.data[i].detail != '') {
+                                title = data.data[i].detail[0].title;
+                                href = '/product/' + data.data[i].product_id + '/' + data.data[i].product_slug;
+                                var desc = data.data[i].detail[0].desc;
+                                desc = desc.substring(0, 50);
+                            }
+
+                            if (data.data[i].product_type == 'simple') {
+                                if (data.data[i].product_discount_price == '' || data.data[i].product_discount_price == null || data.data[i].product_discount_price ==
+                                    'null') {
+                                    productCardPrice = data.data[i].product_price_symbol;
+                                } else {
+                                    productCardPrice = data.data[i].product_discount_price_symbol + '<span>' +data.data[i].product_price_symbol + '</span>';
+                                }
+                            } else {
+                                if (data.data[i].product_combination != null && data.data[i].product_combination != 'null' && data.data[i].product_combination != '') {
+                                    productCardPrice = data.data[i].product_combination[0].product_price_symbol;
+                                }
+                            }
                             switch(appendTo){
                                 case 'product-list-section': 
-                                    product += '<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">' +
+                                    product = '<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">' +
                                         '<div class="product-grid-item">' +
                                             '<div class="product-grid-image">' +
-                                                '<a href="/product/' + e.product_id + '/' + e.product_slug + '">' +
-                                                    '<img class="pic-1 img-fluid" src="{{ asset('gallary') }}/' + e.product_gallary.gallary_name + '">' +
+                                                '<a href="' + href + '">' +
+                                                    '<img class="pic-1 img-fluid" src="' + imgSrc + '">' +
                                                 '</a>' +
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
-                                                    '<li><a href="avascript:void(0)" onclick="addWishlist(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
-                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                                    '<li><a href="avascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
+                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
-                                                '<span class="product-new-label font-weight-bold">New</span>' +
-                                                '<span class="product-discount-label">-10%</span>' +
                                             '</div>' +
                                             '<div class="product-content">' +
-                                                '<h4 class="title mt-2"><a href="/product/' + e.product_id + '/' + e.product_slug + '">' + e.detail[0].title + '</a></h4>' +
+                                                '<h4 class="title mt-2"><a href="' + href + '">' + title + '</a></h4>' +
                                                 '<div class="price">' +
-                                                    e.product_price_symbol +
-                                                    // '<span>$16.00</span>' +
+                                                    productCardPrice +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
-                                    if(i==3){
+                                    if(i==4){
                                         return false
                                     };
                                     break;
 
                                 case 'latest-product-section': 
-                                    product += '<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">' +
+                                    product = '<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">' +
                                         '<div class="product-grid-item">' +
                                             '<div class="product-grid-image">' +
-                                                '<a href="/product/' + e.product_id + '/' + e.product_slug + '">' +
-                                                    '<img class="pic-1 img-fluid" src="{{ asset('gallary') }}/' + e.product_gallary.gallary_name + '">' +
+                                                '<a href="' + href + '">' +
+                                                    '<img class="pic-1 img-fluid" src="' + imgSrc + '">' +
                                                 '</a>' +
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
-                                                    '<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
-                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                                    '<li><a href="avascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
+                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
-                                                '<span class="product-new-label font-weight-bold">New</span>' +
-                                                '<span class="product-discount-label">-10%</span>' +
                                             '</div>' +
                                             '<div class="product-content">' +
-                                                '<h4 class="title mt-2"><a href="/product/' + e.product_id + '/' + e.product_slug + '">' + e.detail[0].title + '</a></h4>' +
+                                                '<h4 class="title mt-2"><a href="' + href + '">' + title + '</a></h4>' +
                                                 '<div class="price">' +
-                                                    e.product_price_symbol +
-                                                    // '<span>$16.00</span>' +
+                                                    productCardPrice +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
-                                    if(i==7){
+                                    if(i==8){
                                         return false
                                     };
                                     break;
 
                                 case 'featured-product-section':
-                                    product += '<div class="slick-item mx-3 ">' +
+                                    product = '<div class="slick-item mx-3 ">' +
                                         '<div class="product-grid-item">' +
                                             '<div class="product-grid-image">' +
-                                                '<a href="/product/' + e.product_id + '/' + e.product_slug + '">' +
-                                                    '<img class="pic-1 img-fluid" src="{{ asset('gallary') }}/' + e.product_gallary.gallary_name + '">' +
+                                                '<a href="' + href + '">' +
+                                                    '<img class="pic-1 img-fluid" src="' + imgSrc + '">' +
                                                 '</a>' +
                                                 '<ul class="social">' +
                                                     '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
-                                                    '<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
-                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                                    '<li><a href="avascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
+                                                    '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                                 '</ul>' +
-                                                '<span class="product-new-label font-weight-bold">New</span>' +
-                                                '<span class="product-discount-label">-10%</span>' +
                                             '</div>' +
                                             '<div class="product-content">' +
-                                                '<h4 class="title mt-2"><a href="/product/' + e.product_id + '/' + e.product_slug + '">' + e.detail[0].title + '</a></h4>' +
+                                                '<h4 class="title mt-2"><a href="' + href + '">' + title + '</a></h4>' +
                                                 '<div class="price">' +
-                                                    e.product_price_symbol +
-                                                    // '<span>$16.00</span>' +
+                                                    productCardPrice +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + e.product_id + '" data-type="' + e.product_type + '">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
                                     break;
                             }
-                        });
+
+                            $("#" + appendTo).append(product);
+                        }
+
+
+                        if (appendTo != 'new-arrival' && appendTo != 'weekly-sale')
+                            getSliderSettings(appendTo);
                     }
-                    $('#' + appendTo).append(product);
                     appendTo == 'featured-product-section' ? productListInit() : '';
                 },
                 error: function(data) {},
