@@ -35,13 +35,13 @@
                                 {{-- AUDIRECT BEAM3 PRO --}}
                             </h1>
                         </div>
-                        <div class="rating-wrapper mb-2">
+                        {{-- <div class="rating-wrapper mb-2">
                             <div class="p-ratings">
                                 <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="product-price d-flex ">
                             <div class="first-price mr-2" id="cut-product-card-price"></div>
                             <div class="second-price" id="product-card-price"></div>

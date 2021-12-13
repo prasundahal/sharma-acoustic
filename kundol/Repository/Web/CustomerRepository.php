@@ -49,13 +49,13 @@ class CustomerRepository implements CustomerInterface
 
     public function changePassword(array $parms)
     {
-        $thi = $this;
+        // $thi = $this;
         $user = Customer::findOrFail($parms['customerId']);
         if (Hash::check($parms['old_password'], $user['password'])) { 
             $user->fill([
                 'password' => Hash::make($parms['new_password'])
             ])->save();
-            return $thi->successResponse('', 'Password Changed Successfully!');
+            return $this->successResponse('', 'Password Changed Successfully!');
             // return response()->json('Password Changed Successfully!');
         }
         return $this->errorResponse($message = 'Old password mismatch!');
