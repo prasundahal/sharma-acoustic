@@ -141,9 +141,11 @@
                             }
 
                             if (data.data[i].product_type == 'simple') {
-                                cartLink = '<li><a href="#" data-tip="Add to Cart" onclick="addToCart(this)" data-id=' + data.data[i].product_id + ' data-type=' + data.data[i].product_type + '><i class="fa fa-shopping-cart"></i></a></li>';
+                                cartLink = '<li><a href="javascript:void(0)" data-tip="Add to Cart" onclick="addToCart(this)" data-id=' + data.data[i].product_id + ' data-type=' + data.data[i].product_type + '><i class="fa fa-shopping-cart"></i></a></li>';
+                                wishList = '<li><a href="javascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>';
                             } else {
                                 cartLink = '<li><a href="product/' + data.data[i].product_id + '/' + data.data[i].product_slug + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>';
+                                wishList = '';
                             }
 
                             clone = '<div class="col-md-4 col-sm-6 mt-3">' +
@@ -151,17 +153,14 @@
                                     '<div class="product-grid-image">' +
                                         '<a href="' + href + '"><img class="pic-1 img-fluid" src="{{ asset('/') }}' + imgSrc + '"></a>' +
                                         '<ul class="social">' +
-                                            '<li><a href="#" data-tip="Add to Wishlist"><i class="fa  fa-shopping-bag"></i></a></li>' +
+                                            wishList +
                                             cartLink +
                                         '</ul>' +
-                                        // '<span class="product-new-label font-weight-bold">New</span>' +
-                                        // '<span class="product-discount-label">-10%</span>' +
                                     '</div>' +
                                     '<div class="product-content">' +
                                         '<h4 class="title mt-2"><a href="' + href + '">' + title + '</a></h4>' +
                                         '<div class="price">' +
                                             priceSymbol +
-                                            // '<span>$16.00</span>' +
                                         '</div>' +
                                         '<a class="add-to-cart" href="javascript:void(0)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" onclick="addToCart(this)">ADD TO CART</a>' +
                                     '</div>' +

@@ -887,9 +887,7 @@
 
                             tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i].product_combination_id + '" product_id="' + data.data[i].product_id + '" product_type="' + data.data[i].product_type + '">' +
                                 '<td class="cart-image">' +
-                                    '<a class="entry-thumbnail" href="detail.html">' +
-                                        '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
-                                    '</a>' +
+                                    '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
                                 '</td>' +
                                 '<td class="cart-product-name-info">' +
                                     '<h4 class="cart-product-description cartItem-name">' + itemName + '</h4>' +
@@ -924,7 +922,6 @@
                                     $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price.toFixed(2));
                                     $(".caritem-grandtotal").html(data.data[i].currency.code + ' ' + total_price.toFixed(2));
                                 } else {
-                                    console.log('else')
                                     $(".caritem-subtotal").html(total_price.toFixed(2) + ' ' + data.data[i].currency.code);
                                     $(".caritem-subtotal").attr('price', total_price.toFixed(2));
                                     $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price.toFixed(2));
