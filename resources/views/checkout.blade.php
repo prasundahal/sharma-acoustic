@@ -1,555 +1,201 @@
 @extends('layouts.master')
 @section('content')
 
-    <div class="container-fuild">
-        <nav aria-label="breadcrumb">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">{{ trans('lables.bread-crumb-home') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ trans('lables.bread-checkout') }}</li>
-                </ol>
+<!-- Breadcrumbs -->
+<section id="breadcrumbs" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="m-0 p-0 d-flex align-items-center text-white">
+                    <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <li class="">Checkout</li>
+                </ul>
             </div>
-        </nav>
-    </div>
-    <section class="pro-content">
-        <div class="container">
-            <div class="page-heading-title">
-                <h2> {{ trans('lables.checkout-checkout') }} </h2>
-
+            <div class="col-12 mt-3">
+                <h2 class="text-white">Checkout</h2>
             </div>
         </div>
-        <!-- checkout Content -->
-        <section class="checkout-area">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-xl-9">
-                        <div class="row">
-                            <div class="checkout-module">
-                                <ul class="nav nav-pills checkoutd-nav mb-3" id="pills-tab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link  active" id="pills-shipping-tab" data-toggle="pill"
-                                            href="#pills-shipping" role="tab" aria-controls="pills-shipping"
-                                            aria-selected="true"><span class="d-flex d-lg-none">1</span><span
-                                                class="d-none d-lg-flex">{{ trans('lables.checkout-shipping-address') }}</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " id="pills-billing-tab" data-toggle="pill"
-                                            href="#pills-billing" role="tab" aria-controls="pills-billing"
-                                            aria-selected="false"><span class="d-flex d-lg-none">2</span><span
-                                                class="d-none d-lg-flex">{{ trans('lables.checkout-billing-address') }}</span></a>
-                                    </li>
-                                    {{-- <li class="nav-item">
-                                    <a class="nav-link " id="pills-method-tab" data-toggle="pill" href="#pills-method" role="tab" aria-controls="pills-method" aria-selected="false"><span class="d-flex d-lg-none">3</span><span class="d-none d-lg-flex">{{ trans('lables.checkout-shipping-method') }}</span></a>
-                                </li> --}}
-                                    <li class="nav-item">
-                                        <a class="nav-link " id="pills-order-tab" data-toggle="pill"
-                                            href="#pills-order" role="tab" aria-controls="pills-order"
-                                            aria-selected="false"><span class="d-flex d-lg-none">4</span><span
-                                                class="d-none d-lg-flex">{{ trans('lables.checkout-order-detail') }}</span></a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="pills-shipping" role="tabpanel"
-                                        aria-labelledby="pills-shipping-tab">
-                                        <form>
-                                            <div class="form-row">
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-first-name') }}</label>
-                                                    <div class="input-group ">
-
-                                                        <input type="text" class="form-control" id="delivery_first_name"
-                                                            placeholder="{{ trans('lables.checkout-first-name') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-last-name') }}</label>
-                                                    <div class="input-group ">
-
-                                                        <input type="text" class="form-control" id="delivery_last_name"
-                                                            placeholder="{{ trans('lables.checkout-last-name') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                {{-- {{dd(getSetting()['is_deliveryboyapp_purchased'])}} --}}
-                                                
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-address') }}</label>
-                                                    <div class="input-group ">
-
-                                                        <input type="text" class="form-control"
-                                                            id="delivery_street_aadress"
-                                                            placeholder="{{ trans('lables.checkout-address') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-city-name') }}</label>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" id="delivery_city"
-                                                            placeholder="City">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-country-name') }}</label>
-                                                    <div class="input-group select-control">
-
-                                                        <select class="form-control" id="delivery_country"
-                                                            onchange="states1()">
-                                                        </select>
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-state-name') }}</label>
-                                                    <div class="input-group select-control">
-
-                                                        <select class="form-control" id="delivery_state">
-
-                                                        </select>
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-                                            <div class="form-row">
-                                                
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-postal-code') }}</label>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" id="delivery_postcode"
-                                                            placeholder="{{ trans('lables.checkout-postal-code') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-phone') }}</label>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" id="delivery_phone"
-                                                            placeholder="{{ trans('lables.checkout-phone') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-row">
-                                                
-                                                @if(isset(getSetting()['is_deliveryboyapp_purchased']) && getSetting()['is_deliveryboyapp_purchased'] == '1')
-                                                <div class="form-group col-md-6 mb-3">
-                                                    <label for=""> @lang('lables.checkout-location')</label>
-                                                    <input type="text" required class="form-control field-validate"
-                                                        data-toggle="modal" data-target="#mapModal" name="latlong"
-                                                        id="latlong" aria-describedby="addressHelp"
-                                                        placeholder="@lang('lables.checkout-location-placeholder')">
-                                                        <div class="invalid-feedback"></div>
-                                                        
-                                                </div>
-                                                @endif
-
-                                            </div>
-
-                                            <div class="col-12 col-sm-12">
-                                                <div class="row">
-
-                                                    <a data-toggle="pill" href="#pills-billing"
-                                                        class="btn btn-secondary swipe-to-top cta">{{ trans('lables.checkout-continue') }}</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-billing" role="tabpanel"
-                                        aria-labelledby="pills-billing-tab">
-                                        <form>
-
-                                            <div class="form-row">
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label
-                                                        for="">{{ trans('lables.checkout-billing-first-name') }}</label>
-                                                    <div class="input-group ">
-
-                                                        <input type="text" class="form-control" id="billing_first_name"
-                                                            placeholder="{{ trans('lables.checkout-billing-first-name') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label
-                                                        for="">{{ trans('lables.checkout-billing-last-name') }}</label>
-                                                    <div class="input-group ">
-
-                                                        <input type="text" class="form-control" id="billing_last_name"
-                                                            placeholder="{{ trans('lables.checkout-billing-last-name') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-billing-address') }}</label>
-                                                    <div class="input-group ">
-
-                                                        <input type="text" class="form-control"
-                                                            id="billing_street_aadress"
-                                                            placeholder="{{ trans('lables.checkout-billing-address') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label
-                                                        for="">{{ trans('lables.checkout-billing-country-name') }}</label>
-                                                    <div class="input-group select-control">
-
-                                                        <select class="form-control" id="billing_country"
-                                                            onchange="states()"></select>
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-state-name') }}</label>
-                                                    <div class="input-group select-control">
-
-                                                        <select class="form-control" id="billing_state"></select>
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label
-                                                        for="">{{ trans('lables.checkout-billing-city-name') }}</label>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" id="billing_city"
-                                                            placeholder="City">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-row">
-
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-postal-code') }}</label>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" id="billing_postcode"
-                                                            placeholder="{{ trans('lables.checkout-postal-code') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="from-group col-md-6 mb-3">
-                                                    <label for="">{{ trans('lables.checkout-billing-phone') }}</label>
-                                                    <div class="input-group">
-
-                                                        <input type="text" class="form-control" id="billing_phone"
-                                                            placeholder="{{ trans('lables.checkout-billing-phone') }}">
-                                                        <div class="invalid-feedback"></div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="form-check">
-
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="defaultCheck">
-                                                    <label class="form-check-label" for="defaultCheck">
-                                                        {{ trans('lables.checkout-same-ship-bill-address-text') }}
-                                                    </label>
-                                                    <small id="checkboxHelp" class="form-text text-muted"></small>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12">
-                                                <div class="row">
-                                                    <a data-toggle="pill" href="#pills-shipping"
-                                                        class="btn btn-light swipe-to-top cta">{{ trans('lables.checkout-back') }}</a>
-                                                    <a data-toggle="pill" href="#pills-order"
-                                                        class="btn btn-secondary swipe-to-top cta">{{ trans('lables.checkout-continue') }}</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    {{-- <div class="tab-pane fade" id="pills-method" role="tabpanel" aria-labelledby="pills-method-tab">
-
-
-                                    <div class="col-12 col-sm-12">
-                                        <div class="row">
-                                            <a data-toggle="pill" href="#pills-billing" class="btn btn-light swipe-to-top cta">{{ trans('lables.checkout-back') }}</a>
-
-                                            <a data-toggle="pill" href="#pills-order" class="btn btn-secondary swipe-to-top cta">{{ trans('lables.checkout-continue') }}</a>
-                                        </div>
-                                    </div>
-
-
-                                </div> --}}
-                                    <input type="hidden" id="delivery_state_hidden" />
-                                    <input type="hidden" id="delivery_country_hidden" />
-                                    <input type="hidden" id="billing_state_hidden" />
-                                    <input type="hidden" id="billing_country_hidden" />
-                                    <div class="tab-pane fade" id="pills-order" role="tabpanel"
-                                        aria-labelledby="pills-order-tab">
-                                        <table class="table top-table" id="cartItem-product-show">
-                                        </table>
-                                        <div class="col-12 col-sm-12">
-                                            <div class="row">
-                                                <div class="heading">
-                                                    <h4>{{ trans('lables.checkout-order-notes-title') }}</h4>
-
-                                                </div>
-
-                                                <div class="form-group" style="width:100%; padding:0;">
-                                                    <label
-                                                        for="exampleFormControlTextarea1">{{ trans('lables.checkout-order-notes-description') }}</label>
-                                                    <textarea class="form-control" id="order_notes" rows="3"></textarea>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-12 col-sm-12 ">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h4>{{ trans('lables.checkout-payment-method-title') }}</h4>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <form id="paymentForm" class="d-block">
-                                                       
-                                                            {{-- <label for="exampleFormControlTextarea1" style="width:100%; margin-bottom:30px;">{{ trans('lables.checkout-payment-method-description') }}</label> --}}
-                                                            @foreach ($payment_method as $payment_methods)
-                                                                @if ($payment_methods->id == '4')
-                                                                     <div class="form-group">
-                                                                        <input class="form-check-input payment_method"
-                                                                            type="radio"
-                                                                            id="inlineCheckbox{{ $payment_methods->id }}"
-                                                                            value="cod" name="payment_method" checked>
-                                                                        <label class="form-check-label"
-                                                                            for="inlineCheckbox{{ $payment_methods->id }}">COD</label>
-                                                                    </div>
-                                                                @elseif($payment_methods->id == '3')
-                                                                     <div class="form-group">
-                                                                        <input class="form-check-input payment_method"
-                                                                            type="radio"
-                                                                            id="inlineCheckbox{{ $payment_methods->id }}"
-                                                                            value="banktransfer" name="payment_method" checked>
-                                                                        <label class="form-check-label"
-                                                                            for="inlineCheckbox{{ $payment_methods->id }}">Bank
-                                                                            Transafer</label>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                            @foreach ($payment_method_default as $payment_methods)
-                                                                 <div class="form-group">
-                                                                    <input class="form-check-input payment_method" type="radio"
-                                                                        id="inlineCheckbox{{ $payment_methods->id }}"
-                                                                        value="{{ $payment_methods->payment_method }}"
-                                                                        name="payment_method">
-                                                                    <label class="form-check-label" for="inlineCheckbox{{ $payment_methods->id }}">
-                                                                        Card Payment</label>
-                                                                </div>
-                                                            @endforeach
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 bank_transfer d-none">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <table class="table table-striped">
-                                                        @foreach ($payment_method_setting as $payment_method_settings)
+    </div>
+</section>
+<!-- Breadcrumbs Ends -->
+<!-- Checkout -->
+<section id="checkout-wrapper" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div id="accordion" class="w-100">
+                <!-- First Collapse -->
+                <div class="card">
+                    <div class="card-header p-0 bg-light" id="headingOne">
+                        <h5 class="mb-0">
+                            <div class="w-100 p-3" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="mr-2"><i class="fa fa-ravelry" aria-hidden="true"></i></span> Order Summary
+                            </div>
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <!-- Cart -->
+                            <section id="cart-wrapper" class="py-3">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="shopping-cart">
+                                            <div class="shopping-cart-table">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
                                                             <tr>
-                                                                <th>{{ str_replace('BANK_TRANSFER_', '', $payment_method_settings->key) }}
-                                                                </th>
-                                                                <td>{{ $payment_method_settings->value }}</td>
+                                                                <th class="cart-description item">Image</th>
+                                                                <th class="cart-product-name item">Product Name</th>
+                                                                <th class="cart-total last-item">Price</th>
+                                                                <th class="cart-qty item">Quantity</th>
+                                                                <th class="cart-total last-item">Total</th>
+                                                                <th class="cart-romove item">Remove</th>
                                                             </tr>
-                                                        @endforeach
-                                                    
+                                                        </thead>
+                                                        <!-- /thead -->
+                                                        <tbody id="cartItem-product-show2">
+                                                            {{-- <tr>
+                                                                <td class="cart-image">
+                                                                    <a class="entry-thumbnail" href="detail.html">
+                                                                        <img src="frontend/assets/images/product-images/1 (3).jpg" class="img-fluid">
+                                                                    </a>
+                                                                </td>
+                                                                <td class="cart-product-name-info">
+                                                                    <h4 class="cart-product-description"><a href="detail.html">Yoga Mat</a></h4>
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <div class="rating rateit-small"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="cart-product-quantity">
+                                                                    <div class="quant-input">
+                                                                        <input type="number" value="1">
+                                                                    </div>
+                                                                </td>
+                                                                <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                                                </td>
+                                                                <td class="romove-item"><a href="#" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a>
+                                                                </td>
+                                                            </tr> --}}
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
-                                    </div>
-                                    <div class="col-md-12 stripe_payment d-none">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group" style="width:100%; padding:0;">
-                                                    <label for="exampleFormControlTextarea1">Account Number</label>
-                                                    <input type="text" class="form-control" id="cc_number"
-                                                        maxlength="16" />
-                                                    <div class="invalid-feedback"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group" style="width:100%; padding:0;">
-                                                    <label for="exampleFormControlTextarea1">Expiry Month</label>
-                                                    <input type="text" class="form-control" id="cc_expiry_month"
-                                                        maxlength="2" />
-                                                    <div class="invalid-feedback"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group" style="width:100%; padding:0;">
-                                                    <label for="exampleFormControlTextarea1">Expiry Year</label>
-                                                    <input type="text" class="form-control" id="cc_expiry_year"
-                                                        maxlength="4" />
-                                                    <div class="invalid-feedback"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group" style="width:100%; padding:0;">
-                                                    <label for="exampleFormControlTextarea1">CVC</label>
-                                                    <input type="text" class="form-control" id="cc_cvc" maxlength="3" />
-                                                    <div class="invalid-feedback"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-12">
-                                        <div class="row">
-                                            <a data-toggle="pill" href="#pills-method"
-                                                class="btn btn-light swipe-to-top cta">{{ trans('lables.checkout-back') }}</a>
-                                            <button type="submit"
-                                                class="btn btn-secondary swipe-to-top createOrder">{{ trans('lables.checkout-continue') }}</button>
                                         </div>
                                     </div>
                                 </div>
+                            </section>
+                            <!-- Cart Ends -->
+                        </div>
+                    </div>
+                </div>
+                <!-- First Collapse Ends -->
+                <!-- Second Collapse  -->
+                <div class="card">
+                    <div class="card-header p-0 bg-light" id="headingTwo">
+                        <h5 class="mb-0">
+                            <div class="collapsed p-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <span class="mr-2"><i class="fa fa-ravelry" aria-hidden="true"></i></span> Shipping Information
+                            </div>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray">First Name</label>
+                                        <input type="text" class="form-control w-100" placeholder="First name" id="delivery_first_name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray">Last Name</label>
+                                        <input type="text" class="form-control w-100" placeholder="Last name" id="delivery_last_name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray mt-3">Address</label>
+                                        <input type="text" class="form-control w-100" placeholder="Nepal" id="delivery_street_aadress">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray mt-3">City</label>
+                                        <input type="text" class="form-control w-100" placeholder="Nepal" id="delivery_city">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray mt-3">Country</label>
+                                        <select class="form-control w-100" id="delivery_country" onchange="states1()"></select>
+                                        {{-- <input type="text" class="form-control w-100" placeholder="Nepal"> --}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray mt-3">State</label>
+                                        <select class="form-control" id="delivery_state"></select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray mt-3">Postal Code</label>
+                                        <input type="text" class="form-control w-100" placeholder="" id="delivery_postcode">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="text_gray mt-3">Number</label>
+                                        <input type="text" class="form-control w-100" placeholder="" id="delivery_phone">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Second Collapse End -->
+                <!-- Third Collapse  -->
+                <div class="card">
+                    <div class="card-header p-0 bg-light" id="headingThree">
+                        <h5 class="mb-0">
+                            <div class="collapsed p-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <span class="mr-2"><i class="fa fa-ravelry" aria-hidden="true"></i></span> Payment Option
+                            </div>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach ($payment_method_default as $payment_methods)
+                                    <div class="col-3">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="inlineCheckbox{{ $payment_methods->id }}" name="customRadio" class="custom-control-input payment_method" {{ $loop->first ? 'checked' : '' }} value="{{ $payment_methods->payment_method }}">
+                                            <label class="custom-control-label" for="inlineCheckbox{{ $payment_methods->id }}">{{ ucwords(str_replace('_', ' ', $payment_methods->payment_method)) }}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-3">
-                    <table class="table right-table" id="cartItem-grandtotal-product-show"></table>
-                    <input type="button" class="form-control btn btn-danger" id="removeCoupon" value="Remove Coupon" />
+                <!-- Third Collapse End -->
+            </div>
+
+            <div class="d-flex justify-content-around w-100 my-1">
+                <div class="total-amount font-weight-bold">
+                    {{ trans('lables.checkout-subtotal') }} : <span class="caritem-subtotal">0</span>
                 </div>
             </div>
-            </div>
-            </div>
-        </section>
-
-    </section>
-    <template id="cartItem-Template">
-        <tbody>
-            <tr class="d-flex cartItem-row">
-                <td class="col-12 col-md-2">
-                    <img class="img-fluid cartItem-image" src="images/product_images/product_image_6.png" />
-                </td>
-                <td class="col-12 col-md-4 item-detail-left">
-                    <div class="item-detail">
-                        <span class="cartItem-category-name"></span>
-                        <h4 class="cartItem-name">
-                        </h4>
-                        <div class="item-attributes"></div>
-                        <div class="item-controls">
-                            <button type="button" class="btn">
-                                <span class="fas fa-pencil-alt"></span>
-                            </button>
-                            <button type="button" class="btn cartItem-remove">
-                                <span class="fas fa-times"></span>
-                            </button>
-                        </div>
-                    </div>
-                </td>
-                <td class="item-price col-12 col-md-2 cartItem-price"></td>
-                <td class="col-12 col-md-2">
-                    <div class="input-group item-quantity">
-
-                        <input type="text" id="quantity2" name="quantity" disabled class="form-control cartItem-qty">
-
-
-                    </div>
-                </td>
-                <td class="align-middle item-total col-12 col-md-2 cartItem-total" align="center"></td>
-            </tr>
-        </tbody>
-    </template>
-
-    <template id="cartItem-grandtotal-template">
-
-        <thead>
-            <tr>
-                <th scope="col" colspan="2" align="center">{{ trans('lables.checkout-order-summary') }}</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">{{ trans('lables.checkout-subtotal') }}</th>
-                <td align="right" class="caritem-subtotal">$0</td>
-
-            </tr>
-            <tr>
-                <th scope="row">{{ trans('lables.checkout-discount') }}</th>
-                <td align="right" class="caritem-discount-coupon">$0</td>
-
-            </tr>
-            <template id="test"></template>
-            <tr>
-                <th scope="row">{{ trans('lables.checkout-shipping') }}</th>
-                <td align="right" class="shipping-tax" data-price="0">$0</td>
-
-            </tr>
-            <tr class="item-price">
-                <th scope="row">{{ trans('lables.checkout-total') }}</th>
-                <td align="right" class="caritem-grandtotal">$0</td>
-
-            </tr>
-
-
-        </tbody>
-
-
-    </template>
-
-    <input type="hidden" class="total_by_weight" />
-
-
-    <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-modal="true">
-
-        <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-
-                    <div class="container">
-                        <div class="row align-items-center">
-
-                            <div class="form-group">
-                                <input type="text" id="pac-input" name="address_address" class="form-control map-input">
-                            </div>
-                            <div id="address-map-container" style="width:100%;height:400px; ">
-                                <div style="width: 100%; height: 100%" id="map"></div>
-                            </div>
-                        </div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-primary" onclick="setUserLocation()"><i
-                            class="fas fa-location-arrow"></i></button>
-                    <button type="button" class="btn btn-secondary" onclick="saveAddress()">Save</button>
+            <div class="d-flex justify-content-around w-100 my-1">
+                <div class="total-amount font-weight-bold">
+                    {{ trans('lables.checkout-discount') }} : <span class="caritem-discount-coupon">0</span>
                 </div>
             </div>
+            <div class="d-flex justify-content-around w-100 my-1">
+                <div class="total-amount font-weight-bold">
+                    {{ trans('lables.checkout-shipping') }} : <span class="shipping-tax">0</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around w-100 my-1">
+                <div class="total-amount font-weight-bold">
+                    {{ trans('lables.checkout-total') }} : <span class="caritem-grandtotal">0</span>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success my-3 mx-auto createOrder">Confirm Payment</button>
         </div>
     </div>
+</section>
 
+<input type="hidden" class="total_by_weight" />
 
 @endsection
 @section('script')
@@ -596,62 +242,41 @@
                 beforeSend: function() {},
                 success: function(data) {
                     if (data.status == 'Success') {
-                        $("#cartItem-product-show").html('');
-                        const templ = document.getElementById("cartItem-Template");
+                        $("#cartItem-product-show2").html('');
                         total_price = 0;
                         total_weight = 0;
 
                         for (i = 0; i < data.data.length; i++) {
-                            const clone = templ.content.cloneNode(true);
-                            // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-
-
-
                             if (data.data[i].product_type == 'variable') {
                                 for (k = 0; k < data.data[i].combination.length; k++) {
-                                    if (data.data[i].product_combination_id == data.data[i].combination[k]
-                                        .product_combination_id) {
-                                        total_weight += parseInt(data.data[i].product_weight) * parseInt(data
-                                            .data[i].qty);
+                                    if (data.data[i].product_combination_id == data.data[i].combination[k].product_combination_id) {
+                                        total_weight += parseInt(data.data[i].product_weight) * parseInt(data.data[i].qty);
                                         if (data.data[i].combination[k].gallary != null) {
-                                            clone.querySelector(".cartItem-image").setAttribute('src',
-                                                '/gallary/' + data.data[i].combination[k].gallary
-                                                .gallary_name);
-                                            clone.querySelector(".cartItem-image").setAttribute('alt', data
-                                                .data[i].combination[k].gallary.gallary_name);
+                                            imgSrc = '/gallary/' + data.data[i].combination[k].gallary.gallary_name;
+                                            imgAlt = data.data[i].combination[k].gallary.gallary_name;
                                             name = data.data[i].product_detail[0].title;
                                             for (loop = 0; loop < data.data[i].product_combination
                                                 .length; loop++) {
                                                 if (data.data[i].product_combination[loop].length - 1 == loop) {
-                                                    name += data.data[i].product_combination[loop].variation
-                                                        .detail[0].name;
+                                                    name += data.data[i].product_combination[loop].variation.detail[0].name;
                                                 } else {
-                                                    name += data.data[i].product_combination[loop].variation
-                                                        .detail[0].name + '-';
+                                                    name += data.data[i].product_combination[loop].variation.detail[0].name + '-';
                                                 }
                                             }
-                                            clone.querySelector(".cartItem-name").innerHTML = name;
                                         }
                                         k = data.data[i].combination.length;
                                     } else {}
                                 }
                             } else {
-                                total_weight += parseInt(data.data[i].product_weight) * parseInt(data.data[i]
-                                    .qty);
-                                if (data.data[i].product_gallary != null && $.trim(data.data[i]
-                                        .product_gallary) != '') {
-                                    if (data.data[i].product_gallary.detail != null && $.trim(data.data[i]
-                                            .product_gallary.detail) != '') {
-                                        clone.querySelector(".cartItem-image").setAttribute('src', data.data[i]
-                                            .product_gallary.detail[2].gallary_path);
+                                total_weight += parseInt(data.data[i].product_weight) * parseInt(data.data[i].qty);
+                                if (data.data[i].product_gallary != null && $.trim(data.data[i].product_gallary) != '') {
+                                    if (data.data[i].product_gallary.detail != null && $.trim(data.data[i].product_gallary.detail) != '') {
+                                        imgSrc = data.data[i].product_gallary.detail[2].gallary_path;
                                     }
                                 }
-                                if (data.data[i].product_detail != null && $.trim(data.data[i]
-                                        .product_detail) != '') {
-                                    clone.querySelector(".cartItem-image").setAttribute('alt', data.data[i]
-                                        .product_detail[0].title);
-                                    clone.querySelector(".cartItem-name").innerHTML = data.data[i]
-                                        .product_detail[0].title;
+                                if (data.data[i].product_detail != null && $.trim(data.data[i].product_detail) != '') {
+                                    imgAlt = data.data[i].product_detail[0].title;
+                                    itemName = data.data[i].product_detail[0].title;
                                 }
                             }
 
@@ -664,80 +289,70 @@
                                 .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
                                     sum = +data.data[i].qty * +discount_price;
-                                    clone.querySelector(".cartItem-total").innerHTML = data.data[i].currency
-                                        .code + ' ' + sum;
-                                    clone.querySelector(".cartItem-price").innerHTML = data.data[i].currency
-                                        .code + ' ' + discount_price;
+                                    cartItemTotal = data.data[i].currency.code + ' ' + sum;
+                                    cartItemPrice = data.data[i].currency.code + ' ' + discount_price;
                                 } else {
                                     sum = +data.data[i].qty * +discount_price;
-                                    clone.querySelector(".cartItem-total").innerHTML = sum + ' ' + data.data[i]
-                                        .currency.code;
-                                    clone.querySelector(".cartItem-price").innerHTML = discount_price + ' ' +
-                                        data.data[i]
-                                        .currency.code;
+                                    cartItemTotal = sum + ' ' + data.data[i].currency.code;
+                                    cartItemPrice = discount_price + ' ' + data.data[i].currency.code;
                                 }
                             } else {
-                                clone.querySelector(".cartItem-price").innerHTML = discount_price;
+                                cartItemPrice = discount_price;
                             }
-                            clone.querySelector(".cartItem-qty").value = +data.data[i].qty;
-                            clone.querySelector(".cartItem-qty").setAttribute('id', 'quantity' + i);
+                            itemQty = +data.data[i].qty;
+                            itemQtyId = 'quantity' + i;
 
                             total_price = total_price + (discount_price * data.data[i].qty);
 
 
-                            if ($.trim(data.data[i].category_detail[0].category_detail) != '' && $.trim(data
-                                    .data[i].category_detail[0].category_detail) != 'null' && $.trim(data.data[
-                                    i].category_detail[0].category_detail) != null) {
-                                clone.querySelector(".cartItem-category-name").innerHTML = data.data[i]
-                                    .category_detail[0].category_detail.detail[0].name;
+                            if ($.trim(data.data[i].category_detail[0].category_detail) != '' && $.trim(data.data[i].category_detail[0].category_detail) != 'null' && $.trim(data.data[i].category_detail[0].category_detail) != null) {
+                                categoryName = data.data[i].category_detail[0].category_detail.detail[0].name;
                             }
-                            clone.querySelector(".cartItem-remove").setAttribute('data-id', data.data[i]
-                                .product_id);
-                            clone.querySelector(".cartItem-remove").setAttribute('data-combination-id', data
-                                .data[i].product_combination_id);
-                            clone.querySelector(".cartItem-remove").setAttribute('onclick',
-                                'removeCartItem(this)');
+                            tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i].product_combination_id + '" product_id="' + data.data[i].product_id + '" product_type="' + data.data[i].product_type + '">' +
+                                '<td class="cart-image">' +
+                                    '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
+                                '</td>' +
+                                '<td class="cart-product-name-info">' +
+                                    '<h4 class="cart-product-description cartItem-name">' + itemName + '</h4>' +
+                                    '<div class="row">' +
+                                        '<div class="col-4">' +
+                                            '<div class="rating rateit-small"></div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</td>' +
+                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' + cartItemPrice + '</span>' +
+                                '</td>' +
+                                '<td class="cart-product-quantity">' +
+                                    '<div class="quant-input">' +
+                                        '<input type="number" value="' + itemQty + '" class="cartItem-qty" id="' + itemQtyId + '">' +
+                                    '</div>' +
+                                '</td>' +
+                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' + cartItemTotal + '</span>' +
+                                '</td>' +
+                                '<td class="romove-item">' +
+                                    '<a href="javascript:void(0)" title="cancel" class="icon cartItem-remove" onclick="removeCartItem(this)" data-id="' + data.data[i].product_id + '" data-combination-id="' + data.data[i].product_combination_id + '"><i class="fa fa-trash-o"></i></a>' +
+                                '</td>' +
+                            '</tr>';
 
-                            clone.querySelector(".cartItem-row").setAttribute('product_combination_id', data
-                                .data[i].product_combination_id);
-                            clone.querySelector(".cartItem-row").setAttribute('product_id', data.data[i]
-                                .product_id);
-                            clone.querySelector(".cartItem-row").setAttribute('product_type', data.data[i]
-                                .product_type);
+                            $("#cartItem-product-show2").append(tbodyRow);
 
-                            $("#cartItem-product-show").append(clone);
-                            const temp1 = document.getElementById("cartItem-grandtotal-template");
-                            const clone1 = temp1.content.cloneNode(true);
-                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
-                                .currency != null) {
+                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i].currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
-                                    clone1.querySelector(".caritem-subtotal").innerHTML = data.data[i].currency
-                                        .code + ' ' + total_price;
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price',
-                                    total_price);
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('currency-position',
-                                        data.data[i].currency.symbol_position);
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('currency-code', data
-                                        .data[i].currency.code);
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price-symbol', data
-                                        .data[i].currency.code + ' ' + total_price);
-                                    clone1.querySelector(".caritem-grandtotal").innerHTML = data.data[i]
-                                        .currency.code + ' ' + total_price.toFixed(2);
-                                    clone1.querySelector(".shipping-tax").setAttribute('data-price', '0');
+                                    $(".caritem-subtotal").html(data.data[i].currency.code + ' ' + total_price);
+                                    $(".caritem-subtotal").attr('price', total_price);
+                                    $(".caritem-subtotal").attr('currency-position', data.data[i].currency.symbol_position);
+                                    $(".caritem-subtotal").attr('currency-code', data.data[i].currency.code);
+                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price);
+                                    $(".caritem-grandtotal").html(data.data[i].currency.code + ' ' + total_price.toFixed(2));
+                                    $(".shipping-tax").attr('data-price', '0');
                                 } else {
-                                    clone1.querySelector(".caritem-subtotal").innerHTML = total_price + ' ' +
-                                        data.data[i].currency.code;
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price',
-                                    total_price);
-                                    clone1.querySelector(".shipping-tax").setAttribute('data-price', '0');
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price-symbol', data
-                                        .data[i].currency.code + ' ' + total_price);
-                                    clone1.querySelector(".caritem-grandtotal").innerHTML = total_price.toFixed(
-                                        2) + ' ' + data.data[i].currency.code;
+                                    $(".caritem-subtotal").html(total_price + ' ' + data.data[i].currency.code);
+                                    $(".caritem-subtotal").attr('price', total_price);
+                                    $(".shipping-tax").attr('data-price', '0');
+                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price);
+                                    $(".caritem-grandtotal").html(total_price.toFixed(2) + ' ' + data.data[i].currency.code);
                                 }
                             }
-                            $("#cartItem-grandtotal-product-show").html('');
-                            $("#cartItem-grandtotal-product-show").append(clone1);
                         }
 
                         $('.total_by_weight').val(total_weight);
@@ -755,9 +370,8 @@
             });
         }
 
-
-
         function removeCartItem(input) {
+            console.log(input);
             product_id = $.trim($(input).attr('data-id'));
             product_combination_id = $.trim($(input).attr('data-combination-id'));
             if (product_combination_id == null || product_combination_id == 'null') {
@@ -765,12 +379,14 @@
             }
 
             if (loggedIn == '1') {
-                url = "{{ url('') }}" + '/api/client/cart?session_id=' + cartSession + '&product_id=' + product_id +
+                url = "{{ url('') }}" + '/api/client/cart/delete?session_id=' + cartSession + '&product_id=' + product_id +
                     '&product_combination_id=' + product_combination_id + '&language_id=' + languageId;
             } else {
                 url = "{{ url('') }}" + '/api/client/cart/guest/delete?session_id=' + cartSession + '&product_id=' +
                     product_id + '&product_combination_id=' + product_combination_id + '&language_id=' + languageId;
             }
+
+            console.log(url);
 
             $.ajax({
                 type: 'DELETE',
@@ -869,7 +485,6 @@
                     }
                 },
                 error: function(data) {
-                    console.log(data);
                     price = $(".caritem-subtotal").attr('price-symbol');
                     $(".caritem-discount-coupon").attr('price', 0);
                     $(".caritem-discount-coupon").html('');
@@ -1232,16 +847,16 @@
 
         $(".createOrder").click(function(e) {
             e.preventDefault();
-            $('.invalid-feedback').css('display', 'none');
-            locations = $("#latlong").val();
-            billing_first_name = $("#billing_first_name").val();
-            billing_last_name = $("#billing_last_name").val();
-            billing_street_aadress = $("#billing_street_aadress").val();
-            billing_country = $("#billing_country").val();
-            billing_state = $("#billing_state").val();
-            billing_city = $("#billing_city").val();
-            billing_postcode = $("#billing_postcode").val();
-            billing_phone = $("#billing_phone").val();
+            // $('.invalid-feedback').css('display', 'none');
+            locations = '';
+            billing_first_name = $("#delivery_first_name").val();
+            billing_last_name = $("#delivery_last_name").val();
+            billing_street_aadress = $("#delivery_street_aadress").val();
+            billing_country = $("#delivery_country").val();
+            billing_state = $("#delivery_state").val();
+            billing_city = $("#delivery_city").val();
+            billing_postcode = $("#delivery_postcode").val();
+            billing_phone = $("#delivery_phone").val();
 
             delivery_first_name = $("#delivery_first_name").val();
             delivery_last_name = $("#delivery_last_name").val();
@@ -1251,14 +866,16 @@
             delivery_city = $("#delivery_city").val();
             delivery_postcode = $("#delivery_postcode").val();
             delivery_phone = $("#delivery_phone").val();
-            order_notes = $("#order_notes").val();
+            order_notes = '';
             coupon_code = $.trim(localStorage.getItem("couponCart"));
 
+
             payment_method = $(".payment_method:checked").val();
-            cc_number = $("#cc_number").val();
-            cc_expiry_month = $("#cc_expiry_month").val();
-            cc_expiry_year = $("#cc_expiry_year").val();
-            cc_cvc = $("#cc_cvc").val();
+            console.log(payment_method);
+            cc_number = '';
+            cc_expiry_month = '';
+            cc_expiry_year = '';
+            cc_cvc = '';
             if (payment_method == '') {
                 toastr.error('Select Payment Method');
                 return;
@@ -1304,6 +921,7 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
+                    console.log(data);
                     if (data.status == 'Success') {
                         window.location.href = "{{ url('/thankyou') }}";
                     } else if (data.status == 'Error') {
@@ -1455,7 +1073,6 @@
             });
         }
 
-
         function caritemGrandtotal() {
             couponCart = $(".caritem-discount-coupon").attr('price');
             if (couponCart == null || couponCart == '') {
@@ -1488,9 +1105,7 @@
     </script>
 
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkfQ--NrbuRkdYSFBu1AXlWohPV7RhNyI&libraries=places&callback=initialize"
-        async defer></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkfQ--NrbuRkdYSFBu1AXlWohPV7RhNyI&libraries=places&callback=initialize" async defer></script>
     <script>
         var markers;
         var myLatlng;
@@ -1659,6 +1274,6 @@
                 map.fitBounds(bounds);
             });
         }
-    </script>
+    </script> --}}
 
 @endsection

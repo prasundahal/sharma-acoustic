@@ -137,7 +137,9 @@
                     <a href="/cart" class="m-auto">
                         <button type="button" class="btn btn-primary m-auto">View Cart Page</button>
                     </a>
-                    <button type="button" class="btn btn-primary m-auto">Proceed Checkout</button>
+                    <a href="/checkout" class="m-auto">
+                        <button type="button" class="btn btn-primary m-auto">Proceed Checkout</button>
+                    </a>
                 </div>
             </div>
         </div>
