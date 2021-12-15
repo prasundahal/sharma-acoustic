@@ -59,6 +59,7 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                console.log(data);
                 if (data.status == 'Success') {
                     var clone = '';
                     var topGal = '';
@@ -420,91 +421,92 @@
         });
     }
 
-    // function productReview() {
-    //     rating = $("input[name=rating]").val();
-    //     comment = $("#comment").val();
-    //     title = $("#title").val();
-    //     if(rating == ''){
-    //         toastr.error('{{ trans("select-ratings") }}');
-    //         return;
-    //     }
+    function productReview() {
+        rating = $("input[name=rating]").val();
+        comment = $("#comment").val();
+        title = $("#title").val();
+        if(rating == ''){
+            toastr.error('{{ trans("select-ratings") }}');
+            return;
+        }
 
-    //     var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&comment=' + comment + '&rating=' + rating +'&title='+title;
-    //     var appendTo = 'related';
-    //     $.ajax({
-    //         type: 'post',
-    //         url: url,
-    //         headers: {
-    //             'Authorization': 'Bearer ' + customerToken,
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    //             clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
-    //             clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
-    //         },
-    //         beforeSend: function() {},
-    //         success: function(data) {
-    //             if (data.status == 'Success') {
-    //                 toastr.success('{{ trans("rating-saved-successfully") }}');
-    //                 $("#comment").val('');
-    //                 $("#title").val('');
-    //                 getProductReview();
-    //             }
-    //         },
-    //         error: function(data) {
-    //             console.log(data);
-    //             if (data.status == 422) {
-    //                 jQuery.each(data.responseJSON.errors, function(index, item) {
-    //                     $("#" + index).parent().find('.invalid-feedback').css('display',
-    //                         'block');
-    //                     $("#" + index).parent().find('.invalid-feedback').html(item);
-    //                 });
-    //             }
-    //             else if (data.status == 401) {
-    //                 toastr.error('{{ trans("response.some_thing_went_wrong") }}');
-    //             }
-    //         },
-    //     });
-    // }
+        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&comment=' + comment + '&rating=' + rating +'&title='+title;
+        var appendTo = 'related';
+        $.ajax({
+            type: 'post',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + customerToken,
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+                clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+            },
+            beforeSend: function() {},
+            success: function(data) {
+                if (data.status == 'Success') {
+                    toastr.success('{{ trans("rating-saved-successfully") }}');
+                    $("#comment").val('');
+                    $("#title").val('');
+                    getProductReview();
+                }
+            },
+            error: function(data) {
+                console.log(data);
+                if (data.status == 422) {
+                    jQuery.each(data.responseJSON.errors, function(index, item) {
+                        $("#" + index).parent().find('.invalid-feedback').css('display',
+                            'block');
+                        $("#" + index).parent().find('.invalid-feedback').html(item);
+                    });
+                }
+                else if (data.status == 401) {
+                    toastr.error('{{ trans("response.some_thing_went_wrong") }}');
+                }
+            },
+        });
+    }
 
-    // function getProductReview() {
-    //     var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}';
-    //     $.ajax({
-    //         type: 'get',
-    //         url: url,
-    //         headers: {
-    //             'Authorization': 'Bearer ' + customerToken,
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    //             clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
-    //             clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
-    //         },
-    //         beforeSend: function() {},
-    //         success: function(data) {
-    //             if (data.status == 'Success') {
-    //                 const temp2 = document.getElementById("review-rating-template");
-    //                 $("#review-rating-show").html('');
-    //                 for (review = 0; review < data.data.length; review++) {
-    //                     const clone1 = temp2.content.cloneNode(true);
-    //                     clone1.querySelector(".review-comment").innerHTML = data.data[review].comment;
-    //                     clone1.querySelector(".review-date").innerHTML = data.data[review].date;
-    //                     clone1.querySelector(".review-title").innerHTML = data.data[review].title;
-    //                     if (data.data[review].rating == '5') {
-    //                         clone1.querySelector(".review-rating5").setAttribute('checked', true);
-    //                     } else if (data.data[review].rating == '4') {
-    //                         clone1.querySelector(".review-rating4").setAttribute('checked', true);
-    //                     } else if (data.data[review].rating == '3') {
-    //                         clone1.querySelector(".review-rating3").setAttribute('checked', true);
-    //                     } else if (data.data[review].rating == '2') {
-    //                         clone1.querySelector(".review-rating2").setAttribute('checked', true);
-    //                     } else if (data.data[review].rating == '1') {
-    //                         clone1.querySelector(".review-rating1").setAttribute('checked', true);
-    //                     }
-    //                     $("#review-rating-show").append(clone1);
-    //                 }
-    //             }
-    //         },
-    //         error: function(data) {
-    //             console.log(data);
-    //         },
-    //     });
-    // }
+    function getProductReview() {
+        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}';
+        $.ajax({
+            type: 'get',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + customerToken,
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+                clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+            },
+            beforeSend: function() {},
+            success: function(data) {
+                console.log(data);
+                if (data.status == 'Success') {
+                    const temp2 = document.getElementById("review-rating-template");
+                    $("#review-rating-show").html('');
+                    for (review = 0; review < data.data.length; review++) {
+                        const clone1 = temp2.content.cloneNode(true);
+                        clone1.querySelector(".review-comment").innerHTML = data.data[review].comment;
+                        clone1.querySelector(".review-date").innerHTML = data.data[review].date;
+                        clone1.querySelector(".review-title").innerHTML = data.data[review].title;
+                        if (data.data[review].rating == '5') {
+                            clone1.querySelector(".review-rating5").setAttribute('checked', true);
+                        } else if (data.data[review].rating == '4') {
+                            clone1.querySelector(".review-rating4").setAttribute('checked', true);
+                        } else if (data.data[review].rating == '3') {
+                            clone1.querySelector(".review-rating3").setAttribute('checked', true);
+                        } else if (data.data[review].rating == '2') {
+                            clone1.querySelector(".review-rating2").setAttribute('checked', true);
+                        } else if (data.data[review].rating == '1') {
+                            clone1.querySelector(".review-rating1").setAttribute('checked', true);
+                        }
+                        $("#review-rating-show").append(clone1);
+                    }
+                }
+            },
+            error: function(data) {
+                console.log(data);
+            },
+        });
+    }
 </script>
 @endsection
