@@ -8,56 +8,21 @@
             <div class="col-12">
                 <ul class="m-0 p-0 d-flex align-items-center text-white">
                     <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                    <li class="">Dashboard Change Password</li>
+                    <li class="">Change Password</li>
                 </ul>
             </div>
             <div class="col-12 mt-3">
-                <h2 class="text-white">Dashboard Change Password</h2>
+                <h2 class="text-white">Change Password</h2>
             </div>
         </div>
     </div>
 </section>
 <!-- Breadcrumbs Ends -->
-<!-- Button trigger modal -->
 <!-- Cart -->
 <section id="password-wrapper" class="py-3">
     <div class="container">
         <div class="row py-xl-5 py-md-3 py-0">
-            <div class="col-xl-3 col-lg-3 col-md-1 col-2">
-                <div class="dashboard-list mt-4 p-xl-3 p-md-2 p-0 d-lg-block d-none">
-                    <ul>
-                        <li class="active mb-3 p-2">
-                            <a href="dashboard-profile.html" class="text-dark"><span class="mr-2"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a>
-                        </li>
-                        <li class="mb-3 p-2">
-                            <a href="dashboard-order-status.html" class="text-dark"><span class="mr-2"><i class="fa fa-sort" aria-hidden="true"></i></span>Order Status</a>
-                        </li>
-                        <li class="mb-3 p-2">
-                            <a href="dashboard-change-password.html" class="text-dark"><span class="mr-2"><i class="fa fa-lock" aria-hidden="true"></i></span>Change Password</a>
-                        </li>
-                        <li class="mb-3 p-2">
-                            <a href="index.html" class="text-dark"><span class="mr-2"><i class="fa fa-sign-out" aria-hidden="true"></i></span>Logout</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Mobile Profile Nav -->
-                <ul class="mobile-profile-nav d-lg-none d-flex flex-column justify-content-around align-items-center h-100" data-toggle="modal" data-target="#profilemobilenav">
-                    <li>
-                        <span><i class="fa fa-user" aria-hidden="true"></i></span>
-                    </li>
-                    <li>
-                        <span><i class="fa fa-sort" aria-hidden="true"></i></span>
-                    </li>
-                    <li>
-                        <span><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    </li>
-                    <li>
-                        <span><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                    </li>
-                </ul>
-                </button>
-                <!-- Mobile Profile Nav Ends-->
-            </div>
+            @include('includes.side-menu')
             <div class="col-xl-5 col-lg-5 col-md-11 col-10 mt-xl-0 mt-md-0 mt-3">
                 <div class="change-password">
                     <form method="post" id="changePassForm">

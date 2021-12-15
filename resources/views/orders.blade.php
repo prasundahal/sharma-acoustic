@@ -1,6 +1,90 @@
 @extends('layouts.master')
 @section('content')
 
+<!-- Breadcrumbs -->
+<section id="breadcrumbs" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="m-0 p-0 d-flex align-items-center text-white">
+                    <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <li class="">WishList</li>
+                </ul>
+            </div>
+            <div class="col-12 mt-3">
+                <h2 class="text-white">WishList</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumbs Ends -->
+<!-- Profile -->
+<section id="profile-wrapper" class="py-3">
+    <div class="container">
+        <div class="row py-xl-5 py-md-3 py-0">
+            @include('includes.side-menu')
+            <div class="col-xl-9 col-lg-9 col-md-11 col-10 mt-xl-0 mt-md-0 mt-3">
+                <section id="cart-wrapper" class="py-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="shopping-cart">
+                                <div class="shopping-cart-table">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="cart-description item">Image</th>
+                                                    <th class="cart-product-name item">Product Name</th>
+                                                    <th class="cart-qty item">Quantity</th>
+                                                    <th class="cart-romove item"></th>
+                                                </tr>
+                                            </thead>
+                                            <!-- /thead -->
+                                            <tbody id="wishlist-show">
+                                                {{-- <tr>
+                                                    <td class="cart-image">
+                                                        <a class="entry-thumbnail" href="detail.html">
+                                                            <img src="frontend/assets/images/product-images/1 (1).jpg" class="img-fluid">
+                                                        </a>
+                                                    </td>
+                                                    <td class="cart-product-name-info">
+                                                        <h4 class="cart-product-description"><a href="detail.html">Yoga Mat</a></h4>
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="rating rateit-small"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.row -->
+                                                    </td>
+                                                    <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                                    </td>
+                                                    <td class="cart-product-quantity">
+                                                        <div class="quant-input">
+                                                            <input type="number" value="1">
+                                                        </div>
+                                                    </td>
+                                                    <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                                    </td>
+                                                    <td class="romove-item"><a href="#" title="cancel" class="icon"><i
+                                                    class="fa fa-trash-o"></i></a>
+                                                    </td>
+                                                </tr> --}}
+                                            </tbody>
+                                            <!-- /tbody -->
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Profile Ends -->
+
+
 <!-- -My Order content -->
 <div class="container-fuild">
     <nav aria-label="breadcrumb">

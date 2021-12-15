@@ -71,25 +71,26 @@
                     $('#add-to-cart').attr('data-type', data.data.product_type);
                     if (data.data.product_gallary_detail != null && data.data.product_gallary_detail.length > 0) {
                         for (var g = 0; g < data.data.product_gallary_detail.length; g++) {
+                            prodGalDetGalName = data.data.product_gallary_detail[g].gallary_name;
                             topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
-                                '<a href="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '">' +
-                                    '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                '<a href="{{ asset('/') }}gallary/large' + prodGalDetGalName + '">' +
+                                    '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
                                 '</a>' +
                             '</div>';
                             thumbGal += '<div class="swiper-slide">' +
-                                '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
                             '</div>';
                         }
                         if(data.data.product_combination){
                             for (loop = 0; loop < data.data.product_combination.length; loop++) {
                                 if (data.data.product_combination[loop].gallary != null) {
                                     topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
-                                        '<a href="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '">' +
-                                            '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                        '<a href="{{ asset('/') }}gallary/large' + prodGalDetGalName + '">' +
+                                            '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
                                         '</a>' +
                                     '</div>';
                                     thumbGal += '<div class="swiper-slide">' +
-                                        '<img src="{{ asset('/') }}gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="" />' +
+                                        '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
                                     '</div>';
                                 }
                             }
@@ -351,10 +352,6 @@
                     var imgAlt = '';
                     var name = '';
                     for (i = 0; i < data.data.length; i++) {
-                        cart = '<li><a href="javascript:void(0)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" onclick="addToCart(this)" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>';
-                        
-                        wish = '<li><a href="javascript:void(0)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" onclick="addWishlist(this)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>'
-
                         if (data.data[i].product_gallary != null) {
                             if (data.data[i].product_gallary.detail != null) {
                                 imgSrc = data.data[i].product_gallary.detail[1].gallary_path;
@@ -397,8 +394,8 @@
                                     '</a>' +
                                     '<ul class="social">' +
                                         '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
-                                        cart +
-                                        wish +
+                                        '<li><a href="javascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
+                                        '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
                                     '</ul>' +
                                     // '<span class="product-new-label font-weight-bold">New</span>' +
                                     // '<span class="product-discount-label">-10%</span>' +
