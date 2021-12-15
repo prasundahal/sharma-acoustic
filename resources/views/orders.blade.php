@@ -127,8 +127,6 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
-                    console.log(data);
-                    const templ = document.getElementById("order-show-template");
                     $("#order-show").html('');
                     for (i = 0; i < data.data.length; i++) {
                         order = data.data[i].order_date.split('T');
