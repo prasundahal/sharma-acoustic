@@ -724,17 +724,18 @@
             $('.selected_category').html(category_name);
         });
 
-        $('#search_button').click(function(e) {
-            e.preventDefault();
-            var searchInput = $('#search-input').val();
-            if (searchInput == "") {
-                toastr.error("{{ trans('search-input-empty') }}")
-            } else {
-                var url = "{{ url('/shop') }}" + '?search=' + searchInput;
-                var catgory_id = $('.selected_category').attr('data-id');
-                if (catgory_id != '' && catgory_id !== undefined)
-                    url += "&category=" + catgory_id;
-                window.location.href = url;
+        $('#search-input').on('keyup', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13){
+                var searchInput = $('#search-input').val();
+                if (searchInput == "") {
+                    toastr.error("{{ trans('search-input-empty') }}")
+                } else {
+                    var url = "{{ url('/shop') }}" + '?search=' + searchInput;
+                    var catgory_id = $('.selected_category').attr('data-id');
+                    if (catgory_id != '' && catgory_id !== undefined)
+                        url += "&category=" + catgory_id;
+                    window.location.href = url;
+                }
             }
         })
 
@@ -992,6 +993,52 @@
         $(document).ajaxStop(function() {
             myFunction();
         });
+
+        $(document).on('keyup', '#search-input', function() {
+            console.log('skjdfhalkjsd');
+            var name = $(this).val();	
+            if (name.length > 0) {	
+                $.ajax({	
+                    url: '{{ route('search-product') }}',	
+                    dataType: 'json',	
+                    method: 'get',	
+                    data: {	
+                        name: name	
+                    },	
+                    success: function(response) {	
+                        console.log(response);	
+                        if (response.length > 0) {	
+                            $('#searchBox > ul').html('');	
+                            var results = '';	
+                            $.each(response, function(i, e) {	
+                                results += '<a href="/product/' + e.id + '/' + e.product_slug + '" style="text-decoration: none;">' +
+                                    '<li class="dropdown-item">' +
+                                        '<img class="img-thumbnail" src="{{ asset("/gallary") }}/' + e.gallary_name + '" style="width: 150px; height: 100px;"> ' + e.title +
+                                    '</li>' +
+                                '</a>';
+                            });
+                            console.log($('#searchBox > ul'));
+                            $('#searchBox > ul').html(results);	
+                            $('#searchBox').addClass('show');	
+                            $('#searchBox > ul').addClass('show');	
+                            // if (e.key === "Escape") {	
+                            //     $('#searchBox').prop('hidden', true);	
+                            // }	
+                        } else {	
+                            $('#searchBox > ul').html('');
+                            $('#searchBox').removeClass('show');	
+                            $('#searchBox > ul').removeClass('show');
+                        }	
+                    },	
+                    error: function(error) {	
+                        console.log(error);	
+                    }	
+                });	
+            } else {	
+                $('#searchBox').html('');	
+                $('#searchBox').prop('hidden', true);	
+            }	
+        })
     </script>
 </body>
 
