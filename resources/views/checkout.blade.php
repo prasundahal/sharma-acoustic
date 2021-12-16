@@ -158,9 +158,13 @@
                                 @foreach ($payment_method_default as $payment_methods)
                                     <div class="col-3">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="inlineCheckbox{{ $payment_methods->id }}" name="customRadio" class="custom-control-input payment_method" {{ $loop->first ? 'checked' : '' }} value="{{ $payment_methods->payment_method }}">
-                                            <label class="custom-control-label" for="inlineCheckbox{{ $payment_methods->id }}">{{ ucwords(str_replace('_', ' ', $payment_methods->payment_method)) }}</label>
+                                            <input type="radio" id="inlineCheckbox{{ $payment_methods->id }}" name="customRadio" class="custom-control-input payment_method otherPayment" {{ $loop->first ? 'checked' : '' }} value="{{ $payment_methods->payment_method }}">
+                                            <label class="custom-control-label otherPayment" for="inlineCheckbox{{ $payment_methods->id }}">{{ ucwords(str_replace('_', ' ', $payment_methods->payment_method)) }}</label>
                                         </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="radio" name="customRadio" class="custom-control-input payment_method esewaRadio" id="esewaRadio">
+                                        <label class="custom-control-label esewaRadio" for="esewaRadio">Esewa</label>
                                     </div>
                                 @endforeach
                             </div>
@@ -190,7 +194,21 @@
                     {{ trans('lables.checkout-total') }} : <span class="caritem-grandtotal">0</span>
                 </div>
             </div>
-            <button type="button" class="btn btn-success my-3 mx-auto createOrder">Confirm Payment</button>
+            <button type="button" class="btn btn-success my-3 mx-auto createOrder confirmButton">Confirm Payment</button>
+        </div>
+        <div class="row" hidden>
+            <form action="https://uat.esewa.com.np/epay/main" method="POST" id="esewaForm" class="my-3 mx-auto">
+                <input value="10" name="tAmt" type="text">
+                <input value="10" name="amt" type="text">
+                <input value="0" name="txAmt" type="text">
+                <input value="0" name="psc" type="text">
+                <input value="0" name="pdc" type="text">
+                <input value="EPAYTEST" name="scd" type="text">
+                <input value="sku7-7|sku8-8|sku9-9" name="pid" type="text">
+                <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="text" name="su">
+                <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="text" name="fu">
+                <button type="submit" class="btn btn-success">Confirm Payment</button>
+            </form>
         </div>
     </div>
 </section>
@@ -219,6 +237,42 @@
             } else {
                 cartItem(cartSession);
             }
+
+            // $('#cartItem-product-show2 > tr')
+            // $('#esewaForm input[name=amt]').val(total);
+
+            $('.otherPayment').on('click', function(){
+                if($('#esewaRadio').is(':checked') == false){
+                    $('#esewaForm').parent().attr('hidden', true);
+                    $('.confirmButton').attr('hidden', false);
+                }
+            });
+
+            $('.esewaRadio').on('click', function(){
+                if($('#esewaRadio').is(':checked')){
+                    $('#esewaForm').parent().attr('hidden', false);
+                    $('.confirmButton').attr('hidden', true);
+                }
+            });
+        });
+
+        $(document).ajaxStop(function () {
+            var productSkus = '';
+            $.each($('#cartItem-product-show2 > tr'), function(){
+                if(productSkus == ''){
+                    productSkus += $(this).attr('product_sku');
+                }else{
+                    productSkus += '|' + $(this).attr('product_sku');
+                }
+            });
+            var total = $('.caritem-grandtotal').html().split(' ').slice(-1)[0];
+            $('#esewaForm input[name="amt"]').val(total);
+            var tax = 0;
+            var servChrg = 0;
+            var total = parseFloat(total) + parseFloat(tax) + parseFloat(servChrg);
+            $('#esewaForm input[name="pid"]').val(productSkus);
+            console.log(total);
+            $('#esewaForm input[name="tAmt"]').val(total);
         });
 
 
@@ -241,6 +295,7 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
+                    console.log(data);
                     if (data.status == 'Success') {
                         $("#cartItem-product-show2").html('');
                         total_price = 0;
@@ -308,7 +363,7 @@
                             if ($.trim(data.data[i].category_detail[0].category_detail) != '' && $.trim(data.data[i].category_detail[0].category_detail) != 'null' && $.trim(data.data[i].category_detail[0].category_detail) != null) {
                                 categoryName = data.data[i].category_detail[0].category_detail.detail[0].name;
                             }
-                            tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i].product_combination_id + '" product_id="' + data.data[i].product_id + '" product_type="' + data.data[i].product_type + '">' +
+                            tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i].product_combination_id + '" product_id="' + data.data[i].product_id + '" product_type="' + data.data[i].product_type + '" product_sku="' + data.data[i].product_slug + '">' +
                                 '<td class="cart-image">' +
                                     '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
                                 '</td>' +
@@ -324,7 +379,7 @@
                                 '</td>' +
                                 '<td class="cart-product-quantity">' +
                                     '<div class="quant-input">' +
-                                        '<input type="number" value="' + itemQty + '" class="cartItem-qty" id="' + itemQtyId + '">' +
+                                        '<input type="text" value="' + itemQty + '" class="cartItem-qty" id="' + itemQtyId + '" readonly>' +
                                     '</div>' +
                                 '</td>' +
                                 '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' + cartItemTotal + '</span>' +

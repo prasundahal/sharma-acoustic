@@ -47,6 +47,7 @@ class CartRepository implements CartInterface
             $sql = $sql->productCategoryDetail($languageId)->availableQtys();
             $sql = $sql->paginate($numOfResult);
             $sql = $sql->unique();
+            // dd($sql);
             return $this->successResponse(CartResource::collection($sql), 'Data Get Successfully!');
         } catch (Exception $e) {
             return $this->errorResponse();

@@ -111,8 +111,8 @@
             <div class="col-12 mt-2">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
-                            aria-controls="first" aria-selected="true">About This Product</a>
+                        {{-- <a class="nav-item nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
+                            aria-controls="first" aria-selected="true">About This Product</a> --}}
                         <a class="nav-item nav-link" id="second-tab" data-toggle="tab" href="#second" role="tab"
                             aria-controls="second" aria-selected="false">Reviews (<span class="review-count">0</span>) </a>
                     </div>
