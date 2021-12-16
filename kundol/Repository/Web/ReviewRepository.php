@@ -23,16 +23,17 @@ class ReviewRepository implements ReviewInterface
             if (isset($_GET['product_id']) && $_GET['product_id'] != '') {
                 $review = $review->where('product_id', $_GET['product_id']);
             }
-
+            
             if (isset($_GET['customer']) && $_GET['customer'] == '1') {
                 $review = $review->with('customer');
             }
-
+            
             if (isset($_GET['limit']) && is_numeric($_GET['limit']) && $_GET['limit'] > 0) {
                 $numOfResult = $_GET['limit'];
             } else {
                 $numOfResult = 100;
             }
+            // dd($review);
 
             return $this->successResponse(ReviewResource::collection($review->paginate($numOfResult)), 'Data Get Successfully!');
         } catch (Exception $e) {

@@ -844,8 +844,12 @@
             }
             /* Product carousel & zoom ends*/
             
-            #product-detail-wrapper .p-ratings .fa-star {
+            #product-detail-wrapper .p-ratings .orange {
                 color: orange;
+            }
+            
+            #product-detail-wrapper .p-ratings .b1b1b1 {
+                color: #b1b1b1;
             }
             
             #product-detail-wrapper .product-price .first-price {

@@ -18,6 +18,7 @@ class ReviewService
             $q->where('order_detail.product_id',$product_id);
         })->first();
 
+        
         if($sql){
             $review_check = Review::where('customer_id', \Auth::id())->where('product_id', $product_id)->count();
             if($review_check == 0){

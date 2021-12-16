@@ -150,7 +150,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth:customer-api', 'scope
     Route::post('order', 'API\Web\OrderController@store');
     Route::put('order/{order}', 'API\Web\@store');
     Route::post('comment', 'API\WOrderController@update');
-    Route::post('review', 'API\Web\ReviewControllereb\CommentController@store');
+    Route::post('review', 'API\Web\ReviewController@store');
     Route::resource('cart', 'API\Web\CartController', ['names' => ['index' => 'client.cart.index', 'store' => 'client.cart.store', 'destroy' => 'client.cart.delete']])->except(['edit', 'create', 'update']);
     Route::delete('cart/delete', 'API\Web\CartController@destroy');
     Route::resource('customer_address_book', 'API\Web\CustomerAddressBookController', ['names' => ['index' => 'admin.customer_address_book.index', 'store' => 'admin.customer_address_book.store', 'update' => 'admin.customer_address_book.update', 'destroy' => 'admin.customer_address_book.delete']])->except(['edit', 'create']);

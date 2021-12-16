@@ -49,7 +49,7 @@
 
 <body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }}">
     {{-- {{   dd(getSetting()) }} --}}
-    @include('extras.preloader')
+    {{-- @include('extras.preloader') --}}
     <!-- Whole Body Wrapper Starts -->
     <section id="index-wrapper">
         @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')

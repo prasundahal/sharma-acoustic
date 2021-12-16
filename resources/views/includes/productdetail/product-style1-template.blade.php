@@ -35,13 +35,15 @@
                                 {{-- AUDIRECT BEAM3 PRO --}}
                             </h1>
                         </div>
-                        {{-- <div class="rating-wrapper mb-2">
-                            <div class="p-ratings">
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                        <div class="rating-wrapper mb-2">
+                            <div class="p-ratings display-rating">
+                                <i class="fa fa-star orange"></i>
+                                <i class="fa fa-star orange"></i>
+                                <i class="fa fa-star b1b1b1"></i>
+                                <i class="fa fa-star b1b1b1"></i>
+                                <i class="fa fa-star b1b1b1"></i>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="product-price d-flex ">
                             <div class="first-price mr-2" id="cut-product-card-price"></div>
                             <div class="second-price" id="product-card-price"></div>
@@ -106,17 +108,17 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-12 mt-2">
+            <div class="col-12 mt-2">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
                             aria-controls="first" aria-selected="true">About This Product</a>
                         <a class="nav-item nav-link" id="second-tab" data-toggle="tab" href="#second" role="tab"
-                            aria-controls="second" aria-selected="false">Reviews <span>(9)</span> </a>
+                            aria-controls="second" aria-selected="false">Reviews (<span class="review-count">0</span>) </a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active p-3 w-75" id="first" role="tabpanel"
+                    {{-- <div class="tab-pane fade show active p-3 w-75" id="first" role="tabpanel"
                         aria-labelledby="first-tab">
                         <p class="pro-desc">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
@@ -147,30 +149,21 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="tab-pane fade p-3" id="second" role="tabpanel" aria-labelledby="second-tab">
-                        <!-- User Comments -->
-                        <div class="col-xl-8 col-lg-8 col-12 comments-content p-4 my-3 bg-light">
-                            <h5 class="mb-2">By Joe John</h5>
-                            <div class="p-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                            <small class="review-date">March 26, 2017</small>
-                        </div>
-                        <!-- User Comments Ends -->
-                        <!-- User Comments -->
-                        <div class="col-xl-8 col-lg-8 col-12 comments-content p-4 my-3 bg-light">
-                            <h5 class="mb-2">By Joe John</h5>
-                            <div class="p-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                            <small class="review-date">March 26, 2017</small>
-                        </div>
-                        <!-- User Comments Ends -->
+                        <span id="review-rating-show">
+                            <!-- User Comments -->
+                            {{-- <div class="col-xl-8 col-lg-8 col-12 comments-content p-4 my-3 bg-light">
+                                <h5 class="mb-2">By Joe John</h5>
+                                <div class="p-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                        class="fa fa-star"></i> </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
+                                <small class="review-date">March 26, 2017</small>
+                            </div> --}}
+                            <!-- User Comments Ends -->
+                        </span>
                         <div class="col-xl-8 col-lg-8 col-12 blog-comment bg-light px-xl-5 px-2 py-4">
                             <div class="col-12 mb-4 text-center">
                                 <h2 class="font-weight-bold mb-xl-4 mb-md-3 mb-2">Add a comment</h2>
@@ -178,34 +171,25 @@
                             <div class="col-xl-12">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12 mb-md-0 mb-4">
-                                            <input type="text" class="form-control border-0 rounded-0"
-                                                placeholder="Name">
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <input type="email" class="form-control border-0 rounded-0"
-                                                placeholder="Email address">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-center mb-2">
+                                                <select class="form-control" id="prodRating" required>
+                                                    <option value=''>Select</option>
+                                                    <option value='1'>1</option>
+                                                    <option value='2'>2</option>
+                                                    <option value='3'>3</option>
+                                                    <option value='4'>4</option>
+                                                    <option value='5'>5</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="col-12 my-md-5 my-4">
                                             <div class="col-text-area d-flex justify-content-center">
-                                                <textarea class="w-100 p-3 border-0 rounded-0"
-                                                    placeholder="Add Comment"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-flex justify-content-center mb-4">
-                                                <div class="p-ratings">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-
+                                                <textarea class="w-100 p-3 border-0 rounded-0" placeholder="Add Comment" id="prodComment"></textarea>
                                             </div>
                                         </div>
                                         <div class="button-wrapper mx-auto mb-3">
-                                            <a href="" class="btn-cus px-5">Send</a>
+                                            <button type="submit" class="btn-cus px-5" id="reviewSend">Send</a>
                                         </div>
                                     </div>
                                 </form>
@@ -213,9 +197,8 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
-    </div>
     </div>
 </section>
 <!-- Product Detail Ends -->
