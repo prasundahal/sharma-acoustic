@@ -163,7 +163,7 @@
                                         </div>
                                     </div>
                                     <div class="col-3">
-                                        <input type="radio" name="customRadio" class="custom-control-input payment_method esewaRadio" id="esewaRadio">
+                                        <input type="radio" name="customRadio" class="custom-control-input payment_method esewaRadio" id="esewaRadio" value="esewa">
                                         <label class="custom-control-label esewaRadio" for="esewaRadio">Esewa</label>
                                     </div>
                                 @endforeach
@@ -204,10 +204,10 @@
                 <input value="0" name="psc" type="text">
                 <input value="0" name="pdc" type="text">
                 <input value="EPAYTEST" name="scd" type="text">
-                <input value="sku7-7|sku8-8|sku9-9" name="pid" type="text">
-                <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="text" name="su">
-                <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="text" name="fu">
-                <button type="submit" class="btn btn-success">Confirm Payment</button>
+                <input value="asdf>asdf0--0sdsd9>87-0-i>phnpoi>sku9-sdsd9" name="pid" type="text">
+                <input value="{{ route('esewa-verify') }}?q=su" type="text" name="su">
+                <input value="{{ route('esewa-verify') }}?q=fu" type="text" name="fu">
+                <button type="submit" class="btn btn-success esewaButton" id="esewaButton">Confirm Payment</button>
             </form>
         </div>
     </div>
@@ -257,22 +257,22 @@
         });
 
         $(document).ajaxStop(function () {
-            var productSkus = '';
-            $.each($('#cartItem-product-show2 > tr'), function(){
-                if(productSkus == ''){
-                    productSkus += $(this).attr('product_sku');
-                }else{
-                    productSkus += '|' + $(this).attr('product_sku');
-                }
-            });
-            var total = $('.caritem-grandtotal').html().split(' ').slice(-1)[0];
-            $('#esewaForm input[name="amt"]').val(total);
-            var tax = 0;
-            var servChrg = 0;
-            var total = parseFloat(total) + parseFloat(tax) + parseFloat(servChrg);
-            $('#esewaForm input[name="pid"]').val(productSkus);
-            console.log(total);
-            $('#esewaForm input[name="tAmt"]').val(total);
+            // var productSkus = '';
+            // $.each($('#cartItem-product-show2 > tr'), function(){
+            //     if(productSkus == ''){
+            //         productSkus += $(this).attr('product_sku');
+            //     }else{
+            //         productSkus += '|' + $(this).attr('product_sku');
+            //     }
+            // });
+            // var total = $('.caritem-grandtotal').html().split(' ').slice(-1)[0];
+            // $('#esewaForm input[name="amt"]').val(total);
+            // var tax = 0;
+            // var servChrg = 0;
+            // var total = parseFloat(total) + parseFloat(tax) + parseFloat(servChrg);
+            // $('#esewaForm input[name="pid"]').val(productSkus);
+            // console.log(total);
+            // $('#esewaForm input[name="tAmt"]').val(total);
         });
 
 
@@ -295,7 +295,6 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
-                    console.log(data);
                     if (data.status == 'Success') {
                         $("#cartItem-product-show2").html('');
                         total_price = 0;
@@ -902,6 +901,15 @@
 
         $(".createOrder").click(function(e) {
             e.preventDefault();
+            createOrder();
+        });
+
+        $("#esewaButton").click(function(e) {
+            e.preventDefault();
+            createOrder();
+        });
+
+        function createOrder(){
             // $('.invalid-feedback').css('display', 'none');
             locations = '';
             billing_first_name = $("#delivery_first_name").val();
@@ -934,6 +942,8 @@
             if (payment_method == '') {
                 toastr.error('Select Payment Method');
                 return;
+            }else if(payment_method == 'cash_on_delivery'){
+                payment_method = 'cod';
             }
 
             url = '/api/client/order';
@@ -978,7 +988,13 @@
                 success: function(data) {
                     console.log(data);
                     if (data.status == 'Success') {
-                        window.location.href = "{{ url('/thankyou') }}";
+                        if(payment_method == 'esewa'){
+                            pid = $('#esewaForm input[name=pid]').val() + '?' + data.data.order_id;
+                            $('#esewaForm input[name=pid]').val(pid);
+                            $('#esewaForm').submit();
+                        }else if(payment_method == 'cod'){
+                            window.location.href = "{{ url('/thankyou') }}";
+                        }
                     } else if (data.status == 'Error') {
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                         $("#pills-shipping-tab").addClass('active');
@@ -1010,7 +1026,7 @@
 
                 },
             });
-        });
+        }
 
         function tax() {
             state_id = $.trim($("#delivery_state").val());

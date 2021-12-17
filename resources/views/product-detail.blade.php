@@ -513,7 +513,6 @@
                 }
             },
             error: function(data) {
-                console.log(data);
                 if (data.status == 422) {
                     jQuery.each(data.responseJSON.errors, function(index, item) {
                         $("#" + index).parent().find('.invalid-feedback').css('display',

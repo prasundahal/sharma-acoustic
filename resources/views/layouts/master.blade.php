@@ -49,7 +49,7 @@
 
 <body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }}">
     {{-- {{   dd(getSetting()) }} --}}
-    @include('extras.preloader')
+    {{-- @include('extras.preloader') --}}
     <!-- Whole Body Wrapper Starts -->
     <section id="index-wrapper">
         @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')
@@ -995,49 +995,43 @@
         });
 
         $(document).on('keyup', '#search-input', function() {
-            console.log('skjdfhalkjsd');
-            var name = $(this).val();	
-            if (name.length > 0) {	
-                $.ajax({	
-                    url: '{{ route('search-product') }}',	
-                    dataType: 'json',	
-                    method: 'get',	
-                    data: {	
-                        name: name	
-                    },	
-                    success: function(response) {	
-                        console.log(response);	
-                        if (response.length > 0) {	
-                            $('#searchBox > ul').html('');	
-                            var results = '';	
-                            $.each(response, function(i, e) {	
+            var name = $(this).val();
+            if (name.length > 0) {
+                $.ajax({
+                    url: '{{ route('search-product') }}',
+                    dataType: 'json',
+                    method: 'get',
+                    data: {
+                        name: name
+                    },
+                    success: function(response) {
+                        if (response.length > 0) {
+                            $('#searchBox > ul').html('');
+                            var results = '';
+                            $.each(response, function(i, e) {
                                 results += '<a href="/product/' + e.id + '/' + e.product_slug + '" style="text-decoration: none;">' +
                                     '<li class="dropdown-item">' +
                                         '<img class="img-thumbnail" src="{{ asset("/gallary") }}/' + e.gallary_name + '" style="width: 150px; height: 100px;"> ' + e.title +
                                     '</li>' +
                                 '</a>';
                             });
-                            console.log($('#searchBox > ul'));
-                            $('#searchBox > ul').html(results);	
-                            $('#searchBox').addClass('show');	
-                            $('#searchBox > ul').addClass('show');	
-                            // if (e.key === "Escape") {	
-                            //     $('#searchBox').prop('hidden', true);	
-                            // }	
-                        } else {	
+                            $('#searchBox > ul').html(results);
+                            $('#searchBox').addClass('show');
+                            $('#searchBox > ul').addClass('show');
+                        } else {
                             $('#searchBox > ul').html('');
-                            $('#searchBox').removeClass('show');	
+                            $('#searchBox').removeClass('show');
                             $('#searchBox > ul').removeClass('show');
-                        }	
-                    },	
-                    error: function(error) {	
-                        console.log(error);	
-                    }	
-                });	
-            } else {	
-                $('#searchBox').html('');	
-                $('#searchBox').prop('hidden', true);	
-            }	
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            } else {
+                $('#searchBox').html('');
+                $('#searchBox').prop('hidden', true);
+            }
         })
     </script>
 </body>

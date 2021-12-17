@@ -200,8 +200,6 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
-                    console.log(appendTo);
-                    console.log(data);
                     if (data.status == 'Success') {
                         for (i = 0; i < data.data.length; i++) {
                             
