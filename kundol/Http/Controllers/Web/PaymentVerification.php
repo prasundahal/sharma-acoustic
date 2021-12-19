@@ -21,6 +21,6 @@ class PaymentVerification extends Controller
             ];
         }
         // dd($result);
-        return redirect('/thankyou', compact('result'));
+        return redirect('/thankyou')->with('result', $result);
     }
 }

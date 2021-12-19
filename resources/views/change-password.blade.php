@@ -86,8 +86,11 @@
                 clientid:"{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                 clientsecret:"{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
+                $('#event-loading').css('display', 'none');
                 if (data.status == 'Success') {
                     log_out();
                     // location.reload();
@@ -97,6 +100,10 @@
                     toastr.error('{{ trans("response.some_thing_went_wrong") }}');
                 }
             },
+            error: function(response){
+                $('#event-loading').css('display', 'none');
+                toastr.error(response.responseJSON.message);
+            }
         });
     });
 

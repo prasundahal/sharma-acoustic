@@ -37,10 +37,10 @@
                           <a href="{{ url('/about-us') }}" class="text-white">About Us</a>
                       </li>
                       <li class="mb-3">
-                          <a href="" class="text-white">Terms & Conditions</a>
+                          <a href="{{ url('/shop') }}" class="text-white">Shop</a>
                       </li>
                       <li class="mb-3">
-                          <a href="" class="text-white">Privacy Policy</a>
+                          <a href="{{ url('/wishlist') }}" class="text-white">Wishlist</a>
                       </li>
                   </ul>
               </div>
@@ -52,9 +52,9 @@
                       <li class="mb-3">
                           <a href="{{ url('/contact-us') }}" class="text-white">Contact Us</a>
                       </li>
-                      <li class="mb-3">
+                      {{-- <li class="mb-3">
                           <a href="" class="text-white">FAQs</a>
-                      </li>
+                      </li> --}}
                   </ul>
               </div>
           </div>
@@ -62,9 +62,9 @@
               <div class="footer-title text_white footer_after">
                   <h4 class="text-white mb-3 mb-md-4">Find Us</h4>
                   <ul>
-                      <li class="text-white mb-3"><span class="pr-3"><i class="fa fa-map-marker" aria-hidden="true"></i></span>Kathmandu, Nepal</li>
-                      <li class="text-white mb-3"><span class="pr-3"><i class="fa fa-phone" aria-hidden="true"></i></span>61421199011, +61283870907, +61452145677</li>
-                      <li class="text-white "><span class="pr-3"><i class="fa fa-envelope-square" aria-hidden="true"></i></span>abc@gmail.com</li>
+                      <li class="text-white mb-3"><span class="pr-3"><i class="fa fa-map-marker" aria-hidden="true"></i></span>{{ getSetting()['invoice_address'] ?? 'Kathmandu, Nepal' }}</li>
+                      <li class="text-white mb-3"><span class="pr-3"><i class="fa fa-phone" aria-hidden="true"></i></span>{{ getSetting()['invoice_mobile'] }}, {{ getSetting()['invoice_phone'] }}</li>
+                      <li class="text-white "><span class="pr-3"><i class="fa fa-envelope-square" aria-hidden="true"></i></span>{{ getSetting()['invoice_email'] }}</li>
                   </ul>
               </div>
           </div>

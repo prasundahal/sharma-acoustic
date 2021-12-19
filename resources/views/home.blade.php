@@ -327,7 +327,9 @@
                     }
                     appendTo == 'featured-product-section' ? productListInit() : '';
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -413,7 +415,9 @@
                         $('#weekly-sale-first-div').html(htmlToRender);
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -455,7 +459,9 @@
                         $('#blog-section').html(blogSection);
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -507,7 +513,9 @@
                         slickInit();
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -543,7 +551,9 @@
                         categorySlickInit();
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -645,7 +655,9 @@
                         $('.banner_div').css('display', 'block');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
     </script>

@@ -43,13 +43,25 @@
     <link rel="stylesheet" href="https://k1ngzed.com/dist/EasyZoom/easyzoom.css" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/jssocials/jssocials.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/jssocials/jssocials-theme-flat.css') }}">
     <!-- Custom Links Ends -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }}">
+    {{-- <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script> --}}
+    
     {{-- {{   dd(getSetting()) }} --}}
-    {{-- @include('extras.preloader') --}}
+    @include('extras.preloader')
     <!-- Whole Body Wrapper Starts -->
     <section id="index-wrapper">
         @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')
@@ -58,7 +70,8 @@
 
         @include(isset(getSetting()['Footer_style']) ? 'includes.footers.footer-'.getSetting()['Footer_style'] :
         'includes.footers.footer-style1')
-        
+
+
     </section>
     <!-- Whole Body Wrapper Ends -->
 
@@ -75,6 +88,11 @@
     <!-- Slick Js -->
     <script src="{{ asset('frontend/assets/slick/slick.min.js') }}"></script>
     <!-- Slick Js Ends-->
+    <!-- toastr Js -->
+    <script src="{{ asset('/assets/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('/assets/toastr/toastr.js.map') }}"></script>
+    <!-- toastr Js Ends-->
+    <script src="{{ asset('/assets/jssocials/jssocials.min.js') }}"></script>
     <!-- Custom Js Starts -->
     <script src="https://k1ngzed.com/dist/swiper/swiper.min.js"></script>
     <script src="https://k1ngzed.com/dist/EasyZoom/easyzoom.js"></script>
@@ -164,7 +182,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
     {{-- <script src="{{ asset('assets/front/js/scripts.js') }}"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
 
     @php
         $language_id = $data['selectedLenguage'];
@@ -321,13 +339,18 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $(".wishlist-count").html(data.data.length);
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -346,14 +369,19 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $(".wishlist-count").html(data.data.length);
-                        toastr.success('{{ trans('wishlist-add-success') }}')
+                        toastr.success('Product added to wishlist')
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -375,14 +403,19 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         toastr.success('{{ trans('response.compare-add-success') }}')
 
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -400,8 +433,11 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         const templ = document.getElementById("quick-view-template");
                         const clone = templ.content.cloneNode(true);
@@ -473,7 +509,9 @@
                         $(".quick-view-modal-show").append(clone);
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -514,8 +552,11 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         if (loggedIn != '1') {
                             localStorage.setItem("cartSession", data.data.session);
@@ -531,6 +572,7 @@
                     }
                 },
                 error: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.responseJSON.status == 'Error') {
                         // toastr.error(data.responseJSON.message);
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
@@ -557,8 +599,11 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         total_price = 0;
                         currrency = '';
@@ -680,7 +725,9 @@
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -773,7 +820,8 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                },
                 success: function(data) {
                     if (data.status == 'Success') {
                         localStorage.removeItem("customerToken");
@@ -808,8 +856,11 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $("#cartItem-product-show").html('');
                         const templ = document.getElementById("cartItem-Template");
@@ -943,7 +994,9 @@
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
@@ -972,17 +1025,23 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $(input).closest('tr').remove();
                         cartItem(cartSession);
                         menuCart(cartSession);
+                        toastr.error('Product removed from cart');
                     } else {
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
     </script>

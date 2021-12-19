@@ -212,15 +212,20 @@
                 clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                 clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
+                $('#event-loading').css('display', 'none');
                 if (data.status == 'Success') {
                     toastr.success('{{ trans("wishlist-remove") }}');
                     wishListShow();
                     getWishlist();
                 }
             },
-            error: function(data) {},
+            error: function(data) {
+                $('#event-loading').css('display', 'none');
+            },
         });
 
     }

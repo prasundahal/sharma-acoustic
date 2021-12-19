@@ -33,8 +33,11 @@
             clientid: "{{isset(getSetting()['client_id']) ? getSetting()['client_id'] : ''}}",
             clientsecret: "{{isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : ''}}",
         },
-        beforeSend: function() {},
+        beforeSend: function() {
+            $('#event-loading').css('display', 'block');
+        },
         success: function(data) {
+            $('#event-loading').css('display', 'none');
             if (data.status == 'Success') {
                 toastr.error('{{ trans("response.contact-form-success") }}');
             }
@@ -43,6 +46,7 @@
             }
         },
         error: function(data) {
+            $('#event-loading').css('display', 'none');
             // console.log(data);
             if(data.status == 422){
                 jQuery.each(data.responseJSON.errors, function(index, item) {

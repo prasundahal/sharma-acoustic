@@ -77,8 +77,11 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         if (data.meta.last_page < page) {
                             $('.load-more-products').attr('disabled', true);
@@ -162,11 +165,12 @@
                                         '<div class="price">' +
                                             priceSymbol +
                                         '</div>' +
-                                        '<a class="add-to-cart" href="javascript:void(0)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" onclick="addToCart(this)">ADD TO CART</a>' +
+                                        '<a class="add-to-cart" href="javascript:void(0)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" onclick="addToCart(this)">ADD TO CART</a><br />' +
+                                        // '<div class="fb-share-button" data-href="{{ url('') }}/product/' + data.data[i].product_id + '/' + data.data[i].product_slug + '" data-layout="button_count"></div>' +
+                                        // '<a target="_blank" class="btn btn-primary btn-sm my-2" href="https://www.facebook.com/sharer/sharer.php?u={{ url('') }}/product/' + data.data[i].product_id + '/' + data.data[i].product_slug + '.com&display=popup"> <i class="fa fa-facebook-square mx-1"></i> Share </a>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';
-
 
                             $("#" + appendTo).append(clone);
                         }

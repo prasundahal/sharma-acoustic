@@ -257,22 +257,21 @@
         });
 
         $(document).ajaxStop(function () {
-            // var productSkus = '';
-            // $.each($('#cartItem-product-show2 > tr'), function(){
-            //     if(productSkus == ''){
-            //         productSkus += $(this).attr('product_sku');
-            //     }else{
-            //         productSkus += '|' + $(this).attr('product_sku');
-            //     }
-            // });
-            // var total = $('.caritem-grandtotal').html().split(' ').slice(-1)[0];
-            // $('#esewaForm input[name="amt"]').val(total);
-            // var tax = 0;
-            // var servChrg = 0;
-            // var total = parseFloat(total) + parseFloat(tax) + parseFloat(servChrg);
-            // $('#esewaForm input[name="pid"]').val(productSkus);
-            // console.log(total);
-            // $('#esewaForm input[name="tAmt"]').val(total);
+            var productSkus = '';
+            $.each($('#cartItem-product-show2 > tr'), function(){
+                if(productSkus == ''){
+                    productSkus += $(this).attr('product_sku');
+                }else{
+                    productSkus += '|' + $(this).attr('product_sku');
+                }
+            });
+            var total = $('.caritem-grandtotal').html().split(' ').slice(-1)[0];
+            $('#esewaForm input[name="amt"]').val(total);
+            var tax = 0;
+            var servChrg = 0;
+            var total = parseFloat(total) + parseFloat(tax) + parseFloat(servChrg);
+            $('#esewaForm input[name="pid"]').val(productSkus);
+            $('#esewaForm input[name="tAmt"]').val(total);
         });
 
 

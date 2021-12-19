@@ -34,6 +34,12 @@
         fetchRelatedProduct();
 
         $('#second-tab').click();
+        $("#share").jsSocials({
+            text: "Sharma Acoustic",
+            showLabel: false,
+            showCount: "inside",
+            shares: ["facebook", "twitter", "googleplus", "linkedin", "whatsapp"]
+        });
     });
 
     loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
@@ -65,7 +71,6 @@
             },
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 if (data.status == 'Success') {
                     var clone = '';
                     var topGal = '';
@@ -476,22 +481,18 @@
     $(document).on('click', '#reviewSend', function(e){
         e.preventDefault();
         if(loggedIn != '1'){
-            alert('please login to review');
+            toastr.error('please login to review');
             return false;
         }
         rating = $("#prodRating").val();
         comment = $("#prodComment").val();
         title = '';
-        console.log(rating);
-        console.log(comment);
-        console.log(title);
         if(rating == ''){
-            alert('no rating');
+            toastr.error('Select rating');
             return;
         }
         
         var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&comment=' + comment + '&rating=' + rating +'&title='+title +'&customer_id='+customerId;
-        console.log(url);
         var appendTo = 'related';
         $.ajax({
             type: 'post',
@@ -502,17 +503,22 @@
                 clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                 clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
-                console.log(data);
+                $('#event-loading').css('display', 'none');
                 if (data.status == 'Success') {
-                    alert('{{ trans("rating-saved-successfully") }}');
+                    toastr.success('{{ trans("rating-saved-successfully") }}');
                     $("#prodRating").val('');
                     $("#prodComment").val('');
                     getProductReview();
+                }else{
+                    toastr.errort
                 }
             },
             error: function(data) {
+                $('#event-loading').css('display', 'none');
                 if (data.status == 422) {
                     jQuery.each(data.responseJSON.errors, function(index, item) {
                         $("#" + index).parent().find('.invalid-feedback').css('display',

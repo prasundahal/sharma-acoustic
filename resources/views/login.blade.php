@@ -95,8 +95,11 @@
                 clientid: "{{isset($setting['client_id']) ? $setting['client_id'] : ''}}",
                 clientsecret: "{{isset($setting['client_secret']) ? $setting['client_secret'] : ''}}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
+                $('#event-loading').css('display', 'none');
                 if(data.status == 'Success'){
                     localStorage.setItem("customerToken",data.data.token);
                     localStorage.setItem("customerHash",data.data.hash);
@@ -107,6 +110,7 @@
                 }
             },
             error: function(data) {
+                $('#event-loading').css('display', 'none');
                 console.log(data.responseJSON.errors);
                 if(data.status == 422){
                     $.each( data.responseJSON.errors, function( index, value ){
@@ -152,9 +156,12 @@
                 clientid: "{{isset($setting['client_id']) ? $setting['client_id'] : ''}}",
                 clientsecret: "{{isset($setting['client_secret']) ? $setting['client_secret'] : ''}}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
                 if(data.status == 'Success'){
+                    $('#event-loading').css('display', 'none');
                     localStorage.setItem("customerToken",data.data.token);
                     localStorage.setItem("customerHash",data.data.hash);
                     localStorage.setItem("customerLoggedin",'1');
@@ -166,6 +173,7 @@
                 }
             },
             error: function(data) {
+                $('#event-loading').css('display', 'none');
                 console.log(data);
                 if(data.status == 422){
                     if(data.responseJSON.status == 'Error'){
