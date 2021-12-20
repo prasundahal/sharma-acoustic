@@ -125,12 +125,12 @@ class CustomerAuthRepository implements CustomerAuthInterface
         // return redirect('/');
         // $indexController = new IndexController();
         // return $indexController->Index($user);
-        // dd($user);
+        dd(serialize($user));
         // $homeService = new HomeService;
         // $data = $homeService->homeIndex();
         // $setting = getSetting();
         // return view('home', compact('data', 'setting', 'socialData'));
-        return redirect()->route('indexx', $user);
+        // return redirect()->route('indexx', serialize($user));
 
         return response()->json([
             'status' => 'Success',

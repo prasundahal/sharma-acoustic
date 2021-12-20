@@ -536,7 +536,7 @@
                     if (data.status == 'Success') {
                         $.each(data.data, function(i, e){
                             var icon = e.icon == 'fa' ? e.icon : 'fa fa-headphones';
-                            category += '<div class="slick-item mx-3 p-3">' +
+                            category += '<div class="slick-item mx-3">' +
                                 '<div class="content text-center bg-light">' +
                                     '<a href="">' +
                                         '<div class="box m-auto"> <i class="' + icon + '" aria-hidden="true"></i></div>' +

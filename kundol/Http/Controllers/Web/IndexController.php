@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Auth;
 
 class IndexController extends Controller
 {
@@ -58,17 +57,12 @@ class IndexController extends Controller
         curl_close($ch);
         return $responseData;
     }
-    public function Index($socialData = null)
+    public function Index()
     {
         // return ini_get('memory_limit');
-        // return Auth::guard('customer');
-        // return $socialData;
         $homeService = new HomeService;
         $data = $homeService->homeIndex();
         $setting = getSetting();
-        if($socialData != null){
-            return view('home', compact('data', 'setting', 'socialData'));
-        }
         return view('home', compact('data', 'setting'));
     }
 

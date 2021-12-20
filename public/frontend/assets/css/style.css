@@ -599,24 +599,25 @@
             #categories-wrapper {
                 box-shadow: 0px 0px 5px 0px #eaeaea;
             }
-            
             #categories-wrapper .content {
+
                 border-radius: 0;
-                padding: 30px 10px;
-                margin: 0px;
+    
+                padding: 10px;
+    
                 border-bottom: 4px solid transparent;
                 transition: all .5s;
-            }
-            
-            #categories-wrapper .content .box {
-                background-color: var(--black);
-                height: 80px;
-                width: 80px;
-                display: block;
-                line-height: 3;
+    
+                }
+    
+                #categories-wrapper .content .box {
+                    background-color: var(--black);
+      
+                display: inline-flex;
+      
                 padding: 15px;
                 border-radius: 8px;
-            }
+                  }
             
             #categories-wrapper .content a {
                 text-decoration: none;
@@ -631,7 +632,7 @@
             #categories-wrapper .content:hover {
                 border-bottom: 4px solid var(--secondary-color);
                 transition: all .5s;
-                box-shadow: -4px 0px 2px -1px var(--secondary-color);
+                /* box-shadow: -4px 0px 2px -1px var(--secondary-color); */
                 border-radius: 8px;
                 transform: translateY(-5px);
                 cursor: pointer;
