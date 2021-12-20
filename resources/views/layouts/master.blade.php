@@ -1,5 +1,8 @@
 {{-- {{ dd(getSetting()['card_style']) }} --}}
 {{-- {{ dd(get_defined_vars()) }} --}}
+@php
+    dd(get_defined_vars());
+@endphp
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -61,7 +64,7 @@
     }(document, 'script', 'facebook-jssdk'));</script> --}}
     
     {{-- {{   dd(getSetting()) }} --}}
-    @include('extras.preloader')
+    {{-- @include('extras.preloader') --}}
     <!-- Whole Body Wrapper Starts -->
     <section id="index-wrapper">
         @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')
