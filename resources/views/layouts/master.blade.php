@@ -211,6 +211,7 @@
         loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
         customerFname = $.trim(localStorage.getItem("customerFname"));
         customerLname = $.trim(localStorage.getItem("customerLname"));
+        console.log(localStorage);
 
         if (loggedIn != '1') {
             $(".auth-login").remove();

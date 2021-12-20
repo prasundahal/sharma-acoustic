@@ -188,11 +188,10 @@
             },
             error: function(data) {
                 console.log(data.responseJSON.errors);
+                $.each( data.responseJSON.errors, function( index, value ){
+                    toastr.error(value);
+                });
                 if(data.status == 422){
-                    $.each( data.responseJSON.errors, function( index, value ){
-                        $("#registerForm").find("."+index).html(value)
-                        $("#registerForm").find("."+index).removeClass('d-none');
-                    });
                 }
             },
         });
