@@ -1,3 +1,11 @@
+<?php
+$categories = App\Models\Admin\Category::inRandomOrder()
+    ->with('detail')
+    ->take(8)
+    ->get();
+?>
+
+{{-- {{ dd($categories) }} --}}
 <!-- Breadcrumbs -->
 <section id="breadcrumbs" class="py-3">
     <div class="container">
@@ -28,24 +36,15 @@
                             </div>
                             <div class="filter-content">
                                 <div class="card-body">
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadio" value="">
-                                        <span class="form-check-label">
-                                            Heading 1
-                                        </span>
-                                    </label>
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadio" value="">
-                                        <span class="form-check-label">
-                                            Heading 2
-                                        </span>
-                                    </label>
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadio" value="">
-                                        <span class="form-check-label">
-                                            Heading 3
-                                        </span>
-                                    </label>
+                                    @foreach ($categories as $category)
+                                        <label class="">
+                                            <a class="text-muted" href="shop?category={{ $category->id }}" style="text-decoration: none;">
+                                                <span class="form-check-label">
+                                                    {{ $category->detail[0]->category_name }}
+                                                </span>
+                                            </a>
+                                        </label>
+                                    @endforeach
                                 </div>
                                 <!-- card-body.// -->
                             </div>
@@ -53,7 +52,7 @@
                         <!-- card-group-item.// -->
                     </div>
                     <!-- card.// -->
-                    <div class="card-wrapper mb-2">
+                    {{-- <div class="card-wrapper mb-2">
                         <div class="card-group-item">
                             <div class="card-head">
                                 <h6 class="title font-weight-bold">By Brands </h6>
@@ -89,7 +88,7 @@
                         </div>
                         <!-- card-group-item.// -->
                         <!-- card-group-item.// -->
-                    </div>
+                    </div> --}}
                     <!-- card.// -->
                     <div class="card-wrapper mb-2">
                         <div class="card-group-item">
@@ -101,11 +100,11 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Min</label>
-                                            <input type="number" class="form-control" id="inputEmail4" placeholder="$0">
+                                            <input type="number" class="form-control" id="minRs" autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-6 text-right">
                                             <label>Max</label>
-                                            <input type="number" class="form-control" placeholder="$1,0000">
+                                            <input type="number" class="form-control" id="maxRs" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -118,10 +117,10 @@
                 <!-- Mobile Filter  -->
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary d-xl-none d-md-block " data-toggle="modal" data-target="#leftsidebarfilter">
-                            Product Filter
-                             <span class="ml-2"> 
-                                 <i class="fa fa-list" aria-hidden="true"></i>
-                                </span>
+                    Product Filter
+                    <span class="ml-2"> 
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                    </span>
                 </button>
                 <!-- Mobile Filter Ends -->
             </div>

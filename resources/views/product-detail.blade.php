@@ -35,8 +35,10 @@
 
         $('#second-tab').click();
         $("#share").jsSocials({
+            url: '{{ url('/') }}',
             text: "Sharma Acoustic",
             showLabel: false,
+            shareIn: 'popup',
             showCount: "inside",
             shares: ["facebook", "twitter", "googleplus", "linkedin", "whatsapp"]
         });

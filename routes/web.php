@@ -51,6 +51,7 @@ Route::any('admin/{all}', function () {
 Route::group(['middleware' => ['general']], function () {
 
     Route::get('/', 'Web\IndexController@index');
+    Route::get('/', 'Web\IndexController@index')->name('indexx');
 
     Route::get('/product/{id}/{slug}', 'Web\IndexController@productDetail');
     Route::get('search/product', 'Web\IndexController@searchProduct')->name('search-product');

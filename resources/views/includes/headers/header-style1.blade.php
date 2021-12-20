@@ -90,7 +90,7 @@ $categories = App\Models\Admin\Category::inRandomOrder()
                         <div class="profilenav-dropdown dropdown-menu p-0" aria-labelledby="profilenav">
                             <a class="dropdown-item" href="{{ url('/login') }}"> <span class="mr-2"><i
                                         class="fa fa-sign-in" aria-hidden="true"></i></span>Login</a>
-                            <a class="dropdown-item" href="{{ url('/customer_register') }}"> <span class="mr-2"><i
+                            <a class="dropdown-item" href="{{ url('/register') }}"> <span class="mr-2"><i
                                         class="fa fa-paper-plane" aria-hidden="true"></i></span>Register</a>
                         </div>
                     </li>

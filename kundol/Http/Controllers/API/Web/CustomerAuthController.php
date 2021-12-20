@@ -52,26 +52,35 @@ class CustomerAuthController extends Controller
         return $this->CustomerAuthRepository->login($parms);
     }
 
+    public function redirect($provider)
+    {
+        return Socialite::driver($provider)->stateless()->redirect();
+    }
+
     public function Callback($provider)
     {
-        $userSocial =   Socialite::driver($provider)->stateless()->user();
-        $users =   Customer::where(['email' => $userSocial->getEmail()])->first();
+        $userSocial = Socialite::driver($provider)->stateless()->user();
+        $users = Customer::where(['email' => $userSocial->getEmail()])->first();
         if ($users) {
             return $this->CustomerAuthRepository->loginWithProvider($users);
         } else {
+            if($userSocial->getName() != ''){
+                $arr = explode(' ', $userSocial->getName());
+                $first_name = $arr[0];
+                $last_name = end($arr);
+            }else{
+                $first_name = '';
+                $last_name = '';
+            }
             $user = Customer::create([
-                'name'          => $userSocial->getName(),
+                'first_name'    => $first_name,
+                'last_name'    => $last_name,
                 'email'         => $userSocial->getEmail(),
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
             ]);
             return $this->CustomerAuthRepository->loginWithProvider($user);
         }
-    }
-
-    public function redirect($provider)
-    {
-        return Socialite::driver($provider)->stateless()->redirect();
     }
 
     public function logout(Request $request)

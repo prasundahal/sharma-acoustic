@@ -1,5 +1,5 @@
 {{-- {{ dd(getSetting()['card_style']) }} --}}
-{{-- {{ dd(getSetting()) }} --}}
+{{-- {{ dd(get_defined_vars()) }} --}}
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -211,7 +211,6 @@
         loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
         customerFname = $.trim(localStorage.getItem("customerFname"));
         customerLname = $.trim(localStorage.getItem("customerLname"));
-        console.log(localStorage);
 
         if (loggedIn != '1') {
             $(".auth-login").remove();

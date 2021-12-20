@@ -38,9 +38,9 @@
                             <div class="row my-2">
                                 <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        {{-- <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
-                                        Remember me
+                                        Remember me --}}
                                     </label>
                                     </div>
                                 </div>
@@ -56,21 +56,18 @@
                             <p class="text-center mt-4">
                                 Don't have an account?
                                 <span>
-                                <a href="register-login.html">Register</a>
+                                <a href="{{ url('/register') }}">Register</a>
                             </span>
 
                             </p>
                             <div class="row mb-4 px-3 justify-content-center align-items-center">
                                 <h6 class="mb-xl-0 mb-md-2 mb-2 mr-2">Sign in with</h6>
                                 <div class="social-media d-flex justify-content-center h-100">
+                                    <div class="google text-center mr-3">
+                                        <a href="{{ url('/api/client/customer_login/google') }}" class="fa fa-google auth-google" aria-hidden="true"></a>
+                                    </div>
                                     <div class="facebook text-center mr-3">
                                         <a class="fa fa-facebook" aria-hidden="true"></a>
-                                    </div>
-                                    <div class="twitter text-center mr-3">
-                                        <a class="fa fa-twitter" aria-hidden="true"></a>
-                                    </div>
-                                    <div class="linkedin text-center mr-3">
-                                        <a class="fa fa-linkedin" aria-hidden="true"></a>
                                     </div>
                                 </div>
                             </div>

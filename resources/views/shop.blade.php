@@ -180,6 +180,140 @@
             });
         }
 
+        function fetchProductWithRange(page, price_from, price_to) {
+            var limit = "{{ isset($_GET['limit']) ? $_GET['limit'] : '12' }}";
+            var category = "{{ isset($_GET['category']) ? $_GET['category'] : '' }}";
+            var varations = "{{ isset($_GET['variation_id']) ? $_GET['variation_id'] : '' }}";
+            var price_range = "{{ isset($_GET['price']) ? $_GET['price'] : '' }}";
+
+            var url = "{{ url('') }}" + '/api/client/products?page=' + page + '&limit=' + limit +
+                '&getDetail=1&language_id=' + language_id + '&currency=' + localStorage.getItem("currency");
+
+            url += "&price_from=" + price_from;
+            url += "&price_to=" + price_to;
+
+            if (category != "")
+                url += "&productCategories=" + category;
+            if (varations != "")
+                url += "&variations=" + varations;
+            
+            if (sortBy != "" && sortType != "")
+                url += "&sortBy=" + sortBy + "&sortType=" + sortType;
+            var searchinput = "{{ isset($_GET['search']) ? $_GET['search'] : '' }}";
+            if (searchinput != "")
+                url += "&searchParameter=" + searchinput;
+            var appendTo = 'shop_page_product_card';
+            $.ajax({
+                type: 'get',
+                url: url,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+                    clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+                },
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
+                success: function(data) {
+                    $('#event-loading').css('display', 'none');
+                    if (data.status == 'Success') {
+                        if (data.meta.last_page < page) {
+                            $('.load-more-products').attr('disabled', true);
+                            $('.load-more-products').html('No More Items');
+                            return
+                        }
+                        var pagination =
+                            '<label for="staticEmail" class="col-form-label">Showing From <span class="showing_record">' +
+                            data.meta.to + '</span>&nbsp;of&nbsp;<span class="showing_total_record">' + data
+                            .meta.total + '</span>&nbsp;results.</label>';
+                        var nextPage = parseInt(data.meta.current_page) + 1;
+                        pagination += '<div class="col-12 col-sm-6">';
+                        pagination += '<ul class="loader-page mt-0">';
+                        pagination += '<li class="loader-page-item">';
+                        pagination += '<button class="load-more-products btn btn-secondary" data-page="' + nextPage + '">Load More</button>';
+                        pagination += '</li>';
+                        pagination += '</ul>';
+                        pagination += '</div>';
+
+                        $('.pagination').html(pagination);
+                        var clone = '';
+                        var imgSrc = '';
+                        var imgAlt = '';
+                        var priceSymbol = '';
+                        var cartLink = '';
+                        for (i = 0; i < data.data.length; i++) {
+                            if (data.data[i].product_gallary != null) {
+                                if (data.data[i].product_gallary.detail != null) {
+                                    imgSrc = data.data[i].product_gallary.detail[0].gallary_path;
+                                    if(imgSrc.startsWith('/')){
+                                        imgSrc = imgSrc.substring(1);
+                                    }
+                                }
+                            }
+                            if (data.data[i].detail != null) {
+                                imgAlt = data.data[i].detail[0].title;
+                            }
+                            if (data.data[i].category != null) {
+                                if (data.data[i].category[0].category_detail.detail != null) {
+                                    category = data.data[i].category[0].category_detail.detail[0].name;
+                                }
+                            }
+                            if (data.data[i].detail != null) {
+                                title = data.data[i].detail[0].title;
+                                href = 'product/' + data.data[i].product_id + '/' + data.data[i].product_slug;
+                                desc = data.data[i].detail[0].desc;
+                                desc = desc.substring(0, 50);
+                            }
+
+                            if (data.data[i].product_type == 'simple') {
+                                if (data.data[i].product_discount_price == '' || data.data[i].product_discount_price == null || data.data[i].product_discount_price == 'null') {
+                                    priceSymbol = data.data[i].product_price_symbol;
+                                } else {
+                                    priceSymbol = data.data[i].product_discount_price_symbol + '<span>' + data.data[i].product_price_symbol + '</span>';
+                                }
+                            } else {
+                                if (data.data[i].product_combination != null && data.data[i].product_combination != 'null' && data.data[i].product_combination != '') {
+                                    priceSymbol = data.data[i].product_combination[0].product_price_symbol;
+                                }
+                            }
+
+                            if (data.data[i].product_type == 'simple') {
+                                cartLink = '<li><a href="javascript:void(0)" data-tip="Add to Cart" onclick="addToCart(this)" data-id=' + data.data[i].product_id + ' data-type=' + data.data[i].product_type + '><i class="fa fa-shopping-cart"></i></a></li>';
+                                wishList = '<li><a href="javascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>';
+                            } else {
+                                cartLink = '<li><a href="product/' + data.data[i].product_id + '/' + data.data[i].product_slug + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>';
+                                wishList = '';
+                            }
+
+                            clone = '<div class="col-md-4 col-sm-6 mt-3">' +
+                                '<div class="product-grid-item">' +
+                                    '<div class="product-grid-image">' +
+                                        '<a href="' + href + '"><img class="pic-1 img-fluid" src="{{ asset('/') }}' + imgSrc + '"></a>' +
+                                        '<ul class="social">' +
+                                            wishList +
+                                            cartLink +
+                                        '</ul>' +
+                                    '</div>' +
+                                    '<div class="product-content">' +
+                                        '<h4 class="title mt-2"><a href="' + href + '">' + title + '</a></h4>' +
+                                        '<div class="price">' +
+                                            priceSymbol +
+                                        '</div>' +
+                                        '<a class="add-to-cart" href="javascript:void(0)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" onclick="addToCart(this)">ADD TO CART</a><br />' +
+                                        // '<div class="fb-share-button" data-href="{{ url('') }}/product/' + data.data[i].product_id + '/' + data.data[i].product_slug + '" data-layout="button_count"></div>' +
+                                        // '<a target="_blank" class="btn btn-primary btn-sm my-2" href="https://www.facebook.com/sharer/sharer.php?u={{ url('') }}/product/' + data.data[i].product_id + '/' + data.data[i].product_slug + '.com&display=popup"> <i class="fa fa-facebook-square mx-1"></i> Share </a>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+
+                            $("#" + appendTo).append(clone);
+                        }
+                    }
+                },
+                error: function(data) {},
+            });
+        }
+
 
         var limit = "{{ isset($_GET['limit']) ? $_GET['limit'] : '12' }}";
         var shopRedirecturl = "{{ url('/shop') }}" + '?limit=' + limit;
@@ -301,6 +435,13 @@
         $(document).on('click', '.load-more-products', function() {
             var pageToLoad = $(this).attr('data-page');
             fetchProduct(pageToLoad);
+        })
+
+        $(document).on('keyup', '#minRs, #maxRs', function() {
+            if($('#minRs').val() != '' && $('#maxRs').val() != ''){
+                $('#shop_page_product_card').html('');
+                fetchProductWithRange(1, $('#minRs').val(), $('#maxRs').val());
+            }
         })
     </script>
 @endsection

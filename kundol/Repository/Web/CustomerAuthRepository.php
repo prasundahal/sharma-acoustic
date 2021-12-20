@@ -3,6 +3,7 @@
 namespace App\Repository\Web;
 
 use App\Contract\Web\CustomerAuthInterface;
+use App\Http\Controllers\Web\IndexController;
 use App\Models\Admin\Customer;
 use App\Models\Web\Cart;
 use App\Services\Admin\AccountService;
@@ -105,7 +106,10 @@ class CustomerAuthRepository implements CustomerAuthInterface
 
     public function loginWithProvider($users)
     {
-        auth()->guard('customer')->loginUsingId($users->id);
+        $users = auth()->guard('customer')->loginUsingId($users->id);
+        // $usersq =auth()->guard('customer')->id();
+        // print_r($usersq);
+        // dd($users);
 
         config(['auth.guards.api.provider' => 'customer']);
 
@@ -117,6 +121,11 @@ class CustomerAuthRepository implements CustomerAuthInterface
 
         $success['token'] =  $user->createToken('MyApp', ['customer'])->accessToken;
         $cookie = $this->getCookieDetails($success['token']);
+
+        // return redirect('/');
+        // $indexController = new IndexController();
+        // return $indexController->Index($user);
+
         return response()->json([
             'status' => 'Success',
             'data' => $user,
