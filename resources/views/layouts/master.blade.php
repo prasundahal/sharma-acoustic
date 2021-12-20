@@ -1,8 +1,8 @@
 {{-- {{ dd(getSetting()['card_style']) }} --}}
 {{-- {{ dd(get_defined_vars()) }} --}}
-@php
+{{-- @php
     dd(get_defined_vars());
-@endphp
+@endphp --}}
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
