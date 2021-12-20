@@ -62,7 +62,7 @@ class IndexController extends Controller
     {
         // return ini_get('memory_limit');
         // return Auth::guard('customer');
-        return $socialData;
+        // return $socialData;
         $homeService = new HomeService;
         $data = $homeService->homeIndex();
         $setting = getSetting();
