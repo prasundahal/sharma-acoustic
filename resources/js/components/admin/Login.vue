@@ -8,7 +8,7 @@
 							class="card-header align-items-center  justify-content-center border-0 h-100px flex-column">
 							<div class="card-title mb-0">
 								<h3 class="card-label font-weight-bold mb-0 text-body">
-									<img src="/assets/images/misc/logo.png" alt="logo" height="70">
+									<img src="/assets/images/misc/logo22.png" alt="logo" height="70">
 								</h3>
 
 							</div>
