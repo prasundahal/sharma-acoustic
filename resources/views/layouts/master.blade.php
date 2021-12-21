@@ -211,7 +211,7 @@
     @endphp
     <script>
         loginErrorMessage = localStorage.getItem("loginErrorMessage");
-        if (loginErrorMessage.length > 1) {
+        if (loginErrorMessage != null) {
             toastr.error(loginErrorMessage);
             localStorage.removeItem("loginErrorMessage");
         }
@@ -282,8 +282,7 @@
         $(document).ready(function() {
 
             loginSuccessMessage = localStorage.getItem("loginSuccessMessage");
-            console.log(loginSuccessMessage);
-            if (loginSuccessMessage.length > 1) {
+            if (loginSuccessMessage != null) {
                 toastr.success(loginSuccessMessage);
                 localStorage.removeItem("loginSuccessMessage");
             }
@@ -562,8 +561,11 @@
                 }
                 product_combination_id = $("#product_combination_id").val();
             }
-            
+            if($(input).parents('tr').data('row') == 'wishlistRows'){
+                $(input).parents('tr').find('.wishlistProductQty').attr('id', 'quantity-input');
+            }
             qty = $.trim($("#quantity-input").val());
+            $(input).parents('tr').find('.wishlistProductQty').removeAttr('id');
             if (qty == '' || qty == 'undefined' || qty == null) {
                 qty = 1;
             }

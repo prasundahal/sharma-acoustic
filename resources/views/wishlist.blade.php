@@ -174,7 +174,7 @@
                                 wishlistProductPrice = data.data[i].product_combination[0].product_price_symbol;
                             }
                         }
-                        tbodyRow = '<tr>' +
+                        tbodyRow = '<tr data-row="wishlistRows">' +
                             '<td class="cart-image">' +
                                 '<a class="entry-thumbnail" href="' + href + '">' +
                                     '<img src="' + imgSrc + '" class="img-fluid">' +
@@ -190,7 +190,7 @@
                             '</td>' +
                             '<td class="cart-product-quantity">' +
                                 '<div class="quant-input">' +
-                                    '<input type="number" value="1">' +
+                                    '<input type="number" value="1" class="wishlistProductQty">' +
                                 '</div>' +
                             '</td>' +
                             '<td class="romove-item">' +
