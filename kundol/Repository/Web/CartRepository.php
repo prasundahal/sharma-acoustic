@@ -65,7 +65,7 @@ class CartRepository implements CartInterface
 
     public function store(array $parms)
     {
-        
+
         try {
             if (Auth::check()) {
                 $customer_id = Auth::id();
@@ -82,27 +82,38 @@ class CartRepository implements CartInterface
             }
             if (!Gate::allows('isDigital')) {
                 if (!isset($parms['product_combination_id']))
-                $parms['product_combination_id'] = null;
+                    $parms['product_combination_id'] = null;
                 $parms['customer_id'] = $customer_id;
                 $parms['session_id'] = $session_id;
-                 $qtyValidation = new AvailableQty;
-                 $qtyValidation = $qtyValidation->availableQty($parms['product_id'], $parms['product_combination_id'], $parms['qty'],'cart');
-                 /* if (!$qtyValidation) {
+                $qtyValidation = new AvailableQty;
+                $qtyValidation = $qtyValidation->availableQty($parms['product_id'], $parms['product_combination_id'], $parms['qty'], 'cart');
+                /* if (!$qtyValidation) {
                     return $this->errorResponse('Out of Stock!', 422);
                  } */
             } else {
-                
+
                 $parms['qty'] = null;
                 $parms['product_combination_id'] = null;
             }
-           
+
+            // $proQty = Cart::where([
+            //     'product_id' => $parms['product_id'],
+            //     'product_combination_id' => $parms['product_combination_id'],
+            //     'is_order' => '0',
+            //     'customer_id' => $customer_id,
+            //     'session_id' => $session_id
+            // ])->pluck('qty')->first();
+
+            // if($proQty){
+            //     $parms['qty'] = $parms['qty'] + $proQty;
+            // }
 
             $sql = Cart::updateOrCreate(
                 [
-                    'product_id' => $parms['product_id'], 
-                    'product_combination_id' => $parms['product_combination_id'], 
-                    'is_order' => '0', 
-                    'customer_id' => $customer_id, 
+                    'product_id' => $parms['product_id'],
+                    'product_combination_id' => $parms['product_combination_id'],
+                    'is_order' => '0',
+                    'customer_id' => $customer_id,
                     'session_id' => $session_id
                 ],
                 $parms
@@ -130,13 +141,12 @@ class CartRepository implements CartInterface
                 else
                     return $this->errorResponse('Session ID is Required');
             }
-            
+
             if (!isset($parms['product_combination_id']))
-            $parms['product_combination_id'] = null;
-            if(isset($parms['product_id'])){
+                $parms['product_combination_id'] = null;
+            if (isset($parms['product_id'])) {
                 $sql = Cart::where('product_id', $parms['product_id'])->where('product_combination_id', $parms['product_combination_id'])->where('customer_id', $customer_id)->where('session_id', $session_id)->delete();
-            }
-            else{
+            } else {
                 $sql = Cart::where('customer_id', $customer_id)->where('session_id', $session_id)->delete();
             }
         } catch (Exception $e) {
