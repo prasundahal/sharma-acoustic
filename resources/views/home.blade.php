@@ -531,13 +531,14 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
+                    console.log(data);
                     var category = '';
                     if (data.status == 'Success') {
                         $.each(data.data, function(i, e){
                             var icon = e.icon == 'fa' ? e.icon : 'fa fa-headphones';
                             category += '<div class="slick-item mx-3">' +
                                 '<div class="content text-center bg-light">' +
-                                    '<a href="">' +
+                                    '<a href="/shop?category=' + e.id + '">' +
                                         '<div class="box m-auto"> <i class="' + icon + '" aria-hidden="true"></i></div>' +
                                         '<div class="title mt-3">' +
                                             '<h6 class="m-0">' + e.name + '</h6>' +

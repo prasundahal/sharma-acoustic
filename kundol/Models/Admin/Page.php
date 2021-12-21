@@ -43,6 +43,10 @@ class Page extends Model
         return $this->hasMany(PageDetail::class);
     }
 
+    public function available_page_detail() {
+        return $this->page_detail()->where('language_id','=', 1)->first();
+    }
+
 
     public function lastDetail()
     {
