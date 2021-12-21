@@ -130,6 +130,7 @@
                 if (data.status == 'Success') {
                     localStorage.removeItem("customerToken");
                     localStorage.removeItem("loginErrorMessage");
+                    localStorage.removeItem("loginSuccessMessage");
                     localStorage.removeItem("customerHash");
                     localStorage.removeItem("customerLoggedin");
                     localStorage.removeItem("customerId");

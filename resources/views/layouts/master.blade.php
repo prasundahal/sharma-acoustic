@@ -9,6 +9,7 @@
             console.log('localStorage');
             console.log(localStorage);
             localStorage.setItem("customerToken", '{{ $user->token }}');
+            localStorage.setItem("loginSuccessMessage", "Welcome {{ $user->first_name }} {{ $user->last_name }}");
             localStorage.setItem("customerHash", '{{ $user->hash }}');
             localStorage.setItem("customerLoggedin",'1');
             localStorage.setItem("customerId", '{{ $user->id }}');
@@ -275,6 +276,14 @@
             cartSession = '';
         }
         $(document).ready(function() {
+
+            loginSuccessMessage = localStorage.getItem("loginSuccessMessage");
+            console.log(loginSuccessMessage);
+            if (loginSuccessMessage.length > 1) {
+                toastr.success(loginSuccessMessage);
+                localStorage.removeItem("loginSuccessMessage");
+            }
+            
             if (loggedIn != '1') {
                 localStorage.setItem("cartSession", cartSession);
                 menuCart(cartSession);
@@ -848,6 +857,7 @@
                     if (data.status == 'Success') {
                         localStorage.removeItem("customerToken");
                         localStorage.removeItem("loginErrorMessage");
+                        localStorage.removeItem("loginSuccessMessage");
                         localStorage.removeItem("customerHash");
                         localStorage.removeItem("customerLoggedin");
                         localStorage.removeItem("customerId");

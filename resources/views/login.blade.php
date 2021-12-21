@@ -133,8 +133,7 @@
         $(".errors").addClass('d-none');
         customerLogin = $.trim(localStorage.getItem("customerLoggedin"));
         if(customerLogin == '1'){
-            toastr.error('{{ trans("already-logged-in") }}');
-
+            toastr.success('Already logged in');
             return;
         }
 
@@ -160,9 +159,9 @@
                 $('#event-loading').css('display', 'block');
             },
             success: function(data) {
-                console.log(data);
                 if(data.status == 'Success'){
                     $('#event-loading').css('display', 'none');
+                    localStorage.setItem("loginSuccessMessage", "Welcome " + data.data.first_name + " " + data.data.last_name);
                     localStorage.setItem("customerToken",data.data.token);
                     localStorage.setItem("customerHash",data.data.hash);
                     localStorage.setItem("customerLoggedin",'1');
@@ -175,6 +174,14 @@
             },
             error: function(data) {
                 $('#event-loading').css('display', 'none');
+                if(data.responseJSON.errors){
+                    var err = '';
+                    $.each(data.responseJSON.errors, function(i, e){
+                        err += e + '\n';
+                    });
+                    toastr.error(err);
+                    return false;
+                }
                 toastr.error(data.responseJSON.message);
             },
         });
