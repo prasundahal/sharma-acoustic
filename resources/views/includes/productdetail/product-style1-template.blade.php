@@ -64,7 +64,7 @@
                                 <div class="quantity mb-3">
                                     <label>Quantity</label>
                                     <div>
-                                        <input type="number" value="1" min="1" />
+                                        <input type="number" value="1" min="1" id="quantity-input" />
                                     </div>
                                 </div>
                             </div>
