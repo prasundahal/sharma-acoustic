@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-
     @include(isset(getSetting()['slider_style']) ? 'includes.sliders.slider-'.getSetting()['slider_style'] :
     'includes.sliders.slider-style1')
 

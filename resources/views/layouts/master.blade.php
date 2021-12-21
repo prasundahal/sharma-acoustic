@@ -4,6 +4,21 @@
 <html class="no-js" lang="zxx">
 
 <head>
+    @if(isset($user))
+        <script>
+            console.log('localStorage');
+            console.log(localStorage);
+            localStorage.setItem("customerToken", '{{ $user->token }}');
+            localStorage.setItem("customerHash", '{{ $user->hash }}');
+            localStorage.setItem("customerLoggedin",'1');
+            localStorage.setItem("customerId", '{{ $user->id }}');
+            localStorage.setItem("customerFname", '{{ $user->first_name }}');
+            localStorage.setItem("customerLname", '{{ $user->last_name }}');
+            localStorage.setItem("cartSession",'');
+            console.log(localStorage);
+            window.location.href = '/';
+        </script>
+    @endif
     <meta charset="UTF-8">
     <title>{{ isset(getSetting()['seo_title']) ? getSetting()['seo_title'] : 'Seo Title' }}</title>
     <meta name="description"
@@ -90,7 +105,7 @@
     <!-- Slick Js Ends-->
     <!-- toastr Js -->
     <script src="{{ asset('/assets/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('/assets/toastr/toastr.js.map') }}"></script>
+    {{-- <script src="{{ asset('/assets/toastr/toastr.js.map') }}"></script> --}}
     <!-- toastr Js Ends-->
     <script src="{{ asset('/assets/jssocials/jssocials.min.js') }}"></script>
     <!-- Custom Js Starts -->
@@ -211,7 +226,6 @@
         loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
         customerFname = $.trim(localStorage.getItem("customerFname"));
         customerLname = $.trim(localStorage.getItem("customerLname"));
-        console.log(localStorage);
 
         if (loggedIn != '1') {
             $(".auth-login").remove();

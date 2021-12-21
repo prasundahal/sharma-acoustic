@@ -8,6 +8,7 @@ use App\Models\Admin\Customer;
 use App\Models\Web\Cart;
 use App\Services\Admin\AccountService;
 use App\Services\Admin\PointService;
+use App\Services\Web\HomeService;
 use App\Traits\ApiResponser;
 use Illuminate\Support\Facades\Hash;
 use Mail;
@@ -122,15 +123,11 @@ class CustomerAuthRepository implements CustomerAuthInterface
         $success['token'] =  $user->createToken('MyApp', ['customer'])->accessToken;
         $cookie = $this->getCookieDetails($success['token']);
 
-        // return redirect('/');
-        // $indexController = new IndexController();
-        // return $indexController->Index($user);
-        dd(serialize($user));
-        // $homeService = new HomeService;
-        // $data = $homeService->homeIndex();
-        // $setting = getSetting();
-        // return view('home', compact('data', 'setting', 'socialData'));
-        // return redirect()->route('indexx', serialize($user));
+
+        $homeService = new HomeService;
+        $data = $homeService->homeIndex();
+        $setting = getSetting();
+        return view('home', compact('data', 'setting', 'user'));
 
         return response()->json([
             'status' => 'Success',
@@ -164,6 +161,7 @@ class CustomerAuthRepository implements CustomerAuthInterface
 
             $success['token'] =  $user->createToken('MyApp', ['customer'])->accessToken;
             $cookie = $this->getCookieDetails($success['token']);
+            dd($user);
             return response()->json([
                 'status' => 'Success',
                 'data' => $user,
