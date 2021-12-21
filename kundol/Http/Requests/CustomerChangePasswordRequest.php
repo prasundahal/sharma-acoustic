@@ -27,7 +27,6 @@ class CustomerChangePasswordRequest extends FormRequest
         $oldPasswordValidation = "'old_password' => 'required'";
         if($_POST['customerId']){
             $user = Customer::where('id', $_POST['customerId'])->first();
-            // dd($user->provider);
             if($user->provider && !$user->password){
                 $oldPasswordValidation = '';
             }
