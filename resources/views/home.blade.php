@@ -531,7 +531,6 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
-                    console.log(data);
                     var category = '';
                     if (data.status == 'Success') {
                         $.each(data.data, function(i, e){

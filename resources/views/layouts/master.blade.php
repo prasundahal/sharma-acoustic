@@ -205,6 +205,13 @@
         //dd ($locale);
     @endphp
     <script>
+        message = localStorage.getItem("message");
+        if (message.length > 1) {
+            toastr.error(message);
+            localStorage.removeItem("message");
+        }
+    </script>
+    <script>
         toastr.options = {
             "closeButton": false,
             "debug": false,

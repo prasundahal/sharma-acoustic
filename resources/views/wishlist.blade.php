@@ -1,3 +1,10 @@
+<script>
+    loggedIn = localStorage.getItem("customerLoggedin");
+    if (loggedIn != '1') {
+        localStorage.setItem("message", "Please Login!!!");
+        window.location.href = "{{url('/')}}";
+    }
+</script>
 @extends('layouts.master')
 @section('content')
 
@@ -88,9 +95,9 @@
 @section('script')
 <script>
     loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
-    if (loggedIn != '1') {
-        window.location.href = "{{url('/')}}";
-    }
+    // if (loggedIn != '1') {
+    //     window.location.href = "{{url('/')}}";
+    // }
 
     languageId = localStorage.getItem("languageId");
     if (languageId == null || languageId == 'null') {

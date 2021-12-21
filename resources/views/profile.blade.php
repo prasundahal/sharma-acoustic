@@ -1,3 +1,10 @@
+<script>
+    loggedIn = localStorage.getItem("customerLoggedin");
+    if (loggedIn != '1') {
+        localStorage.setItem("message", "Please Login!!!");
+        window.location.href = "{{url('/')}}";
+    }
+</script>
 @extends('layouts.master')
 @section('content')
 
