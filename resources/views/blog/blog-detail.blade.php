@@ -1,81 +1,43 @@
 @extends('layouts.master')
 @section('content')
-    <div class="container-fuild">
-        <nav aria-label="breadcrumb">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">{{ trans('lables.bread-crumb-home') }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ trans('lables.bread-blo') }}g</li>
-                </ol>
-            </div>
-        </nav>
-    </div>
-    <section class="pro-content">
+    <!-- Breadcrumbs -->
+    <section id="breadcrumbs" class="py-3">
         <div class="container">
-            <div class="page-heading-title">
-                <h2 class="blog_name">
-                </h2>
-
+            <div class="row">
+                <div class="col-12">
+                    <ul class="m-0 p-0 d-flex align-items-center text-white">
+                        <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right"
+                                aria-hidden="true"></i></span>
+                        <li class="">Blog Detail</li>
+                    </ul>
+                </div>
+                <div class="col-12 mt-3">
+                    <h2 class="text-white blog_name"></h2>
+                </div>
             </div>
         </div>
-
-        <!-- Site Content -->
-        <section class="blog-content">
-            <div class="container">
-
-                <div class="blog-area">
-
-                    <div class="row">
-
-                        <div class="col-12 col-lg-8">
-                            <div class="row">
-                                <div class="col-12 col-sm-12">
-                                    <div class="blog blog-detail">
-
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-12 col-lg-4  d-lg-block d-xl-block blog-menu">
-                            <div class="right-menu-categories category-div category-list">
-
-                            </div>
-                            <div class="category-div featured-blog">
-
-                            </div>
-                            <div class="category-div">
-
-                                <ul class="socials">
-                                    <li><a href="javascript:void(0)" class="fab fb fa-facebook-square" data-toggle="tooltip"
-                                            data-placement="bottom" title="facebook"></a></li>
-                                    <li><a href="javascript:void(0)" class="fab tw fa-twitter-square" data-toggle="tooltip"
-                                            data-placement="bottom" title="twitter"></a></li>
-                                    <li><a href="javascript:void(0)" class="fab sk fa-skype" data-toggle="tooltip" data-placement="bottom"
-                                            title="skype"></a></li>
-                                    <li><a href="javascript:void(0)" class="fab In fa-linkedin" data-toggle="tooltip" data-placement="bottom"
-                                            title="linkedin"></a></li>
-                                    <li><a href="javascript:void(0)" class="fab ig fa-instagram" data-toggle="tooltip"
-                                            data-placement="bottom" title="Instagram"></a></li>
-                                </ul>
-                            </div>
-
-
+    </section>
+    <!-- Breadcrumbs Ends -->
+    <!-- ABOUT Us -->
+    <section id="about-us-wrapper" class="py-4">
+        <div class="container">
+            {{-- <div class="row">
+                <div class="col-12 text-center">
+                    <div class="about-banner-img mb-3 position-relative">
+                        <img src="frontend/assets/images/product-images/1 (2).jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div> --}}
+            <div class="about-us-list">
+                <div class="row">
+                    <div class=" col-xl-12 col-lg-12 col-md-12 order-xl-1 order-lg-1 order-md-1 order-2 mb-2">
+                        <div class="about-us-image-discription d-flex h-100 justify-content-center align-items-center flex-column py-3">
+                            <p class="blog-detail"></p>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-            </div>
-        </section>
     </section>
-
-
 @endsection
 @section('script')
     <script>

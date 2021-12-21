@@ -107,10 +107,10 @@
                 <div class="col-12">
                     <div class="heading d-flex justify-content-between align-items-center mb-5 flex-wrap">
                         <div class="head">
-                            <h2 class="font-weight-bold">Reviews</h2>
+                            <h2 class="font-weight-bold">Blogs</h2>
                         </div>
                         <div class="navigator">
-                            <a href="">See all</a>
+                            <a href="{{ url('/blog') }}">See all</a>
                         </div>
                     </div>
                 </div>
