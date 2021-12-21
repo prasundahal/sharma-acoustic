@@ -198,15 +198,15 @@
         </div>
         <div class="row" hidden>
             <form action="https://uat.esewa.com.np/epay/main" method="POST" id="esewaForm" class="my-3 mx-auto">
-                <input value="10" name="tAmt" type="text">
-                <input value="10" name="amt" type="text">
-                <input value="0" name="txAmt" type="text">
-                <input value="0" name="psc" type="text">
-                <input value="0" name="pdc" type="text">
-                <input value="EPAYTEST" name="scd" type="text">
-                <input value="asdf>asdf0--0sdsd9>87-0-i>phnpoi>sku9-sdsd9" name="pid" type="text">
-                <input value="{{ route('esewa-verify') }}?q=su" type="text" name="su">
-                <input value="{{ route('esewa-verify') }}?q=fu" type="text" name="fu">
+                <input value="10" name="tAmt" type="hidden">
+                <input value="10" name="amt" type="hidden">
+                <input value="0" name="txAmt" type="hidden">
+                <input value="0" name="psc" type="hidden">
+                <input value="0" name="pdc" type="hidden">
+                <input value="EPAYTEST" name="scd" type="hidden">
+                <input value="asdf>asdf0--0sdsd9>87-0-i>phnpoi>sku9-sdsd9" name="pid" type="hidden">
+                <input value="{{ route('esewa-verify') }}?q=su" type="hidden" name="su">
+                <input value="{{ route('esewa-verify') }}?q=fu" type="hidden" name="fu">
                 <button type="submit" class="btn btn-success esewaButton" id="esewaButton">Confirm Payment</button>
             </form>
         </div>
@@ -912,13 +912,46 @@
             // $('.invalid-feedback').css('display', 'none');
             locations = '';
             billing_first_name = $("#delivery_first_name").val();
+            if(billing_first_name == ''){
+                toastr.error('First Name is empty. Fill the required data.');
+                $("#delivery_first_name").focus();
+                return false;
+            }
             billing_last_name = $("#delivery_last_name").val();
+            if(billing_first_name == ''){
+                toastr.error('Last Name is empty. Fill the required data.');
+                return false;
+            }
             billing_street_aadress = $("#delivery_street_aadress").val();
+            if(billing_first_name == ''){
+                toastr.error('Address is empty. Fill the required data.');
+                return false;
+            }
             billing_country = $("#delivery_country").val();
+            if(billing_first_name == ''){
+                toastr.error('Country is empty. Fill the required data.');
+                return false;
+            }
             billing_state = $("#delivery_state").val();
+            if(billing_first_name == ''){
+                toastr.error('State is empty. Fill the required data.');
+                return false;
+            }
             billing_city = $("#delivery_city").val();
+            if(billing_first_name == ''){
+                toastr.error('City is empty. Fill the required data.');
+                return false;
+            }
             billing_postcode = $("#delivery_postcode").val();
+            if(billing_first_name == ''){
+                toastr.error('Post Code  is empty. Fill the required data.');
+                return false;
+            }
             billing_phone = $("#delivery_phone").val();
+            if(billing_first_name == ''){
+                toastr.error('Phone is empty. Fill the required data.');
+                return false;
+            }
 
             delivery_first_name = $("#delivery_first_name").val();
             delivery_last_name = $("#delivery_last_name").val();

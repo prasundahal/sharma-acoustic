@@ -148,7 +148,6 @@ class CustomerAuthRepository implements CustomerAuthInterface
 
             $success['token'] =  $user->createToken('MyApp', ['customer'])->accessToken;
             $cookie = $this->getCookieDetails($success['token']);
-            dd($user);
             return response()->json([
                 'status' => 'Success',
                 'data' => $user,
