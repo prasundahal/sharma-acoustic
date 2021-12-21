@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Admin\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CustomerChangePasswordRequest extends FormRequest
@@ -23,8 +24,16 @@ class CustomerChangePasswordRequest extends FormRequest
      */
     public function rules()
     {
+        $oldPasswordValidation = "'old_password' => 'required'";
+        if($_POST['customerId']){
+            $user = Customer::where('id', $_POST['customerId'])->first();
+            // dd($user->provider);
+            if($user->provider && !$user->password){
+                $oldPasswordValidation = '';
+            }
+        }
         return [
-            'old_password' => 'required',
+            $oldPasswordValidation,
             'new_password' => 'required|string|min:6|same:confirm_password',
             'confirm_password' => 'required',
         ];

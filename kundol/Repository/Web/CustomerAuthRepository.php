@@ -81,19 +81,6 @@ class CustomerAuthRepository implements CustomerAuthInterface
         } else {
             return $this->successResponseArray('error_msg', 'Your email doesn\'t exist in our database. Please register');
         }
-
-
-
-//        $link = str_replace("/", '1', Hash::make('time'));
-//        Customer::where('email', $parms['email'])->update(['forget_hash' => $link]);
-//
-//        $data_set = array('link' => $link);
-//        $message = "";
-//        $email = $parms['email'];
-//        Mail::send('emails.forget-password', $data_set, function ($message) use ($email) {
-//            $message->to($email)->subject('Forget Password');
-//        });
-//        return $this->successResponseArray($link, 'Email Sent Successfully! Against this Link');
     }
 
     public function resetPassword(array $parms)

@@ -51,6 +51,12 @@ class CustomerRepository implements CustomerInterface
     {
         // $thi = $this;
         $user = Customer::findOrFail($parms['customerId']);
+        if($user->provider && !$user->password){
+            $user->fill([
+                'password' => Hash::make($parms['new_password'])
+            ])->save();
+            return $this->successResponse('', 'Password Changed Successfully!');
+        }
         if (Hash::check($parms['old_password'], $user['password'])) { 
             $user->fill([
                 'password' => Hash::make($parms['new_password'])
