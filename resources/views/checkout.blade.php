@@ -204,7 +204,7 @@
                 <input value="0" name="psc" type="hidden">
                 <input value="0" name="pdc" type="hidden">
                 <input value="EPAYTEST" name="scd" type="hidden">
-                <input value="asdf>asdf0--0sdsd9>87-0-i>phnpoi>sku9-sdsd9" name="pid" type="hidden">
+                <input value="" name="pid" type="hidden">
                 <input value="{{ route('esewa-verify') }}?q=su" type="hidden" name="su">
                 <input value="{{ route('esewa-verify') }}?q=fu" type="hidden" name="fu">
                 <button type="submit" class="btn btn-success esewaButton" id="esewaButton">Confirm Payment</button>
@@ -257,12 +257,13 @@
         });
 
         $(document).ajaxStop(function () {
-            var productSkus = '';
+            var d = new Date();
+            var productSkus = d.getTime();
             $.each($('#cartItem-product-show2 > tr'), function(){
                 if(productSkus == ''){
                     productSkus += $(this).attr('product_sku');
                 }else{
-                    productSkus += '|' + $(this).attr('product_sku');
+                    productSkus += '>' + $(this).attr('product_sku');
                 }
             });
             var total = $('.caritem-grandtotal').html().split(' ').slice(-1)[0];
@@ -909,47 +910,69 @@
         });
 
         function createOrder(){
-            // $('.invalid-feedback').css('display', 'none');
             locations = '';
             billing_first_name = $("#delivery_first_name").val();
             if(billing_first_name == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('First Name is empty. Fill the required data.');
                 $("#delivery_first_name").focus();
                 return false;
             }
             billing_last_name = $("#delivery_last_name").val();
-            if(billing_first_name == ''){
+            if(billing_last_name == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('Last Name is empty. Fill the required data.');
+                $("#delivery_last_name").focus();
                 return false;
             }
             billing_street_aadress = $("#delivery_street_aadress").val();
-            if(billing_first_name == ''){
+            if(billing_street_aadress == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('Address is empty. Fill the required data.');
+                $("#delivery_street_aadress").focus();
                 return false;
             }
             billing_country = $("#delivery_country").val();
-            if(billing_first_name == ''){
+            if(billing_country == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('Country is empty. Fill the required data.');
+                $("#delivery_country").focus();
                 return false;
             }
             billing_state = $("#delivery_state").val();
-            if(billing_first_name == ''){
+            if(billing_state == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('State is empty. Fill the required data.');
+                $("#delivery_state").focus();
                 return false;
             }
             billing_city = $("#delivery_city").val();
-            if(billing_first_name == ''){
+            if(billing_city == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('City is empty. Fill the required data.');
+                $("#delivery_city").focus();
                 return false;
             }
             billing_postcode = $("#delivery_postcode").val();
-            if(billing_first_name == ''){
+            if(billing_postcode == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('Post Code  is empty. Fill the required data.');
+                $("#delivery_postcode").focus();
                 return false;
             }
             billing_phone = $("#delivery_phone").val();
-            if(billing_first_name == ''){
+            if(billing_phone == ''){
+                $("#collapseOne").removeClass('show');
+                $("#collapseTwo").addClass('show');
                 toastr.error('Phone is empty. Fill the required data.');
+                $("#delivery_phone").focus();
                 return false;
             }
 
@@ -966,7 +989,6 @@
 
 
             payment_method = $(".payment_method:checked").val();
-            console.log(payment_method);
             cc_number = '';
             cc_expiry_month = '';
             cc_expiry_year = '';
