@@ -60,6 +60,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/datepicker/datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jssocials/jssocials.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jssocials/jssocials-theme-flat.css') }}">
     <!-- Custom Links Ends -->
@@ -108,6 +109,9 @@
     <script src="{{ asset('/assets/toastr/toastr.min.js') }}"></script>
     {{-- <script src="{{ asset('/assets/toastr/toastr.js.map') }}"></script> --}}
     <!-- toastr Js Ends-->
+    <!-- datepicker Js -->
+    <script src="{{ asset('/assets/datepicker/datepicker.js') }}"></script>
+    <!-- datepicker Js Ends-->
     <script src="{{ asset('/assets/jssocials/jssocials.min.js') }}"></script>
     <!-- Custom Js Starts -->
     <script src="https://k1ngzed.com/dist/swiper/swiper.min.js"></script>

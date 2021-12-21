@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="dob">DOB</label>
-                                                <input type="text" class="form-control" id="dob" name="dob">
+                                                <input type="text" class="form-control datepicker" id="dob" name="dob" autocomplete="off" readonly>
                                             </div>
                                             {{-- <div class="form-group col-12">
                                                 <label for="image">Upload Profile Image</label>
@@ -141,6 +141,9 @@
     customerId = $.trim(localStorage.getItem("customerId"));
 
     $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
         getProfile();
     });
 
