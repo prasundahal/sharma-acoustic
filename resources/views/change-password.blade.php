@@ -129,6 +129,7 @@
             success: function(data) {
                 if (data.status == 'Success') {
                     localStorage.removeItem("customerToken");
+                    localStorage.removeItem("loginErrorMessage");
                     localStorage.removeItem("customerHash");
                     localStorage.removeItem("customerLoggedin");
                     localStorage.removeItem("customerId");
