@@ -90,7 +90,7 @@ class IndexController extends Controller
 
     public function searchProduct(Request $request){
         $products = DB::table('products AS t1')
-        ->select('t1.id', 't2.title', 't1.product_slug', 't3.name as gallary_name')
+        ->select('t1.id', 't2.title', 't1.product_slug', 't3.name as gallary_name', 't1.price', 't1.discount_price')
         ->join('product_detail AS t2', 't2.product_id', '=', 't1.id')
         ->join('gallary AS t3', 't3.id', '=', 't1.gallary_id')
         ->where('t2.title', 'like', '%' . $request->name . '%')

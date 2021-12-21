@@ -21,8 +21,12 @@ $categories = App\Models\Admin\Category::inRandomOrder()
                 <!-- Actual search box -->
                 <div class="form-group has-search mb-0">
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search" id="search-input"
-                        autocomplete="off" />
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" id="search-input" autocomplete="off" />
+                        <div class="btn input-group-addon" style="cursor: pointer; border-top: 1px solid #ced4da; border-right: 1px solid #ced4da; border-bottom: 1px solid #ced4da;" id="search-clear">
+                            <span class="fa fa-close"></span>
+                        </div>
+                    </div>
                     <div class="dropdown searchBox" id="searchBox">
                         <ul class="dropdown-menu" style="width: 100%; overflow-y: auto; max-height: 400px; min-height:auto">
                             {{-- <a href="" style="text-decoration: none;">

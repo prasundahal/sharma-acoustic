@@ -4,18 +4,18 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    @if(isset($user))
+    @if (isset($user))
         <script>
             console.log('localStorage');
             console.log(localStorage);
             localStorage.setItem("customerToken", '{{ $user->token }}');
             localStorage.setItem("loginSuccessMessage", "Welcome {{ $user->first_name }} {{ $user->last_name }}");
             localStorage.setItem("customerHash", '{{ $user->hash }}');
-            localStorage.setItem("customerLoggedin",'1');
+            localStorage.setItem("customerLoggedin", '1');
             localStorage.setItem("customerId", '{{ $user->id }}');
             localStorage.setItem("customerFname", '{{ $user->first_name }}');
             localStorage.setItem("customerLname", '{{ $user->last_name }}');
-            localStorage.setItem("cartSession",'');
+            localStorage.setItem("cartSession", '');
             console.log(localStorage);
             window.location.href = '/';
         </script>
@@ -36,7 +36,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Bootstrap link Starts -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css.map') }}">
@@ -52,8 +52,12 @@
     <!-- Font Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap"
+        rel="stylesheet">
     <!-- Font Link Ends -->
     <link rel="stylesheet" href="https://k1ngzed.com/dist/swiper/swiper.min.css" />
     <link rel="stylesheet" href="https://k1ngzed.com/dist/EasyZoom/easyzoom.css" />
@@ -76,12 +80,13 @@
         js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script> --}}
-    
+
     {{-- {{   dd(getSetting()) }} --}}
     {{-- @include('extras.preloader') --}}
     <!-- Whole Body Wrapper Starts -->
     <section id="index-wrapper">
-        @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] : 'includes.headers.header-style1')
+        @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] :
+        'includes.headers.header-style1')
 
         @yield('content')
 
@@ -96,7 +101,9 @@
     <script src="{{ asset('frontend/assets/jquery-3.5.1/jquery-3.5.1.js') }}"></script>
     <!-- Jquery Link Ends-->
     <!-- 2nd Popper Js Starts -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
     <!-- Popper Js Ends -->
     <!-- 3rd Bootstrap Js Link Starts -->
     <script src="{{ asset('frontend/assets/bootstrap-4.3.1/js/bootstrap.min.js') }}"></script>
@@ -120,11 +127,13 @@
     <!-- Custom Js Ends -->
     <!-- Nav Cart Popup -->
     <!-- Modal -->
-    <div class="modal fade" id="nav-cart" tabindex="-1" role="dialog" aria-labelledby="navcartlabel" aria-hidden="true">
+    <div class="modal fade" id="nav-cart" tabindex="-1" role="dialog" aria-labelledby="navcartlabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title m-auto" id="navcartlabel"> <span class="mr-2"><i class="fa fa-opencart" aria-hidden="true"></i></span> Items List</h5>
+                    <h5 class="modal-title m-auto" id="navcartlabel"> <span class="mr-2"><i
+                                class="fa fa-opencart" aria-hidden="true"></i></span> Items List</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -286,7 +295,7 @@
                 toastr.success(loginSuccessMessage);
                 localStorage.removeItem("loginSuccessMessage");
             }
-            
+
             if (loggedIn != '1') {
                 localStorage.setItem("cartSession", cartSession);
                 menuCart(cartSession);
@@ -507,7 +516,8 @@
                         if (data.data.detail != null && data.data.detail != 'null' && data.data.detail != '') {
                             clone.querySelector(".quick-view-product-name").innerHTML = data.data.detail[0]
                                 .title;
-                            clone.querySelector(".quick-view-desc").innerHTML = data.data.detail[0].desc.replace(/<\/?[^>]+>/gi, '').substring(0,250)
+                            clone.querySelector(".quick-view-desc").innerHTML = data.data.detail[0].desc
+                                .replace(/<\/?[^>]+>/gi, '').substring(0, 250)
                         }
                         clone.querySelector(".quick-view-product-id").innerHTML = data.data.product_id;
 
@@ -517,7 +527,8 @@
                                 clone.querySelector(".quick-view-price").innerHTML = '<ins>' + data.data
                                     .product_price_symbol + '</ins>';
                             } else {
-                                clone.querySelector(".quick-view-price").innerHTML = '<ins>' + data.data.product_discount_price + '</ins> <del>' + data.data
+                                clone.querySelector(".quick-view-price").innerHTML = '<ins>' + data.data
+                                    .product_discount_price + '</ins> <del>' + data.data
                                     .product_price_symbol +
                                     '</del>';
                             }
@@ -555,13 +566,13 @@
             product_combination_id = '';
             if (product_type == 'variable') {
                 if ($.trim($("#product_combination_id").val()) == '' || $.trim($("#product_combination_id").val()) ==
-                'null') {
+                    'null') {
                     toastr.error("{{ trans('response.select-combination') }}")
                     return;
                 }
                 product_combination_id = $("#product_combination_id").val();
             }
-            if($(input).parents('tr').data('row') == 'wishlistRows'){
+            if ($(input).parents('tr').data('row') == 'wishlistRows') {
                 $(input).parents('tr').find('.wishlistProductQty').attr('id', 'quantity-input');
             }
             qty = $.trim($("#quantity-input").val());
@@ -655,16 +666,21 @@
                                         .product_combination_id) {
                                         price = data.data[i].combination[k].price;
                                         $(".product-card-price").html(data.data[i].product_price_symbol);
-                                        if (data.data[i].combination[k].gallary != null && data.data[i].combination[k].gallary != 'null' && data.data[i].combination[k].gallary != '') {
-                                            imageSrc = '/gallary/' + data.data[i].combination[k].gallary.gallary_name;
+                                        if (data.data[i].combination[k].gallary != null && data.data[i]
+                                            .combination[k].gallary != 'null' && data.data[i].combination[k]
+                                            .gallary != '') {
+                                            imageSrc = '/gallary/' + data.data[i].combination[k].gallary
+                                                .gallary_name;
                                             imageAlt = data.data[i].combination[k].gallary.gallary_name;
                                             name = data.data[i].product_detail[0].title;
                                             for (loop = 0; loop < data.data[i].product_combination
                                                 .length; loop++) {
                                                 if (data.data[i].product_combination[loop].length - 1 == loop) {
-                                                    name += data.data[i].product_combination[loop].variation.detail[0].name;
+                                                    name += data.data[i].product_combination[loop].variation
+                                                        .detail[0].name;
                                                 } else {
-                                                    name += data.data[i].product_combination[loop].variation.detail[0].name + '-';
+                                                    name += data.data[i].product_combination[loop].variation
+                                                        .detail[0].name + '-';
                                                 }
                                             }
                                         }
@@ -672,17 +688,19 @@
                                     } else {}
                                 }
                             } else {
-                                if (data.data[i].product_gallary != null && data.data[i].product_gallary != 'null' && $.trim(data.data[i].product_gallary) != '') {
+                                if (data.data[i].product_gallary != null && data.data[i].product_gallary !=
+                                    'null' && $.trim(data.data[i].product_gallary) != '') {
                                     if (data.data[i].product_gallary.detail != null && data.data[i]
                                         .product_gallary.detail != 'null' && $.trim(data.data[i].product_gallary
                                             .detail) != '') {
                                         imageSrc = data.data[i].product_gallary.detail[2].gallary_path;
-                                        if(imageSrc.startsWith('/')){
+                                        if (imageSrc.startsWith('/')) {
                                             imageSrc = imageSrc.substring(1);
                                         }
                                     }
                                 }
-                                if (data.data[i].product_detail != null && data.data[i].product_detail != 'null' && $.trim(data.data[i].product_detail) != '') {
+                                if (data.data[i].product_detail != null && data.data[i].product_detail !=
+                                    'null' && $.trim(data.data[i].product_detail) != '') {
                                     imageAlt = data.data[i].product_detail[0].title;
                                     name = data.data[i].product_detail[0].title;
                                 }
@@ -694,46 +712,56 @@
                                 discount_price = data.data[i].price;
                             }
                             //discount_price = +data.data[i].price - +data.data[i].discount_price;
-                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i].currency != null) {
+                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
+                                .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
                                     qtyAmountRow = '<td class="px-4 py-3">' +
                                         '<div class="head font-weight-bold">' +
-                                            name + ' x <span class="cart-quantity ">' + data.data[i].qty + '</span>' +
+                                        name + ' x <span class="cart-quantity ">' + data.data[i].qty +
+                                        '</span>' +
                                         '</div>' +
                                         '<div class="price">' +
-                                            data.data[i].currency.code + ' ' + discount_price +
+                                        data.data[i].currency.code + ' ' + discount_price +
                                         '</div>' +
-                                    '</td>';
+                                        '</td>';
                                     deleteRow = '<td class="px-4 py-3">' +
-                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data.data[i].product_id + ' data-combination-id=' + data.data[i].product_combination_id + ' onclick="removeCartItem(this)"></i></span>' +
-                                    '</td>';
+                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data
+                                        .data[i].product_id + ' data-combination-id=' + data.data[i]
+                                        .product_combination_id +
+                                        ' onclick="removeCartItem(this)"></i></span>' +
+                                        '</td>';
                                 } else {
                                     qtyAmountRow = '<td class="px-4 py-3">' +
                                         '<div class="head font-weight-bold">' +
-                                            name + ' x <span class="cart-quantity ">' + data.data[i].qty + '</span>' +
+                                        name + ' x <span class="cart-quantity ">' + data.data[i].qty +
+                                        '</span>' +
                                         '</div>' +
                                         '<div class="price">' +
-                                            discount_price + ' ' + data.data[i].currency.code +
+                                        discount_price + ' ' + data.data[i].currency.code +
                                         '</div>' +
-                                    '</td>';
+                                        '</td>';
                                     deleteRow = '<td class="px-4 py-3">' +
-                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data.data[i].product_id + ' data-combination-id=' + data.data[i].product_combination_id + ' onclick="removeCartItem(this)"></i></span>' +
-                                    '</td>';
+                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data
+                                        .data[i].product_id + ' data-combination-id=' + data.data[i]
+                                        .product_combination_id +
+                                        ' onclick="removeCartItem(this)"></i></span>' +
+                                        '</td>';
                                 }
                             }
 
                             total_price = total_price + (discount_price * data.data[i].qty);
-                            
+
                             clone += '<tr>' +
                                 '<div class="item">' +
-                                    '<td class="pr-4 py-3"><img src="{{ asset('/') }}' + imageSrc + '" class="img-fluid"></td>' +
-                                    qtyAmountRow +
-                                    deleteRow +
+                                '<td class="pr-4 py-3"><img src="{{ asset('/') }}' + imageSrc +
+                                '" class="img-fluid"></td>' +
+                                qtyAmountRow +
+                                deleteRow +
                                 '</div>' +
-                            '</tr>';
+                                '</tr>';
 
                             $("#top-cart-product-template").html(clone);
-                            
+
                             currrency = data.data[i].currency;
                         }
                         if (currrency != '' && currrency != 'null' && currrency != null) {
@@ -746,9 +774,9 @@
                         if (data.data.length > 0) {
                             totalRow += '<div class="total-amount pt-3 text-center">' +
                                 'Total : <span class="font-weight-bold">' +
-                                    total_price +
+                                total_price +
                                 '</span>' +
-                            '</div>';
+                                '</div>';
                             $("#total-menu-cart-product-count").html(data.data.length);
                             $("#top-cart-product-total").html(totalRow);
                             $('#nav-cart > div > div > div').eq(2).show();
@@ -809,10 +837,10 @@
         });
 
         $('#search-input').on('keyup', function(e) {
-            if (e.key === 'Enter' || e.keyCode === 13){
+            if (e.key === 'Enter' || e.keyCode === 13) {
                 var searchInput = $('#search-input').val();
                 if (searchInput == "") {
-                    toastr.error("{{ trans('search-input-empty') }}")
+                    toastr.error("Search input empty!!!")
                 } else {
                     var url = "{{ url('/shop') }}" + '?search=' + searchInput;
                     var catgory_id = $('.selected_category').attr('data-id');
@@ -821,7 +849,7 @@
                     window.location.href = url;
                 }
             }
-        })
+        });
 
 
         $(".selected-currency").click(function(e) {
@@ -845,7 +873,7 @@
         });
 
         $('.log_out').click(function() {
-        // $('body').click(function() {
+            // $('body').click(function() {
             url = "{{ url('') }}" + '/api/client/customer_logout';
 
             $.ajax({
@@ -857,8 +885,7 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {
-                },
+                beforeSend: function() {},
                 success: function(data) {
                     if (data.status == 'Success') {
                         localStorage.removeItem("customerToken");
@@ -935,40 +962,43 @@
                             } else {
                                 if (data.data[i].product_gallary != null && $.trim(data.data[i]
                                         .product_gallary) != '') {
-                                    if (data.data[i].product_gallary.detail != null && $.trim(data.data[i].product_gallary.detail) != '') {
+                                    if (data.data[i].product_gallary.detail != null && $.trim(data.data[i]
+                                            .product_gallary.detail) != '') {
                                         imgSrc = data.data[i].product_gallary.detail[2].gallary_path;
                                     }
                                 }
-                                if (data.data[i].product_detail != null && $.trim(data.data[i].product_detail) != '') {
-                                    imgAlt =  data.data[i].product_detail[0].title;
+                                if (data.data[i].product_detail != null && $.trim(data.data[i]
+                                    .product_detail) != '') {
+                                    imgAlt = data.data[i].product_detail[0].title;
                                     itemName = data.data[i].product_detail[0].title;
                                 }
                             }
 
-                            if (data.data[i].discount_price > 0)
-                            {
+                            if (data.data[i].discount_price > 0) {
                                 discount_price = data.data[i].discount_price;
                             } else {
                                 discount_price = data.data[i].price;
                             }
-                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i].currency != null) {
+                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
+                                .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
                                     sum = +data.data[i].qty * +discount_price;
                                     cartItemTotal = data.data[i].currency.code + ' ' + sum.toFixed(2);
-                                    cartItemPrice = data.data[i].currency.code + ' ' +discount_price.toFixed(2);
+                                    cartItemPrice = data.data[i].currency.code + ' ' + discount_price.toFixed(
+                                    2);
                                 } else {
                                     sum = +data.data[i].qty * +discount_price;
                                     cartItemTotal = sum.toFixed(2) + ' ' + data.data[i].currency.code;
-                                    cartItemPrice = discount_price.toFixed(2) + ' ' + data.data[i].currency.code;
+                                    cartItemPrice = discount_price.toFixed(2) + ' ' + data.data[i].currency
+                                    .code;
                                 }
-                            }
-                            else{
+                            } else {
                                 cartItemPrice = discount_price.toFixed(2);
                             }
                             itemQty = +data.data[i].qty;
                             $(".cartItem-qty").attr('id', 'quantity' + i);
-                           
-                            total_price = total_price + (discount_price*data.data[i].qty);
+
+                            total_price = total_price + (discount_price * data.data[i].qty);
 
 
                             // if ($.trim(data.data[i].category_detail[0].category_detail) != '' && $.trim(data
@@ -978,47 +1008,60 @@
                             //         .category_detail[0].category_detail.detail[0].name;
                             // }
 
-                            tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i].product_combination_id + '" product_id="' + data.data[i].product_id + '" product_type="' + data.data[i].product_type + '">' +
+                            tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i]
+                                .product_combination_id + '" product_id="' + data.data[i].product_id +
+                                '" product_type="' + data.data[i].product_type + '">' +
                                 '<td class="cart-image">' +
-                                    '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
+                                '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
                                 '</td>' +
                                 '<td class="cart-product-name-info">' +
-                                    '<h4 class="cart-product-description cartItem-name">' + itemName + '</h4>' +
-                                    '<div class="row">' +
-                                        '<div class="col-4">' +
-                                            '<div class="rating rateit-small"></div>' +
-                                        '</div>' +
-                                    '</div>' +
+                                '<h4 class="cart-product-description cartItem-name">' + itemName + '</h4>' +
+                                '<div class="row">' +
+                                '<div class="col-4">' +
+                                '<div class="rating rateit-small"></div>' +
+                                '</div>' +
+                                '</div>' +
                                 '</td>' +
-                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' + cartItemPrice + '</span>' +
+                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' +
+                                cartItemPrice + '</span>' +
                                 '</td>' +
                                 '<td class="cart-product-quantity">' +
-                                    '<div class="quant-input">' +
-                                        '<input type="number" value="' + itemQty + '" class="cartItem-qty">' +
-                                    '</div>' +
+                                '<div class="quant-input">' +
+                                '<input type="number" value="' + itemQty + '" class="cartItem-qty">' +
+                                '</div>' +
                                 '</td>' +
-                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' + cartItemTotal + '</span>' +
+                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' +
+                                cartItemTotal + '</span>' +
                                 '</td>' +
                                 '<td class="romove-item">' +
-                                    '<a href="javascript:void(0)" title="cancel" class="icon cartItem-remove" onclick="removeCartItem(this)" data-id="' + data.data[i].product_id + '" data-combination-id="' + data.data[i].product_combination_id + '"><i class="fa fa-trash-o"></i></a>' +
+                                '<a href="javascript:void(0)" title="cancel" class="icon cartItem-remove" onclick="removeCartItem(this)" data-id="' +
+                                data.data[i].product_id + '" data-combination-id="' + data.data[i]
+                                .product_combination_id + '"><i class="fa fa-trash-o"></i></a>' +
                                 '</td>' +
-                            '</tr>';
+                                '</tr>';
 
                             $("#cartItem-product-show").append(tbodyRow);
 
                             // const temp1 = document.getElementById("cartItem-grandtotal-template");
                             // const clone1 = temp1.content.cloneNode(true);
-                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i].currency != null) {
+                            if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
+                                .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
-                                    $(".caritem-subtotal").html(data.data[i].currency.code + ' ' + total_price.toFixed(2));
+                                    $(".caritem-subtotal").html(data.data[i].currency.code + ' ' + total_price
+                                        .toFixed(2));
                                     $(".caritem-subtotal").attr('price', total_price.toFixed(2));
-                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    $(".caritem-grandtotal").html(data.data[i].currency.code + ' ' + total_price.toFixed(2));
+                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code +
+                                        ' ' + total_price.toFixed(2));
+                                    $(".caritem-grandtotal").html(data.data[i].currency.code + ' ' + total_price
+                                        .toFixed(2));
                                 } else {
-                                    $(".caritem-subtotal").html(total_price.toFixed(2) + ' ' + data.data[i].currency.code);
+                                    $(".caritem-subtotal").html(total_price.toFixed(2) + ' ' + data.data[i]
+                                        .currency.code);
                                     $(".caritem-subtotal").attr('price', total_price.toFixed(2));
-                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    $(".caritem-grandtotal").html(total_price.toFixed(2) + ' ' + data.data[i].currency.code);
+                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code +
+                                        ' ' + total_price.toFixed(2));
+                                    $(".caritem-grandtotal").html(total_price.toFixed(2) + ' ' + data.data[i]
+                                        .currency.code);
                                 }
                             }
                         }
@@ -1103,13 +1146,17 @@
                         name: name
                     },
                     success: function(response) {
+                        console.log(response)
                         if (response.length > 0) {
                             $('#searchBox > ul').html('');
                             var results = '';
                             $.each(response, function(i, e) {
+                                price = e.price;
+                                discount = e.discount_price;
+                                newPrice = parseInt(price) - parseInt(discount);
                                 results += '<a href="/product/' + e.id + '/' + e.product_slug + '" style="text-decoration: none;">' +
                                     '<li class="dropdown-item">' +
-                                        '<img class="img-thumbnail" src="{{ asset("/gallary") }}/' + e.gallary_name + '" style="width: 150px; height: 100px;"> ' + e.title +
+                                        '<img class="img-thumbnail" src="{{ asset("/gallary") }}/' + e.gallary_name + '" style="width: 150px; height: 100px;"> ' + e.title + ' (Rs. ' + newPrice + ')' +
                                     '</li>' +
                                 '</a>';
                             });
@@ -1130,7 +1177,23 @@
                 $('#searchBox').html('');
                 $('#searchBox').prop('hidden', true);
             }
+        });
+
+        $('#search-clear').on('click', function(){
+            $('#search-input').val('');
         })
+
+        $('body').click(function(e) {
+            if (e.target.id == "searchBox" || e.target.id == "search-input"){
+                return;
+            }
+            if ($(e.target).closest('#searchBox').length){
+                return;
+            }
+            $('#searchBox > ul').html('');
+            $('#searchBox').removeClass('show');
+            $('#searchBox > ul').removeClass('show');
+        });
     </script>
 </body>
 
