@@ -111,7 +111,7 @@ $categories = App\Models\Admin\Category::inRandomOrder()
                         <a class="nav-link dropdown-toggle dropdown-custom" data-open="#item2"
                             href="under-construction.html" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            Categories
+                            Product
                         </a>
                         <div id="item2" class="dropdown-menu dropdown-menu2" aria-labelledby="navbarDropdown">
                             <div class="container d-block">
@@ -138,7 +138,7 @@ $categories = App\Models\Admin\Category::inRandomOrder()
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/shop') }}">Product</a>
+                        <a class="nav-link" href="{{ url('/shop') }}">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/about-us') }}">About Us</a>

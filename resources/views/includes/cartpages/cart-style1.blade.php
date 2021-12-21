@@ -5,11 +5,11 @@
             <div class="col-12">
                 <ul class="m-0 p-0 d-flex align-items-center text-white">
                     <li class="font-weight-bold">{{ trans('lables.bread-crumb-home') }}</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                    <li class="">{{ trans('lables.bread-shopping-cart') }}</li>
+                    <li class="">Cart</li>
                 </ul>
             </div>
             <div class="col-12 mt-3">
-                <h2 class="text-white">{{ trans('lables.bread-shopping-cart') }}</h2>
+                <h2 class="text-white">Cart</h2>
             </div>
         </div>
     </div>

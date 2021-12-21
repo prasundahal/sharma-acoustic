@@ -205,10 +205,10 @@
         //dd ($locale);
     @endphp
     <script>
-        message = localStorage.getItem("message");
-        if (message.length > 1) {
-            toastr.error(message);
-            localStorage.removeItem("message");
+        loginErrorMessage = localStorage.getItem("loginErrorMessage");
+        if (loginErrorMessage.length > 1) {
+            toastr.error(loginErrorMessage);
+            localStorage.removeItem("loginErrorMessage");
         }
     </script>
     <script>

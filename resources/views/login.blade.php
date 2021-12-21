@@ -160,6 +160,7 @@
                 $('#event-loading').css('display', 'block');
             },
             success: function(data) {
+                console.log(data);
                 if(data.status == 'Success'){
                     $('#event-loading').css('display', 'none');
                     localStorage.setItem("customerToken",data.data.token);
@@ -174,19 +175,7 @@
             },
             error: function(data) {
                 $('#event-loading').css('display', 'none');
-                console.log(data);
-                if(data.status == 422){
-                    if(data.responseJSON.status == 'Error'){
-                        $("#loginForm").find(".password").html(data.responseJSON.message)
-                        $("#loginForm").find(".password").removeClass('d-none');
-                    }
-                }
-                if(data.status == 422){
-                    $.each( data.responseJSON.errors, function( index, value ){
-                        $("#loginForm").find("."+index).html(value)
-                        $("#loginForm").find("."+index).removeClass('d-none');
-                    });
-                }
+                toastr.error(data.responseJSON.message);
             },
         });
     }

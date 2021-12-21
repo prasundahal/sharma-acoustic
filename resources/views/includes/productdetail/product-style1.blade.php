@@ -9,7 +9,7 @@
               </ul>
           </div>
           <div class="col-12 mt-3">
-              <h2 class="text-white">Product Listing</h2>
+              <h2 class="text-white">Product Detail</h2>
           </div>
       </div>
   </div>
