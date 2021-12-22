@@ -47,16 +47,15 @@
         },
         error: function(data) {
             $('#event-loading').css('display', 'none');
-            // console.log(data);
-            if(data.status == 422){
-                jQuery.each(data.responseJSON.errors, function(index, item) {
-                    $("#"+index).parent().find('.invalid-feedback').css('display','block');
-                    $("#"+index).parent().find('.invalid-feedback').html(item);
+            if(data.responseJSON.errors){
+                var err = '';
+                $.each(data.responseJSON.errors, function(i, e){
+                    err += e + '\n';
                 });
+                toastr.error(err);
+                return false;
             }
-            else{
-                toastr.error('{{ trans("response.some_thing_went_wrong") }}');;
-            }
+            toastr.error(data.responseJSON.message);
 
         },
         });

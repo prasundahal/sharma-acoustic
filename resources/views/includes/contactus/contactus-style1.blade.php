@@ -31,13 +31,13 @@
                     <div class="address-info">
                         <ul>
                             <li class="p-2">
-                                <p class="m-0"><i class="fa fa-map-marker mr-1" aria-hidden="true"></i><span> {{ getSetting()['invoice_address'] ?? 'Kathmandu, Nepal' }}</span></p>
+                                <p class="m-0"><i class="fa fa-map-marker mr-1" aria-hidden="true"></i><span> {{ getSetting()['address'] ?? 'Kathmandu, Nepal' }}</span></p>
                             </li>
                             <li class="p-2">
-                                <p class="m-0"><i class="fa fa-envelope mr-1" aria-hidden="true"></i> <a href="#"><span> {{ getSetting()['invoice_email'] ?? '' }}</span></a></p>
+                                <p class="m-0"><i class="fa fa-envelope mr-1" aria-hidden="true"></i> <a href="mailto:{{ getSetting()['email'] ?? '' }}"><span> {{ getSetting()['email'] ?? '' }}</span></a></p>
                             </li>
                             <li class="p-2">
-                                <p class="m-0"><i class="fa fa-phone mr-1" aria-hidden="true"></i><a href="tel:+4733378901">{{ getSetting()['invoice_mobile'] }}, {{ getSetting()['invoice_phone'] }}</a></p>
+                                <p class="m-0"><i class="fa fa-phone mr-1" aria-hidden="true"></i><a href="tel:{{ getSetting()['phone_number'] ?? '' }}">{{ getSetting()['phone_number'] }}</a></a></p>
                             </li>
                         </ul>
                     </div>
@@ -59,7 +59,7 @@
                         <input type="email" id="email" class="form-control">
                     </div>
                     <div class="form-group">
-
+                        <label>Phone</label>
                         <input type="text" id="phone" class="form-control" placeholder="Phone">
                     </div>
                     <div class="form-group">

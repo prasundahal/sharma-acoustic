@@ -111,7 +111,6 @@
             },
             error: function(data) {
                 $('#event-loading').css('display', 'none');
-                console.log(data.responseJSON.errors);
                 if(data.status == 422){
                     $.each( data.responseJSON.errors, function( index, value ){
                         $("#registerForm").find("."+index).html(value)

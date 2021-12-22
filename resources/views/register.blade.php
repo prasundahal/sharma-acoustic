@@ -184,12 +184,15 @@
                 }
             },
             error: function(data) {
-                console.log(data.responseJSON.errors);
-                $.each( data.responseJSON.errors, function( index, value ){
-                    toastr.error(value);
-                });
-                if(data.status == 422){
+                if(data.responseJSON.errors){
+                    var err = '';
+                    $.each(data.responseJSON.errors, function(i, e){
+                        err += e + '\n';
+                    });
+                    toastr.error(err);
+                    return false;
                 }
+                toastr.error(data.responseJSON.message);
             },
         });
     }

@@ -6,8 +6,6 @@
 <head>
     @if (isset($user))
         <script>
-            console.log('localStorage');
-            console.log(localStorage);
             localStorage.setItem("customerToken", '{{ $user->token }}');
             localStorage.setItem("loginSuccessMessage", "Welcome {{ $user->first_name }} {{ $user->last_name }}");
             localStorage.setItem("customerHash", '{{ $user->hash }}');
@@ -16,7 +14,6 @@
             localStorage.setItem("customerFname", '{{ $user->first_name }}');
             localStorage.setItem("customerLname", '{{ $user->last_name }}');
             localStorage.setItem("cartSession", '');
-            console.log(localStorage);
             window.location.href = '/';
         </script>
     @endif
@@ -220,6 +217,7 @@
     @endphp
     <script>
         loginErrorMessage = localStorage.getItem("loginErrorMessage");
+        console.log(loginErrorMessage);
         if (loginErrorMessage != null) {
             toastr.error(loginErrorMessage);
             localStorage.removeItem("loginErrorMessage");
