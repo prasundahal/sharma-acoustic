@@ -39,7 +39,7 @@
         success: function(data) {
             $('#event-loading').css('display', 'none');
             if (data.status == 'Success') {
-                toastr.error('{{ trans("response.contact-form-success") }}');
+                toastr.success('{{ trans("response.contact-form-success") }}');
             }
             else{
                 toastr.error('{{ trans("response.some_thing_went_wrong") }}');

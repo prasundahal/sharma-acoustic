@@ -15,10 +15,10 @@ class MailController extends Controller
     public function contact_us(ContactUsRequest $request)
     {
         $data = ['first_name' => $request->first_name, 'last_name' => $request->last_name, 'email' => strtolower($request->email), 'message' => $request->message, 'phone' => $request->phone];
-        
         $setting = Setting::where('type', 'email_notify_setting')->pluck('value', 'key');
         $senderEmail = explode(',',$setting['notify_email']);   
-        foreach(['tomhardy8963@gmail.com'] as $email){
+        // dd($senderEmail);
+        foreach($senderEmail as $email){
             Mail::to($email)->send(new ContactUs($data));
         }
         return $this->successResponse('', 'Email sent successfully!');
