@@ -558,6 +558,15 @@
             });
         }
 
+        function buyNow(input){
+            if(loggedIn == '1'){
+                addToCart(input);
+                window.location.href = '{{ url('checkout') }}';
+            }else{
+                toastr.error('Please login');
+            }
+        }
+
         function addToCart(input) {
             product_type = $.trim($(input).attr('data-type'));
             product_id = $.trim($(input).attr('data-id'));

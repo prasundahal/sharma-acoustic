@@ -256,7 +256,7 @@
                                                 '<div class="price">' +
                                                     productCardPrice +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="buyNow(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">Buy Now</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
@@ -283,7 +283,7 @@
                                                 '<div class="price">' +
                                                     productCardPrice +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="buyNow(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">Buy Now</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
@@ -310,7 +310,7 @@
                                                 '<div class="price">' +
                                                     productCardPrice +
                                                 '</div>' +
-                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
+                                                '<a class="add-to-cart" href="javascript:void(0)" onclick="buyNow(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">Buy Now</a>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
@@ -387,7 +387,7 @@
                             htmlToRender +='<picture><div class="product-hover">';
                             if (data.data[0].product_type == 'simple') {
                                 
-                                htmlToRender +='<button type="button" onclick="addToCart(this)" class="btn btn-block btn-secondary cart swipe-to-top" >Add to Cart</button>';
+                                htmlToRender +='<button type="button" onclick="addToCart(this)" class="btn btn-block btn-secondary cart swipe-to-top" >Add To Cart</button>';
 
                             } else {
                                 

@@ -105,6 +105,9 @@
                         <button type="button" id="add-to-wishlist">
                             Add to WishList
                         </button>
+                        <button type="button" id="buyNow">
+                            Buy Now
+                        </button>
                         <div id="share"></div>
                     </div>
                 </div>

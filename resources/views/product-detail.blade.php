@@ -83,6 +83,9 @@
                     $('#add-to-cart').attr('data-id', data.data.product_id);
                     $('#add-to-cart').attr('onclick', 'addToCart(this)');
                     $('#add-to-cart').attr('data-type', data.data.product_type);
+                    $('#buyNow').attr('data-id', data.data.product_id);
+                    $('#buyNow').attr('onclick', 'buyNow(this)');
+                    $('#buyNow').attr('data-type', data.data.product_type);
                     if (data.data.product_gallary_detail != null && data.data.product_gallary_detail.length > 0) {
                         for (var g = 0; g < data.data.product_gallary_detail.length; g++) {
                             prodGalDetGalName = data.data.product_gallary_detail[g].gallary_name;
@@ -421,7 +424,7 @@
                                         price +
                                         // '<span>' + cutPrice + '</span>' +
                                     '</div>' +
-                                    '<a class="add-to-cart" href=javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">ADD TO CART</a>' +
+                                    '<a class="add-to-cart" href=javascript:void(0)" onclick="buyNow(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">Buy Now</a>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -521,16 +524,7 @@
             },
             error: function(data) {
                 $('#event-loading').css('display', 'none');
-                if (data.status == 422) {
-                    jQuery.each(data.responseJSON.errors, function(index, item) {
-                        $("#" + index).parent().find('.invalid-feedback').css('display',
-                            'block');
-                        $("#" + index).parent().find('.invalid-feedback').html(item);
-                    });
-                }
-                else if (data.status == 401) {
-                    toastr.error('{{ trans("response.some_thing_went_wrong") }}');
-                }
+                toastr.error(data.responseJSON.message);
             },
         });
     });
