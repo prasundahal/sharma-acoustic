@@ -243,7 +243,7 @@ export default {
 
   methods: {
     nameWithLang (option) {
-      console.log(option, 'option');
+      // // console.log(option, 'option');
       return option.detail ? `${option.detail[0].name}` : 'Hey';
     },
     fetchCategories() {
@@ -345,6 +345,33 @@ export default {
     // },
     removeImage(index){
       
+      var id = this.gallary_detail_id[index];
+
+      var token = localStorage.getItem("token");
+      var str = window.location.href;
+      var pieces = str.split('/');
+      var productId = pieces[pieces.length - 1];
+
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-type': 'application/json',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+
+        },
+      };
+
+      axios.post(`/api/admin/image`,{'gallary_id': id, 'product_id': productId}, config)
+        .then(res => {
+          if (res == "Success") {
+            this.gallary_detail_path.splice(index,1);
+            this.gallary_detail_id.splice(index,1);
+            this.$emit("setGallaryIdInChild", this.gallary_detail_id);
+          }
+        })
+        .catch(err => // console.log(err))
+
+
         this.gallary_detail_path.splice(index,1);
         this.gallary_detail_id.splice(index,1);
         this.$emit("setGallaryIdInChild", this.gallary_detail_id);

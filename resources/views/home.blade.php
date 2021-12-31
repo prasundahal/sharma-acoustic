@@ -344,7 +344,7 @@
                 beforeSend: function() {},
                 success: function(data) {
                     if (data.status == 'Success') {
-                        console.log(data,"final data");
+                        // console.log(data,"final data");
                         var htmlToRender ="<article><div class='badges'><span class='badge badge-success'>Featured</span></div><div class='detail'>";
                         
                             htmlToRender +='<h5 class="title"><a  href="/product/'+data

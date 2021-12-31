@@ -285,7 +285,7 @@ export default {
         );
       }
 
-      console.log(this.selectedPermission);
+      // console.log(this.selectedPermission);
     },
   },
   created(){

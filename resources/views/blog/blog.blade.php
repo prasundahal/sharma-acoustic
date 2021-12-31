@@ -52,7 +52,7 @@
                         pagination += '</div>';
 
                         $('.pagination').html(pagination);
-                        console.log(data.data);
+                        // console.log(data.data);
                         for (i = 0; i < data.data.length; i++) {
                             date = data.data[i].date;
                             if (data.data[i].gallary != null) {
@@ -81,7 +81,7 @@
                                     '</div>' +
                                 '</div>' +
                             '</div>';
-                            console.log(blogSection);
+                            // console.log(blogSection);
                             $("." + appendTo).append(blogSection);
                         }
                     }

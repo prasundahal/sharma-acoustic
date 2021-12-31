@@ -432,7 +432,7 @@
         }
 
         function removeCartItem(input) {
-            console.log(input);
+            // console.log(input);
             product_id = $.trim($(input).attr('data-id'));
             product_combination_id = $.trim($(input).attr('data-combination-id'));
             if (product_combination_id == null || product_combination_id == 'null') {
@@ -447,7 +447,7 @@
                     product_id + '&product_combination_id=' + product_combination_id + '&language_id=' + languageId;
             }
 
-            console.log(url);
+            // console.log(url);
 
             $.ajax({
                 type: 'DELETE',
@@ -1047,7 +1047,7 @@
                 },
                 beforeSend: function() {},
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                     if (data.status == 'Success') {
                         if(payment_method == 'esewa'){
                             pid = $('#esewaForm input[name=pid]').val() + '?' + data.data.order_id;
@@ -1063,7 +1063,7 @@
                     }
                 },
                 error: function(data) {
-                    console.log();
+                    // console.log();
                     if (data.status == 422) {
                         jQuery.each(data.responseJSON.errors, function(index, item) {
                             $("#" + index).parent().find('.invalid-feedback').css('display',
@@ -1332,10 +1332,10 @@
                        
 
                     } else {
-                        console.log('No results found');
+                        // console.log('No results found');
                     }
                 } else {
-                    console.log('Geocoder failed due to: ' + status);
+                    // console.log('Geocoder failed due to: ' + status);
                 }
             });
         }
@@ -1380,7 +1380,7 @@
 
                 places.forEach(function(place) {
                     if (!place.geometry) {
-                        console.log("Returned place contains no geometry");
+                        // console.log("Returned place contains no geometry");
                         return;
                     }
                     var icon = {
@@ -1390,7 +1390,7 @@
                         anchor: new google.maps.Point(17, 34),
                         scaledSize: new google.maps.Size(25, 25)
                     };
-                    console.log(place.geometry.location);
+                    // console.log(place.geometry.location);
                     // Create a marker for each place.
                     markers.setPosition(place.geometry.location);
                     markers.setTitle(place.name);

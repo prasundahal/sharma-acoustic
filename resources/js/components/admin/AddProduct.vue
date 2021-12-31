@@ -136,7 +136,7 @@ export default {
             this.activeItem = menuItem
         },
         setCategory(value,type){
-           console.log(value,type);
+         //   // console.log(value,type);
            if(type === 'push'){
               if(this.product.category_id.indexOf(value) === -1){
                   this.product.category_id.push(value);
@@ -156,7 +156,7 @@ export default {
            this.product.desc[index] = value;
         },
         setGallaryId(value){
-           console.log(value);
+         //   // console.log(value);
            this.product.gallary_id = value[0];
            this.product.gallary_detail_id = value;
         },
@@ -217,7 +217,7 @@ export default {
            this.product[name] = value;
         },
         setCombinationPrice(name, value){
-           console.log(value);
+         //   // console.log(value);
            this.product[name] = value;
         },
         setCombinationGallery(name, value){

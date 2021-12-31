@@ -178,7 +178,7 @@ router.beforeEach((to, from, next) => {
                 // }
 
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
                 next('/admin/login')
                 return
             })

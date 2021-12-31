@@ -7,6 +7,7 @@ use App\Http\Resources\Admin\ProductDetail;
 use App\Mail\ResetPassword;
 use App\Models\Admin\Attribute;
 use App\Models\Admin\Brand;
+use App\Models\Admin\Category;
 use App\Models\Admin\Customer;
 use App\Models\Admin\Page;
 use App\Models\Admin\PaymentMethod;

@@ -241,6 +241,8 @@ export default {
             page_url += '&sortBy='+this.sortBy+'&sortType='+this.sortType;
             page_url +='&getDetail=1&getCategory=1';
 
+            // // console.log(page_url);
+
             var responseData = {};
 
             axios.get(page_url, this.token).then(res => {
@@ -279,7 +281,7 @@ export default {
                         }
 
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => // console.log(err))
                     .finally(() => (this.$parent.loading = false));
             }
         }

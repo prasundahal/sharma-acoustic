@@ -182,7 +182,7 @@
             },
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 if (data.status == 'Success') {
                     if(data.data != null && data.data != 'null' && data.data != ''){
                         $("#profileForm").find("#gender").val(data.data[0].gender);

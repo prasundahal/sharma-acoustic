@@ -328,7 +328,7 @@ export default {
                                             } else {
                                                 combination_name += '-' + product.combination_detail[c].combination[j].variation.detail[0].name
                                             }
-                                            console.log('c=' + c+ 'j=' + j);
+                                            // // console.log('c=' + c+ 'j=' + j);
                                         }
                                     }
                                     arr.product_id = product.product_id;
@@ -343,7 +343,7 @@ export default {
 
                         }
                         this.display_table = true;
-                        // console.log(this.selectedProducts);
+                        // // console.log(this.selectedProducts);
                     }
                 })
                 .finally(() => (this.$parent.loading = false));

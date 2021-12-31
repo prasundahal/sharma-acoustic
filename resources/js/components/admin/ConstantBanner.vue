@@ -506,7 +506,7 @@ export default {
     },
 
     editBanner(banner) {
-      console.log(banner);
+      // // console.log(banner);
       this.edit = true;
       this.display_form = 1;
       this.errors = new ErrorHandling();
@@ -534,7 +534,7 @@ export default {
       this.showModal = !this.showModal;
     },
     setImage(gallary) {
-      console.log(gallary);
+      // // console.log(gallary);
       (this.gallary_path = gallary.gallary_path),
         (this.banner.gallary_id = gallary.gallary_id);
     },

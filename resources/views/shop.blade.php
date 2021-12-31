@@ -393,7 +393,7 @@
 
             }
 
-            console.log(attribute_id, variation_id, attribute, variation)
+            // console.log(attribute_id, variation_id, attribute, variation)
         })
 
         $('#filter').click(function(e) {

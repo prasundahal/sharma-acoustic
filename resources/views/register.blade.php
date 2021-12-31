@@ -127,7 +127,7 @@
                 }
             },
             error: function(data) {
-                console.log(data.responseJSON.errors);
+                // console.log(data.responseJSON.errors);
                 if(data.status == 422){
                     $.each( data.responseJSON.errors, function( index, value ){
                         $("#registerForm").find("."+index).html(value)
@@ -245,7 +245,7 @@
                 }
             },
             error: function(data) {
-                console.log(data);
+                // console.log(data);
                 if(data.status == 422){
                     if(data.responseJSON.status == 'Error'){
                         $("#loginForm").find(".password").html(data.responseJSON.message)

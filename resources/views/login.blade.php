@@ -50,7 +50,7 @@
                 }
             },
             error: function(data) {
-                console.log(data.responseJSON.errors);
+                // console.log(data.responseJSON.errors);
                 if(data.status == 422){
                     $.each( data.responseJSON.errors, function( index, value ){
                         $("#registerForm").find("."+index).html(value)

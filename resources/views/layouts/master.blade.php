@@ -217,7 +217,7 @@
     @endphp
     <script>
         loginErrorMessage = localStorage.getItem("loginErrorMessage");
-        console.log(loginErrorMessage);
+        // console.log(loginErrorMessage);
         if (loginErrorMessage != null) {
             toastr.error(loginErrorMessage);
             localStorage.removeItem("loginErrorMessage");
@@ -303,10 +303,10 @@
             getWishlist();
 
             // if (loggedIn != '1') {
-            //     console.log('login');
+            //     // console.log('login');
             //     $(".auth-login").remove();
             // } else {
-            //     console.log('no login');
+            //     // console.log('no login');
             //     $(".without-auth-login").remove();
             //     $(".welcomeUsername").html(customerFname + " " + customerLname);
             // }
@@ -1153,7 +1153,7 @@
                         name: name
                     },
                     success: function(response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.length > 0) {
                             $('#searchBox > ul').html('');
                             var results = '';
@@ -1177,7 +1177,7 @@
                         }
                     },
                     error: function(error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             } else {

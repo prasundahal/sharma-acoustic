@@ -343,7 +343,7 @@
                 },
                 error: function(data) {
                     toastr.error(data.responseJSON.errors.comment[0])
-                    console.log(data.responseJSON.errors.comment[0],'if error')
+                    // console.log(data.responseJSON.errors.comment[0],'if error')
                 },
             });    
     }

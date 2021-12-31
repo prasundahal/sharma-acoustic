@@ -85,7 +85,7 @@ export default {
                 .then(res => {
                     if (res.data.status == "Success") {
                         this.billers = res.data.data;
-						console.log(res.data.data,'billers');
+						// console.log(res.data.data,'billers');
                     }
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -104,7 +104,7 @@ export default {
                 .then(res => {
                     if (res.data.status == "Success") {
                         this.customers = res.data.data;
-						console.log(res.data.data,'customers');
+						// console.log(res.data.data,'customers');
                     }
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -123,7 +123,7 @@ export default {
                 .then(res => {
                     if (res.data.status == "Success") {
                         this.warehouses = res.data.data;
-						console.log(res.data.data,'warehouses');
+						// console.log(res.data.data,'warehouses');
                     }
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -145,7 +145,7 @@ export default {
                             [res.data.data[i].setting_key]: res.data.data[i].setting_value
                         });
                     }
-                    console.log('response datass', responseData);
+                    // console.log('response datass', responseData);
                     this.pos = responseData;
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -162,7 +162,7 @@ export default {
                 value.push(pos[i][1].toString())
             }
 
-            console.log(key, value);
+            // console.log(key, value);
 
             var token = localStorage.getItem('token');
             const config = {

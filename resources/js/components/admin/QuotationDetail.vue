@@ -168,7 +168,7 @@ export default {
                                 arr.title = res.data.data.quotationDetail[k].product.detail.length > 0 ? res.data.data.quotationDetail[k].product.detail[0].title : '';
                                 arr.qty = res.data.data.quotationDetail[k].qty;
                                 arr.price = res.data.data.quotationDetail[k].price;
-                                console.log(arr);
+                                // // console.log(arr);
                                 this.selectedProducts.push(arr);
                                 arr = {};
                             } else {
@@ -176,7 +176,7 @@ export default {
                                     for (var i = 0; i < res.data.data.quotationDetail[k].product.combination_detail.length; i++) {
                                         arr.product_combination_id = res.data.data.quotationDetail[k].product.combination_detail[i].product_combination_id;
                                         var combination_name = '';
-                                            console.log(res.data.data.quotationDetail[k].product_combination_id);
+                                            // // console.log(res.data.data.quotationDetail[k].product_combination_id);
                                         if(res.data.data.quotationDetail[k].product.combination_detail[i].product_combination_id == res.data.data.quotationDetail[k].product_combination_id){
                                             if (res.data.data.quotationDetail[k].product.combination_detail[i].combination.length > 0) {
                                                 for (var j = 0; j < res.data.data.quotationDetail[k].product.combination_detail[i].combination.length; j++) {
@@ -185,7 +185,7 @@ export default {
                                                     } else {
                                                         combination_name += '-' + res.data.data.quotationDetail[k].product.combination_detail[i].combination[j].variation.detail[0].name;
                                                     }
-                                                    // console.log('i=' + i + 'j=' + j);
+                                                    // // console.log('i=' + i + 'j=' + j);
                                                 }
                                             }
                                             arr.qty = res.data.data.quotationDetail[k].qty;

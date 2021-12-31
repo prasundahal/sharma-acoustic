@@ -214,7 +214,7 @@ function myFunction() {
 //         if (width < 769) {
 //             $(".dropdown-custom").click(function() {
 //                 var itemOpen = $(this).data('open');
-//                 // console.log(itemOpen);
+//                 // // console.log(itemOpen);
 //                 $('"' + itemOpen + '"').slideToggle("slow")
 //             });
 //         }

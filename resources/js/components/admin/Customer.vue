@@ -266,7 +266,7 @@ export default {
                         }
 
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => // console.log(err))
                     .finally(() => (this.$parent.loading = false));
             }
         },
@@ -318,7 +318,7 @@ export default {
             this.display_form = 1;
             this.errors = new ErrorHandling();
             this.customer = customer;
-            console.log(customer);
+            // // console.log(customer);
 
         },
         clearForm() {

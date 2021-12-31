@@ -2899,14 +2899,14 @@ export default {
               [res.data.data[i].setting_key]: res.data.data[i].setting_value,
             });
           }
-          console.log(responseData, "setting ");
+          // console.log(responseData, "setting ");
           this.setting = responseData;
         })
-        .finally(() => console.log("working"));
+        .finally(() => // console.log("working"));
     },
   },
   mounted() {
-    console.log(this.$parent.permissions, "permissions");
+    // console.log(this.$parent.permissions, "permissions");
     this.fetchSetting();
   },
   props: ["burgerMenu"],

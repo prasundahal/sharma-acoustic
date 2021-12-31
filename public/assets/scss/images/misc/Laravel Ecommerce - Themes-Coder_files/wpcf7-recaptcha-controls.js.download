@@ -79,7 +79,7 @@ document.addEventListener( 'wpcf7spam', function( event ) {
 			let recaptchaWrapper = recaptcha.parentElement;
 			wpcf7.notValidTip( recaptchaWrapper, wpcf7iqfix.recaptcha_empty );
 		} else if( null === response ) {
-			console.log( wpcf7iqfix.response_err );
+			// console.log( wpcf7iqfix.response_err );
 		}
 	} );
 } );

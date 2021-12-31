@@ -340,7 +340,7 @@ export default {
                this.variation = Object.assign({}, this.variation, { attribute_id: res.data.data.attribute.attribute_id })
 
             })
-            .catch(err => console.log(err))
+            .catch(err => // console.log(err))
             .finally(() => (this.$parent.loading = false));
             
             
@@ -364,7 +364,7 @@ export default {
         },
         setSelectedLanguage(selectedLanguage){
             this.selectedLanguage = selectedLanguage;
-            console.log("i am clicked",selectedLanguage)
+            // // console.log("i am clicked",selectedLanguage)
         }
     },
     mounted() {

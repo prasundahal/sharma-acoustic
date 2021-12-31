@@ -113,7 +113,7 @@ export default {
         setBurgerMenu(){
             
             var classList = document.body.classList.value.split(' ');
-            console.log(classList);
+            // console.log(classList);
             if(classList.indexOf('aside-minimize') === -1)
                 document.body.classList.add('aside-minimize')
             else
@@ -134,7 +134,7 @@ export default {
             }
         };
 
-        console.log(localStorage.getItem('name'));
+        // console.log(localStorage.getItem('name'));
         if(localStorage.getItem('name')){
 
             this.username = localStorage.getItem('name')

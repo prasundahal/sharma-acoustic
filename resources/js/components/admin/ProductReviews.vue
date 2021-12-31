@@ -198,7 +198,7 @@ export default {
                 this.reviews = res.data.data;
                 
                 vm.makePagination(res.data.meta, res.data.links);
-                console.log(this.reviews,"reviews");
+                // // console.log(this.reviews,"reviews");
             })
             .finally(() => (this.$parent.loading = false));
         },
@@ -224,7 +224,7 @@ export default {
                         }
 
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => // console.log(err))
                     .finally(() => (this.$parent.loading = false));
             }
         },

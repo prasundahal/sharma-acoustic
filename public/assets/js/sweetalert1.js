@@ -194,7 +194,7 @@ jQuery("#html-alert").on("click", function () {
             onClose: function () { 
                 clearInterval(t) 
             } 
-        }).then(function (t) { t.dismiss === Swal.DismissReason.timer && console.log("I was closed by the timer") }) }), 
+        }).then(function (t) { t.dismiss === Swal.DismissReason.timer && // console.log("I was closed by the timer") }) }), 
         jQuery("#outside-click").on("click", function () { 
             Swal.fire({ 
                 title: "Click outside to close!", 
