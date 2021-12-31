@@ -401,7 +401,7 @@ export default {
                 }
 
             })
-            .catch(err => console.log(err));
+            .catch(err => // console.log(err));
             
             
         },
@@ -423,13 +423,13 @@ export default {
         },
         setSelectedLanguage(selectedLanguage){
             this.selectedLanguage = selectedLanguage;
-            console.log("i am clicked",selectedLanguage)
+            // // console.log("i am clicked",selectedLanguage)
         },
         toggleImageSelect(){
             this.showModal = !this.showModal;
         },
         setImage(gallary){
-            console.log(gallary);
+            // // console.log(gallary);
             this.gallary_path = gallary.gallary_path,
             this.category.gallary_id = gallary.gallary_id;
         },
@@ -437,7 +437,7 @@ export default {
             this.showModalIcon = !this.showModalIcon;
         },
         setIcon(gallary){
-            console.log(gallary);
+            // // console.log(gallary);
             this.icon_path = gallary.gallary_path,
             this.category.icon = gallary.gallary_id;
         },

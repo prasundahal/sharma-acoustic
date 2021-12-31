@@ -51,7 +51,7 @@ export default {
             axios.get('/api/admin/email_template_setting?type=type', config)
                 .then(res => {
                     console.clear();
-                    console.log('email template', res.data.data);
+                    // console.log('email template', res.data.data);
                     if(res.data.data.length > 0){
                         this.emailsetting = res.data.data[0];
                     }

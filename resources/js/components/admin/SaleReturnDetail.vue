@@ -102,7 +102,7 @@ export default {
                                                     } else {
                                                         combination_name += '-' + res.data.data.detail[k].product.combination_detail[i].combination[j].variation.detail[0].name
                                                     }
-                                                    // console.log('i=' + i + 'j=' + j);
+                                                    // // console.log('i=' + i + 'j=' + j);
                                                 }
                                             }
                                             arr.qty = res.data.data.detail[k].qty;

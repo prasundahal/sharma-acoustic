@@ -208,7 +208,7 @@ export default {
 
         },
         setSelectedImages(gallary_id) {
-            console.log(gallary_id);
+            // // console.log(gallary_id);
             if (this.selectedImages.includes(gallary_id)) {
                 const index = this.selectedImages.indexOf(gallary_id);
                 if (index > -1) {

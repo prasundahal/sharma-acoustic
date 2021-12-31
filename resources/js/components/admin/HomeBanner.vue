@@ -369,7 +369,7 @@ export default {
         .then((res) => {
           this.banners = res.data.data;
 
-          console.log(this.banners);
+          // // console.log(this.banners);
 
         })
         .finally(() => (this.$parent.loading = false));
@@ -429,7 +429,7 @@ export default {
 
 
 
-      console.log(this.banner.content);
+      // // console.log(this.banner.content);
 
     },
     clearForm() {
@@ -449,7 +449,7 @@ export default {
       this.showModal = !this.showModal;
     },
     setImage(gallary) {
-      console.log(gallary);
+      // // console.log(gallary);
       (this.gallary_path = gallary.gallary_path),
         (this.banner.gallary_id = gallary.gallary_id);
     },

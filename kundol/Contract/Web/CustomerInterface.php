@@ -7,4 +7,6 @@ interface CustomerInterface
     public function show($customer);
     public function update(array $parms, $customer);
 
+    public function changePassword(array $parms);
+
 }

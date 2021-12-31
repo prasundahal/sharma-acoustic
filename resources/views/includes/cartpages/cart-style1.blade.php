@@ -1,158 +1,114 @@
-<div class="container-fuild">
-    <nav aria-label="breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">{{ trans('lables.bread-crumb-home') }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ trans('lables.bread-shopping-cart') }}</li>
-            </ol>
-        </div>
-    </nav>
-</div>
-<section class="pro-content">
+<!-- Breadcrumbs -->
+<section id="breadcrumbs" class="py-3">
     <div class="container">
-        <div class="page-heading-title">
-            <h2>{{ trans('lables.cart-page-shopping-cart') }}</h2>
-
+        <div class="row">
+            <div class="col-12">
+                <ul class="m-0 p-0 d-flex align-items-center text-white">
+                    <li class="font-weight-bold">{{ trans('lables.bread-crumb-home') }}</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <li class="">Cart</li>
+                </ul>
+            </div>
+            <div class="col-12 mt-3">
+                <h2 class="text-white">Cart</h2>
+            </div>
         </div>
     </div>
-
-
-    <!-- cart Content -->
-    <section class=" cart-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 cart-area cart-page-one">
-                    <div class="row">
-                        <div class="col-12 col-lg-9">
-                            <table class="table top-table" id="cartItem-product-show">
-
-                            </table>
-
-                            <div class="col-12 col-lg-12 mb-4">
-
-                                <div class="row justify-content-between click-btn">
-                                    <div class="col-12 col-lg-4">
+</section>
+<!-- Breadcrumbs Ends -->
+<!-- Cart -->
+<section id="cart-wrapper" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="shopping-cart">
+                <div class="shopping-cart-table">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-description item">Image</th>
+                                    <th class="cart-product-name item">Product Name</th>
+                                    <th class="cart-total last-item">Price</th>
+                                    <th class="cart-qty item">Quantity</th>
+                                    <th class="cart-total last-item">Total</th>
+                                    <th class="cart-romove item">Remove</th>
+                                </tr>
+                            </thead>
+                            <!-- /thead -->
+                            <tbody id="cartItem-product-show">
+                                {{-- <tr>
+                                    <td class="cart-image">
+                                        <a class="entry-thumbnail" href="detail.html">
+                                            <img src="frontend/assets/images/product-images/1 (1).jpg" class="img-fluid">
+                                        </a>
+                                    </td>
+                                    <td class="cart-product-name-info">
+                                        <h4 class="cart-product-description"><a href="detail.html">Yoga Mat</a></h4>
                                         <div class="row">
-                                            <div class="input-group">
-                                                <input type="text" id="coupon_code" class="form-control" placeholder="Coupon Code" aria-label="Coupon Code" aria-describedby="coupon-code">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-secondary swipe-to-top" type="button" onclick="couponCartItem()" id="coupon-code">{{ trans('lables.cart-page-apply') }}</button>
-                                                </div>
+                                            <div class="col-4">
+                                                <div class="rating rateit-small"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-lg-7 align-right">
-                                        <div class="row">
-                                            <button type="button" class="btn btn-secondary swipe-to-top">
-                                                {{ trans('lables.cart-page-continue-shopping') }}</button>
-                                            <button type="button" class="btn btn-light swipe-to-top" onclick="updateCartItem()">{{ 
-                                            trans('lables.cart-page-update-cart') }}</button>
+                                        <!-- /.row -->
+                                    </td>
+                                    <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="quant-input">
+                                            <input type="number" value="1">
                                         </div>
-
-
-
-                                    </div>
-                                </div>
+                                    </td>
+                                    <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                    </td>
+                                    <td class="romove-item"><a href="#" title="cancel" class="icon"><i
+                                    class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr> --}}
+                            </tbody>
+                            <!-- /tbody -->
+                        </table>
+                        <div class="d-flex justify-content-around align-items-center w-100 my-3 flex-wrap">
+                            <form class="coupon-field d-flex ">
+                                <input type="text" placeholder="Apply Coupon Code" class="mr-2 coupon_code">
+                                <button type="button" class="btn btn-success" onclick="couponCartItem()" id="coupon-code">{{ trans('lables.cart-page-apply') }}</button>
+                            </form>
+                            <div class="total-amount font-weight-bold mt-xl-0 mt-md-0 mt-2">
+                                <a href="shop">
+                                    <button type="button" class="btn btn-success">
+                                        {{ trans('lables.cart-page-continue-shopping') }}</button>
+                                </a>
+                                <button type="button" class="btn btn-success" onclick="updateCartItem()">{{ 
+                                trans('lables.cart-page-update-cart') }}</button>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-3">
-                            <table class="table right-table" id="cartItem-grandtotal-product-show">
-
-                            </table>
-                            <a href="{{url('/checkout')}}">
-                                <button class="btn btn-secondary swipe-to-top m-btn col-12">{{ trans('lables.cart-page-proceed-to-checkout') }}</button>
-                            </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-center align-items-center text-center">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-12 my-3 ">
+                        <div class="cart-summary sub_border_shadow p-xl-4 p-lg-4 p-md-3 p-3 text-left">
+                            <strong class="cart_text mb-3 d-block font-weight-bold">Cart Summary</strong>
+                            <div class="cart-price d-flex justify-content-between mb-2">
+                                <h6 class="">Sub Total</h6>
+                                <span class="cart_text caritem-subtotal"></span>
+                            </div>
+                            <div class="cart-price d-flex justify-content-between mb-2">
+                                <h6 class="">{{ trans('lables.cart-page-discount') }}</h6>
+                                <span class="cart_text caritem-discount-coupon"></span>
+                            </div>
+                            <hr>
+                            <div class="cart-price d-flex justify-content-between mb-2">
+                                <h6 class="">Grand Total</h6>
+                                <span class="cart_text caritem-grandtotal"></span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-12 my-3">
+                        <a href="{{url('/checkout')}}">
+                            <button type="button" class="btn btn-success">Proceed Checkout</button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-
-
-    <template id="cartItem-Template">
-        <tbody>
-            <tr class="d-flex cartItem-row">
-                <td class="col-12 col-md-2">
-                    <img class="img-fluid cartItem-image" src="" />
-                </td>
-                <td class="col-12 col-md-4 item-detail-left">
-                    <div class="item-detail">
-                        <span class="cartItem-category-name"></span>
-                        <h4 class="cartItem-name">
-                        </h4>
-                        <div class="item-attributes"></div>
-                        <div class="item-controls">
-                            {{-- <button type="button" class="btn">
-                                <span class="fas fa-pencil-alt"></span>
-                            </button> --}}
-                            <button type="button" class="btn cartItem-remove">
-                                <span class="fas fa-times"></span>
-                            </button>
-                        </div>
-                    </div>
-                </td>
-                <td class="item-price col-12 col-md-2 cartItem-price"></td>
-                <td class="col-12 col-md-2">
-                    <div class="input-group item-quantity">
-
-                        <input type="text" id="quantity2" name="quantity" class="form-control cartItem-qty">
-
-                        <span class="input-group-btn">
-                            <button type="button" value="quantity" class="quantity-right-plus btn cartItem-qty-1" data-type="plus" data-field="">
-
-                                <span class="fas fa-plus"></span>
-                            </button>
-
-                            <button type="button" value="quantity" class="quantity-left-minus btn cartItem-qty-2" data-type="minus" data-field="">
-                                <span class="fas fa-minus"></span>
-                            </button>
-
-
-                        </span>
-
-
-                    </div>
-                </td>
-                <td class="align-middle item-total col-12 col-md-2 cartItem-total" align="center"></td>
-            </tr>
-        </tbody>
-    </template>
-
-
-    <template id="cartItem-grandtotal-template">
-
-        <thead>
-            <tr>
-                <th scope="col" colspan="2" align="center">{{ trans('lables.cart-page-order-summary') }}</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">{{ trans('lables.cart-page-subtotal') }}</th>
-                <td align="right" class="caritem-subtotal"></td>
-
-            </tr>
-            <tr>
-                <th scope="row">{{ trans('lables.cart-page-discount') }}</th>
-                <td align="right" class="caritem-discount-coupon"></td>
-
-            </tr>
-            
-            <tr class="item-price">
-                <th scope="row">{{ trans('lables.cart-page-total') }}</th>
-                <td align="right" class="caritem-grandtotal"></td>
-
-            </tr>
-
-
-        </tbody>
-
-
-    </template>
-
+    </div>
 </section>
-
-
+<!-- Cart Ends -->

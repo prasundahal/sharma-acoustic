@@ -482,7 +482,7 @@ export default {
                                             } else {
                                                 combination_name += '-' + res.data.data.combination_detail[i].combination[j].variation.detail[0].name
                                             }
-                                            console.log('i=' + i + 'j=' + j);
+                                            // // console.log('i=' + i + 'j=' + j);
                                         }
                                     }
                                     arr.product_id = res.data.data.product_id;
@@ -501,7 +501,7 @@ export default {
                 .finally(() => (this.$parent.loading = false));
         },
         incrementIndex() {
-            console.log('custom index => ');
+            // // console.log('custom index => ');
             // this.customIndex++;
         },
         removeItem(index) {

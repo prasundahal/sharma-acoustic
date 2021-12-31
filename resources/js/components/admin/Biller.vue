@@ -335,7 +335,7 @@ export default {
                         }
 
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => // console.log(err))
                     .finally(() => (this.$parent.loading = false));
             }
         },
@@ -396,7 +396,7 @@ export default {
             this.biller.country_id = biller.country.country_id;
             this.biller.state_id = biller.state.id;
 
-            console.log(biller);
+            // console.log(biller);
 
         },
         clearForm() {

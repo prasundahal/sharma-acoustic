@@ -33,26 +33,29 @@
             clientid: "{{isset(getSetting()['client_id']) ? getSetting()['client_id'] : ''}}",
             clientsecret: "{{isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : ''}}",
         },
-        beforeSend: function() {},
+        beforeSend: function() {
+            $('#event-loading').css('display', 'block');
+        },
         success: function(data) {
+            $('#event-loading').css('display', 'none');
             if (data.status == 'Success') {
-                toastr.error('{{ trans("response.contact-form-success") }}');
+                toastr.success('{{ trans("response.contact-form-success") }}');
             }
             else{
                 toastr.error('{{ trans("response.some_thing_went_wrong") }}');
             }
         },
         error: function(data) {
-            // console.log(data);
-            if(data.status == 422){
-                jQuery.each(data.responseJSON.errors, function(index, item) {
-                    $("#"+index).parent().find('.invalid-feedback').css('display','block');
-                    $("#"+index).parent().find('.invalid-feedback').html(item);
+            $('#event-loading').css('display', 'none');
+            if(data.responseJSON.errors){
+                var err = '';
+                $.each(data.responseJSON.errors, function(i, e){
+                    err += e + '\n';
                 });
+                toastr.error(err);
+                return false;
             }
-            else{
-                toastr.error('{{ trans("response.some_thing_went_wrong") }}');;
-            }
+            toastr.error(data.responseJSON.message);
 
         },
         });

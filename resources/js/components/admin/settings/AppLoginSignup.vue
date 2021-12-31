@@ -79,7 +79,7 @@ export default {
                             [res.data.data[i].setting_key]: res.data.data[i].setting_value
                         });
                     }
-                    console.log('response datass', responseData);
+                    // console.log('response datass', responseData);
                     this.apploginsignup = responseData;
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -96,7 +96,7 @@ export default {
                 value.push(apploginsignup[i][1])
             }
 
-            // console.log(key, value);
+            // // console.log(key, value);
 
             var token = localStorage.getItem('token');
             const config = {

@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:user-api', 'scopes:use
     
     Route::resource('gallary', 'API\Admin\GallaryController', ['names' => ['index' => 'admin.gallary.index', 'store' => 'admin.gallary.store']])->except(['edit', 'create', 'destroy']);
     Route::delete('gallary', 'API\Admin\GallaryController@destroy')->name('admin.gallary.delete');
+    Route::post('image', 'API\Admin\GallaryController@deleteSingleImage');
     Route::post('gallary/resize_single_image', 'API\Admin\GallaryController@resizeSingleImage')->name('gallary.resize');
     Route::post('gallary/regenrate_all_images', 'API\Admin\GallaryController@regenrateAllImages')->name('gallary.regenrateAllImages');
     Route::resource('purchaser', 'API\Admin\PurchaserController', ['names' => ['index' => 'admin.purchaser.index', 'store' => 'admin.purchaser.store', 'update' => 'admin.purchaser.update', 'destroy' => 'admin.purchaser.delete']])->except(['edit', 'create']);
@@ -148,14 +149,15 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth:customer-api', 'scope
     Route::resource('wishlist', 'API\Web\WishlistController', ['names' => ['index' => 'client.wishlist.index', 'store' => 'client.wishlist.store', 'destroy' => 'client.wishlist.delete']])->except(['edit', 'create', 'update']);
     Route::resource('compare', 'API\Web\CompareController')->except(['edit', 'create', 'update']);
     Route::post('order', 'API\Web\OrderController@store');
-    Route::put('order/{order}', 'API\Web\OrderController@update');
+    Route::put('order/{order}', 'API\Web\@store');
+    Route::post('comment', 'API\WOrderController@update');
     Route::post('review', 'API\Web\ReviewController@store');
-    Route::post('comment', 'API\Web\CommentController@store');
     Route::resource('cart', 'API\Web\CartController', ['names' => ['index' => 'client.cart.index', 'store' => 'client.cart.store', 'destroy' => 'client.cart.delete']])->except(['edit', 'create', 'update']);
     Route::delete('cart/delete', 'API\Web\CartController@destroy');
     Route::resource('customer_address_book', 'API\Web\CustomerAddressBookController', ['names' => ['index' => 'admin.customer_address_book.index', 'store' => 'admin.customer_address_book.store', 'update' => 'admin.customer_address_book.update', 'destroy' => 'admin.customer_address_book.delete']])->except(['edit', 'create']);
     Route::resource('customer/order', 'API\Admin\OrderController')->only(['index', 'show']);
     Route::resource('profile', 'API\Web\CustomerController')->only(['show', 'update']);
+    Route::post('change-password', 'API\Web\CustomerController@changePassword')->name('change-old-password');
     Route::resource('coupon', 'API\Web\CouponController')->except(['edit', 'show', 'create', 'update', 'destroy']);
     Route::post('add_comments', 'API\Web\OrderController@addOrderComments');
 });

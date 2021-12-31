@@ -83,7 +83,7 @@ export default {
             this.activeItem = menuItem
         },
         updateLoadingState(state){
-            console.log(state,"working")
+            // console.log(state,"working")
             this.$parent.loading = state;
         }
     }

@@ -50,7 +50,7 @@
                 }
             },
             error: function(data) {
-                console.log(data.responseJSON.errors);
+                // console.log(data.responseJSON.errors);
                 if(data.status == 422){
                     $.each( data.responseJSON.errors, function( index, value ){
                         $("#registerForm").find("."+index).html(value)
@@ -95,8 +95,11 @@
                 clientid: "{{isset($setting['client_id']) ? $setting['client_id'] : ''}}",
                 clientsecret: "{{isset($setting['client_secret']) ? $setting['client_secret'] : ''}}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
+                $('#event-loading').css('display', 'none');
                 if(data.status == 'Success'){
                     localStorage.setItem("customerToken",data.data.token);
                     localStorage.setItem("customerHash",data.data.hash);
@@ -107,7 +110,7 @@
                 }
             },
             error: function(data) {
-                console.log(data.responseJSON.errors);
+                $('#event-loading').css('display', 'none');
                 if(data.status == 422){
                     $.each( data.responseJSON.errors, function( index, value ){
                         $("#registerForm").find("."+index).html(value)
@@ -129,8 +132,7 @@
         $(".errors").addClass('d-none');
         customerLogin = $.trim(localStorage.getItem("customerLoggedin"));
         if(customerLogin == '1'){
-            toastr.error('{{ trans("already-logged-in") }}');
-
+            toastr.success('Already logged in');
             return;
         }
 
@@ -152,9 +154,13 @@
                 clientid: "{{isset($setting['client_id']) ? $setting['client_id'] : ''}}",
                 clientsecret: "{{isset($setting['client_secret']) ? $setting['client_secret'] : ''}}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
                 if(data.status == 'Success'){
+                    $('#event-loading').css('display', 'none');
+                    localStorage.setItem("loginSuccessMessage", "Welcome " + data.data.first_name + " " + data.data.last_name);
                     localStorage.setItem("customerToken",data.data.token);
                     localStorage.setItem("customerHash",data.data.hash);
                     localStorage.setItem("customerLoggedin",'1');
@@ -166,19 +172,16 @@
                 }
             },
             error: function(data) {
-                console.log(data);
-                if(data.status == 422){
-                    if(data.responseJSON.status == 'Error'){
-                        $("#loginForm").find(".password").html(data.responseJSON.message)
-                        $("#loginForm").find(".password").removeClass('d-none');
-                    }
-                }
-                if(data.status == 422){
-                    $.each( data.responseJSON.errors, function( index, value ){
-                        $("#loginForm").find("."+index).html(value)
-                        $("#loginForm").find("."+index).removeClass('d-none');
+                $('#event-loading').css('display', 'none');
+                if(data.responseJSON.errors){
+                    var err = '';
+                    $.each(data.responseJSON.errors, function(i, e){
+                        err += e + '\n';
                     });
+                    toastr.error(err);
+                    return false;
                 }
+                toastr.error(data.responseJSON.message);
             },
         });
     }

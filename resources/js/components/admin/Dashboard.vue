@@ -700,7 +700,7 @@ export default {
               },
             };
           }
-          console.log(this.saleSeries, this.saleChartOptions);
+          // // console.log(this.saleSeries, this.saleChartOptions);
         })
         .finally(() => (this.$parent.loading = false));
     },

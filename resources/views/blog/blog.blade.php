@@ -52,35 +52,37 @@
                         pagination += '</div>';
 
                         $('.pagination').html(pagination);
-                        const templ = document.getElementById("blog-template");
-                        console.log(data.data);
+                        // console.log(data.data);
                         for (i = 0; i < data.data.length; i++) {
-                            const clone = templ.content.cloneNode(true);
-                            clone.querySelector(".blog-template-date").innerHTML = data.data[i].date;
-                            clone.querySelector(".blog-template-image-link").setAttribute('href',
-                                '/blog-detail/' + data.data[i].slug);
-                            clone.querySelector(".blog-template-readmore-link").setAttribute('href',
-                                '/blog-detail/' + data.data[i].slug);
-
+                            date = data.data[i].date;
                             if (data.data[i].gallary != null) {
-                                clone.querySelector(".blog-template-image").setAttribute('src', '/gallary/' +
-                                    data.data[i].gallary.gallary_name);
+                                imgSrc = '/gallary/' + data.data[i].gallary.gallary_name;
                             }
                             if (data.data[i].category != null) {
                                 if (data.data[i].category.blog_detail != null) {
-                                    clone.querySelector(".blog-template-category").innerHTML = data.data[i]
-                                        .category.blog_detail[0].name;
+                                    cateName = data.data[i].category.blog_detail[0].name;
                                 }
                             }
                             if (data.data[i].detail != null) {
-                                clone.querySelector(".blog-template-title").innerHTML = data.data[i].detail[0]
-                                    .name;
-                                clone.querySelector(".blog-template-title").setAttribute('href',
-                                    '/blog-detail/' + data.data[i].slug);
-                                clone.querySelector(".blog-template-description").innerHTML = data.data[i]
-                                    .detail[0].description;
+                                name = data.data[i].detail[0].name;
                             }
-                            $("." + appendTo).append(clone);
+                            blogSection = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">' +
+                                '<div class="content">' +
+                                    '<div class="image">' +
+                                        '<img src="' + imgSrc + '" class="img-fluid">' +
+                                    '</div>' +
+                                    '<div class="discription text-center p-3 m-auto bg-light">' +
+                                        '<a href="/blog-detail/' + data.data[i].slug + '">' +
+                                            '<h3 class="font-weight-bold">' +
+                                                name +
+                                            '</h3>' +
+                                        '</a>' +
+                                        '<p>' + data.data[i].detail[0].description.replace(/<[^>]*>?/gm, '').substring(0, 85) + '...</p>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                            // console.log(blogSection);
+                            $("." + appendTo).append(blogSection);
                         }
                     }
                 },

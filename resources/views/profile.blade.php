@@ -1,123 +1,127 @@
+<script>
+    loggedIn = localStorage.getItem("customerLoggedin");
+    if (loggedIn != '1') {
+        localStorage.setItem("loginErrorMessage", "Please Login!!!");
+        window.location.href = "{{url('/login')}}";
+    }
+</script>
 @extends('layouts.master')
 @section('content')
 
-
-<div class="container-fuild">
-    <nav aria-label="breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">{{ trans('lables.bread-crumb-home') }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ trans('lables.bread-profile') }}</li>
-            </ol>
+<!-- Breadcrumbs -->
+<section id="breadcrumbs" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="m-0 p-0 d-flex align-items-center text-white">
+                    <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <li class="">Profile</li>
+                </ul>
+            </div>
+            <div class="col-12 mt-3">
+                <h2 class="text-white">Profile</h2>
+            </div>
         </div>
-    </nav>
-</div>
-<section class="pro-content">
-
-    <!-- Profile Content -->
-    <section class="profile-content">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-12 media-main">
-                    <div class="media">
-                        <div class="media-body">
-                            <div class="row">
-                                <div class="col-12 col-sm-4 col-md-6">
-                                    <h4>User Name<br>
-                                        <small>Location </small>
-                                    </h4>
-                                </div>
-                                <div class="col-12 col-sm-8 col-md-6 detail">
-
-                                    <p class="mb-0">{{ trans('lables.profile-email') }}:<span>info@yourcompanyname.com</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-12 col-lg-3">
-                    <div class="heading">
-                        <h2>
-                            {{ trans('lables.profile-my-account') }}
-                        </h2>
-                        <hr>
-                    </div>
-
-                    @include('includes.side-menu')
-                </div>
-                <div class="col-12 col-lg-9 ">
-                    <div class="heading">
-                        <h2>
-                            {{ trans('lables.profile-prsonal-info') }}
-                        </h2>
-                        <hr>
-                    </div>
-
-                    <form class="align-items-center" id="profileForm">
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">{{ trans('lables.profile-first-name') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="first_name" placeholder="{{ trans('lables.profile-first-name') }}">
-                                <div class="invalid-feedback">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">{{ trans('lables.profile-last-name') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="last_name" placeholder="{{ trans('lables.profile-last-name') }}">
-                                <div class="invalid-feedback">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">{{ trans('lables.profile-gender') }}</label>
-                            <div class="from-group  select-control col-sm-4 ">
-
-
-                                <select class="form-control " id="gender">
-                                    <option value="Male" >Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    
-                                </div>
-
-                            </div>
-                            <label for="inputPassword" class="col-sm-2 col-form-label">{{ trans('lables.profile-dob') }}</label>
-                            <div class=" col-sm-4">
-                                <div class="input-group date">
-                                    <input type="date" class="form-control datepicker" id="{{ trans('lables.profile-dob') }}">
-                                    <div class="invalid-feedback">
-                                        
+    </div>
+</section>
+<!-- Breadcrumbs Ends -->
+<!-- Profile -->
+<section id="profile-wrapper" class="py-3">
+    <div class="container">
+        <div class="row py-xl-5 py-md-3 py-0">
+            @include('includes.side-menu')
+            <div class="col-xl-9 col-lg-9 col-md-11 col-10 mt-xl-0 mt-md-0 mt-3">
+                <div class="row">
+                    <div class="col-10">
+                        <ul class="nav mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active font-weight-bold p-0 head-info text-dark" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true">Profile Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  edit text-white" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false"><span class="mr-2"><i class="fa fa-pencil" aria-hidden="true"></i></span>Edit</a>
+                            </li>
+                        </ul>
+                        <div class="profile-side-detail-edit">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+                                    <div class="dashboard-content d-flex justify-content-around align-items-center h-100">
+                                        {{-- <div class="dashboard-profile-image mr-3">
+                                            <img src="frontend/assets/images/profile.jpg" class="tab-profile-img img-fluid">
+                                        </div> --}}
+                                        <ul class="w-100 mb-0">
+                                            <li>
+                                                Name <span id="liName">
+                                                    {{-- Ram Shrestha --}}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                Contact <span id="liPhone">
+                                                    {{-- +123 90 --}}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                Email <span id="liEmail">
+                                                    {{-- ram@gmail.com --}}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                Address <span id="liAddress">
+                                                    {{-- Kathmandu, Nepal --}}
+                                                </span>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-
+                                <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                                    <form id="profileForm" method="post">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="first_name">First Name</label>
+                                                <input type="text" class="form-control" placeholder="First Name" id="first_name" name="first_name">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="last_name">Last Name</label>
+                                                <input type="text" class="form-control" placeholder="Last Name" id="last_name" name="last_name">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="phone">Phone</label>
+                                                <input type="number" class="form-control" placeholder="" id="phone" name="phone">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="gender">Email</label>
+                                                <select class="form-control" id="gender" name="gender">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="dob">DOB</label>
+                                                <input type="text" class="form-control datepicker" id="dob" name="dob" autocomplete="off" readonly>
+                                            </div>
+                                            {{-- <div class="form-group col-12">
+                                                <label for="image">Upload Profile Image</label>
+                                                <input type="file" class="form-control-file" id="uploadprofileimage">
+                                            </div> --}}
+                                            <div class="form-group col-md-12 col-12">
+                                                <input type="hidden" class="form-control" id="addres_id">
+                                                <input type="hidden" class="form-control" id="method">
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                            @php
+                                                getSetting()['is_deliveryboyapp_purchased'] = 0;
+                                            @endphp
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">{{ trans('lables.profile-phone') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="phone" placeholder="{{ trans('lables.profile-phone') }}">
-                            </div>
-                        </div>
-                        <input type="hidden" class="form-control" id="method">
-                        <input type="hidden" class="form-control" id="addres_id">
-                        <button type="submit" class="btn btn-secondary swipe-to-top saveProfile">{{ trans('lables.profile-update') }}</button>
-                    </form>
-
-                    <!-- ............the end..... -->
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </section>
-
+<!-- Profile Ends -->
 
 @endsection
 @section('script')
@@ -137,6 +141,9 @@
     customerId = $.trim(localStorage.getItem("customerId"));
 
     $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
         getProfile();
     });
 
@@ -154,6 +161,8 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
+                    $("#liName").html(data.data.customer_first_name + ' ' + data.data.customer_last_name);
+                    $("#liEmail").html(data.data.customer_email);
                     $("#profileForm").find("#first_name").val(data.data.customer_first_name);
                     $("#profileForm").find("#last_name").val(data.data.customer_last_name);
                 }
@@ -173,11 +182,14 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                // console.log(data);
                 if (data.status == 'Success') {
                     if(data.data != null && data.data != 'null' && data.data != ''){
                         $("#profileForm").find("#gender").val(data.data[0].gender);
                         $("#profileForm").find("#gender").trigger('change');
                         $("#profileForm").find("#dob").val(data.data[0].dob);
+                        $("#liPhone").html(data.data[0].phone);
+                        $("#liAddress").html(data.data[0].city + ', ' + data.data[0].country_id.country_name);
                         $("#profileForm").find("#phone").val(data.data[0].phone);
                         $("#profileForm").find("#method").val('put');
                         $("#profileForm").find("#addres_id").val(data.data[0].id);
@@ -212,8 +224,11 @@
                 clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                 clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
+                $('#event-loading').css('display', 'none');
                 if (data.status == 'Success') {
                     toastr.success('{{ trans("profile-updated-successfully") }}');
                 }
@@ -222,7 +237,7 @@
                 }
             },
             error: function(data) {
-                console.log();
+                $('#event-loading').css('display', 'none');
                 if(data.status == 422){
                     jQuery.each(data.responseJSON.errors, function(index, item) {
                         $("#"+index).parent().find('.invalid-feedback').css('display','block');
@@ -270,13 +285,13 @@
                 if (data.status == 'Success') {
                     $("#profileForm").find("#method").val('put');
                     $("#profileForm").find("#addres_id").val(data.data.id);
+                    location.reload();
                 }
                 else if (data.status == 'Error') {
                     toastr.error('{{ trans("response.some_thing_went_wrong") }}');
                 }
             },
             error: function(data) {
-                console.log();
                 if(data.status == 422){
                     jQuery.each(data.responseJSON.errors, function(index, item) {
                         $("#"+index).parent().find('.invalid-feedback').css('display','block');

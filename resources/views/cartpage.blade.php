@@ -25,11 +25,6 @@
             }
         });
 
-        
-
-
-      
-
 
         function couponCartItem() {
             coupon_code = $.trim($("#coupon_code").val());
@@ -107,8 +102,7 @@
                     $(".caritem-grandtotal").html(price);
                     localStorage.setItem("couponCart", '');
                     if (data.status == 401) {
-                        // toastr.error(data.res
-                        toastr.error('{{ trans('response.please_login_first') }}')
+                        toastr.error('{{ trans('response.please_login_first') }}');
                     }
                 },
             });

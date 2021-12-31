@@ -254,7 +254,7 @@ export default {
             this.pagination = pagination;
         },
         productNameBasedOnType(stock_transfer){
-            // console.log(stock_transfer);
+            // // console.log(stock_transfer);
 
 
             if(stock_transfer.detail[0].product.product_type === "simple"){

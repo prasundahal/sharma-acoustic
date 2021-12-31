@@ -1,3 +1,4 @@
+{{-- {{ dd(get_defined_vars()) }} --}}
 @extends('layouts.master')
 @section('content')
 <style>
@@ -9,15 +10,13 @@
         border: 1px solid;
     }
 </style>
-@include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail'] :
-'includes.productdetail.product-style1')
+@include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail'] : 'includes.productdetail.product-style1')
 
-@include(isset(getSetting()['product_detail']) ?
-'includes.productdetail.product-'.getSetting()['product_detail']."-template" :
-'includes.productdetail.product-style1-template')
+@include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail']."-template" : 'includes.productdetail.product-style1-template')
 
-@include(isset(getSetting()['card_style']) ?
-'includes.cart.product_card_'.getSetting()['card_style'] : "includes.cart.product_card_style1")
+@include('includes.productdetail.related-product-section');
+
+@include(isset(getSetting()['card_style']) ? 'includes.cart.product_card_'.getSetting()['card_style'] : "includes.cart.product_card_style1")
 
 <input type="hidden" id="product_id" value="{{ $product }}" />
 
@@ -33,9 +32,23 @@
     $(document).ready(function() {
         fetchProduct();
         fetchRelatedProduct();
+
+        $('#second-tab').click();
+        $("#share").jsSocials({
+            url: '{{ url('/') }}',
+            text: "Sharma Acoustic",
+            showLabel: false,
+            shareIn: 'popup',
+            showCount: "inside",
+            shares: ["facebook", "twitter", "googleplus", "linkedin", "whatsapp"]
+        });
     });
 
+    loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
+    customerId = $.trim(localStorage.getItem("customerId"));
+
     languageId = localStorage.getItem("languageId");
+
     if (languageId == null || languageId == 'null') {
         localStorage.setItem("languageId", '1');
         $(".language-default-name").html('Endlish');
@@ -61,131 +74,135 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
-                    const templ = document.getElementById("product-detail-section");
-
-                    const clone = templ.content.cloneNode(true);
-                    // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-                    clone.querySelector(".wishlist-icon").setAttribute('data-id', data.data.product_id);
-                    clone.querySelector(".wishlist-icon").setAttribute('onclick', 'addWishlist(this)');
-                    clone.querySelector(".wishlist-icon").setAttribute('data-type', data.data.product_type);
-                    clone.querySelector(".compare-icon").setAttribute('data-id', data.data.product_id);
-                    clone.querySelector(".compare-icon").setAttribute('data-type', data.data.product_type);
-                    clone.querySelector(".compare-icon").setAttribute('onclick', 'addCompare(this)');
-                    clone.querySelector(".product-detail-section-product-id").innerHTML = data.data
-                        .product_id;
-
-                    clone.querySelector(".add-to-cart").setAttribute('onclick', 'addToCart(this)');
-                    clone.querySelector(".add-to-cart").setAttribute('data-id', data.data.product_id);
-                    clone.querySelector(".add-to-cart").setAttribute('data-type', data.data.product_type);
-
-
-                    if (data.data.product_gallary_detail != null) {
-                        var image_list_link = "";
-                        var image_list = "";
+                    var clone = '';
+                    var topGal = '';
+                    var thumbGal = '';
+                    $('#add-to-wishlist').attr('data-id', data.data.product_id);
+                    $('#add-to-wishlist').attr('onclick', 'addWishlist(this)');
+                    $('#add-to-wishlist').attr('data-type', data.data.product_type);
+                    $('#add-to-cart').attr('data-id', data.data.product_id);
+                    $('#add-to-cart').attr('onclick', 'addToCart(this)');
+                    $('#add-to-cart').attr('data-type', data.data.product_type);
+                    $('#buyNow').attr('data-id', data.data.product_id);
+                    $('#buyNow').attr('onclick', 'buyNow(this)');
+                    $('#buyNow').attr('data-type', data.data.product_type);
+                    if (data.data.product_gallary_detail != null && data.data.product_gallary_detail.length > 0) {
                         for (var g = 0; g < data.data.product_gallary_detail.length; g++) {
-
-                            image_list_link += '<a class="slider-for__item ex1 fancybox-button" href="/gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet"><img class="product-detail-section-image" src="/gallary/large' + data.data.product_gallary_detail[g].gallary_name + '" alt="Zoom Image" /></a>'
-
-
-                            image_list += '<div class="slider-nav__item"><img class="product-detail-section-image" src="/gallary/thumbnail' + data.data.product_gallary_detail[g].gallary_name + '" alt="Zoom Image"/></div>';
-
+                            prodGalDetGalName = data.data.product_gallary_detail[g].gallary_name;
+                            topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
+                                '<a href="{{ asset('/') }}gallary/large' + prodGalDetGalName + '">' +
+                                    '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
+                                '</a>' +
+                            '</div>';
+                            thumbGal += '<div class="swiper-slide">' +
+                                '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
+                            '</div>';
                         }
-
                         if(data.data.product_combination){
                             for (loop = 0; loop < data.data.product_combination.length; loop++) {
                                 if (data.data.product_combination[loop].gallary != null) {
-                                    image_list_link += '<a class="slider-for__item ex1 fancybox-button" href="/gallary/large' + data.data.product_combination[loop].gallary.gallary_name + '" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet"><img class="product-detail-section-image" src="/gallary/large' + data.data.product_combination[loop].gallary.gallary_name + '" alt="Zoom Image" /></a>';
-
-
-                                    image_list += '<div class="slider-nav__item"><img class="product-detail-section-image" src="/gallary/thumbnail' + data.data.product_combination[loop].gallary.gallary_name + '" alt="Zoom Image" id="image-'+data.data.product_combination[loop].product_combination_id+'"/></div>';
+                                    topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
+                                        '<a href="{{ asset('/') }}gallary/large' + prodGalDetGalName + '">' +
+                                            '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
+                                        '</a>' +
+                                    '</div>';
+                                    thumbGal += '<div class="swiper-slide">' +
+                                        '<img src="{{ asset('/') }}gallary/large' + prodGalDetGalName + '" alt="" />' +
+                                    '</div>';
                                 }
                             }
                         }
-
-                        clone.querySelector(".slider-for").innerHTML = image_list_link;
-                        clone.querySelector(".slider-nav").innerHTML = image_list;
-
-                    }
-                    if (data.data.category != null) {
-                        if (data.data.category[0].category_detail != null) {
-                            if (data.data.category[0].category_detail.detail != null) {
-                                clone.querySelector(".product-detail-section-cateogory-link").setAttribute(
-                                    'href', "/shop");
-
-                                clone.querySelector(".product-detail-section-cateogory-link").innerHTML =
-                                    data.data.category[0].category_detail.detail[0].name;
-
-                            }
+                    } else {
+                        if(data.data.product_gallary != null){
+                            // // console.log(data.data.product_gallary.gallary_name);
+                            topGal += '<div class="swiper-slide easyzoom easyzoom--overlay">' +
+                                '<a href="{{ asset("/") }}gallary/' + data.data.product_gallary.gallary_name + '">' +
+                                    '<img src="{{ asset("/") }}gallary/' + data.data.product_gallary.gallary_name + '" alt="" />' +
+                                '</a>' +
+                            '</div>';
+                            thumbGal += '<div class="swiper-slide">' +
+                                '<img src="{{ asset("/") }}gallary/' + data.data.product_gallary.gallary_name + '" alt="" />' +
+                            '</div>';
                         }
                     }
+                    $('#top-gallery').html(topGal);
+                    $('#thumb-gallery').html(thumbGal);
+                    productDetailInit();
+
+                    // if (data.data.category != null) {
+                    //     if (data.data.category[0].category_detail != null) {
+                    //         if (data.data.category[0].category_detail.detail != null) {
+                    //             clone.querySelector(".product-detail-section-cateogory-link").setAttribute(
+                    //                 'href', "/shop");
+
+                    //             clone.querySelector(".product-detail-section-cateogory-link").innerHTML =
+                    //                 data.data.category[0].category_detail.detail[0].name;
+
+                    //         }
+                    //     }
+                    // }
+
                     if (data.data.detail != null) {
-                        clone.querySelector(".pro-title").innerHTML = data.data.detail[0].title;
-                        clone.querySelector(".description").innerHTML = data.data.detail[0].desc;
+                        $("#pro-title").html(data.data.detail[0].title);
+                        $(".pro-desc").html(data.data.detail[0].desc);
 
                     }
 
                     if (data.data.product_type == 'simple') {
-                            if (data.data.product_discount_price == '' || data.data
-                                .product_discount_price == null || data.data.product_discount_price ==
-                                'null') {
-                                clone.querySelector(".product-card-price").innerHTML = data.data
-                                    .product_price_symbol;
+                            if (data.data.product_discount_price == '' || data.data.product_discount_price == null || data.data.product_discount_price =='null') {
+                                $("#product-card-price").html(data.data.product_price_symbol);
                             } else {
-
-                                clone.querySelector(".product-card-price").innerHTML = data.data
-                                    .product_discount_price_symbol + '<span>' + data.data
-                                    .product_price_symbol + '</span>';
+                                $("#product-card-price").html(data.data.product_discount_price_symbol); 
+                                $('#cut-product-card-price').html(data.data.product_price_symbol);
                             }
                         } else {
                             if (data.data.product_combination != null) {
-                                clone.querySelector(".product-card-price").innerHTML = data.data
-                          .product_combination[0].product_price_symbol;
+                                $("#product-card-price").html(data.data.product_combination[0].product_price_symbol);
                         }
-                        if (data.data.attribute != null) {
-                            var combination = '';
-                            var attribute = data.data.attribute
-                            for (var a = 0; a < attribute.length; a++) {
+                        // if (data.data.attribute != null) {
+                        //     var combination = '';
+                        //     var attribute = data.data.attribute
+                        //     for (var a = 0; a < attribute.length; a++) {
 
-                                if (attribute[a].attributes != null) {
+                        //         if (attribute[a].attributes != null) {
 
-                                    if (attribute[a].attributes.detail != null) {
+                        //             if (attribute[a].attributes.detail != null) {
 
-                                        combination += '<div class="color-selection">';
-                                        combination += '<h4><b>' + attribute[a].attributes.detail[0].name +
-                                            '</b></h4>';
-                                        combination += '</div>';
-                                    }
-                                    combination += '<ul class="variations">';
-                                    if (attribute[a].variations != null) {
-                                        for (var v = 0; v < attribute[a].variations
-                                            .length; v++) {
-                                            combination +=
-                                                '<li class="btn size-btn variation_list_item attribute_' +
-                                                attribute[a].attributes.detail[0].name.split(' ').join(
-                                                    '_') + '_div  ' + attribute[a].variations[v]
-                                                .product_variation.detail[0].name + '-' + attribute[a]
-                                                .attributes.detail[0].name.split(' ').join('_') +
-                                                '" data-attribute-id="' + attribute[a].attributes
-                                                .attribute_id + '" data-attribute-name="' + attribute[a]
-                                                .attributes.detail[0].name + '" data-variation-id="' +
-                                                attribute[a].variations[v]
-                                                .product_variation.id + '" data-variation-name="' +
-                                                attribute[a].variations[v]
-                                                .product_variation.detail[0].name + '">' + attribute[a]
-                                                .variations[v]
-                                                .product_variation.detail[0].name + '</li>';
-                                        }
-                                    }
-                                    combination += '</ul>';
-                                }
-                                clone.querySelector(".pro-options").innerHTML = combination;
-                            }
-                        }
+                        //                 combination += '<div class="color-selection">';
+                        //                 combination += '<h4><b>' + attribute[a].attributes.detail[0].name +
+                        //                     '</b></h4>';
+                        //                 combination += '</div>';
+                        //             }
+                        //             combination += '<ul class="variations">';
+                        //             if (attribute[a].variations != null) {
+                        //                 for (var v = 0; v < attribute[a].variations
+                        //                     .length; v++) {
+                        //                     combination +=
+                        //                         '<li class="btn size-btn variation_list_item attribute_' +
+                        //                         attribute[a].attributes.detail[0].name.split(' ').join(
+                        //                             '_') + '_div  ' + attribute[a].variations[v]
+                        //                         .product_variation.detail[0].name + '-' + attribute[a]
+                        //                         .attributes.detail[0].name.split(' ').join('_') +
+                        //                         '" data-attribute-id="' + attribute[a].attributes
+                        //                         .attribute_id + '" data-attribute-name="' + attribute[a]
+                        //                         .attributes.detail[0].name + '" data-variation-id="' +
+                        //                         attribute[a].variations[v]
+                        //                         .product_variation.id + '" data-variation-name="' +
+                        //                         attribute[a].variations[v]
+                        //                         .product_variation.detail[0].name + '">' + attribute[a]
+                        //                         .variations[v]
+                        //                         .product_variation.detail[0].name + '</li>';
+                        //                 }
+                        //             }
+                        //             combination += '</ul>';
+                        //         }
+                        //         clone.querySelector(".pro-options").innerHTML = combination;
+                        //     }
+                        // }
 
                     }
                     if (data.data.reviews !== null) {
-                        clone.querySelector(".review-count").innerHTML = data.data.reviews.length +
-                            " Reviews";
+                        $(".review-count").html(data.data.reviews.length);
                             rating = '';
                             sum = 0;
                             for(review = 0; review < data.data.reviews.length; review++){
@@ -194,39 +211,41 @@
                             cur_rating = (sum / data.data.reviews.length);
                             cur_rating = Math.round(cur_rating);
                             if(cur_rating == 1){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa " for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                             }
                             else if(cur_rating == 2){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                             }
                             else if(cur_rating == 3){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                             }
                             else if(cur_rating == 4){
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa active" for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i>';
                             }
                             else if(cur_rating == 5){
-                                rating = '<label class="full fa active" for="star1" title="Awesome - 1 stars"></label><label class="full fa active" for="star_2" title="Awesome - 2 stars"></label><label class="full fa active" for="star_3" title="Awesome - 3 stars"></label><label class="full fa active" for="star_4" title="Awesome - 4 stars"></label><label class="full fa active" for="star_5" title="Awesome - 5 stars"></label>'
+                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>';
                             }
                             else{
-                                rating = '<label class="full fa " for="star1" title="Awesome - 1 stars"></label><label class="full fa " for="star_2" title="Awesome - 2 stars"></label><label class="full fa " for="star_3" title="Awesome - 3 stars"></label><label class="full fa " for="star_4" title="Awesome - 4 stars"></label><label class="full fa " for="star_5" title="Awesome - 5 stars"></label>'
+                                rating = '<i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                             }
 
-                            clone.querySelector(".display-rating").innerHTML = rating;
+                            $(".display-rating").innerHTML = rating;
                     }
 
                     if (data.data.rating !== null) {
-                        clone.querySelector(".rating").innerHTML = data.data.rating;
+                        // clone.querySelector(".rating").innerHTML = data.data.rating;
                     }
 
 
                     $("." + appendTo).append(clone);
                     getProductReview();
-                    slideInital();
+                    // slideInital();
 
                 }
             },
-            error: function(data) {},
+            error: function(data) {
+                myFunction();
+            },
         });
     }
 
@@ -263,7 +282,7 @@
 
         }
 
-        // console.log(attribute_id, variation_id, attribute, variation);
+        // // console.log(attribute_id, variation_id, attribute, variation);
         var url = "{{ url('') }}" + '/api/client/products/{{ $product }}?getCategory=1&getDetail=1&language_id=' + languageId + '&currency='+localStorage.getItem("currency");
         $.ajax({
             type: 'get',
@@ -286,8 +305,8 @@
                             ++p;
                         }
                         if (variation_array.length == variation_id.length) {
-                            console.log(variation_array);
-                            console.log(variation_id);
+                            // console.log(variation_array);
+                            // console.log(variation_id);
                             for (m = 0; m < variation_id.length; m++) {
                                 if (jQuery.inArray(parseInt(variation_id[m]), variation_array) == -1) {
                                     not_combination = 1;
@@ -345,80 +364,74 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
-
-                    const templ = document.getElementById("product-card-template");
-                    templ.prepend('<div class="product-carousel-js">');
-                    templ.append('</div>');
+                    var cart = '';
+                    var wish = '';
+                    var imgSrc = '';
+                    var imgAlt = '';
+                    var name = '';
                     for (i = 0; i < data.data.length; i++) {
-                        const clone = templ.content.cloneNode(true);
-                        // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-                        clone.querySelector(".wishlist-icon").setAttribute('data-id', data.data[i]
-                            .product_id);
-                        clone.querySelector(".wishlist-icon").setAttribute('onclick', 'addWishlist(this)');
-                        clone.querySelector(".wishlist-icon").setAttribute('data-type', data.data[i]
-                            .product_type);
-                        clone.querySelector(".compare-icon").setAttribute('data-id', data.data[i]
-                            .product_id);
-                        clone.querySelector(".compare-icon").setAttribute('data-type', data.data[i]
-                            .product_type);
-                        clone.querySelector(".compare-icon").setAttribute('onclick', 'addCompare(this)');
-                        clone.querySelector(".quick-view-icon").setAttribute('data-id', data.data[i]
-                            .product_id);
-                        clone.querySelector(".quick-view-icon").setAttribute('data-type', data.data[i]
-                            .product_type);
-                        clone.querySelector(".quick-view-icon").setAttribute('onclick', 'quiclViewData(this)');
-
                         if (data.data[i].product_gallary != null) {
                             if (data.data[i].product_gallary.detail != null) {
-                                clone.querySelector(".product-card-image").setAttribute('src', data.data[i]
-                                    .product_gallary.detail[1].gallary_path);
+                                imgSrc = data.data[i].product_gallary.detail[1].gallary_path;
                             }
                         }
                         if (data.data[i].detail != null) {
-                            clone.querySelector(".product-card-image").setAttribute('alt', data.data[i]
-                                .detail[0].title);
+                            imgAlt = data.data[i].detail[0].title;
                         }
                         if (data.data[i].category != null) {
                             if (data.data[i].category[0].category_detail != null) {
                                 if (data.data[i].category[0].category_detail.detail != null) {
-                                    clone.querySelector(".product-card-category").innerHTML = data.data[i]
-                                        .category[0].category_detail.detail[0].name;
+                                    name = data.data[i].category[0].category_detail.detail[0].name;
                                 }
                             }
                         }
                         if (data.data[i].detail != null) {
-                            clone.querySelector(".product-card-name").innerHTML = data.data[i].detail[0]
-                                .title;
-                            clone.querySelector(".product-card-name").setAttribute('href', '/product/' + data
-                                    .data[i].product_id+'/'+data
-                                    .data[i].product_slug);
-                                    var desc = data.data[i].detail[0].desc;
-                            clone.querySelector(".product-card-desc").innerHTML = desc.substring(0, 50);
+                            title = data.data[i].detail[0].title;
+                            href = '/product/' + data.data[i].product_id+'/'+data.data[i].product_slug;
+                            var desc = data.data[i].detail[0].desc;
+                            desc = desc.substring(0, 50);
                         }
 
                         if (data.data[i].product_type == 'simple') {
-                                if (data.data[i].product_discount_price == '' || data.data[i]
-                                    .product_discount_price == null || data.data[i].product_discount_price ==
-                                    'null') {
-                                    clone.querySelector(".product-card-price").innerHTML = data.data[i]
-                                        .product_price_symbol;
-                                } else {
-                                    clone.querySelector(".product-card-price").innerHTML = data.data[i]
-                                        .product_price_symbol + '<span>' +data.data[i].product_discount_price_symbol +'</span>';
-                                }
+                            if (data.data[i].product_discount_price == '' || data.data[i].product_discount_price == null || data.data[i].product_discount_price == 'null') {
+                                price = data.data[i].product_price_symbol;
+                            } else {
+                                price = data.data[i].product_price_symbol + '<span>' +data.data[i].product_discount_price_symbol +'</span>';
+                            }
                         } else {
                             if (data.data[i].product_combination != null) {
-                                clone.querySelector(".product-card-price").innerHTML = data.data[i]
-                                    .product_combination[0].product_price_symbol;
+                                price = data.data[i].product_combination[0].product_price_symbol;
                             }
                         }
 
-                        clone.querySelector(".product-card-link").setAttribute('href', '/product/' + data
-                                    .data[i].product_id+'/'+data
-                                    .data[i].product_slug);
-                        $("." + appendTo).append(clone);
+                        clone = '<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12  mt-4 mb-3">' +
+                            '<div class="product-grid-item">' +
+                                '<div class="product-grid-image">' +
+                                    '<a href="' + href + '">' +
+                                        '<img class="pic-1 img-fluid" src="' +imgSrc + '">' +
+                                    '</a>' +
+                                    '<ul class="social">' +
+                                        '<!-- <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li> -->' +
+                                        '<li><a href="javascript:void(0)" onclick="addWishlist(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>' +
+                                        '<li><a href="javascript:void(0)" onclick="addToCart(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                    '</ul>' +
+                                    // '<span class="product-new-label font-weight-bold">New</span>' +
+                                    // '<span class="product-discount-label">-10%</span>' +
+                                '</div>' +
+                                '<div class="product-content">' +
+                                    '<h4 class="title mt-2"><a href="' + href + '">Product Name</a></h4>' +
+                                    '<div class="price">' +
+                                        price +
+                                        // '<span>' + cutPrice + '</span>' +
+                                    '</div>' +
+                                    '<a class="add-to-cart" href=javascript:void(0)" onclick="buyNow(this)" data-id="' + data.data[i].product_id + '" data-type="' + data.data[i].product_type + '">Buy Now</a>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                        
+                        $("#featured-product").append(clone);
                     }
-                    getSliderSettings(appendTo);
+                    // getSliderSettings(appendTo);
                 }
             },
             error: function(data) {},
@@ -455,7 +468,7 @@
                 }
             },
             error: function(data) {
-                console.log(data);
+                // console.log(data);
                 if (data.status == 422) {
                     jQuery.each(data.responseJSON.errors, function(index, item) {
                         $("#" + index).parent().find('.invalid-feedback').css('display',
@@ -470,8 +483,54 @@
         });
     }
 
+    $(document).on('click', '#reviewSend', function(e){
+        e.preventDefault();
+        if(loggedIn != '1'){
+            toastr.error('please login to review');
+            return false;
+        }
+        rating = $("#prodRating").val();
+        comment = $("#prodComment").val();
+        title = '';
+        if(rating == ''){
+            toastr.error('Select rating');
+            return;
+        }
+        
+        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&comment=' + comment + '&rating=' + rating +'&title='+title +'&customer_id='+customerId;
+        var appendTo = 'related';
+        $.ajax({
+            type: 'post',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + customerToken,
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+                clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+            },
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
+            success: function(data) {
+                $('#event-loading').css('display', 'none');
+                if (data.status == 'Success') {
+                    toastr.success('{{ trans("rating-saved-successfully") }}');
+                    $("#prodRating").val('');
+                    $("#prodComment").val('');
+                    getProductReview();
+                }else{
+                    toastr.errort
+                }
+            },
+            error: function(data) {
+                $('#event-loading').css('display', 'none');
+                toastr.error(data.responseJSON.message);
+            },
+        });
+    });
+
     function getProductReview() {
-        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}';
+        var url = "{{ url('') }}" + '/api/client/review?product_id={{ $product }}&customer=1';
         $.ajax({
             type: 'get',
             url: url,
@@ -484,90 +543,35 @@
             beforeSend: function() {},
             success: function(data) {
                 if (data.status == 'Success') {
-                    const temp2 = document.getElementById("review-rating-template");
                     $("#review-rating-show").html('');
                     for (review = 0; review < data.data.length; review++) {
-                        const clone1 = temp2.content.cloneNode(true);
-                        clone1.querySelector(".review-comment").innerHTML = data.data[review].comment;
-                        clone1.querySelector(".review-date").innerHTML = data.data[review].date;
-                        clone1.querySelector(".review-title").innerHTML = data.data[review].title;
                         if (data.data[review].rating == '5') {
-                            clone1.querySelector(".review-rating5").setAttribute('checked', true);
+                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>';
                         } else if (data.data[review].rating == '4') {
-                            clone1.querySelector(".review-rating4").setAttribute('checked', true);
+                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i>';
                         } else if (data.data[review].rating == '3') {
-                            clone1.querySelector(".review-rating3").setAttribute('checked', true);
+                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                         } else if (data.data[review].rating == '2') {
-                            clone1.querySelector(".review-rating2").setAttribute('checked', true);
+                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                         } else if (data.data[review].rating == '1') {
-                            clone1.querySelector(".review-rating1").setAttribute('checked', true);
+                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
                         }
-                        $("#review-rating-show").append(clone1);
+                        span = '<div class="col-xl-8 col-lg-8 col-12 comments-content p-4 my-3 bg-light">' +
+                            '<h5 class="mb-2">By ' + data.data[review].customer.customer_first_name + ' ' + data.data[review].customer.customer_last_name + '</h5>' +
+                            '<div class="p-ratings">' +
+                                rating +
+                            '</div>' +
+                            '<p>' + data.data[review].comment + '</p>' +
+                            '<small class="review-date">' + data.data[review].date + '</small>' +
+                        '</div>';
+                        $("#review-rating-show").append(span);
                     }
                 }
             },
             error: function(data) {
-                console.log(data);
+                // console.log(data);
             },
         });
-    }
-
-
-    function slideInital() {
-        // Product SLICK
-        // $('.slider-show').html('<div class="slider-for"></div><div class="slider-nav"></div>');
-        // alert();
-        jQuery('.slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            infinite: false,
-            draggable: false,
-            fade: true,
-            asNavFor: '.slider-nav',
-            reinit : true
-        });
-        jQuery('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider-for',
-            centerMode: true,
-            centerPadding: '60px',
-            dots: false,
-            arrows: true,
-            focusOnSelect: true,
-            reinit : true
-        });
-
-
-        // Product vertical SLICK
-        jQuery('.slider-for-vertical').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            infinite: false,
-            draggable: false,
-            fade: true,
-            asNavFor: '.slider-nav-vertical'
-        });
-        jQuery('.slider-nav-vertical').slick({
-            dots: false,
-            arrows: true,
-            vertical: true,
-            asNavFor: '.slider-for-vertical',
-            slidesToShow: 3,
-            // centerMode: true,
-            slidesToScroll: 1,
-            verticalSwiping: true,
-            focusOnSelect: true
-        });
-
-        jQuery(function() {
-            // ZOOM
-            jQuery('.ex1').zoom();
-
-        });
-
     }
 </script>
 @endsection

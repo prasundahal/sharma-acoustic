@@ -1,8 +1,22 @@
 {{-- {{ dd(getSetting()['card_style']) }} --}}
+{{-- {{ dd(getSetting()) }} --}}
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 <head>
+    @if (isset($user))
+        <script>
+            localStorage.setItem("customerToken", '{{ $user->token }}');
+            localStorage.setItem("loginSuccessMessage", "Welcome {{ $user->first_name }} {{ $user->last_name }}");
+            localStorage.setItem("customerHash", '{{ $user->hash }}');
+            localStorage.setItem("customerLoggedin", '1');
+            localStorage.setItem("customerId", '{{ $user->id }}');
+            localStorage.setItem("customerFname", '{{ $user->first_name }}');
+            localStorage.setItem("customerLname", '{{ $user->last_name }}');
+            localStorage.setItem("cartSession", '');
+            window.location.href = '/';
+        </script>
+    @endif
     <meta charset="UTF-8">
     <title>{{ isset(getSetting()['seo_title']) ? getSetting()['seo_title'] : 'Seo Title' }}</title>
     <meta name="description"
@@ -17,60 +31,198 @@
     <link rel="icon" type="image/png"
         href="{{ isset(getSetting()['favicon']) ? getSetting()['favicon'] : '01-fav.png' }}">
 
-    <!-- Fontawesome CSS Files -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Core CSS Files -->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/front/css/style.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <!-- Bootstrap link Starts -->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/bootstrap-4.3.1/css/bootstrap.min.css.map') }}">
+    <!-- Bootstrap link Ends -->
+    <!-- Font Awesome Link Starts -->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!-- Font Awesome Link Ends -->
+    <!-- Slick Css -->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/slick/slick-theme.css') }}">
+    <!-- Slick Css Ends-->
+    <!-- Custom Links -->
+    <!-- Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <!-- Font Link Ends -->
+    <link rel="stylesheet" href="https://k1ngzed.com/dist/swiper/swiper.min.css" />
+    <link rel="stylesheet" href="https://k1ngzed.com/dist/EasyZoom/easyzoom.css" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/datepicker/datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/jssocials/jssocials.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/jssocials/jssocials-theme-flat.css') }}">
+    <!-- Custom Links Ends -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-
-
 </head>
 
-<body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }} ">
+<body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }}">
+    {{-- <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script> --}}
+
     {{-- {{   dd(getSetting()) }} --}}
-    @include('extras.preloader')
-    @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] :
-    'includes.headers.header-style1')
+    {{-- @include('extras.preloader') --}}
+    <!-- Whole Body Wrapper Starts -->
+    <section id="index-wrapper">
+        @include(isset(getSetting()['header_style']) ? 'includes.headers.header-'.getSetting()['header_style'] :
+        'includes.headers.header-style1')
+
+        @yield('content')
+
+        @include(isset(getSetting()['Footer_style']) ? 'includes.footers.footer-'.getSetting()['Footer_style'] :
+        'includes.footers.footer-style1')
 
 
-    @yield('content')
+    </section>
+    <!-- Whole Body Wrapper Ends -->
 
+    <!-- 1st Jquery Link Starts-->
+    <script src="{{ asset('frontend/assets/jquery-3.5.1/jquery-3.5.1.js') }}"></script>
+    <!-- Jquery Link Ends-->
+    <!-- 2nd Popper Js Starts -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <!-- Popper Js Ends -->
+    <!-- 3rd Bootstrap Js Link Starts -->
+    <script src="{{ asset('frontend/assets/bootstrap-4.3.1/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/bootstrap-4.3.1/js/bootstrap.min.js.map') }}"></script>
+    <!-- Bootstrap Js Link Ends -->
+    <!-- Slick Js -->
+    <script src="{{ asset('frontend/assets/slick/slick.min.js') }}"></script>
+    <!-- Slick Js Ends-->
+    <!-- toastr Js -->
+    <script src="{{ asset('/assets/toastr/toastr.min.js') }}"></script>
+    {{-- <script src="{{ asset('/assets/toastr/toastr.js.map') }}"></script> --}}
+    <!-- toastr Js Ends-->
+    <!-- datepicker Js -->
+    <script src="{{ asset('/assets/datepicker/datepicker.js') }}"></script>
+    <!-- datepicker Js Ends-->
+    <script src="{{ asset('/assets/jssocials/jssocials.min.js') }}"></script>
+    <!-- Custom Js Starts -->
+    <script src="https://k1ngzed.com/dist/swiper/swiper.min.js"></script>
+    <script src="https://k1ngzed.com/dist/EasyZoom/easyzoom.js"></script>
+    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <!-- Custom Js Ends -->
+    <!-- Nav Cart Popup -->
+    <!-- Modal -->
+    <div class="modal fade" id="nav-cart" tabindex="-1" role="dialog" aria-labelledby="navcartlabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title m-auto" id="navcartlabel"> <span class="mr-2"><i
+                                class="fa fa-opencart" aria-hidden="true"></i></span> Items List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="top-cart-product-template">
+                        {{-- <tr>
+                            <div class="item">
+                                <td class="pr-4 py-3"><img src=" frontend/assets/images/product-images/1 (2).jpg " class="img-fluid"></td>
+                                <td class="px-4 py-3">
+                                    <div class="head font-weight-bold">
+                                        Beats Headphone x <span class="cart-quantity ">1</span>
+                                    </div>
+                                    <div class="price">
+                                        Rs 1000
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="item">
+                                <td class="pr-4 py-3"><img src=" frontend/assets/images/product-images/1 (1).jpg " class="img-fluid"></td>
+                                <td class="px-4 py-3">
+                                    <div class="head font-weight-bold">
+                                        Beats Headphone x <span class="cart-quantity ">1</span>
+                                    </div>
+                                    <div class="price">
+                                        Rs 1000
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </td>
+                            </div>
+                        </tr> --}}
+                    </table>
+                    <span id="top-cart-product-total"></span>
+                    {{-- <div class="total-amount pt-3 text-center">
+                        Total : <span class="font-weight-bold" id="top-cart-product-total">
+                            Rs 1500
+                        </span>
+                    </div> --}}
+                </div>
+                <div class="modal-footer">
+                    <a href="/cart" class="m-auto">
+                        <button type="button" class="btn btn-primary m-auto">View Cart Page</button>
+                    </a>
+                    <a href="/checkout" class="m-auto">
+                        <button type="button" class="btn btn-primary m-auto">Proceed Checkout</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+    <!-- Nav Cart Popup -->
 
-    @include(isset(getSetting()['Footer_style']) ? 'includes.footers.footer-'.getSetting()['Footer_style'] :
-    'includes.footers.footer-style1')
-
-
-    <a href="javascript:void(0)" class="btn-secondary swipe-to-top" id="back-to-top" data-toggle="tooltip"
+    {{-- <a href="javascript:void(0)" class="btn-secondary swipe-to-top" id="back-to-top" data-toggle="tooltip"
         data-placement="bottom" data-original-title="{{ trans('lables.general-backtotop') }}"
-        title="{{ trans('lables.general-backtotop') }}">&uarr;</a>
+        title="{{ trans('lables.general-backtotop') }}">&uarr;</a> --}}
 
-    <div class="mobile-overlay"></div>
+    {{-- <div class="mobile-overlay"></div> --}}
 
-    <div class="notifications" id="notificationWishlist">Product Added To Wishlist</div>
+    {{-- <div class="notifications" id="notificationWishlist">Product Added To Wishlist</div> --}}
 
 
 
-    @include('extras.settings')
-    @include('modals.product-quick-view')
+    {{-- @include('extras.settings') --}}
+    {{-- @include('modals.product-quick-view') --}}
 
     <!-- All custom scripts here -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/front/js/scripts.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
+    {{-- <script src="{{ asset('assets/front/js/scripts.js') }}"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
 
     @php
         $language_id = $data['selectedLenguage'];
         $locale = session()->get('locale');
         //dd ($locale);
     @endphp
+    <script>
+        loginErrorMessage = localStorage.getItem("loginErrorMessage");
+        // console.log(loginErrorMessage);
+        if (loginErrorMessage != null) {
+            toastr.error(loginErrorMessage);
+            localStorage.removeItem("loginErrorMessage");
+        }
+    </script>
     <script>
         toastr.options = {
             "closeButton": false,
@@ -89,18 +241,21 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
+
         loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
         customerFname = $.trim(localStorage.getItem("customerFname"));
         customerLname = $.trim(localStorage.getItem("customerLname"));
+
         if (loggedIn != '1') {
             $(".auth-login").remove();
+            $(".without-auth-login").removeAttr('hidden');
         } else {
+            $(".auth-login").removeAttr('hidden');
             $(".without-auth-login").remove();
             $(".welcomeUsername").html(customerFname + " " + customerLname);
         }
 
         customerToken = $.trim(localStorage.getItem("customerToken"));
-
 
         languageId = localStorage.getItem("languageId");
         languageName = localStorage.getItem("languageName");
@@ -127,12 +282,17 @@
             $('.currency option[value="' + localStorage.getItem("languageId") + '"]').attr('selected', 'selected');
         }
 
-
         cartSession = $.trim(localStorage.getItem("cartSession"));
         if (cartSession == null || cartSession == 'null') {
             cartSession = '';
         }
         $(document).ready(function() {
+
+            loginSuccessMessage = localStorage.getItem("loginSuccessMessage");
+            if (loginSuccessMessage != null) {
+                toastr.success(loginSuccessMessage);
+                localStorage.removeItem("loginSuccessMessage");
+            }
 
             if (loggedIn != '1') {
                 localStorage.setItem("cartSession", cartSession);
@@ -140,11 +300,16 @@
             } else {
                 menuCart('');
             }
-
             getWishlist();
 
-
-
+            // if (loggedIn != '1') {
+            //     // console.log('login');
+            //     $(".auth-login").remove();
+            // } else {
+            //     // console.log('no login');
+            //     $(".without-auth-login").remove();
+            //     $(".welcomeUsername").html(customerFname + " " + customerLname);
+            // }
         });
 
         function getSliderSettings(className) {
@@ -215,17 +380,20 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $(".wishlist-count").html(data.data.length);
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
-
-
 
         function addWishlist(input) {
             if (loggedIn != '1') {
@@ -242,17 +410,21 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $(".wishlist-count").html(data.data.length);
-                        toastr.success('{{ trans('wishlist-add-success') }}')
+                        toastr.success('Product added to wishlist')
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
-
 
         function addCompare(input) {
             if (loggedIn != '1') {
@@ -272,17 +444,21 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         toastr.success('{{ trans('response.compare-add-success') }}')
 
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
-
 
         function quiclViewData(input) {
             product_type = $.trim($(input).attr('data-type'));
@@ -298,8 +474,11 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         const templ = document.getElementById("quick-view-template");
                         const clone = templ.content.cloneNode(true);
@@ -335,7 +514,8 @@
                         if (data.data.detail != null && data.data.detail != 'null' && data.data.detail != '') {
                             clone.querySelector(".quick-view-product-name").innerHTML = data.data.detail[0]
                                 .title;
-                            clone.querySelector(".quick-view-desc").innerHTML = data.data.detail[0].desc.replace(/<\/?[^>]+>/gi, '').substring(0,250)
+                            clone.querySelector(".quick-view-desc").innerHTML = data.data.detail[0].desc
+                                .replace(/<\/?[^>]+>/gi, '').substring(0, 250)
                         }
                         clone.querySelector(".quick-view-product-id").innerHTML = data.data.product_id;
 
@@ -345,7 +525,8 @@
                                 clone.querySelector(".quick-view-price").innerHTML = '<ins>' + data.data
                                     .product_price_symbol + '</ins>';
                             } else {
-                                clone.querySelector(".quick-view-price").innerHTML = '<ins>' + data.data.product_discount_price + '</ins> <del>' + data.data
+                                clone.querySelector(".quick-view-price").innerHTML = '<ins>' + data.data
+                                    .product_discount_price + '</ins> <del>' + data.data
                                     .product_price_symbol +
                                     '</del>';
                             }
@@ -371,10 +552,20 @@
                         $(".quick-view-modal-show").append(clone);
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
+        function buyNow(input){
+            if(loggedIn == '1'){
+                addToCart(input);
+                window.location.href = '{{ url('checkout') }}';
+            }else{
+                toastr.error('Please login');
+            }
+        }
 
         function addToCart(input) {
             product_type = $.trim($(input).attr('data-type'));
@@ -388,8 +579,11 @@
                 }
                 product_combination_id = $("#product_combination_id").val();
             }
-
+            if ($(input).parents('tr').data('row') == 'wishlistRows') {
+                $(input).parents('tr').find('.wishlistProductQty').attr('id', 'quantity-input');
+            }
             qty = $.trim($("#quantity-input").val());
+            $(input).parents('tr').find('.wishlistProductQty').removeAttr('id');
             if (qty == '' || qty == 'undefined' || qty == null) {
                 qty = 1;
             }
@@ -413,12 +607,15 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         if (loggedIn != '1') {
                             localStorage.setItem("cartSession", data.data.session);
-                            console.dir(data);
+                            // console.dir(data);
                             menuCart(data.data.session);
                         } else {
                             menuCart('');
@@ -430,6 +627,7 @@
                     }
                 },
                 error: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.responseJSON.status == 'Error') {
                         // toastr.error(data.responseJSON.message);
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
@@ -456,31 +654,31 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
-                        $(".top-cart-product-show").html('');
-                        const templ = document.getElementById("top-cart-product-template");
                         total_price = 0;
                         currrency = '';
+                        var qtyAmountRow = '';
+                        var deleteRow = '';
+                        var totalRow = '';
+                        var clone = '';
                         for (i = 0; i < data.data.length; i++) {
-                            const clone = templ.content.cloneNode(true);
-                            // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
                             if (data.data[i].product_type == 'variable') {
                                 for (k = 0; k < data.data[i].combination.length; k++) {
                                     if (data.data[i].product_combination_id == data.data[i].combination[k]
                                         .product_combination_id) {
                                         price = data.data[i].combination[k].price;
                                         $(".product-card-price").html(data.data[i].product_price_symbol);
-
                                         if (data.data[i].combination[k].gallary != null && data.data[i]
                                             .combination[k].gallary != 'null' && data.data[i].combination[k]
                                             .gallary != '') {
-                                            clone.querySelector(".top-cart-product-image").setAttribute('src',
-                                                '/gallary/' + data.data[i].combination[k].gallary
-                                                .gallary_name);
-                                            clone.querySelector(".top-cart-product-image").setAttribute('alt',
-                                                data.data[i].combination[k].gallary.gallary_name);
+                                            imageSrc = '/gallary/' + data.data[i].combination[k].gallary
+                                                .gallary_name;
+                                            imageAlt = data.data[i].combination[k].gallary.gallary_name;
                                             name = data.data[i].product_detail[0].title;
                                             for (loop = 0; loop < data.data[i].product_combination
                                                 .length; loop++) {
@@ -492,7 +690,6 @@
                                                         .detail[0].name + '-';
                                                 }
                                             }
-                                            clone.querySelector(".top-cart-product-name").innerHTML = name;
                                         }
                                         k = data.data[i].combination.length;
                                     } else {}
@@ -503,21 +700,20 @@
                                     if (data.data[i].product_gallary.detail != null && data.data[i]
                                         .product_gallary.detail != 'null' && $.trim(data.data[i].product_gallary
                                             .detail) != '') {
-                                        clone.querySelector(".top-cart-product-image").setAttribute('src', data
-                                            .data[i].product_gallary.detail[2].gallary_path);
+                                        imageSrc = data.data[i].product_gallary.detail[2].gallary_path;
+                                        if (imageSrc.startsWith('/')) {
+                                            imageSrc = imageSrc.substring(1);
+                                        }
                                     }
                                 }
                                 if (data.data[i].product_detail != null && data.data[i].product_detail !=
                                     'null' && $.trim(data.data[i].product_detail) != '') {
-                                    clone.querySelector(".top-cart-product-image").setAttribute('alt', data
-                                        .data[i].product_detail[0].title);
-                                    clone.querySelector(".top-cart-product-name").innerHTML = data.data[i]
-                                        .product_detail[0].title;
+                                    imageAlt = data.data[i].product_detail[0].title;
+                                    name = data.data[i].product_detail[0].title;
                                 }
                             }
 
-                            if (data.data[i].discount_price > 0)
-                            {
+                            if (data.data[i].discount_price > 0) {
                                 discount_price = data.data[i].discount_price;
                             } else {
                                 discount_price = data.data[i].price;
@@ -526,25 +722,53 @@
                             if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
                                 .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
-                                    clone.querySelector(".top-cart-product-qty-amount").innerHTML = data.data[i]
-                                        .qty + ' x ' + data.data[i].currency.code + ' ' + discount_price +
-                                        '     <i class="fas fa-trash"  data-id=' + data.data[i]
-                                        .product_id + ' data-combination-id=' + data
-                                        .data[i].product_combination_id +
-                                        ' onclick="removeCartItem(this)"></i>';
+                                    qtyAmountRow = '<td class="px-4 py-3">' +
+                                        '<div class="head font-weight-bold">' +
+                                        name + ' x <span class="cart-quantity ">' + data.data[i].qty +
+                                        '</span>' +
+                                        '</div>' +
+                                        '<div class="price">' +
+                                        data.data[i].currency.code + ' ' + discount_price +
+                                        '</div>' +
+                                        '</td>';
+                                    deleteRow = '<td class="px-4 py-3">' +
+                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data
+                                        .data[i].product_id + ' data-combination-id=' + data.data[i]
+                                        .product_combination_id +
+                                        ' onclick="removeCartItem(this)"></i></span>' +
+                                        '</td>';
                                 } else {
-                                    clone.querySelector(".top-cart-product-qty-amount").innerHTML = data.data[i]
-                                        .qty + ' x ' + discount_price + ' ' + data.data[i].currency.code +
-                                        '  <i class="fas fa-trash" data-id=' + data.data[i]
-                                        .product_id + ' data-combination-id=' + data
-                                        .data[i].product_combination_id +
-                                        '  onclick="removeCartItem(this)"></i>';
+                                    qtyAmountRow = '<td class="px-4 py-3">' +
+                                        '<div class="head font-weight-bold">' +
+                                        name + ' x <span class="cart-quantity ">' + data.data[i].qty +
+                                        '</span>' +
+                                        '</div>' +
+                                        '<div class="price">' +
+                                        discount_price + ' ' + data.data[i].currency.code +
+                                        '</div>' +
+                                        '</td>';
+                                    deleteRow = '<td class="px-4 py-3">' +
+                                        '<span><i class="fa fa-trash" aria-hidden="true"   data-id=' + data
+                                        .data[i].product_id + ' data-combination-id=' + data.data[i]
+                                        .product_combination_id +
+                                        ' onclick="removeCartItem(this)"></i></span>' +
+                                        '</td>';
                                 }
                             }
-                            
-                            total_price = total_price + (discount_price*data.data[i].qty);
 
-                            $(".top-cart-product-show").append(clone);
+                            total_price = total_price + (discount_price * data.data[i].qty);
+
+                            clone += '<tr>' +
+                                '<div class="item">' +
+                                '<td class="pr-4 py-3"><img src="{{ asset('/') }}' + imageSrc +
+                                '" class="img-fluid"></td>' +
+                                qtyAmountRow +
+                                deleteRow +
+                                '</div>' +
+                                '</tr>';
+
+                            $("#top-cart-product-template").html(clone);
+
                             currrency = data.data[i].currency;
                         }
                         if (currrency != '' && currrency != 'null' && currrency != null) {
@@ -555,22 +779,29 @@
                             }
                         }
                         if (data.data.length > 0) {
-                            const temp1 = document.getElementById("top-cart-product-total-template");
-                            const clone1 = temp1.content.cloneNode(true);
-                            clone1.querySelector(".top-cart-product-total").innerHTML = total_price;
-                            $(".top-cart-product-show").append(clone1);
-                            $(".total-menu-cart-product-count").html(data.data.length);
+                            totalRow += '<div class="total-amount pt-3 text-center">' +
+                                'Total : <span class="font-weight-bold">' +
+                                total_price +
+                                '</span>' +
+                                '</div>';
+                            $("#total-menu-cart-product-count").html(data.data.length);
+                            $("#top-cart-product-total").html(totalRow);
+                            $('#nav-cart > div > div > div').eq(2).show();
                         } else {
-                            $(".top-cart-product-show").html('{{ trans('lables.header-emptycart') }}');
+                            $("#total-menu-cart-product-count").html(data.data.length);
+                            $("#top-cart-product-template").html('<tr><td>No Items</td></tr>');
+                            $("#top-cart-product-total").html('');
+                            $('#nav-cart > div > div > div').eq(2).hide();
                         }
                     } else {
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
-
 
         $(document).on('click', '.quantity-plus', function() {
             var quantity = $('#quantity-input').val();
@@ -612,19 +843,20 @@
             $('.selected_category').html(category_name);
         });
 
-        $('#search_button').click(function(e) {
-            e.preventDefault();
-            var searchInput = $('#search-input').val();
-            if (searchInput == "") {
-                toastr.error("{{ trans('search-input-empty') }}")
-            } else {
-                var url = "{{ url('/shop') }}" + '?search=' + searchInput;
-                var catgory_id = $('.selected_category').attr('data-id');
-                if (catgory_id != '' && catgory_id !== undefined)
-                    url += "&category=" + catgory_id;
-                window.location.href = url;
+        $('#search-input').on('keyup', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                var searchInput = $('#search-input').val();
+                if (searchInput == "") {
+                    toastr.error("Search input empty!!!")
+                } else {
+                    var url = "{{ url('/shop') }}" + '?search=' + searchInput;
+                    var catgory_id = $('.selected_category').attr('data-id');
+                    if (catgory_id != '' && catgory_id !== undefined)
+                        url += "&category=" + catgory_id;
+                    window.location.href = url;
+                }
             }
-        })
+        });
 
 
         $(".selected-currency").click(function(e) {
@@ -638,8 +870,6 @@
             location.reload();
         });
 
-
-
         $(".currency").change(function(e) {
             e.preventDefault();
             lcurrencyId = $(this).attr('data-id');
@@ -650,6 +880,7 @@
         });
 
         $('.log_out').click(function() {
+            // $('body').click(function() {
             url = "{{ url('') }}" + '/api/client/customer_logout';
 
             $.ajax({
@@ -665,6 +896,8 @@
                 success: function(data) {
                     if (data.status == 'Success') {
                         localStorage.removeItem("customerToken");
+                        localStorage.removeItem("loginErrorMessage");
+                        localStorage.removeItem("loginSuccessMessage");
                         localStorage.removeItem("customerHash");
                         localStorage.removeItem("customerLoggedin");
                         localStorage.removeItem("customerId");
@@ -696,16 +929,17 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $("#cartItem-product-show").html('');
                         const templ = document.getElementById("cartItem-Template");
                         total_price = 0;
                         for (i = 0; i < data.data.length; i++) {
                             $("#totalItems").val(i + 1);
-                            const clone = templ.content.cloneNode(true);
-                            // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
                             if (data.data[i].product_type == 'variable') {
                                 for (k = 0; k < data.data[i].combination.length; k++) {
                                     if (data.data[i].product_combination_id == data.data[i].combination[k]
@@ -737,21 +971,17 @@
                                         .product_gallary) != '') {
                                     if (data.data[i].product_gallary.detail != null && $.trim(data.data[i]
                                             .product_gallary.detail) != '') {
-                                        clone.querySelector(".cartItem-image").setAttribute('src', data.data[i]
-                                            .product_gallary.detail[2].gallary_path);
+                                        imgSrc = data.data[i].product_gallary.detail[2].gallary_path;
                                     }
                                 }
                                 if (data.data[i].product_detail != null && $.trim(data.data[i]
-                                        .product_detail) != '') {
-                                    clone.querySelector(".cartItem-image").setAttribute('alt', data.data[i]
-                                        .product_detail[0].title);
-                                    clone.querySelector(".cartItem-name").innerHTML = data.data[i]
-                                        .product_detail[0].title;
+                                    .product_detail) != '') {
+                                    imgAlt = data.data[i].product_detail[0].title;
+                                    itemName = data.data[i].product_detail[0].title;
                                 }
                             }
 
-                            if (data.data[i].discount_price > 0)
-                            {
+                            if (data.data[i].discount_price > 0) {
                                 discount_price = data.data[i].discount_price;
                             } else {
                                 discount_price = data.data[i].price;
@@ -760,82 +990,88 @@
                                 .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
                                     sum = +data.data[i].qty * +discount_price;
-                                    clone.querySelector(".cartItem-total").innerHTML = data.data[i].currency
-                                        .code + ' ' + sum.toFixed(2);
-                                    clone.querySelector(".cartItem-price").innerHTML = data.data[i].currency
-                                        .code + ' ' +discount_price.toFixed(2);
+                                    cartItemTotal = data.data[i].currency.code + ' ' + sum.toFixed(2);
+                                    cartItemPrice = data.data[i].currency.code + ' ' + discount_price.toFixed(
+                                    2);
                                 } else {
                                     sum = +data.data[i].qty * +discount_price;
-                                    clone.querySelector(".cartItem-total").innerHTML = sum.toFixed(2) + ' ' + data.data[i]
-                                        .currency.code;
-                                    clone.querySelector(".cartItem-price").innerHTML = discount_price.toFixed(2) + ' ' + data.data[i]
-                                        .currency.code;
+                                    cartItemTotal = sum.toFixed(2) + ' ' + data.data[i].currency.code;
+                                    cartItemPrice = discount_price.toFixed(2) + ' ' + data.data[i].currency
+                                    .code;
                                 }
+                            } else {
+                                cartItemPrice = discount_price.toFixed(2);
                             }
-                            else{
-                                clone.querySelector(".cartItem-price").innerHTML = discount_price.toFixed(2);
-                            }
-                            clone.querySelector(".cartItem-qty").value = +data.data[i].qty;
-                            clone.querySelector(".cartItem-qty").setAttribute('id', 'quantity' + i);
-                            clone.querySelector(".cartItem-qty-1").setAttribute('value', 'quantity' + i);
-                            clone.querySelector(".cartItem-qty-2").setAttribute('value', 'quantity' + i);
-                            clone.querySelector(".cartItem-qty-1").setAttribute('data-field', i);
-                            clone.querySelector(".cartItem-qty-2").setAttribute('data-field', i);
+                            itemQty = +data.data[i].qty;
+                            $(".cartItem-qty").attr('id', 'quantity' + i);
 
-                           
-                            total_price = total_price + (discount_price*data.data[i].qty);
+                            total_price = total_price + (discount_price * data.data[i].qty);
 
 
-                            if ($.trim(data.data[i].category_detail[0].category_detail) != '' && $.trim(data
-                                    .data[i].category_detail[0].category_detail) != 'null' && $.trim(data.data[
-                                    i].category_detail[0].category_detail) != null) {
-                                clone.querySelector(".cartItem-category-name").innerHTML = data.data[i]
-                                    .category_detail[0].category_detail.detail[0].name;
-                            }
-                            clone.querySelector(".cartItem-remove").setAttribute('data-id', data.data[i]
-                                .product_id);
-                            clone.querySelector(".cartItem-remove").setAttribute('data-combination-id', data
-                                .data[i].product_combination_id);
-                            clone.querySelector(".cartItem-remove").setAttribute('onclick',
-                                'removeCartItem(this)');
+                            // if ($.trim(data.data[i].category_detail[0].category_detail) != '' && $.trim(data
+                            //         .data[i].category_detail[0].category_detail) != 'null' && $.trim(data.data[
+                            //         i].category_detail[0].category_detail) != null) {
+                            //     clone.querySelector(".cartItem-category-name").innerHTML = data.data[i]
+                            //         .category_detail[0].category_detail.detail[0].name;
+                            // }
 
-                            clone.querySelector(".cartItem-row").setAttribute('product_combination_id', data
-                                .data[i].product_combination_id);
-                            clone.querySelector(".cartItem-row").setAttribute('product_id', data.data[i]
-                                .product_id);
-                            clone.querySelector(".cartItem-row").setAttribute('product_type', data.data[i]
-                                .product_type);
+                            tbodyRow = '<tr class="cartItem-row" product_combination_id="' + data.data[i]
+                                .product_combination_id + '" product_id="' + data.data[i].product_id +
+                                '" product_type="' + data.data[i].product_type + '">' +
+                                '<td class="cart-image">' +
+                                '<img src="' + imgSrc + '" class="img-fluid cartItem-image">' +
+                                '</td>' +
+                                '<td class="cart-product-name-info">' +
+                                '<h4 class="cart-product-description cartItem-name">' + itemName + '</h4>' +
+                                '<div class="row">' +
+                                '<div class="col-4">' +
+                                '<div class="rating rateit-small"></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' +
+                                cartItemPrice + '</span>' +
+                                '</td>' +
+                                '<td class="cart-product-quantity">' +
+                                '<div class="quant-input">' +
+                                '<input type="number" value="' + itemQty + '" class="cartItem-qty">' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="cart-product-grand-total"><span class="cart-grand-total-price">' +
+                                cartItemTotal + '</span>' +
+                                '</td>' +
+                                '<td class="romove-item">' +
+                                '<a href="javascript:void(0)" title="cancel" class="icon cartItem-remove" onclick="removeCartItem(this)" data-id="' +
+                                data.data[i].product_id + '" data-combination-id="' + data.data[i]
+                                .product_combination_id + '"><i class="fa fa-trash-o"></i></a>' +
+                                '</td>' +
+                                '</tr>';
 
-                            $("#cartItem-product-show").append(clone);
+                            $("#cartItem-product-show").append(tbodyRow);
 
-                            const temp1 = document.getElementById("cartItem-grandtotal-template");
-                            const clone1 = temp1.content.cloneNode(true);
+                            // const temp1 = document.getElementById("cartItem-grandtotal-template");
+                            // const clone1 = temp1.content.cloneNode(true);
                             if (data.data[i].currency != '' && data.data[i].currency != 'null' && data.data[i]
                                 .currency != null) {
                                 if (data.data[i].currency.symbol_position == 'left') {
-                                    clone1.querySelector(".caritem-subtotal").innerHTML = data.data[i].currency
-                                        .code + ' ' + total_price.toFixed(2);
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price',
-                                    total_price.toFixed(2));
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price-symbol', data
-                                        .data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    clone1.querySelector(".caritem-grandtotal").innerHTML = data.data[i]
-                                        .currency.code + ' ' + total_price.toFixed(2);
+                                    $(".caritem-subtotal").html(data.data[i].currency.code + ' ' + total_price
+                                        .toFixed(2));
+                                    $(".caritem-subtotal").attr('price', total_price.toFixed(2));
+                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code +
+                                        ' ' + total_price.toFixed(2));
+                                    $(".caritem-grandtotal").html(data.data[i].currency.code + ' ' + total_price
+                                        .toFixed(2));
                                 } else {
-                                    clone1.querySelector(".caritem-subtotal").innerHTML = total_price.toFixed(2) + ' ' +
-                                        data.data[i].currency.code;
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price',
-                                    total_price.toFixed(2));
-                                    clone1.querySelector(".caritem-subtotal").setAttribute('price-symbol', data
-                                        .data[i].currency.code + ' ' + total_price.toFixed(2));
-                                    clone1.querySelector(".caritem-grandtotal").innerHTML = total_price.toFixed(2) + ' ' +
-                                        data.data[i].currency.code;
+                                    $(".caritem-subtotal").html(total_price.toFixed(2) + ' ' + data.data[i]
+                                        .currency.code);
+                                    $(".caritem-subtotal").attr('price', total_price.toFixed(2));
+                                    $(".caritem-subtotal").attr('price-symbol', data.data[i].currency.code +
+                                        ' ' + total_price.toFixed(2));
+                                    $(".caritem-grandtotal").html(total_price.toFixed(2) + ' ' + data.data[i]
+                                        .currency.code);
                                 }
                             }
-                            $("#cartItem-grandtotal-product-show").html('');
-                            $("#cartItem-grandtotal-product-show").append(clone1);
                         }
-
 
                         couponCart = $.trim(localStorage.getItem("couponCart"));
                         if (couponCart != 'null' && couponCart != '') {
@@ -847,12 +1083,13 @@
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
 
         function removeCartItem(input) {
-
             product_id = $.trim($(input).attr('data-id'));
             product_combination_id = $.trim($(input).attr('data-combination-id'));
             if (product_combination_id == null || product_combination_id == 'null') {
@@ -877,22 +1114,94 @@
                     clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                     clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
                 },
-                beforeSend: function() {},
+                beforeSend: function() {
+                    $('#event-loading').css('display', 'block');
+                },
                 success: function(data) {
+                    $('#event-loading').css('display', 'none');
                     if (data.status == 'Success') {
                         $(input).closest('tr').remove();
                         cartItem(cartSession);
                         menuCart(cartSession);
+                        toastr.error('Product removed from cart');
                     } else {
                         toastr.error('{{ trans('response.some_thing_went_wrong') }}');
                     }
                 },
-                error: function(data) {},
+                error: function(data) {
+                    $('#event-loading').css('display', 'none');
+                },
             });
         }
     </script>
 
     @yield('script')
+
+    <script>
+        $(document).ajaxStop(function() {
+            myFunction();
+        });
+
+        $(document).on('keyup', '#search-input', function() {
+            var name = $(this).val();
+            if (name.length > 0) {
+                $.ajax({
+                    url: '{{ route('search-product') }}',
+                    dataType: 'json',
+                    method: 'get',
+                    data: {
+                        name: name
+                    },
+                    success: function(response) {
+                        // console.log(response)
+                        if (response.length > 0) {
+                            $('#searchBox > ul').html('');
+                            var results = '';
+                            $.each(response, function(i, e) {
+                                price = e.price;
+                                discount = e.discount_price;
+                                newPrice = parseInt(price) - parseInt(discount);
+                                results += '<a href="/product/' + e.id + '/' + e.product_slug + '" style="text-decoration: none;">' +
+                                    '<li class="dropdown-item">' +
+                                        '<img class="img-thumbnail" src="{{ asset("/gallary") }}/' + e.gallary_name + '" style="width: 150px; height: 100px;"> ' + e.title + ' (Rs. ' + newPrice + ')' +
+                                    '</li>' +
+                                '</a>';
+                            });
+                            $('#searchBox > ul').html(results);
+                            $('#searchBox').addClass('show');
+                            $('#searchBox > ul').addClass('show');
+                        } else {
+                            $('#searchBox > ul').html('');
+                            $('#searchBox').removeClass('show');
+                            $('#searchBox > ul').removeClass('show');
+                        }
+                    },
+                    error: function(error) {
+                        // console.log(error);
+                    }
+                });
+            } else {
+                $('#searchBox').html('');
+                $('#searchBox').prop('hidden', true);
+            }
+        });
+
+        $('#search-clear').on('click', function(){
+            $('#search-input').val('');
+        })
+
+        $('body').click(function(e) {
+            if (e.target.id == "searchBox" || e.target.id == "search-input"){
+                return;
+            }
+            if ($(e.target).closest('#searchBox').length){
+                return;
+            }
+            $('#searchBox > ul').html('');
+            $('#searchBox').removeClass('show');
+            $('#searchBox > ul').removeClass('show');
+        });
+    </script>
 </body>
 
 </html>

@@ -177,7 +177,7 @@ export default {
                                 arr.title = res.data.data.detail[k].product.detail.length > 0 ? res.data.data.detail[k].product.detail[0].title : '';
                                 arr.qty = res.data.data.detail[k].product_qty;
                                 arr.price = res.data.data.detail[k].product_price;
-                                console.log(arr);
+                                // console.log(arr);
                                 this.selectedProducts.push(arr);
                                 arr = {};
                             } else {
@@ -193,7 +193,7 @@ export default {
                                                     } else {
                                                         combination_name += '-' + res.data.data.detail[k].product.combination_detail[i].combination[j].variation.detail[0].name
                                                     }
-                                                    // console.log('i=' + i + 'j=' + j);
+                                                    // // console.log('i=' + i + 'j=' + j);
                                                 }
                                             }
                                             arr.qty = res.data.data.detail[k].product_qty;

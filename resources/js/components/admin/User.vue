@@ -316,7 +316,7 @@ export default {
                         }
 
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => // console.log(err))
                     .finally(() => (this.$parent.loading = false));
             }
         },
@@ -369,7 +369,7 @@ export default {
             this.user.status = user.status;
             this.user.warehouse_id = user.warehouse;
             console.clear();
-            console.log(user,"user");
+            // console.log(user,"user");
         },
         clearForm() {
             this.edit = false;
@@ -406,7 +406,7 @@ export default {
         },
         
         nameWithLang (warehoue) {
-            console.log(warehoue, 'warehoue');
+            // console.log(warehoue, 'warehoue');
             return warehoue ? `${warehoue.warehouse_name}` : 'Hey';
         },
     },

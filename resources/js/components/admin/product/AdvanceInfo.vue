@@ -359,7 +359,7 @@ export default {
             this.$emit('setActiveInChild', value);
         },
         setCombinationPrice(name,price) {
-            console.log(name,price)
+            // console.log(name,price)
             var newprice = price != null ? price : this.price;
             if(this.combinationPrice[name] == null){
                 this.combinationPrice[name] = newprice;
@@ -367,7 +367,7 @@ export default {
             this.$emit('setCombinationPriceInChild', name, newprice);
         },
         setCombinationSku(name,sku) {
-            console.log(name,sku);
+            // console.log(name,sku);
             var newsku = sku != null ? sku : this.sku;
 
             this.$emit('setCombinationSkuInChild', name, newsku);
@@ -403,7 +403,7 @@ export default {
 
 
             for(var i= 0; i < this.selectedAttribute.length; i++){
-                // console.log(this.variationData[i]);
+                // // console.log(this.variationData[i]);
                 if(this.variationData['variation_'+this.selectedAttribute[i]].length > 0){
                     totalVariations = parseInt(totalVariations) + 1;
                 }
@@ -433,7 +433,7 @@ export default {
 
         makeCombinationData(){
             var res = this.cartesian(this.combinations);
-            console.log(this.lastSku,"last sku");
+            // console.log(this.lastSku,"last sku");
             var new_sku,sku_no;
             new_sku = this.lastSku;
             for(var i= 0; i < res.length; i++){
@@ -477,7 +477,7 @@ export default {
                     }
                     
             }
-            // console.log(this.edit_combination_detail.length);
+            // // console.log(this.edit_combination_detail.length);
             if(this.combinationDetail.length > 0 && this.edit_combination_detail.length > 0){
                 for(var i= 0; i < res.length; i++){
                     var variation_id = [];
@@ -504,7 +504,7 @@ export default {
                                     
                                 }
                                 if(is_combination.indexOf(0) == -1){
-                                    // console.log(price_name + ' => ' + this.edit_combination_detail[j].price);
+                                    // // console.log(price_name + ' => ' + this.edit_combination_detail[j].price);
                                     this.combinationPrice[price_name] = this.edit_combination_detail[j].price;
                                     this.setCombinationPrice(price_name,this.edit_combination_detail[j].price);
                                     this.combinationSku[sku_name] = this.edit_combination_detail[j].sku;
@@ -601,7 +601,7 @@ export default {
             this.currentSelectedGalleryName = name;
         },
         setImage(gallary){
-            // console.log(gallary);
+            // // console.log(gallary);
             this.combinationGalleryPath[this.currentSelectedGalleryName] = gallary.gallary_path;
             this.combinationGallery[this.currentSelectedGalleryName] = gallary.gallary_id;
             this.setCombinationGallery(this.currentSelectedGalleryName);
@@ -609,7 +609,7 @@ export default {
     },
     watch:{
         product(newVal, oldVal){
-        console.log(newVal,"newval");
+        // console.log(newVal,"newval");
         this.editChild = this.$parent.edit;
         this.product_type = newVal.product_type;
         this.sku = newVal.sku;
@@ -626,7 +626,7 @@ export default {
         this.product_min_order = newVal.product_min_order;
         this.product_weight = newVal.product_weight;
 
-        console.log(this.sku,"sku")
+        // console.log(this.sku,"sku")
         if(newVal.product_type == 'variable'){
             
             this.edit_combination_detail = newVal.combination_detail;

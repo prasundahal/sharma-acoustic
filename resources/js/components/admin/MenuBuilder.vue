@@ -397,7 +397,7 @@ export default {
   },
   methods: {
     changeJson() {
-      console.log(this.nestableItems);
+      // // console.log(this.nestableItems);
     },
     menu() {
       this.$parent.loading = true;
@@ -413,7 +413,7 @@ export default {
         .then((res) => {
           if (res.data.status == "Success") {
             this.nestableItems = JSON.parse(res.data.data.menu);
-            console.log(JSON.parse(res.data.data.menu));
+            // // console.log(JSON.parse(res.data.data.menu));
           }
         })
         .finally(() => (this.$parent.loading = false));
@@ -429,7 +429,7 @@ export default {
       
       if(this.edit){
         for (var i = 0; i < this.nestableItems.length; i++) {
-          console.log(this.nestableItems[i],"single menu");
+          // // console.log(this.nestableItems[i],"single menu");
           if (this.editChild) {
             this.findChild(this.menuObject, this.nestableItems[i]);
           } else {
@@ -438,7 +438,7 @@ export default {
             }
           }
       }
-        // console.log(menu);
+        // // console.log(menu);
         // return;
       }
       var menu = JSON.stringify(this.nestableItems);
@@ -496,7 +496,7 @@ export default {
       this.errors = new ErrorHandling();
       var err = {};
       var isError = false;
-      console.log(this.menuObject.name.length, this.language_id.length);
+      // // console.log(this.menuObject.name.length, this.language_id.length);
       this.menuObject.language_id = this.language_id; 
       if (this.menuObject.name.length !== this.language_id.length) {
         err.name = ["name field is required"];
@@ -553,7 +553,7 @@ export default {
     },
     setSelectedLanguage(selectedLanguage) {
       this.selectedLanguage = selectedLanguage;
-      console.log("i am clicked", selectedLanguage);
+      // // console.log("i am clicked", selectedLanguage);
     },
     fetchcategorys() {
       this.$parent.loading = true;
@@ -599,7 +599,7 @@ export default {
     },
     removeChild(item, nestedItem) {
       for (var j = 0; j < nestedItem.children.length; j++) {
-        console.log(item.id, nestedItem.children[j].id);
+        // // console.log(item.id, nestedItem.children[j].id);
         if (item.id == nestedItem.children[j].id) {
           nestedItem.children.splice(j, 1);
           this.updateSetting();
@@ -668,7 +668,7 @@ export default {
       }
 
       catalog.children = childObject;
-      console.log(catalog);
+      // // console.log(catalog);
       this.nestableItems.push(catalog);
       this.updateSetting();
     },

@@ -193,11 +193,11 @@ export default {
                                 arr.title = res.data.data.detail[k].product_id ? res.data.data.detail[k].product_id.detail[0].title : '';
                                 arr.qty = res.data.data.detail[k].qty;
                                 arr.price = res.data.data.detail[k].price;
-                                console.log(arr);
+                                // console.log(arr);
                                 this.selectedProducts.push(arr);
                                 arr = {};
                             } else {
-                                console.log(res.data.data.detail[k].product_id);
+                                // console.log(res.data.data.detail[k].product_id);
                                 if (res.data.data.detail[k].product_id.combination_detail && res.data.data.detail[k].product_id.combination_detail.length > 0) {
                                     for (var i = 0; i < res.data.data.detail[k].product_id.combination_detail.length; i++) {
                                         arr.product_combination_id = res.data.data.detail[k].product_id.combination_detail[i].product_combination_id;
@@ -210,7 +210,7 @@ export default {
                                                     } else {
                                                         combination_name += '-' + res.data.data.detail[k].product_id.combination_detail[i].combination[j].variation.detail[0].name
                                                     }
-                                                    // console.log('i=' + i + 'j=' + j);
+                                                    // // console.log('i=' + i + 'j=' + j);
                                                 }
                                             }
                                             arr.qty = res.data.data.detail[k].qty;

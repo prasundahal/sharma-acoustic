@@ -2411,7 +2411,7 @@
                           <span class="nav-text">General Settings</span>
                         </router-link>
                       </li>
-                      <li
+                      <!-- <li
                         class="nav-item"
                         v-if="$parent.permissions.includes('home-page-builder')"
                       >
@@ -2447,7 +2447,7 @@
                           </span>
                           <span class="nav-text">Home Page Builder</span>
                         </router-link>
-                      </li>
+                      </li> -->
                       <li
                         class="nav-item"
                         v-if="$parent.permissions.includes('menu-builder')"
@@ -2609,7 +2609,7 @@
 
               <!--begin::Nav Mobile App Settings -->
 
-              <li
+              <!-- <li
                 class="nav-item"
                 v-if="
                   setting.is_app_purchased === '1' &&
@@ -2720,7 +2720,7 @@
                     </ul>
                   </div>
                 </div>
-              </li>
+              </li> -->
 
               <!--begin::Nav Delivery Boy Settings -->
 
@@ -2899,14 +2899,14 @@ export default {
               [res.data.data[i].setting_key]: res.data.data[i].setting_value,
             });
           }
-          console.log(responseData, "setting ");
+          // console.log(responseData, "setting ");
           this.setting = responseData;
         })
-        .finally(() => console.log("working"));
+        .finally(() => // console.log("working"));
     },
   },
   mounted() {
-    console.log(this.$parent.permissions, "permissions");
+    // console.log(this.$parent.permissions, "permissions");
     this.fetchSetting();
   },
   props: ["burgerMenu"],

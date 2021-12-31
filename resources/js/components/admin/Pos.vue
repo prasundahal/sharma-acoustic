@@ -776,7 +776,7 @@ export default {
 							continue;
 						}
 					}
-					console.log('123');
+					// // console.log('123');
 
 					if(data[i].product_type == 'variable'){
 						for(var k=0; k<data[i].combination_detail.length;k++){
@@ -976,7 +976,7 @@ export default {
 					if(is_exist.length > 0){
 						return;
 					}
-					console.log('3')
+					// // console.log('3')
 					var parms = {};
 					parms['product_name'] = data[i].detail[0].title;
 					parms['product_id'] = data[i].product_id;

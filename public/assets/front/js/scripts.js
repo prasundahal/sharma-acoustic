@@ -5081,14 +5081,14 @@ jQuery( document ).ready(function() {
 
 // Home Tabs Active
 jQuery('.nav-index').on('show.bs.tab', function (e) {
-    console.log('fire');
+    // console.log('fire');
     e.target // newly activated tab
     e.relatedTarget // previous active tab
     jQuery('.tab-overlay').show();   
 })
 
 jQuery('.nav-index').on('hidden.bs.tab', function (e) {
-    console.log('expire');
+    // console.log('expire');
     e.target // newly activated tab
     e.relatedTarget // previous active tab
     jQuery('.tab-overlay').hide();   
@@ -5432,7 +5432,7 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
     jQuery(window).scroll(function(){
         var positiontop = jQuery(document).scrollTop();
-        // console.log(positiontop);
+        // // console.log(positiontop);
       
 
     });

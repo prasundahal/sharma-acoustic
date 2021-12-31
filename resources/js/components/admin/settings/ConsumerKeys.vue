@@ -65,14 +65,14 @@ export default {
               });
             }
           }
-          console.log("response datass", responseData);
+          // console.log("response datass", responseData);
           this.consumer = responseData;
         })
         .finally(() => this.$emit("updateLoadingState", false));
     },
 
     updateSetting() {
-    //   console.log(this.consumer);
+    //   // console.log(this.consumer);
     //   return;
       this.$emit("updateLoadingState", true);
       var consumerArray = Object.entries(this.consumer);
@@ -84,7 +84,7 @@ export default {
         value.push(consumerArray[i][1].toString());
       }
 
-      console.log(key, value);
+      // console.log(key, value);
 
       var token = localStorage.getItem("token");
       const config = {

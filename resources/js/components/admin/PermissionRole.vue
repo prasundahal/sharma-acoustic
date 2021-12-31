@@ -164,7 +164,7 @@ export default {
             this.selectedPermission.splice(this.selectedPermission.indexOf(parseInt(e.target.value)),1)
         }
 
-        console.log(this.selectedPermission)
+        // // console.log(this.selectedPermission)
     }
   },
   mounted() {

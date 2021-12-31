@@ -1,92 +1,103 @@
+<script>
+    loggedIn = localStorage.getItem("customerLoggedin");
+    if (loggedIn != '1') {
+        localStorage.setItem("loginErrorMessage", "Please Login!!!");
+        window.location.href = "{{url('/login')}}";
+    }
+</script>
 @extends('layouts.master')
 @section('content')
-<!-- wishlist Content -->
-<section class="wishlist-content pro-content">
 
+<!-- Breadcrumbs -->
+<section id="breadcrumbs" class="py-3">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-3">
-                <div class="heading">
-                    <h2>
-                        My Account
-                    </h2>
-                    <hr>
-                </div>
-
-                @include('includes.side-menu')
-
+            <div class="col-12">
+                <ul class="m-0 p-0 d-flex align-items-center text-white">
+                    <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <li class="">WishList</li>
+                </ul>
             </div>
-            <div class="col-12 col-lg-9 ">
-                <div class="heading">
-                    <h2>
-                        Wishlist Products
-                    </h2>
-                    <hr>
-                </div>
-
-                <div class="col-12 px-0 media-main" id="wishlist-show">
-
-                </div>
-
-                <!-- ............the end..... -->
+            <div class="col-12 mt-3">
+                <h2 class="text-white">WishList</h2>
             </div>
         </div>
     </div>
 </section>
-
-<template id="wishlist-product-template">
-    <div class="media">
-        <img class="img-fluid wishlist-product-img" src="images/wishlist/wishlist-1.png" alt="John Doe">
-        <div class="media-body">
-            <div class="row">
-                <div class="col-12 col-md-8  texting">
-                    <h3><a href="javascript:void(0)" class="wishlist-product-name"></a></h3>
-                    <div class="price wishlist-product-price"></div>
-                    <p class="wishlist-product-desc"></p>
-                    <div class="buttons">
-                        <div class="input-group item-quantity">
-
-                            <input type="text" value="1" id="quantity2" name="quantity" class="form-control cartItem-qty">
-    
-                            <span class="input-group-btn">
-                                <button type="button" value="quantity" class="quantity-right-plus btn cartItem-qty-1" data-type="plus" data-field="">
-    
-                                    <span class="fas fa-plus"></span>
-                                </button>
-    
-                                <button type="button" value="quantity" class="quantity-left-minus btn cartItem-qty-2" data-type="minus" data-field="">
-                                    <span class="fas fa-minus"></span>
-                                </button>
-    
-    
-                            </span>
-    
-    
+<!-- Breadcrumbs Ends -->
+<!-- Profile -->
+<section id="profile-wrapper" class="py-3">
+    <div class="container">
+        <div class="row py-xl-5 py-md-3 py-0">
+            @include('includes.side-menu')
+            <div class="col-xl-9 col-lg-9 col-md-11 col-10 mt-xl-0 mt-md-0 mt-3">
+                <section id="cart-wrapper" class="py-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="shopping-cart">
+                                <div class="shopping-cart-table">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="cart-description item">Image</th>
+                                                    <th class="cart-product-name item">Product Name</th>
+                                                    <th class="cart-qty item">Quantity</th>
+                                                    <th class="cart-romove item"></th>
+                                                </tr>
+                                            </thead>
+                                            <!-- /thead -->
+                                            <tbody id="wishlist-show">
+                                                {{-- <tr>
+                                                    <td class="cart-image">
+                                                        <a class="entry-thumbnail" href="detail.html">
+                                                            <img src="frontend/assets/images/product-images/1 (1).jpg" class="img-fluid">
+                                                        </a>
+                                                    </td>
+                                                    <td class="cart-product-name-info">
+                                                        <h4 class="cart-product-description"><a href="detail.html">Yoga Mat</a></h4>
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="rating rateit-small"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.row -->
+                                                    </td>
+                                                    <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                                    </td>
+                                                    <td class="cart-product-quantity">
+                                                        <div class="quant-input">
+                                                            <input type="number" value="1">
+                                                        </div>
+                                                    </td>
+                                                    <td class="cart-product-grand-total"><span class="cart-grand-total-price">$300.00</span>
+                                                    </td>
+                                                    <td class="romove-item"><a href="#" title="cancel" class="icon"><i
+                                                    class="fa fa-trash-o"></i></a>
+                                                    </td>
+                                                </tr> --}}
+                                            </tbody>
+                                            <!-- /tbody -->
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <a href="javascript:void(0)" class="btn btn-secondary swipe-to-top wishlist-product-btn">
-                            ADD TO CART
-                        </a>
                     </div>
-                </div>
-                <div class="col-12 col-md-4 detail">
-
-                    {{-- <div class="share"><a href="javascript:void(0)">Share &nbsp;<i class="fas fa-share"></i></a> </div> --}}
-                    <div class="share"><a href="javascript:void(0)" class="wishlist-remove">Remove &nbsp;<i class="fas fa-trash-alt"></i></a>
-                    </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
-</template>
-
-
+</section>
+<!-- Profile Ends -->
+ 
 @endsection
 @section('script')
 <script>
     loggedIn = $.trim(localStorage.getItem("customerLoggedin"));
-    if (loggedIn != '1') {
-        window.location.href = "{{url('/')}}";
-    }
+    // if (loggedIn != '1') {
+    //     window.location.href = "{{url('/')}}";
+    // }
 
     languageId = localStorage.getItem("languageId");
     if (languageId == null || languageId == 'null') {
@@ -105,7 +116,7 @@
     customerId = $.trim(localStorage.getItem("customerId"));
 
     $(document).ready(function() {
-        getCustomerOrder();
+        // getCustomerOrder();
     });
 
     wishListShow();
@@ -124,101 +135,70 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                // // console.log(data);
                 if (data.status == 'Success') {
                     $("#wishlist-show").html('');
-                    const templ = document.getElementById("wishlist-product-template");
                     for (i = 0; i < data.data.length; i++) {
-                        const clone = templ.content.cloneNode(true);
-                        // clone.querySelector(".single-text-chat-li").classList.add("bg-blue-100");
-                        if (data.data[i].products.product_gallary != null && data.data[i].products.product_gallary !=
-                            'null' && data.data[i].products.product_gallary != '') {
-                            if (data.data[i].products.product_gallary.detail != null && data.data[i].products.product_gallary
-                                .detail != 'null' && data.data[i].products.product_gallary.detail != '') {
-                                    if(data.data[i].products.product_gallary.detail[2].gallary_path){
-                                        clone.querySelector(".wishlist-product-img").setAttribute('src', data.data[i].products.product_gallary.detail[2].gallary_path);
-                                    }
+                        href = '/product/' + data.data[i].products.product_id + '/' + data.data[i].products.product_slug;
+                        if (data.data[i].products.product_gallary != null && data.data[i].products.product_gallary != 'null' && data.data[i].products.product_gallary != '') {
+                            if (data.data[i].products.product_gallary.detail != null && data.data[i].products.product_gallary.detail != 'null' && data.data[i].products.product_gallary.detail != '') {
+                                if(data.data[i].products.product_gallary.detail[2].gallary_path){
+                                    imgSrc = data.data[i].products.product_gallary.detail[2].gallary_path;
+                                }
                             }
                         }
-                        if (data.data[i].products.detail != null && data.data[i].products.detail != 'null' && data.data[i].products
-                            .detail != '') {
-                            clone.querySelector(".wishlist-product-img").setAttribute('alt', data.data[i].products
-                                .detail[0].title);
+                        if (data.data[i].products.detail != null && data.data[i].products.detail != 'null' && data.data[i].products.detail != '') {
+                            imgAlt = data.data[i].products.detail[0].title;
                         }
-                        if (data.data[i].products.category != null && data.data[i].products.category != 'null' && data.data[i].products
-                            .category != '') {
-                            if (data.data[i].products.category[0].category_detail != null && data.data[i].products.category[0]
-                                .category_detail != 'null' && data.data[i].products.category[0].category_detail != ''
+                        if (data.data[i].products.category != null && data.data[i].products.category != 'null' && data.data[i].products.category != '') {
+                            if (data.data[i].products.category[0].category_detail != null && data.data[i].products.category[0].category_detail != 'null' && data.data[i].products.category[0].category_detail != ''
                             ) {
-                                if (data.data[i].products.category[0].category_detail.detail != null && data.data[i].products
-                                    .category[0].category_detail.detail != 'null' && data.data[i].products.category[
-                                        0].category_detail.detail != '') {
-                                    // clone.querySelector(".product-card-category").innerHTML = data.data[i].products
-                                        // .category[0].category_detail.detail[0].name;
+                                if (data.data[i].products.category[0].category_detail.detail != null && data.data[i].products.category[0].category_detail.detail != 'null' && data.data[i].products.category[0].category_detail.detail != '') {
+                                    // clone.querySelector(".product-card-category").innerHTML = data.data[i].products.category[0].category_detail.detail[0].name;
                                 }
                             }
                         }
-                        if (data.data[i].products.detail != null && data.data[i].products.detail != 'null' && data.data[i].products
-                            .detail != '') {
-                            clone.querySelector(".wishlist-product-name").innerHTML = data.data[i].products.detail[0]
-                                .title;
-                            clone.querySelector(".wishlist-product-desc").innerHTML = data.data[i].products.detail[0]
-                                .desc;
+                        if (data.data[i].products.detail != null && data.data[i].products.detail != 'null' && data.data[i].products.detail != '') {
+                            title = data.data[i].products.detail[0].title;
+                            desc = data.data[i].products.detail[0].desc;
                         }
 
-                        // if (data.data[i].products.product_type == 'simple') {
-                        //     if (data.data[i].products.product_discount_price == '' || data.data[i].products
-                        //         .product_discount_price == null || data.data[i].products.product_discount_price ==
-                        //         'null') {
-                        //         clone.querySelector(".wishlist-product-price").innerHTML = 'Total Price: <span>'+data.data[i].products
-                        //             .product_price_symbol+'</span>';
-                        //     } else {
-                        //         clone.querySelector(".wishlist-product-price").innerHTML = product_price_symbol + '<span>' + data.data[i].products.product_discount_price_symbol + '</span>';
-                        //     }
-                        // } else {
-                        //     if (data.data[i].products.product_combination != null && data.data[i].products
-                        //         .product_combination != 'null' && data.data[i].products.product_combination != '') {
-                        //         clone.querySelector(".wishlist-product-price").innerHTML = 'Total Price: <span>'+ data.data[i].products
-                        //             .product_combination[0].product_price_symbol+'</span>';
-                        //     }
-                        // }
                         if (data.data[i].product_type == 'simple') {
-                                if (data.data[i].product_discount_price == '' || data.data[i]
-                                    .product_discount_price == null || data.data[i].product_discount_price ==
-                                    'null') {
-                                    clone.querySelector(".wishlist-product-price").innerHTML = data.data[i]
-                                        .product_price_symbol;
-                                } else {
-                                    clone.querySelector(".wishlist-product-price").innerHTML =
-                                    data.data[i]
-                                        .product_discount_price_symbol + '<span>' +data.data[i].product_price_symbol + '</span>';
-                                }
+                            if (data.data[i].product_discount_price == '' || data.data[i].product_discount_price == null || data.data[i].product_discount_price == 'null') {
+                                wishlistProductPrice = data.data[i].product_price_symbol;
                             } else {
-                                if (data.data[i].product_combination != null && data.data[i]
-                                    .product_combination != 'null' && data.data[i].product_combination != '') {
-                                    clone.querySelector(".wishlist-product-price").innerHTML = data.data[i]
-                                        .product_combination[0].product_price_symbol;
-                                }
+                                wishlistProductPrice = data.data[i].product_discount_price_symbol + '<span>' +data.data[i].product_price_symbol + '</span>';
                             }
-                        if (data.data[i].products.product_type == 'simple') {
-                            clone.querySelector(".wishlist-product-btn").setAttribute('onclick', "addToCart(this)");
-                            clone.querySelector(".wishlist-product-btn").setAttribute('data-id', data.data[i].products.product_id);
-                            clone.querySelector(".wishlist-product-btn").setAttribute('data-type', data.data[i].products.product_type);
-                            clone.querySelector(".wishlist-product-btn").innerHTML = 'Add To Cart';
                         } else {
-                            clone.querySelector(".wishlist-product-btn").setAttribute('href', '/product/' + data
-                            .data[i].products.product_id + '/' + data
-                            .data[i].products.product_slug);
-                            clone.querySelector(".wishlist-product-btn").innerHTML = 'View Detail';
+                            if (data.data[i].product_combination != null && data.data[i].product_combination != 'null' && data.data[i].product_combination != '') {
+                                wishlistProductPrice = data.data[i].product_combination[0].product_price_symbol;
+                            }
                         }
-
-                        clone.querySelector(".cartItem-qty").setAttribute('id', 'quantity' + i);
-                        clone.querySelector(".cartItem-qty-1").setAttribute('value', 'quantity' + i);
-                        clone.querySelector(".cartItem-qty-2").setAttribute('value', 'quantity' + i);
-                        clone.querySelector(".cartItem-qty-1").setAttribute('data-field', i);
-                        clone.querySelector(".cartItem-qty-2").setAttribute('data-field', i);
-                        clone.querySelector(".wishlist-remove").setAttribute('onclick', "removeWishlist(this)");
-                        clone.querySelector(".wishlist-remove").setAttribute('data-id', data.data[i].wishlist);
-                        $("#wishlist-show").append(clone);
+                        tbodyRow = '<tr data-row="wishlistRows">' +
+                            '<td class="cart-image">' +
+                                '<a class="entry-thumbnail" href="' + href + '">' +
+                                    '<img src="' + imgSrc + '" class="img-fluid">' +
+                                '</a>' +
+                            '</td>' +
+                            '<td class="cart-product-name-info">' +
+                                '<h4 class="cart-product-description"><a href="' + href + '">' + title + '</a></h4>' +
+                                '<div class="row">' +
+                                    '<div class="col-4">' +
+                                        '<div class="rating rateit-small"></div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</td>' +
+                            '<td class="cart-product-quantity">' +
+                                '<div class="quant-input">' +
+                                    '<input type="number" value="1" class="wishlistProductQty">' +
+                                '</div>' +
+                            '</td>' +
+                            '<td class="romove-item">' +
+                                '<button type="button" class="btn btn-primary mx-1" onclick="addToCart(this)" data-id="' + data.data[i].products.product_id + '" data-type="' + data.data[i].products.product_type + '"><i class="fa fa-shopping-bag"> </i> Add To Cart</button>' +
+                                '<button type="button" class="btn btn-primary mx-1" onclick="removeWishlist(this)" data-id="' + data.data[i].wishlist + '"><i class="fa fa-trash-o"></i> Remove</button>' +
+                            '</td>' +
+                        '</tr>';
+                        $("#wishlist-show").append(tbodyRow);
                     }
                 }
             },
@@ -239,15 +219,20 @@
                 clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
                 clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
             },
-            beforeSend: function() {},
+            beforeSend: function() {
+                $('#event-loading').css('display', 'block');
+            },
             success: function(data) {
+                $('#event-loading').css('display', 'none');
                 if (data.status == 'Success') {
                     toastr.success('{{ trans("wishlist-remove") }}');
                     wishListShow();
                     getWishlist();
                 }
             },
-            error: function(data) {},
+            error: function(data) {
+                $('#event-loading').css('display', 'none');
+            },
         });
 
     }

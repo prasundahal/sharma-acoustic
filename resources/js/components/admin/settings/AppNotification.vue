@@ -61,7 +61,7 @@ export default {
                             [res.data.data[i].setting_key]: res.data.data[i].setting_value
                         });
                     }
-                    console.log('response datass', responseData);
+                    // console.log('response datass', responseData);
                     this.appnotification = responseData;
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -78,7 +78,7 @@ export default {
                 value.push(appnotification[i][1].toString())
             }
 
-            console.log(key, value);
+            // console.log(key, value);
 
             var token = localStorage.getItem('token');
             const config = {

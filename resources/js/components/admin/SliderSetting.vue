@@ -409,7 +409,7 @@ export default {
                         }
 
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => // console.log(err))
                     .finally(() => (this.$parent.loading = false));
             }
         },
@@ -483,13 +483,13 @@ export default {
         },
         setSelectedLanguage(selectedLanguage) {
             this.selectedLanguage = selectedLanguage;
-            console.log("i am clicked", selectedLanguage)
+            // console.log("i am clicked", selectedLanguage)
         },
         toggleImageSelect(){
             this.showModal = !this.showModal;
         },
         setImage(gallary){
-            console.log(gallary);
+            // console.log(gallary);
             this.gallary_path = gallary.gallary_path,
             this.slider.gallary_id = gallary.gallary_id;
         }

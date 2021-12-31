@@ -1,138 +1,76 @@
-
-    <div class="container-fuild">
-        <nav aria-label="breadcrumb">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Contactus</li>
-                </ol>
+<!-- Breadcrumbs -->
+<section id="breadcrumbs" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="m-0 p-0 d-flex align-items-center text-white">
+                    <li class="font-weight-bold">Home</li><span class="mx-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <li class="">Contact Us</li>
+                </ul>
             </div>
-        </nav>
-    </div>
-
-    <section class="pro-content">
-
-        <div class="container">
-            <div class="page-heading-title">
-                <h2> CONTACT
-                </h2>
-
+            <div class="col-12 mt-3">
+                <h2 class="text-white">Contact Us</h2>
             </div>
         </div>
-        <!-- contact Content -->
-        <section class="contact-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12">
-                        <div class="row">
-                            <div class="col-12 col-lg-4">
-                                <div class="form-start">
-                                    <form id="contactusForm">
-                                        <label class="first-label" for="email">First Name</label>
-                                        <div class="input-group">
+    </div>
+</section>
+<!-- Breadcrumbs Ends -->
+<!-- Contact Us -->
+<section id="contact-us-wrapper" class="p-4">
+    <div class="container">
+        <div class="row padding px-xl-5 px-lg-5 px-md-4">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                <!-- CONTACT INFO -->
+                <div class="contact-info d-flex flex-column justify-content-center h-100 text-white">
+                    <div class="title mb-3">
+                        <h1 class="contact-us-heading">Love To Hear From You</h1>
 
+                        <p class="pt-3"></p>
 
-                                            <input type="text" class="form-control" id="first_name"
-                                                placeholder="Enter Your First Name" aria-describedby="inputGroupPrepend" required>
-                                            <div class="invalid-feedback">
-                                                Please choose a first name.
-                                            </div>
-                                        </div>
-                                        <label class="first-label" for="email">Last Name</label>
-                                        <div class="input-group">
-
-
-                                            <input type="text" class="form-control" id="last_name"
-                                                placeholder="Enter Your Last Name" aria-describedby="inputGroupPrepend" required>
-                                            <div class="invalid-feedback">
-                                                Please choose a last name.
-                                            </div>
-                                        </div>
-                                        <label for="email">Email</label>
-                                        <div class="input-group">
-
-                                            <input type="text" class="form-control" id="email"
-                                                placeholder="Enter Email here.." aria-describedby="inputGroupPrepend"
-                                                required>
-                                            <div class="invalid-feedback">
-                                                Please choose a email.
-                                            </div>
-                                        </div>
-                                        <label for="email">Phone</label>
-                                        <div class="input-group">
-
-
-                                            <input type="text" class="form-control textbox" id="phone"
-                                                placeholder="Enter Your Phone" aria-describedby="inputGroupPrepend"
-                                                required>
-                                            <div class="invalid-feedback">
-                                                Please choose a phone.
-                                            </div>
-                                        </div>
-                                        <label for="email">Message</label>
-                                        <textarea name="message" id="message" placeholder="write..." rows="5" cols="56"></textarea>
-
-
-                                        <button type="submit" class="btn btn-secondary swipe-to-top">SUBMIT <i
-                                                class="fas fa-location-arrow"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-5">
-                                <div id="map" style="height:400px; margin-top: 5px;">
-
-                                </div>
-                                <script>
-                                    var map;
-
-                                    function initMap() {
-                                        map = new google.maps.Map(document.getElementById('map'), {
-                                            center: {
-                                                lat: -34.397,
-                                                lng: 150.644
-                                            },
-                                            zoom: 8
-                                        });
-                                    }
-                                </script>
-                                <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-                                <p class="info">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                    commodo consequat.
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                    nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id est laborum.
-                                </p>
-                            </div>
-                            <div class="col-12 col-lg-3">
-
-                                <div class="">
-                                    <ul class="contact-info pl-0 mb-0">
-                                        <li> <i class="fas fa-mobile-alt"></i><span><a href="javascript:void(0)">888-9636-6000</a><br> <a
-                                                    href="javascript:void(0)">888-9636-6000</a></span> </li>
-                                        <li> <i class="fas fa-map-marker"></i><span><a href="javascript:void(0)">Ecommerce<br>Demo Store
-                                                    3654123</a></span> </li>
-                                        <li> <i class="fas fa-envelope"></i><span> <a
-                                                    href="javascript:void(0)">Support@ecommerce.com</a><br><a href="javascript:void(0)">info@ecommerce.com</a>
-                                            </span> </li>
-                                        <li> <i class="fas fa-tty"></i><span> <a href="javascript:void(0)">23456789</a><br><a
-                                                    href="javascript:void(0)">123456</a> </span> </li>
-
-                                    </ul>
-                                </div>
-
-                            </div>
-
-                        </div>
+                    </div>
+                    <div class="address-info">
+                        <ul>
+                            <li class="p-2">
+                                <p class="m-0"><i class="fa fa-map-marker mr-1" aria-hidden="true"></i><span> {{ getSetting()['address'] ?? 'Kathmandu, Nepal' }}</span></p>
+                            </li>
+                            <li class="p-2">
+                                <p class="m-0"><i class="fa fa-envelope mr-1" aria-hidden="true"></i> <a href="mailto:{{ getSetting()['email'] ?? '' }}"><span> {{ getSetting()['email'] ?? '' }}</span></a></p>
+                            </li>
+                            <li class="p-2">
+                                <p class="m-0"><i class="fa fa-phone mr-1" aria-hidden="true"></i><a href="tel:{{ getSetting()['phone_number'] ?? '' }}">{{ getSetting()['phone_number'] }}</a></a></p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
             </div>
-        </section>
-
-    </section>
-
+            <div class="col-xl-5 col-lg-6 col-md-6 col-12 m-auto">
+                <!-- CONTACT FORM HERE -->
+                <form class="p-4" id="contactusForm">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="first_name" class="form-control">
+                    </div> 
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="last_name" class="form-control">
+                    </div>  
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" id="phone" class="form-control" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" class="form-control " rows="4" placeholder="Your Message"></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="px-5">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Us Ends -->

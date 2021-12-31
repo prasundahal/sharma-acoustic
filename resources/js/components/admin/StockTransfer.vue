@@ -228,7 +228,7 @@ export default {
             if(selectedProduct.product_combination_id != null)
                 this.stocktransfer.product_combination_id[index] = selectedProduct.product_combination_id
 
-            console.log(selectedProduct.product_id,index,this.stocktransfer)
+            // console.log(selectedProduct.product_id,index,this.stocktransfer)
         },
         addstocktransfer() {
             this.$parent.loading = true;
@@ -308,7 +308,7 @@ export default {
                                             } else {
                                                 combination_name += '-' + res.data.data.combination_detail[i].combination[j].variation.detail[0].name
                                             }
-                                            // console.log('i=' + i + 'j=' + j);
+                                            // // console.log('i=' + i + 'j=' + j);
                                         }
                                     }
                                     arr.product_id = res.data.data.product_id;

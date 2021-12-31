@@ -9,6 +9,8 @@ use App\Http\Requests\GallaryRequest;
 use App\Http\Requests\GallaryTagRequest;
 use App\Http\Requests\SingleGallaryRequest;
 use App\Models\Admin\Gallary;
+use App\Models\Admin\ProductGallaryDetail;
+use Illuminate\Http\Request;
 
 class GallaryController extends Controller
 {
@@ -52,5 +54,20 @@ class GallaryController extends Controller
     public function regenrateAllImages()
     {
         return $this->gallaryRepository->regenrateAllImages();
+    }
+
+    public function deleteSingleImage(Request $request){
+        $result = ProductGallaryDetail::where([
+            'product_id' => $request['product_id'],
+            'gallary_id' => $request['gallary_id']
+        ])->delete();
+        if($result){
+            return response()->json([
+                'success' => 'successfully deleted',
+            ]);
+        }
+        return response()->json([
+            'error' => 'error',
+        ]);
     }
 }

@@ -98,7 +98,7 @@ export default {
         check: function (e) {
             this.display[e.target.name] = this.display[e.target.name] == "hide" ? "show" : "hide";
 
-            console.log(this.display);
+            // console.log(this.display);
         },
         fetchSetting() {
             this.$emit('updateLoadingState', true)
@@ -117,7 +117,7 @@ export default {
                             [res.data.data[i].setting_key]: res.data.data[i].setting_value
                         });
                     }
-                    console.log('response datass', responseData);
+                    // console.log('response datass', responseData);
                     this.display = responseData;
                 })
                 .finally(() => (this.$emit('updateLoadingState', false)));
@@ -134,7 +134,7 @@ export default {
                 value.push(display[i][1])
             }
 
-            // console.log(key, value);
+            // // console.log(key, value);
 
             var token = localStorage.getItem('token');
             const config = {
