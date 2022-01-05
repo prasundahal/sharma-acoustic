@@ -42,6 +42,7 @@ class WishlistRepository implements WishlistInterface
             if (isset($_GET['getDetail']) && $_GET['getDetail'] == '1') {
                 $wishlist = $wishlist->getProductDetailByLanguageId($languageId);
             }
+            // dd($wishlist->customerId(Auth::id()));
             return $this->successResponse(WishlistResource::collection($wishlist->customerId(Auth::id())->paginate($numOfResult)) , 'Data Get Successfully!');
         } catch (Exception $e) {
             return $this->errorResponse();

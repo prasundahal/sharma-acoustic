@@ -135,7 +135,7 @@
             },
             beforeSend: function() {},
             success: function(data) {
-                // // console.log(data);
+                console.log(data);
                 if (data.status == 'Success') {
                     $("#wishlist-show").html('');
                     for (i = 0; i < data.data.length; i++) {
