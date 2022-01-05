@@ -165,14 +165,14 @@
                                 @foreach ($payment_method_default as $payment_methods)
                                     <div class="col-3">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="inlineCheckbox{{ $payment_methods->id }}" name="customRadio" class="custom-control-input payment_method otherPayment" {{ $loop->first ? 'checked' : '' }} value="{{ $payment_methods->payment_method }}">
-                                            <label class="custom-control-label otherPayment" for="inlineCheckbox{{ $payment_methods->id }}">{{ ucwords(str_replace('_', ' ', $payment_methods->payment_method)) }}</label>
+                                            <input type="radio" id="inlineCheckbox{{ $payment_methods->id }}" name="customRadio" class="custom-control-input payment_method" {{ $loop->first ? 'checked' : '' }} value="{{ $payment_methods->payment_method }}">
+                                            <label class="custom-control-label" for="inlineCheckbox{{ $payment_methods->id }}">{{ ucwords(str_replace('_', ' ', $payment_methods->payment_method)) }}</label>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    {{-- <div class="col-3">
                                         <input type="radio" name="customRadio" class="custom-control-input payment_method esewaRadio" id="esewaRadio" value="esewa">
                                         <label class="custom-control-label esewaRadio" for="esewaRadio">Esewa</label>
-                                    </div>
+                                    </div> --}}
                                 @endforeach
                             </div>
                         </div>
@@ -214,13 +214,13 @@
                 <input value="" name="pid" type="hidden">
                 <input value="{{ route('esewa-verify') }}?q=su" type="hidden" name="su">
                 <input value="{{ route('esewa-verify') }}?q=fu" type="hidden" name="fu">
-                <button type="submit" class="btn btn-success esewaButton" id="esewaButton">Confirm Payment</button>
+                <button type="submit" class="btn btn-success esewaButton" id="esewaButton">Confirm Esewa Payment</button>
             </form>
         </div>
     </div>
 </section>
 
-<input type="hidden" class="total_by_weight" />
+<input type="hidden" class="total_by_weight_old" />
 
 @endsection
 @section('script')
@@ -255,12 +255,12 @@
                 }
             });
 
-            $('.esewaRadio').on('click', function(){
-                if($('#esewaRadio').is(':checked')){
-                    $('#esewaForm').parent().attr('hidden', false);
-                    $('.confirmButton').attr('hidden', true);
-                }
-            });
+            // $('.esewaRadio').on('click', function(){
+            //     if($('#esewaRadio').is(':checked')){
+            //         $('#esewaForm').parent().attr('hidden', false);
+            //         $('.confirmButton').attr('hidden', true);
+            //     }
+            // });
         });
 
         $(document).ajaxStop(function () {
@@ -888,19 +888,48 @@
 
         $(".payment_method").click(function() {
             payment_method = $.trim($(".payment_method:checked").val());
+            if(payment_method == 'esewa'){
+                $('#esewaForm').parent().attr('hidden', false);
+                $('.confirmButton').attr('hidden', true);
+                $.ajax({
+                    type: 'post',
+                    data: {
+                        'payment_method': payment_method,
+                    },
+                    url: '{{ url("") }}' + '/api/client/esewaMerchant',
+                    headers: {
+                        'Authorization': 'Bearer ' + customerToken,
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        clientid: "{{ isset(getSetting()['client_id']) ? getSetting()['client_id'] : '' }}",
+                        clientsecret: "{{ isset(getSetting()['client_secret']) ? getSetting()['client_secret'] : '' }}",
+                    },
+                    beforeSend: function() {},
+                    success: function(response) {
+                        $("#esewaForm").attr('action', response.ESEWA_URL);
+                        $('#esewaForm input[name="scd"]').val(response.ESEWA_MERCHANT_ID);
+                    }
+                });
+                $(".stripe_payment").addClass('d-none');
+                $(".bank_transfer").addClass('d-none');
+            }
             if (payment_method == 'stripe' || payment_method == 'paypal') {
+                $('#esewaForm').parent().attr('hidden', true);
+                $('.confirmButton').attr('hidden', false);
                 $(".stripe_payment").removeClass('d-none');
                 $(".bank_transfer").addClass('d-none');
                 return;
             }
             if (payment_method == 'banktransfer') {
+                $('#esewaForm').parent().attr('hidden', true);
+                $('.confirmButton').attr('hidden', false);
                 $(".bank_transfer").removeClass('d-none');
                 $(".stripe_payment").addClass('d-none');
             }
-            if(payment_method == 'cod'){
+            if(payment_method == 'cash_on_delivery'){
+                $('#esewaForm').parent().attr('hidden', true);
+                $('.confirmButton').attr('hidden', false);
                 $(".stripe_payment").addClass('d-none');
                 $(".bank_transfer").addClass('d-none');
-
             }
             
         });
