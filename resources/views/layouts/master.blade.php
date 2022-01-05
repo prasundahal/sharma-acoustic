@@ -123,7 +123,7 @@
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     <!-- Custom Js Ends -->
     <!-- Nav Cart Popup -->
-aklsdhfaskljdhfalksjdhfakljdhfaklsjdhfkajshdflkajshdflkajshdfklajsdh
+
 <!-- Messenger Chat Plugin Code -->
 <div id="fb-root"></div>
 
@@ -154,7 +154,6 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-
 
     <!-- Modal -->
     <div class="modal fade" id="nav-cart" tabindex="-1" role="dialog" aria-labelledby="navcartlabel"
