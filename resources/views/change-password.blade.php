@@ -46,7 +46,7 @@
                             <input type="password" class="form-control unicase-form-control text-input" id="confirm_password">
                         </div>
                         <div class="radio outer-xs">
-                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
+                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Update</button>
                         </div>
                     </form>
                 </div>
