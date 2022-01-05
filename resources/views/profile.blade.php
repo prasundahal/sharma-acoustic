@@ -86,10 +86,10 @@
                                             </div>
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="phone">Phone</label>
-                                                <input type="number" class="form-control" placeholder="" id="phone" name="phone">
+                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
                                             </div>
                                             <div class="form-group col-md-6 col-12">
-                                                <label for="gender">Email</label>
+                                                <label for="gender">Gender</label>
                                                 <select class="form-control" id="gender" name="gender">
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
@@ -98,22 +98,6 @@
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="dob">DOB</label>
                                                 <input type="text" class="form-control datepicker" id="dob" name="dob" autocomplete="off" readonly>
-                                            </div>
-                                            <div class="form-group col-md-6 col-12">
-                                                <label for="phone">Phone</label>
-                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
-                                            </div>
-                                            <div class="form-group col-md-6 col-12">
-                                                <label for="phone">Phone</label>
-                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
-                                            </div>
-                                            <div class="form-group col-md-6 col-12">
-                                                <label for="phone">Phone</label>
-                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
-                                            </div>
-                                            <div class="form-group col-md-6 col-12">
-                                                <label for="phone">Phone</label>
-                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
                                             </div>
                                             {{-- <div class="form-group col-12">
                                                 <label for="image">Upload Profile Image</label>
