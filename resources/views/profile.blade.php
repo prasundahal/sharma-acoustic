@@ -25,6 +25,7 @@
     </div>
 </section>
 <!-- Breadcrumbs Ends -->
+
 <!-- Profile -->
 <section id="profile-wrapper" class="py-3">
     <div class="container">
@@ -97,6 +98,22 @@
                                             <div class="form-group col-md-6 col-12">
                                                 <label for="dob">DOB</label>
                                                 <input type="text" class="form-control datepicker" id="dob" name="dob" autocomplete="off" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="phone">Phone</label>
+                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="phone">Phone</label>
+                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="phone">Phone</label>
+                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
+                                            </div>
+                                            <div class="form-group col-md-6 col-12">
+                                                <label for="phone">Phone</label>
+                                                <input type="text" class="form-control" placeholder="" id="phone" name="phone">
                                             </div>
                                             {{-- <div class="form-group col-12">
                                                 <label for="image">Upload Profile Image</label>

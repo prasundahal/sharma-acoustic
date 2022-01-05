@@ -10,6 +10,9 @@
             <li class="mb-3 p-2">
                 <a href="/orders" class="text-dark"><span class="mr-2"><i class="fa fa-sort" aria-hidden="true"></i></span>Order Status</a>
             </li>
+            <li class="mb-3 p-2">
+                <a href="/shipping-address" class="text-dark"><span class="mr-2"><i class="fa fa-map" aria-hidden="true"></i></span>Shipping Address</a>
+            </li>
             <li class="mb-3 p-2 ">
                 <a href="/change-password" class="text-dark"><span class="mr-2"><i class="fa fa-lock" aria-hidden="true"></i></span>Change Password</a>
             </li>
