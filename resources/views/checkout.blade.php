@@ -121,11 +121,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="" class="text_gray mt-3">Address</label>
-                                        <input type="text" class="form-control w-100" placeholder="Nepal" id="delivery_street_aadress">
+                                        <input type="text" class="form-control w-100" placeholder="Address" id="delivery_street_aadress">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="" class="text_gray mt-3">City</label>
-                                        <input type="text" class="form-control w-100" placeholder="Nepal" id="delivery_city">
+                                        <input type="text" class="form-control w-100" placeholder="City" id="delivery_city">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="" class="text_gray mt-3">Country</label>
@@ -566,6 +566,7 @@
         $(document).ready(function() {
             getCustomerAdress();
             countries();
+            states1();
         });
 
         function getCustomerAdress() {
@@ -629,11 +630,14 @@
                         for (i = 0; i < data.data.length; i++) {
                             selected = '';
                             if ($.trim($("#billing_country_hidden").val()) != '' && $.trim($(
-                                    "#billing_country_hidden").val()) == data.data[i].country_id) {
-                                selected = 'selected';
-                                $("#billing_country_hidden").val('');
+                                "#billing_country_hidden").val()) == data.data[i].country_id) {
+                                    selected = 'selected';
+                                    $("#billing_country_hidden").val('');
                             }
-
+                            if(data.data[i].country_name == 'Nepal'){
+                                selected = 'selected';
+                            }
+                            
                             html += '<option value="' + data.data[i].country_id + '" ' + selected + '>' + data
                                 .data[i].country_name + '</option>';
                         }
@@ -710,6 +714,8 @@
                                 $("#delivery_country_hidden").val('');
                             } else if (data.data[i].country_id == country) {
                                 selected = 'selected';
+                            } else if (data.data[i].country_name == 'Nepal'){
+                                selected = 'selected';
                             }
                             html += '<option value="' + data.data[i].country_id + '" ' + selected + '>' + data
                                 .data[i].country_name + '</option>';
@@ -731,6 +737,10 @@
         function states1() {
 
             country_id = $("#delivery_country").val() ? $("#delivery_country").val() : country;
+            if(!country){
+                country_id = 149;
+            }
+
             if (country_id == '') {
                 $("#delivery_state").html('');
                 return;
