@@ -201,7 +201,7 @@
                     {{ trans('lables.checkout-total') }} : <span class="caritem-grandtotal">0</span>
                 </div>
             </div>
-            <button type="button" class="btn btn-success my-3 mx-auto createOrder confirmButton">Confirm Payment</button>
+            <button type="button" class="btn btn-success my-3 mx-auto createOrder">Confirm Payment</button>
         </div>
         <div class="row" hidden>
             <form action="https://uat.esewa.com.np/epay/main" method="POST" id="esewaForm" class="my-3 mx-auto">
@@ -244,23 +244,6 @@
             } else {
                 cartItem(cartSession);
             }
-
-            // $('#cartItem-product-show2 > tr')
-            // $('#esewaForm input[name=amt]').val(total);
-
-            $('.otherPayment').on('click', function(){
-                if($('#esewaRadio').is(':checked') == false){
-                    $('#esewaForm').parent().attr('hidden', true);
-                    $('.confirmButton').attr('hidden', false);
-                }
-            });
-
-            // $('.esewaRadio').on('click', function(){
-            //     if($('#esewaRadio').is(':checked')){
-            //         $('#esewaForm').parent().attr('hidden', false);
-            //         $('.confirmButton').attr('hidden', true);
-            //     }
-            // });
         });
 
         $(document).ajaxStop(function () {
@@ -900,7 +883,7 @@
             payment_method = $.trim($(".payment_method:checked").val());
             if(payment_method == 'esewa'){
                 $('#esewaForm').parent().attr('hidden', false);
-                $('.confirmButton').attr('hidden', true);
+                $('.createOrder').attr('hidden', true);
                 $.ajax({
                     type: 'post',
                     data: {
@@ -924,20 +907,20 @@
             }
             if (payment_method == 'stripe' || payment_method == 'paypal') {
                 $('#esewaForm').parent().attr('hidden', true);
-                $('.confirmButton').attr('hidden', false);
+                $('.createOrder').attr('hidden', false);
                 $(".stripe_payment").removeClass('d-none');
                 $(".bank_transfer").addClass('d-none');
                 return;
             }
             if (payment_method == 'banktransfer') {
                 $('#esewaForm').parent().attr('hidden', true);
-                $('.confirmButton').attr('hidden', false);
+                $('.createOrder').attr('hidden', false);
                 $(".bank_transfer").removeClass('d-none');
                 $(".stripe_payment").addClass('d-none');
             }
             if(payment_method == 'cash_on_delivery'){
                 $('#esewaForm').parent().attr('hidden', true);
-                $('.confirmButton').attr('hidden', false);
+                $('.createOrder').attr('hidden', false);
                 $(".stripe_payment").addClass('d-none');
                 $(".bank_transfer").addClass('d-none');
             }
@@ -1267,10 +1250,12 @@
                 }
                 total = +sub_price + +total_tax_price - +couponCart;
             }
+            currencyCode = $(".caritem-subtotal").attr('currency-code') ? $(".caritem-subtotal").attr('currency-code') : '';
+            totalP = total ? total.toFixed(2) : 0;
             if ($.trim($(".caritem-subtotal").attr('currency-position')) == 'left') {
-                $(".caritem-grandtotal").html($(".caritem-subtotal").attr('currency-code') + ' ' + total.toFixed(2));
+                $(".caritem-grandtotal").html(currencyCode + ' ' + totalP);
             } else {
-                $(".caritem-grandtotal").html(total.toFixed(2) + ' ' + $(".caritem-subtotal").attr('currency-code'));
+                $(".caritem-grandtotal").html(totalP + ' ' + currencyCode);
             }
         }
     </script>

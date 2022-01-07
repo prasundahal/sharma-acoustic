@@ -35,14 +35,8 @@
                                 {{-- AUDIRECT BEAM3 PRO --}}
                             </h1>
                         </div>
-                        <div class="rating-wrapper mb-2">
-                            <div class="p-ratings display-rating">
-                                <i class="fa fa-star orange"></i>
-                                <i class="fa fa-star orange"></i>
-                                <i class="fa fa-star b1b1b1"></i>
-                                <i class="fa fa-star b1b1b1"></i>
-                                <i class="fa fa-star b1b1b1"></i>
-                            </div>
+                        <div class="rating-wrapper mb-2" id="display-rating">
+                            
                         </div>
                         <div class="product-price d-flex ">
                             <div class="first-price mr-2" id="cut-product-card-price"></div>
