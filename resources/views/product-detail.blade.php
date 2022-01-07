@@ -203,33 +203,30 @@
                     }
                     if (data.data.reviews !== null) {
                         $(".review-count").html(data.data.reviews.length);
-                            rating = '';
-                            sum = 0;
-                            for(review = 0; review < data.data.reviews.length; review++){
-                                sum = +sum + +data.data.reviews[review].rating;
-                            }
-                            cur_rating = (sum / data.data.reviews.length);
-                            cur_rating = Math.round(cur_rating);
-                            if(cur_rating == 1){
-                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                            }
-                            else if(cur_rating == 2){
-                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                            }
-                            else if(cur_rating == 3){
-                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                            }
-                            else if(cur_rating == 4){
-                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i>';
-                            }
-                            else if(cur_rating == 5){
-                                rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>';
-                            }
-                            else{
-                                rating = '<i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                            }
-
-                            $(".display-rating").innerHTML = rating;
+                        rating = '';
+                        sum = 0;
+                        for(review = 0; review < data.data.reviews.length; review++){
+                            sum = +sum + +data.data.reviews[review].rating;
+                        }
+                        cur_rating = (sum / 5);
+                        cur_rating = cur_rating * 100;
+                        rating = '<div class="rating">' +
+                            '<div class="rating-upper" style="width: ' + cur_rating + '%">' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                            '</div>' +
+                            '<div class="rating-lower">' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                            '</div>' +
+                        '</div>';
+                        $("#display-rating").html(rating);
                     }
 
                     if (data.data.rating !== null) {
@@ -545,21 +542,27 @@
                 if (data.status == 'Success') {
                     $("#review-rating-show").html('');
                     for (review = 0; review < data.data.length; review++) {
-                        if (data.data[review].rating == '5') {
-                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>';
-                        } else if (data.data[review].rating == '4') {
-                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i>';
-                        } else if (data.data[review].rating == '3') {
-                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                        } else if (data.data[review].rating == '2') {
-                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                        } else if (data.data[review].rating == '1') {
-                            rating = '<i class="fa fa-star orange"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i><i class="fa fa-star b1b1b1"></i>';
-                        }
+                        cur_rating = (data.data[review].rating / 5);
+                        cur_rating = cur_rating * 100;
                         span = '<div class="col-xl-8 col-lg-8 col-12 comments-content p-4 my-3 bg-light">' +
                             '<h5 class="mb-2">By ' + data.data[review].customer.customer_first_name + ' ' + data.data[review].customer.customer_last_name + '</h5>' +
                             '<div class="p-ratings">' +
-                                rating +
+                                '<div class="rating">' +
+                                    '<div class="rating-upper" id="product-rating" style="width: ' + cur_rating + '%">' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                    '</div>' +
+                                    '<div class="rating-lower">' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                        '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
+                                    '</div>' +
+                                '</div>' +
                             '</div>' +
                             '<p>' + data.data[review].comment + '</p>' +
                             '<small class="review-date">' + data.data[review].date + '</small>' +
