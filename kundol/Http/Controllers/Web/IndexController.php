@@ -85,7 +85,7 @@ class IndexController extends Controller
     {
         $homeService = new HomeService;
         $data = $homeService->homeIndex();
-        // dd($data);
+        // dd($product);+
         return view('product-detail', compact('data', 'product'));
     }
 

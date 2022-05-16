@@ -73,6 +73,7 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                console.log(data);
                 if (data.status == 'Success') {
                     var clone = '';
                     var topGal = '';
@@ -143,9 +144,11 @@
                     // }
 
                     if (data.data.detail != null) {
+                        // console.log('not null');
                         $("#pro-title").html(data.data.detail[0].title);
                         $(".pro-desc").html(data.data.detail[0].desc);
-
+                    }else{
+                        // console.log('null');
                     }
 
                     if (data.data.product_type == 'simple') {

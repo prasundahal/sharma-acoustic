@@ -56,8 +56,12 @@
         href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap"
         rel="stylesheet">
     <!-- Font Link Ends -->
-    <link rel="stylesheet" href="https://k1ngzed.com/dist/swiper/swiper.min.css" />
-    <link rel="stylesheet" href="https://k1ngzed.com/dist/EasyZoom/easyzoom.css" />
+    {{-- <link rel="stylesheet" href="https://k1ngzed.com/dist/swiper/swiper.min.css" />
+    <link rel="stylesheet" href="https://k1ngzed.com/dist/EasyZoom/easyzoom.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('frontend/assets/swiper/drift-basic.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/swiper/swiper.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/xzoom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/easyzoom.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/toastr/toastr.min.css') }}">
@@ -69,6 +73,7 @@
 </head>
 
 <body class="animation-s1 {{ $data['direction'] === 'rtl' ? 'bodyrtl' : '' }}">
+    <div id="loading"></div>
     {{-- <div id="fb-root"></div>
     <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -118,27 +123,33 @@
     <!-- datepicker Js Ends-->
     <script src="{{ asset('/assets/jssocials/jssocials.min.js') }}"></script>
     <!-- Custom Js Starts -->
-    <script src="https://k1ngzed.com/dist/swiper/swiper.min.js"></script>
-    <script src="https://k1ngzed.com/dist/EasyZoom/easyzoom.js"></script>
+    {{-- <script src="https://k1ngzed.com/dist/swiper/swiper.min.js"></script>
+    <script src="https://k1ngzed.com/dist/EasyZoom/easyzoom.js"></script> --}}
+    
+    <script src="{{ asset('frontend/assets/swiper/drift.min.js') }}"></script>
+
+    <script src="{{ asset('frontend/assets/swiper/swiper.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/swiper/xzoom.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/easyzoom.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     <!-- Custom Js Ends -->
     <!-- Nav Cart Popup -->
 
 <!-- Messenger Chat Plugin Code -->
-<div id="fb-root"></div>
+{{-- <div id="fb-root"></div> --}}
 
 <!-- Your Chat Plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
+{{-- <div id="fb-customer-chat" class="fb-customerchat">
+</div> --}}
 
-<script>
+{{-- <script>
 var chatbox = document.getElementById('fb-customer-chat');
 chatbox.setAttribute("page_id", "101471335762242");
 chatbox.setAttribute("attribution", "biz_inbox");
-</script>
+</script> --}}
 
 <!-- Your SDK code -->
-<script>
+{{-- <script>
 window.fbAsyncInit = function() {
     FB.init({
     xfbml            : true,
@@ -153,7 +164,7 @@ window.fbAsyncInit = function() {
     js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-</script>
+</script> --}}
 
     <!-- Modal -->
     <div class="modal fade" id="nav-cart" tabindex="-1" role="dialog" aria-labelledby="navcartlabel"
