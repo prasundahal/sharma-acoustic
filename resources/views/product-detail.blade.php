@@ -9,6 +9,16 @@
     .price-active {
         border: 1px solid;
     }
+    .rating-upper {
+        color: orange;
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
 </style>
 @include(isset(getSetting()['product_detail']) ? 'includes.productdetail.product-'.getSetting()['product_detail'] : 'includes.productdetail.product-style1')
 
@@ -214,7 +224,7 @@
                         cur_rating = (sum / 5);
                         cur_rating = cur_rating * 100;
                         rating = '<div class="rating">' +
-                            '<div class="rating-upper" style="width: ' + cur_rating + '%">' +
+                            '<div class="rating-upper d-flex" style="width: ' + cur_rating + '%">' +
                                 '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
                                 '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
                                 '<span><i class="fa fa-star" aria-hidden="true"></i></span>' +
