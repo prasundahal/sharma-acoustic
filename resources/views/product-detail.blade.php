@@ -384,6 +384,8 @@
             },
             beforeSend: function() {},
             success: function(data) {
+                // console.log('here');
+                // console.log(data);
                 if (data.status == 'Success') {
                     var cart = '';
                     var wish = '';
@@ -408,6 +410,7 @@
                         }
                         if (data.data[i].detail != null) {
                             title = data.data[i].detail[0].title;
+                            console.log(title);
                             href = '/product/' + data.data[i].product_id+'/'+data.data[i].product_slug;
                             var desc = data.data[i].detail[0].desc;
                             desc = desc.substring(0, 50);
@@ -440,7 +443,7 @@
                                     // '<span class="product-discount-label">-10%</span>' +
                                 '</div>' +
                                 '<div class="product-content">' +
-                                    '<h4 class="title mt-2"><a href="' + href + '">Product Name</a></h4>' +
+                                    '<h4 class="title mt-2"><a href="' + href + '">'+title+'</a></h4>' +
                                     '<div class="price">' +
                                         price +
                                         // '<span>' + cutPrice + '</span>' +
