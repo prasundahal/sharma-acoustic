@@ -9,6 +9,17 @@
     .price-active {
         border: 1px solid;
     }
+    .rating {
+        display: inline-block;
+        unicode-bidi: bidi-override;
+        color: #888888;
+        font-size: 20px;
+        height: 20px;
+        width: auto;
+        margin: 0;
+        position: relative;
+        padding: 0;
+    }
     .rating-upper {
         color: orange;
         padding: 0;
